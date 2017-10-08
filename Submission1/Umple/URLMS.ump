@@ -1,0 +1,85 @@
+class URLMS
+{
+  1 <@>- 1 StaffManager;
+  1 <@>- 1 InventoryManager;
+  1 <@>- 1 FundingManager;
+}
+
+class InventoryManager
+{
+  1 -- * InventoryItem;
+}
+
+class InventoryItem
+{
+  name;
+  double cost;
+  category;
+}
+
+class SupplyType
+{
+  int quantity;
+isA InventoryItem;
+}
+
+class Equipment
+{
+  isA InventoryItem;
+}
+
+class FundingManager
+{
+  double totalBalance;
+  1 <@>- * FundingAccount;
+  1 -- * Report;
+}
+
+class FundingAccount
+{
+  type;
+  double balance;
+}
+
+class Expense
+{
+  double amount;
+type;
+* -- 1 FundingAccount;
+}
+
+class Report
+{
+  title;
+  Date date;
+}
+
+class StaffMember
+{
+}
+
+class ResearchRole
+{
+  * -- 1 StaffMember;
+}
+
+class ResearchAssociate
+{
+  isA ResearchRole;
+}
+
+class ResearchAssistant
+{
+  isA ResearchRole;
+}
+
+class StaffManager
+{
+  1 -- * StaffMember;
+}
+
+class ProgressUpdate
+{
+  * -<@> 1 StaffMember;
+}
+
