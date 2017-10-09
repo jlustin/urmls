@@ -5,9 +5,12 @@ import ca.mcgill.ecse321.urlms.model.InventoryManager;
 import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+
+import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
 
 public class URLMSApplication {
+		//private static URLMS urlms = new URLMS(new StaffManager(new URLMS(0)), new InventoryManager(new URLMS(0)), new FundingManager(0, new URLMS(0)));
 		private static URLMS urlms;
 	
 		private static StaffManager staffManager = new StaffManager(urlms);
@@ -28,6 +31,9 @@ public class URLMSApplication {
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	            	new MainPage().setVisible(true);
+
+	            	// 	PersistenceXStream.readBahaye();
+
 //	                if (tileO.hasGames()) {
 //	                	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
 //	                    	dp.setVisible(true);       
