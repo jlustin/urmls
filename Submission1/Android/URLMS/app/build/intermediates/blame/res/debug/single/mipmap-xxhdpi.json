@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher_round.png",
+        "source": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]

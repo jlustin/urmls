@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    }
+]
