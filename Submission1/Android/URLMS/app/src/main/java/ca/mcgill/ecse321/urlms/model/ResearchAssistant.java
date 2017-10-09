@@ -1,10 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
-package com.example.team8.urlms.model;
+package ca.mcgill.ecse321.urlms.model;
 
-// line 77 "../../../../../URLMS.ump"
-public class ResearchAssociate extends ResearchRole
+// line 82 "../../../../../URLMS.ump"
+public class ResearchAssistant extends ResearchRole
 {
 
   //------------------------
@@ -15,7 +15,7 @@ public class ResearchAssociate extends ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchAssociate(StaffMember aStaffMember)
+  public ResearchAssistant(StaffMember aStaffMember)
   {
     super(aStaffMember);
   }

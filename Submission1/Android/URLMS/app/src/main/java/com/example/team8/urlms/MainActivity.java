@@ -7,12 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
+import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.model.StaffMember;
+
 
 public class MainActivity extends AppCompatActivity {
 
     Button backButton;
     Button viewStaffButton;
     TextView toDisplay;
+
+    public static Controller controller = new Controller();
 
 
     @Override
@@ -33,7 +40,17 @@ public class MainActivity extends AppCompatActivity {
         viewStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toDisplay.setText(R.string.longText);
+                controller.addMember();
+                List<StaffMember> staffList = controller.viewStaffList();
+                String name;
+                int id;
+                String output =null;
+                for(StaffMember aMember: staffList){
+
+                    output += aMember.getName() + " " + aMember.getId()+"\n";
+
+                }
+                toDisplay.setText(output);
             }
         });
 
@@ -42,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 toDisplay.setText(null);
+
+
+
+
+
+
+
 
             }
         });

@@ -1,29 +1,29 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
-package com.example.team8.urlms.model;
+package ca.mcgill.ecse321.urlms.model;
 
-// line 73 "../../../../../URLMS.ump"
-public class ResearchRole
+// line 87 "../../../../../URLMS.ump"
+public class ProgressUpdate
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //ResearchRole Associations
+  //ProgressUpdate Associations
   private StaffMember staffMember;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchRole(StaffMember aStaffMember)
+  public ProgressUpdate(StaffMember aStaffMember)
   {
     boolean didAddStaffMember = setStaffMember(aStaffMember);
     if (!didAddStaffMember)
     {
-      throw new RuntimeException("Unable to create researchRole due to staffMember");
+      throw new RuntimeException("Unable to create progressUpdate due to staffMember");
     }
   }
 
@@ -48,9 +48,9 @@ public class ResearchRole
     staffMember = aStaffMember;
     if (existingStaffMember != null && !existingStaffMember.equals(aStaffMember))
     {
-      existingStaffMember.removeResearchRole(this);
+      existingStaffMember.removeProgressUpdate(this);
     }
-    staffMember.addResearchRole(this);
+    staffMember.addProgressUpdate(this);
     wasSet = true;
     return wasSet;
   }
@@ -59,7 +59,7 @@ public class ResearchRole
   {
     StaffMember placeholderStaffMember = staffMember;
     this.staffMember = null;
-    placeholderStaffMember.removeResearchRole(this);
+    placeholderStaffMember.removeProgressUpdate(this);
   }
 
 }
