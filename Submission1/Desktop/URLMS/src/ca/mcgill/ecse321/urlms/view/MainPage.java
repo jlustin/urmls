@@ -57,12 +57,16 @@ public class MainPage extends JFrame {
 		JButton btnViewStaffList = new JButton("View Staff List");
 		btnViewStaffList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblNewLabel.setText("");
+				controller.addMember();
 				List<StaffMember> staffList = controller.viewStaffList();
 				String name;
+				int id;
 				for (StaffMember aMember : staffList) {
 					String previousText = lblNewLabel.getText();
 					name = aMember.getName();
-					lblNewLabel.setText(previousText + name);
+					id = aMember.getId();
+					lblNewLabel.setText(previousText + name + id + " ");
 				}
 			}
 		});
