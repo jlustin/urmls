@@ -1,10 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
-package ca.mcgill.ecse321.urlms.model;
+package com.example.team8.urlms.model;
 
-// line 80 "../../../../../URLMS.ump"
-public class ResearchAssistant extends ResearchRole
+// line 28 "../../../../../URLMS.ump"
+public class Equipment extends InventoryItem
 {
 
   //------------------------
@@ -15,9 +15,9 @@ public class ResearchAssistant extends ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchAssistant(StaffMember aStaffMember)
+  public Equipment(String aName, double aCost, String aCategory, InventoryManager aInventoryManager)
   {
-    super(aStaffMember);
+    super(aName, aCost, aCategory, aInventoryManager);
   }
 
   //------------------------

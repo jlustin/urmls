@@ -1,7 +1,7 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
-package ca.mcgill.ecse321.urlms.model;
+package com.example.team8.urlms.model;
 
 // line 15 "../../../../../URLMS.ump"
 public class InventoryItem
