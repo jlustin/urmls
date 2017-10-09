@@ -7,11 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.persistence.*;
 
+import android.content.res.XmlResourceParser;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //initiate persistence
+        final Persistence persistence = new Persistence();
+
 
 
         backButton = (Button) findViewById(R.id.backButton);
@@ -37,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //viewStaffList
+
         viewStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,17 +67,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                toDisplay.setText(null);
-
-
-
-
-
-
-
-
+//                XML parser
+                XmlResourceParser parser = getResources().getXml(R.xml.stafflist);
+                    persistence.processData(parser, toDisplay);
             }
         });
 
     }
+
+
 }
