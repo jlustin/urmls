@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static com.example.team8.urlms.R.id.toDisplay;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         backButton = (Button) findViewById(R.id.backButton);
         viewStaffButton = (Button) findViewById(R.id.viewStaff);
         toDisplay = (TextView) findViewById(R.id.toDisplay);
@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         //initiate scrolling
         toDisplay.setMovementMethod(new ScrollingMovementMethod());
 
+
+        //viewStaffList
         viewStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
