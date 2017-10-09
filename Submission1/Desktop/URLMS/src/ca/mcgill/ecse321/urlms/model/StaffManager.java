@@ -80,9 +80,9 @@ public class StaffManager
     return 0;
   }
 
-  public StaffMember addStaffMember()
+  public StaffMember addStaffMember(String aName, int aId)
   {
-    return new StaffMember(this);
+    return new StaffMember(aName, aId, this);
   }
 
   public boolean addStaffMember(StaffMember aStaffMember)
