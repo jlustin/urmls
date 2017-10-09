@@ -3,7 +3,7 @@
 
 package com.example.team8.urlms.model;
 
-// line 71 "../../../../../URLMS.ump"
+// line 73 "../../../../../URLMS.ump"
 public class ResearchRole
 {
 

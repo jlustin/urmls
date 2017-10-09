@@ -12,6 +12,10 @@ public class StaffMember
   // MEMBER VARIABLES
   //------------------------
 
+  //StaffMember Attributes
+  private String name;
+  private int id;
+
   //StaffMember Associations
   private List<ResearchRole> researchRoles;
   private List<ProgressUpdate> progressUpdates;
@@ -21,8 +25,10 @@ public class StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(StaffManager aStaffManager)
+  public StaffMember(String aName, int aId, StaffManager aStaffManager)
   {
+    name = aName;
+    id = aId;
     researchRoles = new ArrayList<ResearchRole>();
     progressUpdates = new ArrayList<ProgressUpdate>();
     boolean didAddStaffManager = setStaffManager(aStaffManager);
@@ -35,6 +41,32 @@ public class StaffMember
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setName(String aName)
+  {
+    boolean wasSet = false;
+    name = aName;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setId(int aId)
+  {
+    boolean wasSet = false;
+    id = aId;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public int getId()
+  {
+    return id;
+  }
 
   public ResearchRole getResearchRole(int index)
   {
@@ -283,4 +315,12 @@ public class StaffMember
     placeholderStaffManager.removeStaffMember(this);
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "name" + ":" + getName()+ "," +
+            "id" + ":" + getId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "staffManager = "+(getStaffManager()!=null?Integer.toHexString(System.identityHashCode(getStaffManager())):"null");
+  }
 }
