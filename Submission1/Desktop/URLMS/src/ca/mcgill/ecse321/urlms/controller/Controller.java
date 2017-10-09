@@ -18,7 +18,6 @@ public class Controller {
 		
 	}
 	
-
 	public void addMember() {
 		URLMS urlms = URLMSApplication.getURLMS();
 		StaffManager staffManager = urlms.getStaffManager();
