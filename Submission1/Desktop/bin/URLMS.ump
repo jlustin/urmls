@@ -1,0 +1,88 @@
+namespace ca.mcgill.ecse321.urlms.model;
+
+class URLMS
+{
+  1 <@>- 1 StaffManager;
+  1 <@>- 1 InventoryManager;
+  1 <@>- 1 FundingManager;
+}
+
+class InventoryManager
+{
+  1 -- * InventoryItem;
+}
+
+class InventoryItem
+{
+  name;
+  double cost;
+  category;
+}
+
+class SupplyType
+{
+  int quantity;
+isA InventoryItem;
+}
+
+class Equipment
+{
+  isA InventoryItem;
+}
+
+class FundingManager
+{
+  double totalBalance;
+  1 <@>- * FundingAccount;
+  1 -- * Report;
+}
+
+class FundingAccount
+{
+  type;
+  double balance;
+  1 -- * Expense;
+}
+
+class Expense
+{
+  double amount;
+  type;
+
+}
+
+class Report
+{
+  title;
+  Date date;
+}
+
+class StaffManager
+{
+  1 -- * StaffMember;
+}
+
+class StaffMember
+{
+  1 -- * ResearchRole;
+  1 <@>- * ProgressUpdate;
+}
+
+class ResearchRole
+{
+}
+
+class ResearchAssociate
+{
+  isA ResearchRole;
+}
+
+class ResearchAssistant
+{
+  isA ResearchRole;
+}
+
+class ProgressUpdate
+{
+}
+
