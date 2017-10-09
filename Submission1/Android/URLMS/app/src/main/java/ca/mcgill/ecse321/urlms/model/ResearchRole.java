@@ -3,27 +3,27 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 85 "../../../../../URLMS.ump"
-public class ProgressUpdate
+// line 73 "../../../../../URLMS.ump"
+public class ResearchRole
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //ProgressUpdate Associations
+  //ResearchRole Associations
   private StaffMember staffMember;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public ProgressUpdate(StaffMember aStaffMember)
+  public ResearchRole(StaffMember aStaffMember)
   {
     boolean didAddStaffMember = setStaffMember(aStaffMember);
     if (!didAddStaffMember)
     {
-      throw new RuntimeException("Unable to create progressUpdate due to staffMember");
+      throw new RuntimeException("Unable to create researchRole due to staffMember");
     }
   }
 
@@ -48,9 +48,9 @@ public class ProgressUpdate
     staffMember = aStaffMember;
     if (existingStaffMember != null && !existingStaffMember.equals(aStaffMember))
     {
-      existingStaffMember.removeProgressUpdate(this);
+      existingStaffMember.removeResearchRole(this);
     }
-    staffMember.addProgressUpdate(this);
+    staffMember.addResearchRole(this);
     wasSet = true;
     return wasSet;
   }
@@ -59,7 +59,7 @@ public class ProgressUpdate
   {
     StaffMember placeholderStaffMember = staffMember;
     this.staffMember = null;
-    placeholderStaffMember.removeProgressUpdate(this);
+    placeholderStaffMember.removeResearchRole(this);
   }
 
 }

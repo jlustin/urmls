@@ -3,8 +3,8 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 75 "../../../../../URLMS.ump"
-public class ResearchAssociate extends ResearchRole
+// line 82 "../../../../../URLMS.ump"
+public class ResearchAssistant extends ResearchRole
 {
 
   //------------------------
@@ -15,7 +15,7 @@ public class ResearchAssociate extends ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchAssociate(StaffMember aStaffMember)
+  public ResearchAssistant(StaffMember aStaffMember)
   {
     super(aStaffMember);
   }
