@@ -2,22 +2,32 @@
   include 'controller/controller.php';
   if (!empty($_GET['act'])) {
   	getStaffList();
-  } else {
+  }
+  else if (!empty($_GET['act2'])){
+  	addStaff($_POST["newstaffname"]);
+  }
+  else {
 ?>
 <html>
 	<head>
-		<title>Staff Manager</title>
+		<title>URLMS</title>
 	</head>
 	<body>
-		<h1>Click to View Staff List!!!</h1>
-		<br><br><br>
+		<h1>University Research Lab Management System</h1>
+		<br><br>
 		<form action="index.php" method="get">
-			<!-- <p>First way: php script in a different file</p>
-			<input type="button" value="View Staff1!" onclick="getStaffList()" /> -->
 			<br>
-			<p>Second way: php script within index.php</p>
+			<p>View Staff List</p>
 			<input type="hidden" name="act" value="run" />
- 			<input type="submit" value="View Staff2!" />
+ 			<input type="submit" value="View Staff!" />
+ 			<br>
+		</form>
+		<form action="index.php" method="get">
+			<br>
+			<p>Add Staff Member</p>
+			<input type="hidden" name="act2" value="run" />
+			<input type="text" name="newstaffname" value=" "/>
+ 			<input type="submit" value="Add staff!" />
  			<br>
 		</form>
 	</body>

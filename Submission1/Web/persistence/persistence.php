@@ -11,6 +11,6 @@
 	 * Save to XML file
 	 */
 	function saveData($xml, $string){
-		$xml->asXML($string);
+		file_put_contents($string, $xml->asXML());
 	}
 ?>

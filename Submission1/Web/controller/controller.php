@@ -11,6 +11,13 @@
 		}
 	}
 	
-	
-	
+	/*
+	 * add new staff to the staff.xml file
+	 */
+	function addStaff($newstaffname){
+		$data = loadData("staff.xml");
+		$staff = $data->addChild("staff");
+		$staff->addChild("name", $newstaffname);
+		saveData($staff, "staff.xml");
+	}
 ?>
