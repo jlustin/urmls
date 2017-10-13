@@ -16,7 +16,7 @@ public class URLMSApplication {
 		
 		//staffManager.addStaffMember(staffMember);
 		
-		private static String filename = "data.urlms";
+		private static String filename = "staff.xml";
 		//public static TileODesignPage dp = new TileODesignPage();
 		//public static TileOPlayPage pp = new TileOPlayPage();
 		
@@ -51,19 +51,20 @@ public class URLMSApplication {
 	 		return urlms;
 		}
 		//public URLMS(StaffManager aStaffManager, InventoryManager aInventoryManager, FundingManager aFundingManager)
-//		public static void save() {
-//			PersistenceObjectStream.serialize(tileO);
-//		}
-//		
-//		public static TileO load() {
-//			PersistenceObjectStream.setFilename(filename);
-//			tileO = (TileO) PersistenceObjectStream.deserialize();
-//			// model cannot be loaded - create empty TileO
-//			if (tileO == null) {
-//				tileO = new TileO();
-//			}
-//			return tileO;
-//		}
+		public static void save() {
+			PersistenceXStream.saveToXMLwithXStream(urlms.getStaffManager());
+		}
+		
+		public static StaffManager load() {
+			PersistenceXStream.setFilename(filename);
+			StaffManager sm = urlms.getStaffManager();
+			 sm = (StaffManager) PersistenceXStream.loadFromXMLwithXStream();
+			// model cannot be loaded - create empty TileO
+			if (sm == null) {
+				sm = PersistenceXStream.initializeModelManager("staff.xml");
+			}
+			return sm;
+		}
 		
 		public static void setFilename(String newFilename) {
 			filename = newFilename;

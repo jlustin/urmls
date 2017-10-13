@@ -15,7 +15,7 @@ import ca.mcgill.ecse321.urlms.model.URLMS;
 public abstract class PersistenceXStream {
 
     private static XStream xstream = new XStream();
-    private static String filename = "data.xml";
+    private static String filename = "staff.xml";
 
     public static StaffManager initializeModelManager(String fileName) {
         // Initialization for persistence
