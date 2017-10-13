@@ -55,13 +55,13 @@ public class URLMSApplication {
 			PersistenceXStream.saveToXMLwithXStream(urlms.getStaffManager());
 		}
 		
-		public static StaffManager load() {
+		public static URLMS load() {
 			PersistenceXStream.setFilename(filename);
-			StaffManager sm = urlms.getStaffManager();
-			 sm = (StaffManager) PersistenceXStream.loadFromXMLwithXStream();
+			URLMS sm = getURLMS();
+			 sm = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			// model cannot be loaded - create empty TileO
 			if (sm == null) {
-				sm = PersistenceXStream.initializeModelManager("staff.xml");
+				sm = PersistenceXStream.initializeModelManager("urlms.xml");
 			}
 			return sm;
 		}

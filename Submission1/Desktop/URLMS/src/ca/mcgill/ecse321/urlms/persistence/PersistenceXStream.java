@@ -15,21 +15,18 @@ import ca.mcgill.ecse321.urlms.model.URLMS;
 public abstract class PersistenceXStream {
 
     private static XStream xstream = new XStream();
-    private static String filename = "staff.xml";
+    private static String filename = "urlms.xml";
 
-    public static StaffManager initializeModelManager(String fileName) {
+    public static URLMS initializeModelManager(String fileName) {
         // Initialization for persistence
-        StaffManager rm;
+        URLMS rm;
         setFilename(fileName);
-        setAlias("staff", StaffMember.class);
-//        setAlias("participant", Participant.class);
-//        setAlias("registration", Registration.class);
-//        setAlias("manager", RegistrationManager.class);
+        setAlias("urlms", URLMS.class);
 
         // load model if exists, create otherwise
         File file = new File(fileName);
         if (file.exists()) {
-            rm = (StaffManager) loadFromXMLwithXStream();
+            rm = (URLMS) loadFromXMLwithXStream();
         } else {
             try {
                 file.createNewFile();
@@ -37,7 +34,7 @@ public abstract class PersistenceXStream {
                 e.printStackTrace();
                 System.exit(1);
             }
-            rm = new StaffManager(new URLMS(0));
+            rm = new URLMS(0);
             saveToXMLwithXStream(rm);
         }
         return rm;
