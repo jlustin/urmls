@@ -31,7 +31,7 @@ public class Controller {
 		staffManager.addStaffMember(member3);
 	}
 	
-	public void saveDesign() {
+	public void save() {
 		//TODO: VICTORIQUE
 		URLMSApplication.save();
 	}

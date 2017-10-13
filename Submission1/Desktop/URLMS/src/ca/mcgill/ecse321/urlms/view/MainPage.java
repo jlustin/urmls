@@ -73,17 +73,27 @@ public class MainPage extends JFrame {
 	
 		
 		lblNewLabel = new JLabel("New label");
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.save();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel))
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(133)
 							.addComponent(btnViewStaffList))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblNewLabel)))
+							.addGap(162)
+							.addComponent(btnSave)))
 					.addContainerGap(174, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -93,7 +103,9 @@ public class MainPage extends JFrame {
 					.addComponent(btnViewStaffList)
 					.addGap(18)
 					.addComponent(lblNewLabel)
-					.addContainerGap(199, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+					.addComponent(btnSave)
+					.addGap(25))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
