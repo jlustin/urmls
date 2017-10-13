@@ -9,16 +9,10 @@ import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
 
 public class URLMSApplication {
-		//private static URLMS urlms = new URLMS(new StaffManager(new URLMS(0)), new InventoryManager(new URLMS(0)), new FundingManager(0, new URLMS(0)));
-		private static URLMS urlms;
-//		private static StaffManager staffManager = new StaffManager(urlms);
-//		private static StaffMember staffMember = new StaffMember("Victor", 123, staffManager);
-		
-		//staffManager.addStaffMember(staffMember);
+
+		private static URLMS urlms;	
 		
 		private static String filename = "staff.xml";
-		//public static TileODesignPage dp = new TileODesignPage();
-		//public static TileOPlayPage pp = new TileOPlayPage();
 		
 		/**
 		 * @param args
@@ -30,15 +24,6 @@ public class URLMSApplication {
 	            public void run() {
 	            	new MainPage().setVisible(true);
 	            	
-	           // 	PersistenceXStream.readBahaye();
-//	                if (tileO.hasGames()) {
-//	                	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
-//	                    	dp.setVisible(true);       
-//	                    }
-//	                    else {
-//	                    	pp.setVisible(true);
-//	                    }
-//	                }
 	            }
 	        });        
 		}
@@ -50,7 +35,7 @@ public class URLMSApplication {
 			}
 	 		return urlms;
 		}
-		//public URLMS(StaffManager aStaffManager, InventoryManager aInventoryManager, FundingManager aFundingManager)
+	
 		public static void save() {
 			PersistenceXStream.saveToXMLwithXStream(urlms.getStaffManager());
 		}
