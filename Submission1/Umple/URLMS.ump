@@ -1,3 +1,5 @@
+namespace ca.mcgill.ecse321.urlms.model;
+
 class URLMS
 {
   1 <@>- 1 StaffManager;
@@ -62,6 +64,8 @@ class StaffManager
 
 class StaffMember
 {
+  name;
+  int id;
   1 -- * ResearchRole;
   1 <@>- * ProgressUpdate;
 }
