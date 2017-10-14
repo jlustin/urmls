@@ -32,10 +32,9 @@ public class Controller {
 		staffManager.addStaffMember(member3);
 	}
 	
-	public void save(URLMS urlms) {
+	public void save() {
 		//TODO: VICTORIQUE
 		URLMSApplication.save();
-		urlms = URLMSApplication.load();
 	}
 	
 	public String viewStaffMember(int index, URLMS urlms){

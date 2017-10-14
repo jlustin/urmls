@@ -31,7 +31,7 @@ public class URLMSApplication {
 		public static URLMS getURLMS() {
 			if (urlms == null) {
 				urlms = new URLMS(0);			// ONLY FOR TEST, NEED TO IMPLEMENT WITH LOAD LATER
-//				urlms = load();	
+				urlms = load();	
 			}
 	 		return urlms;
 		}
