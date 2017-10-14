@@ -12,7 +12,7 @@ public class URLMSApplication {
 
 		private static URLMS urlms;	
 		
-		private static String filename = "staff.xml";
+		private static String filename = "urlms.xml";
 		
 		/**
 		 * @param args
@@ -37,13 +37,13 @@ public class URLMSApplication {
 		}
 	
 		public static void save() {
-			PersistenceXStream.saveToXMLwithXStream(urlms.getStaffManager());
+			PersistenceXStream.saveToXMLwithXStream(urlms);
 		}
 		
 		public static URLMS load() {
 			PersistenceXStream.setFilename(filename);
 			URLMS sm = getURLMS();
-			 sm = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+			sm = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			// model cannot be loaded - create empty TileO
 			if (sm == null) {
 				sm = PersistenceXStream.initializeModelManager("urlms.xml");

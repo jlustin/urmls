@@ -6,6 +6,7 @@ import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
 public class Controller {
 	
@@ -31,8 +32,15 @@ public class Controller {
 		staffManager.addStaffMember(member3);
 	}
 	
-	public void save() {
+	public void save(URLMS urlms) {
 		//TODO: VICTORIQUE
 		URLMSApplication.save();
+		urlms = URLMSApplication.load();
 	}
+	
+	public String viewStaffMember(int index, URLMS urlms){
+		return urlms.getStaffManager().getStaffMembers().get(index).getName();
+	}
+	
+
 }
