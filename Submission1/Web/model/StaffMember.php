@@ -9,6 +9,10 @@ class StaffMember
   // MEMBER VARIABLES
   //------------------------
 
+  //StaffMember Attributes
+  private $name;
+  private $id;
+
   //StaffMember Associations
   private $researchRoles;
   private $progressUpdates;
@@ -18,8 +22,10 @@ class StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aStaffManager)
+  public function __construct($aName, $aId, $aStaffManager)
   {
+    $this->name = $aName;
+    $this->id = $aId;
     $this->researchRoles = array();
     $this->progressUpdates = array();
     $didAddStaffManager = $this->setStaffManager($aStaffManager);
@@ -32,6 +38,32 @@ class StaffMember
   //------------------------
   // INTERFACE
   //------------------------
+
+  public function setName($aName)
+  {
+    $wasSet = false;
+    $this->name = $aName;
+    $wasSet = true;
+    return $wasSet;
+  }
+
+  public function setId($aId)
+  {
+    $wasSet = false;
+    $this->id = $aId;
+    $wasSet = true;
+    return $wasSet;
+  }
+
+  public function getName()
+  {
+    return $this->name;
+  }
+
+  public function getId()
+  {
+    return $this->id;
+  }
 
   public function getResearchRole_index($index)
   {
@@ -198,9 +230,9 @@ class StaffMember
     return 0;
   }
 
-  public function addProgressUpdateVia()
+  public function addProgressUpdateVia($aDate)
   {
-    return new ProgressUpdate($this);
+    return new ProgressUpdate($aDate, $this);
   }
 
   public function addProgressUpdate($aProgressUpdate)
