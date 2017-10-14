@@ -1,7 +1,7 @@
 <?php
 	include 'persistence/persistence.php';
 	
-	/* 
+	/*
 	 * get staff list from the staff.xml file
 	 */
 	function getStaffList(){
