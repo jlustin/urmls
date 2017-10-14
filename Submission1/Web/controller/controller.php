@@ -1,14 +1,33 @@
 <?php
-	include 'persistence/persistence.php';
+	include '../persistence/persistence.php';
 	
+	$persistence = new Persistence();
+	$urlms = $persistence->loadData("../staff.xml"); //TODO dont make it load everytime we call controller
+	
+	switch($_GET['action']){
+		case "9/10":
+			getStaffList();
+			break;
+		case "10/10":
+			addStaff($_GET['newstaffname']);
+			break;
+	}
+		
 	/*
 	 * get staff list from the staff.xml file
 	 */
 	function getStaffList(){
-		$data = loadData("staff.xml");
-		foreach($data->children() as $staffs){
-			echo $staffs['id'] . "    " . $staffs->name . "<br>";
+		global $urlms;
+		$members = $urlms->getStaffManager()->getStaffMembers();
+		
+		for($i = 0; $i < sizeOf($members); $i++){
+			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		}
+		
+// 		$data = loadData("staff.xml");
+// 		foreach($data->children() as $staffs){
+// 			echo $staffs['id'] . "    " . $staffs->name . "<br>";
+// 		}
 	}
 	
 	/*
@@ -20,4 +39,5 @@
 		$staff->addChild("name", $newstaffname);
 		saveData($staff, "staff.xml");
 	}
+	
 ?>

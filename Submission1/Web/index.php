@@ -1,19 +1,3 @@
-<?php
-  include 'controller/controller.php';
-  include 'persistence/persistence.php';
-  
-  $urlms = loadData("staff.xml");
-  
-  if (!empty($_GET['act'])) {
-  	
-  	echo $_GET['act'];
-//   	getStaffList();
-  }
-  else if (!empty($_GET['act2'])){
-//  	addStaff($_POST["newstaffname"]);
-  }
-  else {
-?>
 <html>
 	<head>
 		<title>URLMS</title>
@@ -33,13 +17,10 @@
 		<form action="index.php" method="get">
 			<br>
 			<p>Add Staff Member</p>
-			<input type="hidden" name="act2" value="run" />
+			<input type="hidden" name="action" value="10/10" />
 			<input type="text" name="newstaffname" value=" "/>
  			<input type="submit" value="Add staff!" />
  			<br>
 		</form>
 	</body>
 <html/>
-<?php
-  }
-?>
