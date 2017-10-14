@@ -41,7 +41,7 @@ public class URLMSApplication {
 		
 		public static URLMS load() {
 			PersistenceXStream.setFilename(filename);
-			URLMS sm = getURLMS();
+			URLMS sm;
 			sm = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			// model cannot be loaded - create empty TileO
 			if (sm == null) {
