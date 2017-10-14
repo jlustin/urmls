@@ -19,7 +19,7 @@ public class Controller {
 		
 	}
 	
-	public void addMember() {
+	public void addSampleMembers() {
 		URLMS urlms = URLMSApplication.getURLMS();
 		StaffManager staffManager = urlms.getStaffManager();
 		StaffMember member = new StaffMember("Victor", 123, staffManager);
