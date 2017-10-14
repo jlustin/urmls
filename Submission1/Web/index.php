@@ -1,10 +1,16 @@
 <?php
   include 'controller/controller.php';
+  include 'persistence/persistence.php';
+  
+  $urlms = loadData("staff.xml");
+  
   if (!empty($_GET['act'])) {
-  	getStaffList();
+  	
+  	echo $_GET['act'];
+//   	getStaffList();
   }
   else if (!empty($_GET['act2'])){
-  	addStaff($_POST["newstaffname"]);
+//  	addStaff($_POST["newstaffname"]);
   }
   else {
 ?>
@@ -15,13 +21,15 @@
 	<body>
 		<h1>University Research Lab Management System</h1>
 		<br><br>
-		<form action="index.php" method="get">
+		<form action="controller/controller.php" method="get">
 			<br>
 			<p>View Staff List</p>
-			<input type="hidden" name="act" value="run" />
+			<input type="hidden" name="action" value="9/10" />
  			<input type="submit" value="View Staff!" />
  			<br>
 		</form>
+		
+		
 		<form action="index.php" method="get">
 			<br>
 			<p>Add Staff Member</p>

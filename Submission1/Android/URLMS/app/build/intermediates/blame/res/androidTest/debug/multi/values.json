@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "outputFile": "C:\\Users\\Flowers\\Documents\\P8\\Submission1\\Android\\URLMS\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,31 @@
                     "endOffset": 96
                 },
                 "from": {
-                    "file": "/Users/ericvuong/.android/build-cache/a02afa846a132d03e38e2a18acd47bf953c2d283/output/res/values/values.xml",
+                    "file": "C:\\Users\\Flowers\\.android\\build-cache\\7bc5ca4f3e4a1beafb09c035f1fbae040996bd2f\\output\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 229,
+                        "endColumn": 45,
+                        "endOffset": 270
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\Users\\ericvuong\\Dropbox\\McGill\\Fall2017\\ISE\\PROJECT\\Git\\P8\\Submission1\\Android\\URLMS\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 45,
+                    "endOffset": 96
+                },
+                "from": {
+                    "file": "C:\\Users\\ericvuong\\.android\\build-cache\\a02afa846a132d03e38e2a18acd47bf953c2d283\\output\\res\\values\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
