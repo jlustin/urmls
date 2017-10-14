@@ -9,16 +9,10 @@ import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
 
 public class URLMSApplication {
-		//private static URLMS urlms = new URLMS(new StaffManager(new URLMS(0)), new InventoryManager(new URLMS(0)), new FundingManager(0, new URLMS(0)));
-		private static URLMS urlms;
-//		private static StaffManager staffManager = new StaffManager(urlms);
-//		private static StaffMember staffMember = new StaffMember("Victor", 123, staffManager);
+
+		private static URLMS urlms;	
 		
-		//staffManager.addStaffMember(staffMember);
-		
-		private static String filename = "data.urlms";
-		//public static TileODesignPage dp = new TileODesignPage();
-		//public static TileOPlayPage pp = new TileOPlayPage();
+		private static String filename = "urlms.xml";
 		
 		/**
 		 * @param args
@@ -30,40 +24,31 @@ public class URLMSApplication {
 	            public void run() {
 	            	new MainPage().setVisible(true);
 	            	
-	           // 	PersistenceXStream.readBahaye();
-//	                if (tileO.hasGames()) {
-//	                	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
-//	                    	dp.setVisible(true);       
-//	                    }
-//	                    else {
-//	                    	pp.setVisible(true);
-//	                    }
-//	                }
 	            }
 	        });        
 		}
 
 		public static URLMS getURLMS() {
 			if (urlms == null) {
-				urlms = new URLMS(0);			// ONLY FOR TEST, NEED TO IMPLEMENT WITH LOAD LATER
-//				urlms = load();	
+				urlms = load();	
 			}
 	 		return urlms;
 		}
-		//public URLMS(StaffManager aStaffManager, InventoryManager aInventoryManager, FundingManager aFundingManager)
-//		public static void save() {
-//			PersistenceObjectStream.serialize(tileO);
-//		}
-//		
-//		public static TileO load() {
-//			PersistenceObjectStream.setFilename(filename);
-//			tileO = (TileO) PersistenceObjectStream.deserialize();
-//			// model cannot be loaded - create empty TileO
-//			if (tileO == null) {
-//				tileO = new TileO();
-//			}
-//			return tileO;
-//		}
+	
+		public static void save() {
+			PersistenceXStream.saveToXMLwithXStream(urlms);
+		}
+		
+		public static URLMS load() {
+			PersistenceXStream.setFilename(filename);
+			URLMS sm;
+			sm = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+			// model cannot be loaded - create empty TileO
+			if (sm == null) {
+				sm = PersistenceXStream.initializeModelManager("urlms.xml");
+			}
+			return sm;
+		}
 		
 		public static void setFilename(String newFilename) {
 			filename = newFilename;
