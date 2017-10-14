@@ -58,15 +58,15 @@ public class Persistence
                 if(staffName.equals("staff")){
                     name += parser.getAttributeValue(null, "id") + " ";
                     while(eventType!=XmlResourceParser.TEXT){
-                    try {
-                        eventType = parser.next();
-                        throw new XmlPullParserException("lol");
-                    }  catch (XmlPullParserException e) {
-                        e.printStackTrace();
-                    }  catch (IOException e){
-                        e.printStackTrace();
-                    }}
-                        name+= parser.getText() + "\n";
+                        try {
+                            eventType = parser.next();
+                            throw new XmlPullParserException("lol");
+                        }  catch (XmlPullParserException e) {
+                            e.printStackTrace();
+                        }  catch (IOException e){
+                            e.printStackTrace();
+                        }}
+                    name+= parser.getText() + "\n";
 
                 }
             }
@@ -85,6 +85,7 @@ public class Persistence
             }
         }
         toDisplay.setText(name);
+        //lol
 
 
     }
