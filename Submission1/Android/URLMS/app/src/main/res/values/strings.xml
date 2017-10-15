@@ -7,13 +7,10 @@
     <string name="addMember">Add Member</string>
     <string name="appTitle">U R L M S</string>
 
-    <string name="longText">
-        Feras, 00001\nEric, 00002\nVictor, 00003\nJustin, 00004\nChun Ming 00005\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-   </string>
-
+    <string name="insertID">Insert ID</string>
+    <string name="insertName">Insert name</string>
+    <string name="deleteButton">Delete</string>
+    <string name="updateButton">Update</string>
+    <string name="deleteAll">Erase Database</string>
 
 </resources>

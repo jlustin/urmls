@@ -442,16 +442,14 @@
     <string name="addMember">Add Member</string>
     <string name="appTitle">U R L M S</string>
     <string name="app_name">URLMS</string>
-    <string name="longText">
-        Feras, 00001\nEric, 00002\nVictor, 00003\nJustin, 00004\nChun Ming 00005\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-        Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-   </string>
+    <string name="deleteAll">Erase Database</string>
+    <string name="deleteButton">Delete</string>
+    <string name="insertID">Insert ID</string>
+    <string name="insertName">Insert name</string>
     <string name="refreshButton">Refresh</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="updateButton">Update</string>
     <string name="view_stafflist">View Staff Members </string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
