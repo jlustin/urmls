@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 
 import android.content.res.XmlResourceParser;
 
@@ -34,59 +36,56 @@ import java.io.File;
 import static android.R.attr.name;
 import static com.example.team8.urlms.R.id.toDisplay;
 
-public class Persistence
+public abstract class Persistence
 {
 //TODO
     // implement XML reader
 
 
-    public Persistence() {
+    public static URLMS load(XmlResourceParser parser) {
 
 
-    }
+        URLMS urlms = new URLMS(0);
+        StaffManager sm = urlms.getStaffManager();
 
-    public void processData(XmlResourceParser parser, TextView toDisplay) {
-
-        String name = "";
+        int id = 0;
+        String name;
 
         int eventType = -1;
-        while(eventType!=XmlResourceParser.END_DOCUMENT)
-        {
-            if(eventType == XmlResourceParser.START_TAG)
-            {
+        while(eventType!=XmlResourceParser.END_DOCUMENT) {
+            if (eventType == XmlResourceParser.START_TAG) {
                 String staffName = parser.getName();
-                if(staffName.equals("staff")){
-                    name += parser.getAttributeValue(null, "id") + " ";
-                    while(eventType!=XmlResourceParser.TEXT){
-                    try {
-                        eventType = parser.next();
-                        throw new XmlPullParserException("lol");
-                    }  catch (XmlPullParserException e) {
-                        e.printStackTrace();
-                    }  catch (IOException e){
-                        e.printStackTrace();
-                    }}
-                        name+= parser.getText() + "\n";
+                if (staffName.equals("staff")) {
+                    id = Integer.parseInt(parser.getAttributeValue(null, "id"));
+                    while (eventType != XmlResourceParser.TEXT) {
+                        try {
+                            eventType = parser.next();
+
+                            throw new XmlPullParserException("");
+                        } catch (XmlPullParserException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    name = parser.getText();
+                    sm.addStaffMember(name, id);
 
                 }
             }
-//            if(eventType == XmlResourceParser.TEXT)
-//            {
-//                name+= parser.getText() + "\n";
-//            }
             //exception handling
             try {
                 eventType = parser.next();
                 throw new XmlPullParserException("lol");
-            }  catch (XmlPullParserException e) {
+            } catch (XmlPullParserException e) {
                 e.printStackTrace();
-            }  catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        toDisplay.setText(name);
 
-
+        return urlms;
     }
 
 
