@@ -14,7 +14,7 @@
 		</form>
 		
 		
-		<form action="index.php" method="get">
+		<form action="controller/controller.php" method="get">
 			<br>
 			<p>Add Staff Member</p>
 			<input type="hidden" name="action" value="10/10" />

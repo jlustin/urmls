@@ -23,21 +23,22 @@
 		for($i = 0; $i < sizeOf($members); $i++){
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		}
-		
-// 		$data = loadData("staff.xml");
-// 		foreach($data->children() as $staffs){
-// 			echo $staffs['id'] . "    " . $staffs->name . "<br>";
-// 		}
+		?>
+	<HTML>
+	<a href="../index.php">back</a>
+	</HTML>
+		<?php 
 	}
 	
 	/*
 	 * add new staff to the staff.xml file
 	 */
 	function addStaff($newstaffname){
-		$data = loadData("staff.xml");
-		$staff = $data->addChild("staff");
-		$staff->addChild("name", $newstaffname);
-		saveData($staff, "staff.xml");
+	
+// 		$data = loadData("staff.xml");
+// 		$staff = $data->addChild("staff");
+// 		$staff->addChild("name", $newstaffname);
+// 		saveData($staff, "staff.xml");
 	}
 	
 ?>
