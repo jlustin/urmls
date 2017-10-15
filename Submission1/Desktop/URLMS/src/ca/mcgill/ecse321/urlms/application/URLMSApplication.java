@@ -5,13 +5,14 @@ import ca.mcgill.ecse321.urlms.model.InventoryManager;
 import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
 
 public class URLMSApplication {
+		//private static URLMS urlms = new URLMS(new StaffManager(new URLMS(0)), new InventoryManager(new URLMS(0)), new FundingManager(0, new URLMS(0)));
 		private static URLMS urlms;
-	
-		private static StaffManager staffManager = new StaffManager(urlms);
-		//private static StaffMember staffMember = new StaffMember("Victor", 123, staffManager);
+//		private static StaffManager staffManager = new StaffManager(urlms);
+//		private static StaffMember staffMember = new StaffMember("Victor", 123, staffManager);
 		
 		//staffManager.addStaffMember(staffMember);
 		
@@ -28,6 +29,8 @@ public class URLMSApplication {
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	            	new MainPage().setVisible(true);
+	            	
+	           // 	PersistenceXStream.readBahaye();
 //	                if (tileO.hasGames()) {
 //	                	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
 //	                    	dp.setVisible(true);       
@@ -42,7 +45,7 @@ public class URLMSApplication {
 
 		public static URLMS getURLMS() {
 			if (urlms == null) {
-				urlms = new URLMS(new StaffManager(urlms), new InventoryManager(urlms), new FundingManager(0, urlms));			// ONLY FOR TEST, NEED TO IMPLEMENT WITH LOAD LATER
+				urlms = new URLMS(0);			// ONLY FOR TEST, NEED TO IMPLEMENT WITH LOAD LATER
 //				urlms = load();	
 			}
 	 		return urlms;

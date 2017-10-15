@@ -1,19 +1,27 @@
 package ca.mcgill.ecse321.urlms.controller;
 
+import android.content.res.XmlResourceParser;
+
+import com.example.team8.urlms.R;
+
 import java.util.*;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+import ca.mcgill.ecse321.urlms.persistence.Persistence;
 
 public class Controller {
 
+    URLMS urlms;
+    public Controller(XmlResourceParser parser){
+        urlms = Persistence.load(parser);
+    }
+
     public List<StaffMember> viewStaffList(){
-        URLMS urlms = URLMSApplication.getURLMS();
         StaffManager staffManager = urlms.getStaffManager();
         List<StaffMember> staffList = staffManager.getStaffMembers();
-
         return staffList;
 
     }

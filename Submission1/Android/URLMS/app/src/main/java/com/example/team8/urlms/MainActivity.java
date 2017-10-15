@@ -7,73 +7,102 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.List;
 
+import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.*;
 
 import android.content.res.XmlResourceParser;
+import android.widget.Toast;
 
-import org.xmlpull.v1.XmlPullParserException;
+import static android.R.attr.name;
+
+//import static com.example.team8.urlms.MainActivity.load;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button backButton;
+    Button refreshButton;
     Button viewStaffButton;
+    Button addMember;
     TextView toDisplay;
-
-    public static Controller controller = new Controller();
+    TextView appTitle;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //initiate persistence
-        final Persistence persistence = new Persistence();
 
-
-
-        backButton = (Button) findViewById(R.id.backButton);
+        //buttons
+        refreshButton = (Button) findViewById(R.id.refreshButton);
         viewStaffButton = (Button) findViewById(R.id.viewStaff);
+        addMember = (Button) findViewById(R.id.addMember);
+        //textviews
         toDisplay = (TextView) findViewById(R.id.toDisplay);
+        appTitle = (TextView) findViewById(R.id.appTitle);
+
+        viewStaffMembers();
+        refresh();
+        addMember(); // not implemented
 
         //initiate scrolling
         toDisplay.setMovementMethod(new ScrollingMovementMethod());
 
+    }
 
-        //viewStaffList
+    //toast
+    public void toastMessage(String message){
+        Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
+        myToast.show();
+    }
 
+
+    //button methods
+
+    private void refresh() {
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toDisplay.setText("");
+                toastMessage("Page refreshed.");
+            }
+        });
+    }
+
+    public void viewStaffMembers(){
         viewStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.addMember();
+
+                XmlResourceParser parser = getResources().getXml(R.xml.stafflist);
+                Controller controller = new Controller(parser);
+
                 List<StaffMember> staffList = controller.viewStaffList();
                 String name;
                 int id;
-                String output =null;
+                String output = "";
                 for(StaffMember aMember: staffList){
-
-                    output += aMember.getName() + " " + aMember.getId()+"\n";
-
+                    output += aMember.getId() +" " +aMember.getName() +"\n";
                 }
                 toDisplay.setText(output);
+
+
+                toastMessage("All members displayed.");
+
             }
         });
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                XML parser
-                XmlResourceParser parser = getResources().getXml(R.xml.stafflist);
-                    persistence.processData(parser, toDisplay);
-            }
-        });
-
     }
 
+    private void addMember() {
+        addMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastMessage("Member added.");
+            }
+        });
+    }
 
 }

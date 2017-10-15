@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 
 import android.content.res.XmlResourceParser;
 
@@ -34,20 +36,20 @@ import java.io.File;
 import static android.R.attr.name;
 import static com.example.team8.urlms.R.id.toDisplay;
 
-public class Persistence
+public  abstract class Persistence
 {
 //TODO
     // implement XML reader
 
 
-    public Persistence() {
+     public static URLMS load(XmlResourceParser parser) {
 
 
-    }
+        URLMS urlms = new URLMS(0);
+        StaffManager sm = urlms.getStaffManager();
 
-    public void processData(XmlResourceParser parser, TextView toDisplay) {
-
-        String name = "";
+        int id = 0;
+        String name;
 
         int eventType = -1;
         while(eventType!=XmlResourceParser.END_DOCUMENT)
@@ -56,24 +58,29 @@ public class Persistence
             {
                 String staffName = parser.getName();
                 if(staffName.equals("staff")){
-                    name += parser.getAttributeValue(null, "id") + " ";
+                    id = Integer.parseInt(parser.getAttributeValue(null, "id"));
                     while(eventType!=XmlResourceParser.TEXT){
                         try {
                             eventType = parser.next();
+<<<<<<< HEAD
                             throw new XmlPullParserException("lol");
+=======
+                            throw new XmlPullParserException("");
+>>>>>>> dev
                         }  catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }  catch (IOException e){
                             e.printStackTrace();
                         }}
+<<<<<<< HEAD
                     name+= parser.getText() + "\n";
+=======
+                    name = parser.getText();
+                    sm.addStaffMember(name,id);
+>>>>>>> dev
 
                 }
             }
-//            if(eventType == XmlResourceParser.TEXT)
-//            {
-//                name+= parser.getText() + "\n";
-//            }
             //exception handling
             try {
                 eventType = parser.next();
@@ -84,10 +91,14 @@ public class Persistence
                 e.printStackTrace();
             }
         }
+<<<<<<< HEAD
         toDisplay.setText(name);
         //lol
 
+=======
+>>>>>>> dev
 
+        return urlms;
     }
 
 

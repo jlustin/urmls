@@ -18,4 +18,17 @@ public class Controller {
 		
 	}
 	
+	public void addMember() {
+		URLMS urlms = URLMSApplication.getURLMS();
+		StaffManager staffManager = urlms.getStaffManager();
+		StaffMember member = new StaffMember("Victor", 123, staffManager);
+		staffManager.addStaffMember(member);
+
+		StaffMember member2 = new StaffMember("Feras", 111, staffManager);
+		staffManager.addStaffMember(member2);
+		
+		StaffMember member3 = new StaffMember("Jun2Yu", 222, staffManager);
+		staffManager.addStaffMember(member3);
+	}
+	
 }
