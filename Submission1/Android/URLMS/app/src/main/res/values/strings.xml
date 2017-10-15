@@ -3,8 +3,9 @@
 
 
     <string name="view_stafflist">View Staff Members </string>
-    <string name="backButton">Back</string>
-
+    <string name="refreshButton">Refresh</string>
+    <string name="addMember">Add Member</string>
+    <string name="appTitle">U R L M S</string>
 
     <string name="longText">
         Feras, 00001\nEric, 00002\nVictor, 00003\nJustin, 00004\nChun Ming 00005\n

@@ -1646,7 +1646,7 @@
         Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
         Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
         Test\nTest\nTest\nTest\nTest\nTest\nTest\nTest\n
-   </string><string name="app_name">URLMS</string><string name="backButton">Back</string></file><file path="/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/src/main/res/values/styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+   </string><string name="appTitle">U R L M S</string><string name="app_name">URLMS</string><string name="addMember">Add Member</string><string name="refreshButton">Refresh</string></file><file path="/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/src/main/res/values/styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

@@ -38,7 +38,7 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/backButton"
+        android:text="@string/refreshButton"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp"/>
 
