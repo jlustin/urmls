@@ -36,13 +36,13 @@ import java.io.File;
 import static android.R.attr.name;
 import static com.example.team8.urlms.R.id.toDisplay;
 
-public  abstract class Persistence
+public abstract class Persistence
 {
 //TODO
     // implement XML reader
 
 
-     public static URLMS load(XmlResourceParser parser) {
+    public static URLMS load(XmlResourceParser parser) {
 
 
         URLMS urlms = new URLMS(0);
@@ -52,32 +52,25 @@ public  abstract class Persistence
         String name;
 
         int eventType = -1;
-        while(eventType!=XmlResourceParser.END_DOCUMENT)
-        {
-            if(eventType == XmlResourceParser.START_TAG)
-            {
+        while(eventType!=XmlResourceParser.END_DOCUMENT) {
+            if (eventType == XmlResourceParser.START_TAG) {
                 String staffName = parser.getName();
-                if(staffName.equals("staff")){
+                if (staffName.equals("staff")) {
                     id = Integer.parseInt(parser.getAttributeValue(null, "id"));
-                    while(eventType!=XmlResourceParser.TEXT){
+                    while (eventType != XmlResourceParser.TEXT) {
                         try {
                             eventType = parser.next();
-<<<<<<< HEAD
-                            throw new XmlPullParserException("lol");
-=======
+
                             throw new XmlPullParserException("");
->>>>>>> dev
-                        }  catch (XmlPullParserException e) {
+                        } catch (XmlPullParserException e) {
                             e.printStackTrace();
-                        }  catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
-                        }}
-<<<<<<< HEAD
-                    name+= parser.getText() + "\n";
-=======
+                        }
+                    }
+
                     name = parser.getText();
-                    sm.addStaffMember(name,id);
->>>>>>> dev
+                    sm.addStaffMember(name, id);
 
                 }
             }
@@ -85,18 +78,12 @@ public  abstract class Persistence
             try {
                 eventType = parser.next();
                 throw new XmlPullParserException("lol");
-            }  catch (XmlPullParserException e) {
+            } catch (XmlPullParserException e) {
                 e.printStackTrace();
-            }  catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-<<<<<<< HEAD
-        toDisplay.setText(name);
-        //lol
-
-=======
->>>>>>> dev
 
         return urlms;
     }
