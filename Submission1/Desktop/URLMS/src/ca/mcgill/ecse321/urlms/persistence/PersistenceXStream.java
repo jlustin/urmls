@@ -19,14 +19,14 @@ public abstract class PersistenceXStream {
 
     public static URLMS initializeModelManager(String fileName) {
         // Initialization for persistence
-        URLMS rm;
+        URLMS urlms;
         setFilename(fileName);
         setAlias("urlms", URLMS.class);
 
         // load model if exists, create otherwise
         File file = new File(fileName);
         if (file.exists()) {
-            rm = (URLMS) loadFromXMLwithXStream();
+            urlms = (URLMS) loadFromXMLwithXStream();
         } else {
             try {
                 file.createNewFile();
@@ -34,10 +34,10 @@ public abstract class PersistenceXStream {
                 e.printStackTrace();
                 System.exit(1);
             }
-            rm = new URLMS(0);
-            saveToXMLwithXStream(rm);
+            urlms = new URLMS(0);
+            saveToXMLwithXStream(urlms);
         }
-        return rm;
+        return urlms;
 
     }
 
@@ -63,7 +63,7 @@ public abstract class PersistenceXStream {
             return xstream.fromXML(fileReader);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }

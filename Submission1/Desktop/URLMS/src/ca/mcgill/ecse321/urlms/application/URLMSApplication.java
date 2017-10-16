@@ -1,12 +1,9 @@
 package ca.mcgill.ecse321.urlms.application;
 
-import ca.mcgill.ecse321.urlms.model.FundingManager;
-import ca.mcgill.ecse321.urlms.model.InventoryManager;
-import ca.mcgill.ecse321.urlms.model.StaffManager;
-import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
+import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
 
 public class URLMSApplication {
 
@@ -30,6 +27,7 @@ public class URLMSApplication {
 
 		public static URLMS getURLMS() {
 			if (urlms == null) {
+				
 				urlms = load();	
 			}
 	 		return urlms;
@@ -41,13 +39,15 @@ public class URLMSApplication {
 		
 		public static URLMS load() {
 			PersistenceXStream.setFilename(filename);
-			URLMS sm;
-			sm = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+			URLMS urlms;
+			urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			// model cannot be loaded - create empty TileO
-			if (sm == null) {
-				sm = PersistenceXStream.initializeModelManager("urlms.xml");
+			if (urlms == null) {
+				urlms = PersistenceXStream.initializeModelManager("urlms.xml");
+				NewSaveFilePO nsfpo = new NewSaveFilePO();
+				nsfpo.setVisible(true);
 			}
-			return sm;
+			return urlms;
 		}
 		
 		public static void setFilename(String newFilename) {
