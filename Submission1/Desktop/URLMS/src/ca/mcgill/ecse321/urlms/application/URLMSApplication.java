@@ -27,7 +27,6 @@ public class URLMSApplication {
 
 		public static URLMS getURLMS() {
 			if (urlms == null) {
-				
 				urlms = load();	
 			}
 	 		return urlms;

@@ -21,7 +21,7 @@ public abstract class PersistenceXStream {
         // Initialization for persistence
         URLMS urlms;
         setFilename(fileName);
-        setAlias("urlms", URLMS.class);
+        //setAlias("URLMS", URLMS.class);
 
         // load model if exists, create otherwise
         File file = new File(fileName);
