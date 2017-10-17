@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+//TODO: UC-SM-01
     public void viewStaffMembers(){
         viewStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Cursor result = myDb.getAllData();
                 if(result.getCount()==0){
-                    //show message
                     return;
                 }
                 StringBuffer buffer = new StringBuffer();
