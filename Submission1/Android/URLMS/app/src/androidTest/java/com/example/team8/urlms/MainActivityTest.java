@@ -46,6 +46,7 @@ public class MainActivityTest {
             expected.append("ID :" + cursor.getString(0)+"\n");
             expected.append("Name :" + cursor.getString(1)+"\n\n");
         }
+        //checks if expected matches what actually displays on the screen
         assertEquals(mActivity.toDisplay.getText().toString(), expected.toString());
 
     }

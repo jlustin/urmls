@@ -1,6 +1,8 @@
 package com.example.team8.urlms;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -191,10 +193,33 @@ public class MainActivity extends AppCompatActivity {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDb.deleteAll();
-                    toastMessage("All members deleted");
+                deleteAllAuthorization();
             }
         });
+    }
+
+    public void deleteAllAuthorization(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Admin Access Required.")
+                .setCancelable(false)
+                .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myDb.deleteAll();
+                toDisplay.setText("");
+                toastMessage("All members deleted");
+
+            }
+        })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+            AlertDialog display = alert.create();
+            alert.setTitle("Admin");
+            alert.show();
     }
 
 }
