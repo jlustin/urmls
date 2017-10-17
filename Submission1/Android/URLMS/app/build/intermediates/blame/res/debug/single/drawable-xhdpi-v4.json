@@ -56,12 +56,12 @@
         "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/drawable-xhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png",
-        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
-    },
-    {
         "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_star_half_black_16dp.png",
         "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/drawable-xhdpi-v4/abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png",
+        "source": "/Users/ericvuong/.android/build-cache/a6f5c707fb6e9d40f41d8af38de5ee81905c0c15/output/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_star_half_black_36dp.png",

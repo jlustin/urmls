@@ -1,4 +1,4 @@
-#Sat Oct 14 11:09:26 EDT 2017
+#Tue Oct 17 15:08:22 EDT 2017
 file.2=/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e0c6b64bf7cdbb9dc2d695d8f21ee8132f27f094/classes.dex
 base.2=/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e0c6b64bf7cdbb9dc2d695d8f21ee8132f27f094
 file.1=/Users/ericvuong/Dropbox/McGill/Fall2017/ISE/PROJECT/Git/P8/Submission1/Android/URLMS/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.0.0-alpha1_d2eaedf219848e5f06fda1a9b0c25f7e460466a6/classes.dex
