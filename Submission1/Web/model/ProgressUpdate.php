@@ -9,6 +9,9 @@ class ProgressUpdate
   // MEMBER VARIABLES
   //------------------------
 
+  //ProgressUpdate Attributes
+  private $date;
+
   //ProgressUpdate Associations
   private $staffMember;
 
@@ -16,8 +19,9 @@ class ProgressUpdate
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aStaffMember)
+  public function __construct($aDate, $aStaffMember)
   {
+    $this->date = $aDate;
     $didAddStaffMember = $this->setStaffMember($aStaffMember);
     if (!$didAddStaffMember)
     {
@@ -28,6 +32,19 @@ class ProgressUpdate
   //------------------------
   // INTERFACE
   //------------------------
+
+  public function setDate($aDate)
+  {
+    $wasSet = false;
+    $this->date = $aDate;
+    $wasSet = true;
+    return $wasSet;
+  }
+
+  public function getDate()
+  {
+    return $this->date;
+  }
 
   public function getStaffMember()
   {
