@@ -40,7 +40,6 @@ public class URLMSApplication {
 			PersistenceXStream.setFilename(filename);
 			URLMS urlms;
 			urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
-			// model cannot be loaded - create empty TileO
 			if (urlms == null) {
 				urlms = PersistenceXStream.initializeModelManager("urlms.xml");
 				NewSaveFilePO nsfpo = new NewSaveFilePO();
