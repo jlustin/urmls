@@ -91,9 +91,9 @@ class StaffManager
     return 0;
   }
 
-  public function addStaffMemberVia()
+  public function addStaffMemberVia($aName, $aId)
   {
-    return new StaffMember($this);
+    return new StaffMember($aName, $aId, $this);
   }
 
   public function addStaffMember($aStaffMember)
