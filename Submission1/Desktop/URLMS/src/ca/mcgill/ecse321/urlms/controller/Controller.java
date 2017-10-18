@@ -10,15 +10,23 @@ import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
 public class Controller {
 	
+	/**
+	 * This method will get the staff member list of the current urlms in order to view the members
+	 * @return the staffList from urlms
+	 */
 	public List<StaffMember> viewStaffList(){
 		URLMS urlms = URLMSApplication.getURLMS();
 		StaffManager staffManager = urlms.getStaffManager();
 		List<StaffMember> staffList = staffManager.getStaffMembers();
 		
 		return staffList;
-		
 	}
 	
+	/**
+	 * This method is used for testing purposes. Three members with names Victor, Feras and Jun2Yu will be
+	 * added to the current staff member list. These three members will have different IDs: 123, 111 and 222
+	 * respectively.
+	 */
 	public void addSampleMembers() {
 		URLMS urlms = URLMSApplication.getURLMS();
 		StaffManager staffManager = urlms.getStaffManager();
@@ -32,11 +40,18 @@ public class Controller {
 		staffManager.addStaffMember(member3);
 	}
 	
+	/**
+	 * This method calls the save method from the applicationg to save the current urlms to the persistence.
+	 */
 	public void save() {
-		//TODO: VICTORIQUE
 		URLMSApplication.save();
 	}
 	
+	/**
+	 * This method will get the name of a specific staff member in the list and return its name as a string.
+	 * @param index of the staff member in the list
+	 * @return name of the staff member as a String
+	 */
 	public String viewStaffMember(int index){
 		return URLMSApplication.getURLMS().getStaffManager().getStaffMembers().get(index).getName();
 	}

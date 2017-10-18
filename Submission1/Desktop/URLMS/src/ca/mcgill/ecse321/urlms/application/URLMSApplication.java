@@ -7,16 +7,15 @@ import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
 
 public class URLMSApplication {
 
-		private static URLMS urlms;	
+		private static URLMS urlms;						//main urlms for the whole application
 		
-		private static String filename = "urlms.xml";
+		private static String filename = "urlms.xml";	//persistence data file name
 		
 		/**
 		 * @param args
 		 */
 		public static void main(String[] args) {
-			// start UI
-			// TODO startup the UI corresponding to the right mode?
+			// start the Main Page UI
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	            	new MainPage().setVisible(true);
@@ -25,6 +24,10 @@ public class URLMSApplication {
 	        });        
 		}
 
+		/**
+		 * This method will get the current urlms. If it is null, it will fetch for the urlms saved.
+		 * @return the current urlms
+		 */
 		public static URLMS getURLMS() {
 			if (urlms == null) {
 				urlms = load();	
@@ -32,14 +35,25 @@ public class URLMSApplication {
 	 		return urlms;
 		}
 	
+		/**
+		 * This method will save the current urlms to the persistence. The data file will be an XLM file created
+		 * using XStream.
+		 */
 		public static void save() {
 			PersistenceXStream.saveToXMLwithXStream(urlms);
 		}
 		
+		/**
+		 * This method will load the urlms stored in the XML data file. If no load file is found, a new save file
+		 * will be created.
+		 * @return loaded urlms
+		 */
 		public static URLMS load() {
 			PersistenceXStream.setFilename(filename);
 			URLMS urlms;
 			urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+			
+			//if the file does not exist, create a new save file
 			if (urlms == null) {
 				urlms = PersistenceXStream.initializeModelManager("urlms.xml");
 				NewSaveFilePO nsfpo = new NewSaveFilePO();
@@ -48,6 +62,10 @@ public class URLMSApplication {
 			return urlms;
 		}
 		
+		/**
+		 * This method sets the file name to the desired name
+		 * @param newFilename file name String
+		 */
 		public static void setFilename(String newFilename) {
 			filename = newFilename;
 		}
