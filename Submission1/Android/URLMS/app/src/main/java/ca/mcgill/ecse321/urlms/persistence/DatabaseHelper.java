@@ -8,6 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.List;
+
+import ca.mcgill.ecse321.urlms.model.StaffManager;
+import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
+
 import static android.R.attr.id;
 
 /**
@@ -21,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
-
+    public static URLMS urlms = new URLMS(0);
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, 1);
@@ -65,11 +71,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
     }
-    public Integer deleteAll(){
+    public void deleteAll(){
         SQLiteDatabase db = this.getWritableDatabase();
-        for(int id=0; id<100;id++){
-            db.delete(TABLE_NAME, "ID = ?", new String[] {Integer.toString(id)});
-        }
-        return 1;
+            db.delete(TABLE_NAME, "1", null);
+    }
+    public List<StaffMember> load(Cursor cursor){
+        StaffManager sm = this.urlms.getStaffManager();
+        while(cursor.moveToNext()){
+            if(cursor.getString(0)!=null){
+                sm.addStaffMember(cursor.getString(1),Integer.parseInt(cursor.getString(0)));
+            }}
+        return sm.getStaffMembers();
     }
 }

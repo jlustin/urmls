@@ -1,6 +1,8 @@
 package com.example.team8.urlms;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -17,6 +19,7 @@ import ca.mcgill.ecse321.urlms.persistence.*;
 
 import android.content.res.XmlResourceParser;
 import android.widget.Toast;
+
 
 //import static com.example.team8.urlms.MainActivity.load;
 
@@ -37,13 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
 
+    Controller controller = new Controller();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDb = new DatabaseHelper(this);
 
+        myDb = new DatabaseHelper(this);
+        Cursor result = myDb.getAllData();
 
         //buttons
         refreshButton = (Button) findViewById(R.id.refreshButton);
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void refresh() {
+    public void refresh() {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,11 +126,29 @@ public class MainActivity extends AppCompatActivity {
                 StringBuffer buffer = new StringBuffer();
                 while(result.moveToNext()){
                     buffer.append("ID :" + result.getString(0)+"\n");
-                    buffer.append("ID :" + result.getString(1)+"\n\n");
+                    buffer.append("Name :" + result.getString(1)+"\n\n");
                 }
                 //show all Data
                 toDisplay.setText(buffer);
                 toastMessage("All members displayed.");
+
+
+                /*
+                ===================================================================
+                SQL+persistence+model
+                ===================================================================
+                 */
+//                Cursor result = myDb.getAllData();
+//                List<StaffMember> staffList = controller.viewMembers(result);
+//                String name;
+//                int id;
+//                String output = "";
+//                for(StaffMember aMember: staffList){
+//                    output += aMember.getId() +" " +aMember.getName() +"\n";
+//                }
+//
+//                toDisplay.setText(output);
+//
 
             }
         });
@@ -169,12 +193,33 @@ public class MainActivity extends AppCompatActivity {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int result = myDb.deleteAll();
-                if(result==1){
-                    toastMessage("All members deleted");
-                }
+                deleteAllAuthorization();
             }
         });
+    }
+
+    public void deleteAllAuthorization(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Admin Access Required.")
+                .setCancelable(false)
+                .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myDb.deleteAll();
+                toDisplay.setText("");
+                toastMessage("All members deleted");
+
+            }
+        })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+            AlertDialog display = alert.create();
+            alert.setTitle("Admin");
+            alert.show();
     }
 
 }
