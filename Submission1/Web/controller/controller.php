@@ -17,10 +17,12 @@
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
 	
+	// start session
 	session_start();
 	
 	$c = new Controller();
-	
+	// check with button was clicked by user
+	// and run the right controller method with respect to user choice
 	switch($_GET['action']){
 		case "9/10":
 			$c->getStaffList();
@@ -37,6 +39,9 @@
 		
 class Controller {
 	
+	/*
+	 * Constructor
+	 */
 	public function __construct(){}
 	
 	/*
@@ -46,12 +51,14 @@ class Controller {
 		// Load data
 		$persistence = new Persistence();
 		$urlms = $persistence->loadDataFromStore();
-		
+		// Get staff members from urlms
 		$members = $urlms->getStaffManager()->getStaffMembers();
 		for ($i = 0; $i < sizeof($members); $i++){
+			// display each staff member represented by their ID and name
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		} 
 		?>
+		<!-- Add back button to page -->
 		<HTML>
 			<a href="../index.php">Back</a>
 		</HTML><?php
@@ -78,6 +85,7 @@ class Controller {
 			$persistence->writeDataToStore($urlms);
 			
 			?>
+			<!-- Add back button to page -->
 			<HTML>
 				<p>New staff member successfully added!</p>
 				<a href="../index.php">Back</a>
