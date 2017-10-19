@@ -1,67 +1,71 @@
 package ca.mcgill.ecse321.urlms.application;
 
-import ca.mcgill.ecse321.urlms.model.FundingManager;
-import ca.mcgill.ecse321.urlms.model.InventoryManager;
-import ca.mcgill.ecse321.urlms.model.StaffManager;
-import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
+import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
 
 public class URLMSApplication {
-		private static URLMS urlms;
-	
-		private static StaffManager staffManager = new StaffManager(urlms);
-		//private static StaffMember staffMember = new StaffMember("Victor", 123, staffManager);
+
+		private static URLMS urlms;						//main urlms for the whole application
 		
-		//staffManager.addStaffMember(staffMember);
-		
-		private static String filename = "data.urlms";
-		//public static TileODesignPage dp = new TileODesignPage();
-		//public static TileOPlayPage pp = new TileOPlayPage();
+		private static String filename = "urlms.xml";	//persistence data file name
 		
 		/**
 		 * @param args
 		 */
 		public static void main(String[] args) {
-			// start UI
-			// TODO startup the UI corresponding to the right mode?
+			// start the Main Page UI
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	            	new MainPage().setVisible(true);
-//	                if (tileO.hasGames()) {
-//	                	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
-//	                    	dp.setVisible(true);       
-//	                    }
-//	                    else {
-//	                    	pp.setVisible(true);
-//	                    }
-//	                }
+	            	
 	            }
 	        });        
 		}
 
+		/**
+		 * This method will get the current urlms. If it is null, it will fetch for the urlms saved.
+		 * @return the current urlms
+		 */
 		public static URLMS getURLMS() {
 			if (urlms == null) {
-				urlms = new URLMS(new StaffManager(urlms), new InventoryManager(urlms), new FundingManager(0, urlms));			// ONLY FOR TEST, NEED TO IMPLEMENT WITH LOAD LATER
-//				urlms = load();	
+				urlms = load();	
 			}
 	 		return urlms;
 		}
-		//public URLMS(StaffManager aStaffManager, InventoryManager aInventoryManager, FundingManager aFundingManager)
-//		public static void save() {
-//			PersistenceObjectStream.serialize(tileO);
-//		}
-//		
-//		public static TileO load() {
-//			PersistenceObjectStream.setFilename(filename);
-//			tileO = (TileO) PersistenceObjectStream.deserialize();
-//			// model cannot be loaded - create empty TileO
-//			if (tileO == null) {
-//				tileO = new TileO();
-//			}
-//			return tileO;
-//		}
+	
+		/**
+		 * This method will save the current urlms to the persistence. The data file will be an XLM file created
+		 * using XStream.
+		 */
+		public static void save() {
+			PersistenceXStream.saveToXMLwithXStream(urlms);
+		}
 		
+		/**
+		 * This method will load the urlms stored in the XML data file. If no load file is found, a new save file
+		 * will be created.
+		 * @return loaded urlms
+		 */
+		public static URLMS load() {
+			PersistenceXStream.setFilename(filename);
+			URLMS urlms;
+			urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+			
+			//if the file does not exist, create a new save file
+			if (urlms == null) {
+				urlms = PersistenceXStream.initializeModelManager("urlms.xml");
+				NewSaveFilePO nsfpo = new NewSaveFilePO();
+				nsfpo.setVisible(true);
+			}
+			return urlms;
+		}
+		
+		/**
+		 * This method sets the file name to the desired name
+		 * @param newFilename file name String
+		 */
 		public static void setFilename(String newFilename) {
 			filename = newFilename;
 		}

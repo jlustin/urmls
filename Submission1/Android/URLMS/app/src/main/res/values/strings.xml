@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">URLMS</string>
+
+
+    <string name="view_stafflist">View Staff Members </string>
+    <string name="refreshButton">Refresh</string>
+    <string name="addMember">Add Member</string>
+    <string name="appTitle">U R L M S</string>
+
+    <string name="insertID">Insert ID</string>
+    <string name="insertName">Insert name</string>
+    <string name="deleteButton">Delete</string>
+    <string name="updateButton">Update</string>
+    <string name="deleteAll">Erase Database</string>
+
+</resources>
