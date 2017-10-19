@@ -104,12 +104,12 @@
       </file>
       <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="android-designer2">
+          <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
+          <provider editor-type-id="text-editor">
             <state relative-caret-position="290">
-              <caret line="145" column="39" selection-start-line="145" selection-start-column="39" selection-end-line="145" selection-end-column="39" />
+              <caret line="144" column="39" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -2016,13 +2016,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/ca/mcgill/ecse321/urlms/persistence/persistence.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ca/mcgill/ecse321/urlms/persistence/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/example/team8/urlms/ExampleUnitTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ca/mcgill/ecse321/urlms/controller/Controller.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/MainActivityTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ca/mcgill/ecse321/urlms/persistence/Persistence.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       </list>
     </option>
   </component>
@@ -3176,12 +3176,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
+      <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="290">
-          <caret line="145" column="39" selection-start-line="145" selection-start-column="39" selection-end-line="145" selection-end-column="39" />
+          <caret line="144" column="39" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="39" />
           <folding />
         </state>
       </provider>
