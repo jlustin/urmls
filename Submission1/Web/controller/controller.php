@@ -16,11 +16,6 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-
-// 	include '../persistence/persistence.php';
-	
-// 	$persistence = new Persistence();
-// 	$urlms = $persistence->loadData("../staff.xml"); //TODO dont make it load everytime we call controller
 	
 	session_start();
 	
@@ -31,16 +26,7 @@
 			$c->getStaffList();
 			break;
 		case "10/10":
-			$c->addStaff($_GET['newstaffname']); ?>
-			
-			<!DOCTYPE html>
-				<html>
-					<head>
-						<meta http-equiv="refresh" content="0; url=/index.php/" />
-					</head>
-				</html>
-				
-			<?php
+			$c->addStaff($_GET['newstaffname']); 
 			break;
 	}
 		
@@ -48,6 +34,9 @@ class Controller {
 	
 	public function __construct(){}
 	
+	/*
+	 * get list of staff from urlms
+	 */
 	function getStaffList(){
 		// Load data
 		$persistence = new Persistence();
@@ -57,10 +46,14 @@ class Controller {
 		for ($i = 0; $i < sizeof($members); $i++){
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		} 
+		?>
+		<HTML>
+			<a href="../index.php">back</a>
+		</HTML><?php
 	}
 	
 	/*
-	 * add new staff to the staff.xml file
+	 * add new staff to urlms
 	 */
 	function addStaff($newstaffname){
 		
@@ -78,25 +71,14 @@ class Controller {
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
+			
+			?>
+			<HTML>
+				<p>New staff member successfully added!</p>
+				<a href="../index.php">back</a>
+			</HTML><?php
 		}
 	}
 	
 }
-	/*
-	 * get staff list from the staff.xml file
-	 */
-// 	function getStaffList(){
-// 		global $urlms;
-// 		$members = $urlms->getStaffManager()->getStaffMembers();
-		
-// 		for($i = 0; $i < sizeOf($members); $i++){  
-// 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
-// 		}
-// 		?>
-<!-- 	<HTML> -->
-<!-- 	<a href="../index.php">back</a> -->
-<!-- 	</HTML> -->
-		<?php 
-// 	}
-
 ?>

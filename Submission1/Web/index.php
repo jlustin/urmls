@@ -13,7 +13,6 @@
  			<br>
 		</form>
 		
-		
 		<form action="controller/controller.php" method="get">
 			<br>
 			<p>Add Staff Member</p>
