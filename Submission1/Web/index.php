@@ -17,7 +17,7 @@
 			<br>
 			<p>Add Staff Member</p>
 			<input type="hidden" name="action" value="10/10" />
-			<input type="text" name="newstaffname" value=" "/>
+			<input type="text" name="newstaffname" value=""/>
  			<input type="submit" value="Add staff!" />
  			<br>
 		</form>

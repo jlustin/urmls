@@ -26,7 +26,12 @@
 			$c->getStaffList();
 			break;
 		case "10/10":
+			try {
 			$c->addStaff($_GET['newstaffname']); 
+			} catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			}
 			break;
 	}
 		
@@ -48,16 +53,16 @@ class Controller {
 		} 
 		?>
 		<HTML>
-			<a href="../index.php">back</a>
+			<a href="../index.php">Back</a>
 		</HTML><?php
+		//Can use echo "<a href= \"../index.php\">Back</a>" . "<br>"; as alternative
 	}
 	
 	/*
 	 * add new staff to urlms
 	 */
-	function addStaff($newstaffname){
+	function addStaff($name){
 		
-		$name = $newstaffname;
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
@@ -66,7 +71,7 @@ class Controller {
 			$urlms = $persistence->loadDataFromStore();
 			
 			//add the new member to the staff manager
-			$newStaff = new StaffMember($name, 00003, $urlms->getStaffManager());
+			$newStaff = new StaffMember($name, rand(0,1000), $urlms->getStaffManager());
 			$urlms->getStaffManager()->addStaffMember($newStaff);
 			
 			// Write data
@@ -75,7 +80,7 @@ class Controller {
 			?>
 			<HTML>
 				<p>New staff member successfully added!</p>
-				<a href="../index.php">back</a>
+				<a href="../index.php">Back</a>
 			</HTML><?php
 		}
 	}
