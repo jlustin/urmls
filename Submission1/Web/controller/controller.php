@@ -52,7 +52,7 @@ class Controller {
 		$persistence = new Persistence();
 		$urlms = $persistence->loadDataFromStore();
 		// Get staff members from urlms
-		$members = $urlms->getStaffManager()->getStaffMembers();
+		$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
 		for ($i = 0; $i < sizeof($members); $i++){
 			// display each staff member represented by their ID and name
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
@@ -78,8 +78,8 @@ class Controller {
 			$urlms = $persistence->loadDataFromStore();
 			
 			//add the new member to the staff manager
-			$newStaff = new StaffMember($name, rand(0,1000), $urlms->getStaffManager());
-			$urlms->getStaffManager()->addStaffMember($newStaff);
+			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getStaffManager());
+			$urlms->getLabs_index(0)->getStaff()->addStaffMember($newStaffMember);
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
