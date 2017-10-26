@@ -2,10 +2,11 @@
 	$my_dir = dirname(__FILE__);
 	require_once $my_dir . '/../persistence/persistence.php';
 	require_once $my_dir . '/../model/URLMS.php';
-	require_once $my_dir . '/../model/StaffManager.php';
+	require_once $my_dir . '/../model/Lab.php';
+	require_once $my_dir . '/../model/Staff.php';
+	require_once $my_dir . '/../model/Funding.php';
+	require_once $my_dir . '/../model/Inventory.php';
 	require_once $my_dir . '/../model/StaffMember.php';
-	require_once $my_dir . '/../model/InventoryManager.php';
-	require_once $my_dir . '/../model/FundingManager.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
 	require_once $my_dir . '/../model/ResearchRole.php';
@@ -52,7 +53,7 @@ class Controller {
 		$persistence = new Persistence();
 		$urlms = $persistence->loadDataFromStore();
 		// Get staff members from urlms
-		$members = $urlms->getStaffManager()->getStaffMembers();
+		$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
 		for ($i = 0; $i < sizeof($members); $i++){
 			// display each staff member represented by their ID and name
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
@@ -78,8 +79,8 @@ class Controller {
 			$urlms = $persistence->loadDataFromStore();
 			
 			//add the new member to the staff manager
-			$newStaff = new StaffMember($name, rand(0,1000), $urlms->getStaffManager());
-			$urlms->getStaffManager()->addStaffMember($newStaff);
+			$newStaff = new StaffMember($name, rand(0,1000), $urlms->getLab_index());
+			$urlms->getLab_index(0)->getStaff()->addStaffMember($newStaff);
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
