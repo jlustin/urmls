@@ -15,21 +15,21 @@ class FundingAccount
 
   //FundingAccount Associations
   private $expenses;
-  private $fundingManager;
+  private $funding;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aType, $aBalance, $aFundingManager)
+  public function __construct($aType, $aBalance, $aFunding)
   {
     $this->type = $aType;
     $this->balance = $aBalance;
     $this->expenses = array();
-    $didAddFundingManager = $this->setFundingManager($aFundingManager);
-    if (!$didAddFundingManager)
+    $didAddFunding = $this->setFunding($aFunding);
+    if (!$didAddFunding)
     {
-      throw new Exception("Unable to create fundingAccount due to fundingManager");
+      throw new Exception("Unable to create fundingAccount due to funding");
     }
   }
 
@@ -104,9 +104,9 @@ class FundingAccount
     return $index;
   }
 
-  public function getFundingManager()
+  public function getFunding()
   {
-    return $this->fundingManager;
+    return $this->funding;
   }
 
   public static function minimumNumberOfExpenses()
@@ -182,21 +182,21 @@ class FundingAccount
     return $wasAdded;
   }
 
-  public function setFundingManager($aFundingManager)
+  public function setFunding($aFunding)
   {
     $wasSet = false;
-    if ($aFundingManager == null)
+    if ($aFunding == null)
     {
       return $wasSet;
     }
     
-    $existingFundingManager = $this->fundingManager;
-    $this->fundingManager = $aFundingManager;
-    if ($existingFundingManager != null && $existingFundingManager != $aFundingManager)
+    $existingFunding = $this->funding;
+    $this->funding = $aFunding;
+    if ($existingFunding != null && $existingFunding != $aFunding)
     {
-      $existingFundingManager->removeFundingAccount($this);
+      $existingFunding->removeFundingAccount($this);
     }
-    $this->fundingManager->addFundingAccount($this);
+    $this->funding->addFundingAccount($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -212,9 +212,9 @@ class FundingAccount
     {
       $aExpense->delete();
     }
-    $placeholderFundingManager = $this->fundingManager;
-    $this->fundingManager = null;
-    $placeholderFundingManager->removeFundingAccount($this);
+    $placeholderFunding = $this->funding;
+    $this->funding = null;
+    $placeholderFunding->removeFundingAccount($this);
   }
 
 }

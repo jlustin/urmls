@@ -2,37 +2,37 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
-class InventoryManager
+class Inventory
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //InventoryManager Associations
+  //Inventory Associations
   private $inventoryItems;
-  private $uRLMS;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aURLMS = null)
+  public function __construct($aLab = null)
   {
     if (func_num_args() == 0) { return; }
 
     $this->inventoryItems = array();
-    if ($aURLMS == null || $aURLMS->getInventoryManager() != null)
+    if ($aLab == null || $aLab->getInventory() != null)
     {
-      throw new Exception("Unable to create InventoryManager due to aURLMS");
+      throw new Exception("Unable to create Inventory due to aLab");
     }
-    $this->uRLMS = $aURLMS;
+    $this->lab = $aLab;
   }
-  public static function newInstance($aStaffManagerForURLMS, $aFundingManagerForURLMS)
+  public static function newInstance($aStaffForLab, $aFundingForLab, $aURLMSForLab)
   {
-    $thisInstance = new InventoryManager();
+    $thisInstance = new Inventory();
     $this->inventoryItems = array();
-    $thisInstance->uRLMS = new URLMS($aStaffManagerForURLMS, $thisInstance, $aFundingManagerForURLMS);
+    $thisInstance->lab = new Lab($aStaffForLab, $thisInstance, $aFundingForLab, $aURLMSForLab);
     return $thisInstance;
   }
 
@@ -81,9 +81,9 @@ class InventoryManager
     return $index;
   }
 
-  public function getURLMS()
+  public function getLab()
   {
-    return $this->uRLMS;
+    return $this->lab;
   }
 
   public static function minimumNumberOfInventoryItems()
@@ -100,11 +100,11 @@ class InventoryManager
   {
     $wasAdded = false;
     if ($this->indexOfInventoryItem($aInventoryItem) !== -1) { return false; }
-    $existingInventoryManager = $aInventoryItem->getInventoryManager();
-    $isNewInventoryManager = $existingInventoryManager != null && $this !== $existingInventoryManager;
-    if ($isNewInventoryManager)
+    $existingInventory = $aInventoryItem->getInventory();
+    $isNewInventory = $existingInventory != null && $this !== $existingInventory;
+    if ($isNewInventory)
     {
-      $aInventoryItem->setInventoryManager($this);
+      $aInventoryItem->setInventory($this);
     }
     else
     {
@@ -117,8 +117,8 @@ class InventoryManager
   public function removeInventoryItem($aInventoryItem)
   {
     $wasRemoved = false;
-    //Unable to remove aInventoryItem, as it must always have a inventoryManager
-    if ($this !== $aInventoryItem->getInventoryManager())
+    //Unable to remove aInventoryItem, as it must always have a inventory
+    if ($this !== $aInventoryItem->getInventory())
     {
       unset($this->inventoryItems[$this->indexOfInventoryItem($aInventoryItem)]);
       $this->inventoryItems = array_values($this->inventoryItems);
@@ -170,11 +170,11 @@ class InventoryManager
     {
       $aInventoryItem->delete();
     }
-    $existingURLMS = $this->uRLMS;
-    $this->uRLMS = null;
-    if ($existingURLMS != null)
+    $existingLab = $this->lab;
+    $this->lab = null;
+    if ($existingLab != null)
     {
-      $existingURLMS->delete();
+      $existingLab->delete();
     }
   }
 

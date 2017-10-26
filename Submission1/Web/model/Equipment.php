@@ -13,9 +13,9 @@ class Equipment extends InventoryItem
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aCost, $aCategory, $aInventoryManager)
+  public function __construct($aName, $aCost, $aCategory, $aInventory)
   {
-    parent::__construct($aName, $aCost, $aCategory, $aInventoryManager);
+    parent::__construct($aName, $aCost, $aCategory, $aInventory);
   }
 
   //------------------------

@@ -15,21 +15,21 @@ class InventoryItem
   private $category;
 
   //InventoryItem Associations
-  private $inventoryManager;
+  private $inventory;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aCost, $aCategory, $aInventoryManager)
+  public function __construct($aName, $aCost, $aCategory, $aInventory)
   {
     $this->name = $aName;
     $this->cost = $aCost;
     $this->category = $aCategory;
-    $didAddInventoryManager = $this->setInventoryManager($aInventoryManager);
-    if (!$didAddInventoryManager)
+    $didAddInventory = $this->setInventory($aInventory);
+    if (!$didAddInventory)
     {
-      throw new Exception("Unable to create inventoryItem due to inventoryManager");
+      throw new Exception("Unable to create inventoryItem due to inventory");
     }
   }
 
@@ -76,26 +76,26 @@ class InventoryItem
     return $this->category;
   }
 
-  public function getInventoryManager()
+  public function getInventory()
   {
-    return $this->inventoryManager;
+    return $this->inventory;
   }
 
-  public function setInventoryManager($aInventoryManager)
+  public function setInventory($aInventory)
   {
     $wasSet = false;
-    if ($aInventoryManager == null)
+    if ($aInventory == null)
     {
       return $wasSet;
     }
     
-    $existingInventoryManager = $this->inventoryManager;
-    $this->inventoryManager = $aInventoryManager;
-    if ($existingInventoryManager != null && $existingInventoryManager != $aInventoryManager)
+    $existingInventory = $this->inventory;
+    $this->inventory = $aInventory;
+    if ($existingInventory != null && $existingInventory != $aInventory)
     {
-      $existingInventoryManager->removeInventoryItem($this);
+      $existingInventory->removeInventoryItem($this);
     }
-    $this->inventoryManager->addInventoryItem($this);
+    $this->inventory->addInventoryItem($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -107,9 +107,9 @@ class InventoryItem
 
   public function delete()
   {
-    $placeholderInventoryManager = $this->inventoryManager;
-    $this->inventoryManager = null;
-    $placeholderInventoryManager->removeInventoryItem($this);
+    $placeholderInventory = $this->inventory;
+    $this->inventory = null;
+    $placeholderInventory->removeInventoryItem($this);
   }
 
 }

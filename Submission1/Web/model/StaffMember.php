@@ -16,22 +16,22 @@ class StaffMember
   //StaffMember Associations
   private $researchRoles;
   private $progressUpdates;
-  private $staffManager;
+  private $staff;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aId, $aStaffManager)
+  public function __construct($aName, $aId, $aStaff)
   {
     $this->name = $aName;
     $this->id = $aId;
     $this->researchRoles = array();
     $this->progressUpdates = array();
-    $didAddStaffManager = $this->setStaffManager($aStaffManager);
-    if (!$didAddStaffManager)
+    $didAddStaff = $this->setStaff($aStaff);
+    if (!$didAddStaff)
     {
-      throw new Exception("Unable to create staffMember due to staffManager");
+      throw new Exception("Unable to create staffMember due to staff");
     }
   }
 
@@ -147,9 +147,9 @@ class StaffMember
     return $index;
   }
 
-  public function getStaffManager()
+  public function getStaff()
   {
-    return $this->staffManager;
+    return $this->staff;
   }
 
   public static function minimumNumberOfResearchRoles()
@@ -298,21 +298,21 @@ class StaffMember
     return $wasAdded;
   }
 
-  public function setStaffManager($aStaffManager)
+  public function setStaff($aStaff)
   {
     $wasSet = false;
-    if ($aStaffManager == null)
+    if ($aStaff == null)
     {
       return $wasSet;
     }
     
-    $existingStaffManager = $this->staffManager;
-    $this->staffManager = $aStaffManager;
-    if ($existingStaffManager != null && $existingStaffManager != $aStaffManager)
+    $existingStaff = $this->staff;
+    $this->staff = $aStaff;
+    if ($existingStaff != null && $existingStaff != $aStaff)
     {
-      $existingStaffManager->removeStaffMember($this);
+      $existingStaff->removeStaffMember($this);
     }
-    $this->staffManager->addStaffMember($this);
+    $this->staff->addStaffMember($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -336,9 +336,9 @@ class StaffMember
       $this->progressUpdates = array_values($this->progressUpdates);
     }
     
-    $placeholderStaffManager = $this->staffManager;
-    $this->staffManager = null;
-    $placeholderStaffManager->removeStaffMember($this);
+    $placeholderStaff = $this->staff;
+    $this->staff = null;
+    $placeholderStaff->removeStaffMember($this);
   }
 
 }

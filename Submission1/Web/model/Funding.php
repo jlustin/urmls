@@ -2,45 +2,45 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
-class FundingManager
+class Funding
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //FundingManager Attributes
+  //Funding Attributes
   private $totalBalance;
 
-  //FundingManager Associations
+  //Funding Associations
   private $fundingAccounts;
   private $reports;
-  private $uRLMS;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aTotalBalance = null, $aURLMS = null)
+  public function __construct($aTotalBalance = null, $aLab = null)
   {
     if (func_num_args() == 0) { return; }
 
     $this->totalBalance = $aTotalBalance;
     $this->fundingAccounts = array();
     $this->reports = array();
-    if ($aURLMS == null || $aURLMS->getFundingManager() != null)
+    if ($aLab == null || $aLab->getFunding() != null)
     {
-      throw new Exception("Unable to create FundingManager due to aURLMS");
+      throw new Exception("Unable to create Funding due to aLab");
     }
-    $this->uRLMS = $aURLMS;
+    $this->lab = $aLab;
   }
-  public static function newInstance($aTotalBalance, $aStaffManagerForURLMS, $aInventoryManagerForURLMS)
+  public static function newInstance($aTotalBalance, $aStaffForLab, $aInventoryForLab, $aURLMSForLab)
   {
-    $thisInstance = new FundingManager();
+    $thisInstance = new Funding();
     $thisInstance->totalBalance = $aTotalBalance;
     $this->fundingAccounts = array();
     $this->reports = array();
-    $thisInstance->uRLMS = new URLMS($aStaffManagerForURLMS, $aInventoryManagerForURLMS, $thisInstance);
+    $thisInstance->lab = new Lab($aStaffForLab, $aInventoryForLab, $thisInstance, $aURLMSForLab);
     return $thisInstance;
   }
 
@@ -143,9 +143,9 @@ class FundingManager
     return $index;
   }
 
-  public function getURLMS()
+  public function getLab()
   {
-    return $this->uRLMS;
+    return $this->lab;
   }
 
   public static function minimumNumberOfFundingAccounts()
@@ -162,11 +162,11 @@ class FundingManager
   {
     $wasAdded = false;
     if ($this->indexOfFundingAccount($aFundingAccount) !== -1) { return false; }
-    $existingFundingManager = $aFundingAccount->getFundingManager();
-    $isNewFundingManager = $existingFundingManager != null && $this !== $existingFundingManager;
-    if ($isNewFundingManager)
+    $existingFunding = $aFundingAccount->getFunding();
+    $isNewFunding = $existingFunding != null && $this !== $existingFunding;
+    if ($isNewFunding)
     {
-      $aFundingAccount->setFundingManager($this);
+      $aFundingAccount->setFunding($this);
     }
     else
     {
@@ -179,8 +179,8 @@ class FundingManager
   public function removeFundingAccount($aFundingAccount)
   {
     $wasRemoved = false;
-    //Unable to remove aFundingAccount, as it must always have a fundingManager
-    if ($this !== $aFundingAccount->getFundingManager())
+    //Unable to remove aFundingAccount, as it must always have a funding
+    if ($this !== $aFundingAccount->getFunding())
     {
       unset($this->fundingAccounts[$this->indexOfFundingAccount($aFundingAccount)]);
       $this->fundingAccounts = array_values($this->fundingAccounts);
@@ -235,11 +235,11 @@ class FundingManager
   {
     $wasAdded = false;
     if ($this->indexOfReport($aReport) !== -1) { return false; }
-    $existingFundingManager = $aReport->getFundingManager();
-    $isNewFundingManager = $existingFundingManager != null && $this !== $existingFundingManager;
-    if ($isNewFundingManager)
+    $existingFunding = $aReport->getFunding();
+    $isNewFunding = $existingFunding != null && $this !== $existingFunding;
+    if ($isNewFunding)
     {
-      $aReport->setFundingManager($this);
+      $aReport->setFunding($this);
     }
     else
     {
@@ -252,8 +252,8 @@ class FundingManager
   public function removeReport($aReport)
   {
     $wasRemoved = false;
-    //Unable to remove aReport, as it must always have a fundingManager
-    if ($this !== $aReport->getFundingManager())
+    //Unable to remove aReport, as it must always have a funding
+    if ($this !== $aReport->getFunding())
     {
       unset($this->reports[$this->indexOfReport($aReport)]);
       $this->reports = array_values($this->reports);
@@ -313,11 +313,11 @@ class FundingManager
     {
       $aReport->delete();
     }
-    $existingURLMS = $this->uRLMS;
-    $this->uRLMS = null;
-    if ($existingURLMS != null)
+    $existingLab = $this->lab;
+    $this->lab = null;
+    if ($existingLab != null)
     {
-      $existingURLMS->delete();
+      $existingLab->delete();
     }
   }
 

@@ -20,8 +20,10 @@
 				$str = file_get_contents($this->filename);
 				$urlms = unserialize($str);
 			} else {
-				// if doesn't exist, create new instance of URLMS
-				$urlms = URLMS::newInstance(0);
+				// if doesn't exist, create new instances of URLMS and Lab and add lab to URLMS
+				$urlms = new URLMS();
+				$lab = Lab::newInstance(0, $urlms);
+				$urlms->addLab($lab);
 			}
 			// return urlms
 			return $urlms;

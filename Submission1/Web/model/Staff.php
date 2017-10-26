@@ -2,37 +2,37 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
-class StaffManager
+class Staff
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //StaffManager Associations
+  //Staff Associations
   private $staffMembers;
-  private $uRLMS;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aURLMS = null)
+  public function __construct($aLab = null)
   {
     if (func_num_args() == 0) { return; }
 
     $this->staffMembers = array();
-    if ($aURLMS == null || $aURLMS->getStaffManager() != null)
+    if ($aLab == null || $aLab->getStaff() != null)
     {
-      throw new Exception("Unable to create StaffManager due to aURLMS");
+      throw new Exception("Unable to create Staff due to aLab");
     }
-    $this->uRLMS = $aURLMS;
+    $this->lab = $aLab;
   }
-  public static function newInstance($aInventoryManagerForURLMS, $aFundingManagerForURLMS)
+  public static function newInstance($aInventoryForLab, $aFundingForLab, $aURLMSForLab)
   {
-    $thisInstance = new StaffManager();
+    $thisInstance = new Staff();
     $this->staffMembers = array();
-    $thisInstance->uRLMS = new URLMS($thisInstance, $aInventoryManagerForURLMS, $aFundingManagerForURLMS);
+    $thisInstance->lab = new Lab($thisInstance, $aInventoryForLab, $aFundingForLab, $aURLMSForLab);
     return $thisInstance;
   }
 
@@ -81,9 +81,9 @@ class StaffManager
     return $index;
   }
 
-  public function getURLMS()
+  public function getLab()
   {
-    return $this->uRLMS;
+    return $this->lab;
   }
 
   public static function minimumNumberOfStaffMembers()
@@ -100,11 +100,11 @@ class StaffManager
   {
     $wasAdded = false;
     if ($this->indexOfStaffMember($aStaffMember) !== -1) { return false; }
-    $existingStaffManager = $aStaffMember->getStaffManager();
-    $isNewStaffManager = $existingStaffManager != null && $this !== $existingStaffManager;
-    if ($isNewStaffManager)
+    $existingStaff = $aStaffMember->getStaff();
+    $isNewStaff = $existingStaff != null && $this !== $existingStaff;
+    if ($isNewStaff)
     {
-      $aStaffMember->setStaffManager($this);
+      $aStaffMember->setStaff($this);
     }
     else
     {
@@ -117,8 +117,8 @@ class StaffManager
   public function removeStaffMember($aStaffMember)
   {
     $wasRemoved = false;
-    //Unable to remove aStaffMember, as it must always have a staffManager
-    if ($this !== $aStaffMember->getStaffManager())
+    //Unable to remove aStaffMember, as it must always have a staff
+    if ($this !== $aStaffMember->getStaff())
     {
       unset($this->staffMembers[$this->indexOfStaffMember($aStaffMember)]);
       $this->staffMembers = array_values($this->staffMembers);
@@ -170,11 +170,11 @@ class StaffManager
     {
       $aStaffMember->delete();
     }
-    $existingURLMS = $this->uRLMS;
-    $this->uRLMS = null;
-    if ($existingURLMS != null)
+    $existingLab = $this->lab;
+    $this->lab = null;
+    if ($existingLab != null)
     {
-      $existingURLMS->delete();
+      $existingLab->delete();
     }
   }
 
