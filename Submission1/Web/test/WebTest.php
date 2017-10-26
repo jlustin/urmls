@@ -38,7 +38,7 @@ class WebTest extends PHPUnit_Framework_TestCase
 
 		// 5. Check that we got it back
 		$this->assertEquals(1, count($this->urlms->getStaffManager()->getStaffMembers()));
-		$myStaff = $urlms->getStaffManager()->getStaffMember_index(0);
+		$myStaff = $urlms->getLab_index()->getStaffMember_index(0);
 		$this->assertEquals("Frank", $myStaff->getName());
 	}
 
