@@ -4,7 +4,7 @@ require_once $my_dir . '/../model/StaffManager.php';
 require_once $my_dir . '/../model/StaffMember.php';
 require_once $my_dir . '/../persistence/persistence.php';
 
-class test extends PHPUnit_Framework_TestCase
+class WebTest extends PHPUnit_Framework_TestCase
 {
 	protected $urlms;
 
@@ -17,7 +17,7 @@ class test extends PHPUnit_Framework_TestCase
 	{
 	}
 
-	public function test()
+	public function testA()
 	{
 		// 1. Create test data
 		$sm = $this->urlms->getStaffManager();

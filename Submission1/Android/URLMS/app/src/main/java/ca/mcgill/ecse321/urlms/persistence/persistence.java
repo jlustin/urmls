@@ -36,7 +36,7 @@ import java.io.File;
 import static android.R.attr.name;
 import static com.example.team8.urlms.R.id.toDisplay;
 
-public abstract class Persistence
+public class Persistence
 {
 //TODO
     // implement XML reader
