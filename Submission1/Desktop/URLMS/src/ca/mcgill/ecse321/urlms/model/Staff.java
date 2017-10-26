@@ -4,36 +4,36 @@
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 
-// line 60 "../../../../../URLMS.ump"
-public class StaffManager
+// line 65 "../../../../../URLMS.ump"
+public class Staff
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //StaffManager Associations
+  //Staff Associations
   private List<StaffMember> staffMembers;
-  private URLMS uRLMS;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public StaffManager(URLMS aURLMS)
+  public Staff(Lab aLab)
   {
     staffMembers = new ArrayList<StaffMember>();
-    if (aURLMS == null || aURLMS.getStaffManager() != null)
+    if (aLab == null || aLab.getStaff() != null)
     {
-      throw new RuntimeException("Unable to create StaffManager due to aURLMS");
+      throw new RuntimeException("Unable to create Staff due to aLab");
     }
-    uRLMS = aURLMS;
+    lab = aLab;
   }
 
-  public StaffManager(InventoryManager aInventoryManagerForURLMS, FundingManager aFundingManagerForURLMS)
+  public Staff(Inventory aInventoryForLab, Funding aFundingForLab, URLMS aURLMSForLab)
   {
     staffMembers = new ArrayList<StaffMember>();
-    uRLMS = new URLMS(this, aInventoryManagerForURLMS, aFundingManagerForURLMS);
+    lab = new Lab(this, aInventoryForLab, aFundingForLab, aURLMSForLab);
   }
 
   //------------------------
@@ -70,9 +70,9 @@ public class StaffManager
     return index;
   }
 
-  public URLMS getURLMS()
+  public Lab getLab()
   {
-    return uRLMS;
+    return lab;
   }
 
   public static int minimumNumberOfStaffMembers()
@@ -89,11 +89,11 @@ public class StaffManager
   {
     boolean wasAdded = false;
     if (staffMembers.contains(aStaffMember)) { return false; }
-    StaffManager existingStaffManager = aStaffMember.getStaffManager();
-    boolean isNewStaffManager = existingStaffManager != null && !this.equals(existingStaffManager);
-    if (isNewStaffManager)
+    Staff existingStaff = aStaffMember.getStaff();
+    boolean isNewStaff = existingStaff != null && !this.equals(existingStaff);
+    if (isNewStaff)
     {
-      aStaffMember.setStaffManager(this);
+      aStaffMember.setStaff(this);
     }
     else
     {
@@ -106,8 +106,8 @@ public class StaffManager
   public boolean removeStaffMember(StaffMember aStaffMember)
   {
     boolean wasRemoved = false;
-    //Unable to remove aStaffMember, as it must always have a staffManager
-    if (!this.equals(aStaffMember.getStaffManager()))
+    //Unable to remove aStaffMember, as it must always have a staff
+    if (!this.equals(aStaffMember.getStaff()))
     {
       staffMembers.remove(aStaffMember);
       wasRemoved = true;
@@ -154,11 +154,11 @@ public class StaffManager
       StaffMember aStaffMember = staffMembers.get(i - 1);
       aStaffMember.delete();
     }
-    URLMS existingURLMS = uRLMS;
-    uRLMS = null;
-    if (existingURLMS != null)
+    Lab existingLab = lab;
+    lab = null;
+    if (existingLab != null)
     {
-      existingURLMS.delete();
+      existingLab.delete();
     }
   }
 

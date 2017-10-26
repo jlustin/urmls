@@ -4,7 +4,7 @@
 package ca.mcgill.ecse321.urlms.model;
 import java.sql.Date;
 
-// line 54 "../../../../../URLMS.ump"
+// line 59 "../../../../../URLMS.ump"
 public class Report
 {
 
@@ -17,20 +17,20 @@ public class Report
   private Date date;
 
   //Report Associations
-  private FundingManager fundingManager;
+  private Funding funding;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Report(String aTitle, Date aDate, FundingManager aFundingManager)
+  public Report(String aTitle, Date aDate, Funding aFunding)
   {
     title = aTitle;
     date = aDate;
-    boolean didAddFundingManager = setFundingManager(aFundingManager);
-    if (!didAddFundingManager)
+    boolean didAddFunding = setFunding(aFunding);
+    if (!didAddFunding)
     {
-      throw new RuntimeException("Unable to create report due to fundingManager");
+      throw new RuntimeException("Unable to create report due to funding");
     }
   }
 
@@ -64,35 +64,35 @@ public class Report
     return date;
   }
 
-  public FundingManager getFundingManager()
+  public Funding getFunding()
   {
-    return fundingManager;
+    return funding;
   }
 
-  public boolean setFundingManager(FundingManager aFundingManager)
+  public boolean setFunding(Funding aFunding)
   {
     boolean wasSet = false;
-    if (aFundingManager == null)
+    if (aFunding == null)
     {
       return wasSet;
     }
 
-    FundingManager existingFundingManager = fundingManager;
-    fundingManager = aFundingManager;
-    if (existingFundingManager != null && !existingFundingManager.equals(aFundingManager))
+    Funding existingFunding = funding;
+    funding = aFunding;
+    if (existingFunding != null && !existingFunding.equals(aFunding))
     {
-      existingFundingManager.removeReport(this);
+      existingFunding.removeReport(this);
     }
-    fundingManager.addReport(this);
+    funding.addReport(this);
     wasSet = true;
     return wasSet;
   }
 
   public void delete()
   {
-    FundingManager placeholderFundingManager = fundingManager;
-    this.fundingManager = null;
-    placeholderFundingManager.removeReport(this);
+    Funding placeholderFunding = funding;
+    this.funding = null;
+    placeholderFunding.removeReport(this);
   }
 
 
@@ -101,6 +101,6 @@ public class Report
     return super.toString() + "["+
             "title" + ":" + getTitle()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "fundingManager = "+(getFundingManager()!=null?Integer.toHexString(System.identityHashCode(getFundingManager())):"null");
+            "  " + "funding = "+(getFunding()!=null?Integer.toHexString(System.identityHashCode(getFunding())):"null");
   }
 }

@@ -4,36 +4,36 @@
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 
-// line 10 "../../../../../URLMS.ump"
-public class InventoryManager
+// line 15 "../../../../../URLMS.ump"
+public class Inventory
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //InventoryManager Associations
+  //Inventory Associations
   private List<InventoryItem> inventoryItems;
-  private URLMS uRLMS;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public InventoryManager(URLMS aURLMS)
+  public Inventory(Lab aLab)
   {
     inventoryItems = new ArrayList<InventoryItem>();
-    if (aURLMS == null || aURLMS.getInventoryManager() != null)
+    if (aLab == null || aLab.getInventory() != null)
     {
-      throw new RuntimeException("Unable to create InventoryManager due to aURLMS");
+      throw new RuntimeException("Unable to create Inventory due to aLab");
     }
-    uRLMS = aURLMS;
+    lab = aLab;
   }
 
-  public InventoryManager(StaffManager aStaffManagerForURLMS, FundingManager aFundingManagerForURLMS)
+  public Inventory(Staff aStaffForLab, Funding aFundingForLab, URLMS aURLMSForLab)
   {
     inventoryItems = new ArrayList<InventoryItem>();
-    uRLMS = new URLMS(aStaffManagerForURLMS, this, aFundingManagerForURLMS);
+    lab = new Lab(aStaffForLab, this, aFundingForLab, aURLMSForLab);
   }
 
   //------------------------
@@ -70,9 +70,9 @@ public class InventoryManager
     return index;
   }
 
-  public URLMS getURLMS()
+  public Lab getLab()
   {
-    return uRLMS;
+    return lab;
   }
 
   public static int minimumNumberOfInventoryItems()
@@ -89,11 +89,11 @@ public class InventoryManager
   {
     boolean wasAdded = false;
     if (inventoryItems.contains(aInventoryItem)) { return false; }
-    InventoryManager existingInventoryManager = aInventoryItem.getInventoryManager();
-    boolean isNewInventoryManager = existingInventoryManager != null && !this.equals(existingInventoryManager);
-    if (isNewInventoryManager)
+    Inventory existingInventory = aInventoryItem.getInventory();
+    boolean isNewInventory = existingInventory != null && !this.equals(existingInventory);
+    if (isNewInventory)
     {
-      aInventoryItem.setInventoryManager(this);
+      aInventoryItem.setInventory(this);
     }
     else
     {
@@ -106,8 +106,8 @@ public class InventoryManager
   public boolean removeInventoryItem(InventoryItem aInventoryItem)
   {
     boolean wasRemoved = false;
-    //Unable to remove aInventoryItem, as it must always have a inventoryManager
-    if (!this.equals(aInventoryItem.getInventoryManager()))
+    //Unable to remove aInventoryItem, as it must always have a inventory
+    if (!this.equals(aInventoryItem.getInventory()))
     {
       inventoryItems.remove(aInventoryItem);
       wasRemoved = true;
@@ -154,11 +154,11 @@ public class InventoryManager
       InventoryItem aInventoryItem = inventoryItems.get(i - 1);
       aInventoryItem.delete();
     }
-    URLMS existingURLMS = uRLMS;
-    uRLMS = null;
-    if (existingURLMS != null)
+    Lab existingLab = lab;
+    lab = null;
+    if (existingLab != null)
     {
-      existingURLMS.delete();
+      existingLab.delete();
     }
   }
 

@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 28 "../../../../../URLMS.ump"
+// line 33 "../../../../../URLMS.ump"
 public class Equipment extends InventoryItem
 {
 
@@ -15,9 +15,9 @@ public class Equipment extends InventoryItem
   // CONSTRUCTOR
   //------------------------
 
-  public Equipment(String aName, double aCost, String aCategory, InventoryManager aInventoryManager)
+  public Equipment(String aName, double aCost, String aCategory, Inventory aInventory)
   {
-    super(aName, aCost, aCategory, aInventoryManager);
+    super(aName, aCost, aCategory, aInventory);
   }
 
   //------------------------

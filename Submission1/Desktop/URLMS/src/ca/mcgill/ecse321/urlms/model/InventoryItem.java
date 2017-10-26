@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 15 "../../../../../URLMS.ump"
+// line 20 "../../../../../URLMS.ump"
 public class InventoryItem
 {
 
@@ -17,21 +17,21 @@ public class InventoryItem
   private String category;
 
   //InventoryItem Associations
-  private InventoryManager inventoryManager;
+  private Inventory inventory;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public InventoryItem(String aName, double aCost, String aCategory, InventoryManager aInventoryManager)
+  public InventoryItem(String aName, double aCost, String aCategory, Inventory aInventory)
   {
     name = aName;
     cost = aCost;
     category = aCategory;
-    boolean didAddInventoryManager = setInventoryManager(aInventoryManager);
-    if (!didAddInventoryManager)
+    boolean didAddInventory = setInventory(aInventory);
+    if (!didAddInventory)
     {
-      throw new RuntimeException("Unable to create inventoryItem due to inventoryManager");
+      throw new RuntimeException("Unable to create inventoryItem due to inventory");
     }
   }
 
@@ -78,35 +78,35 @@ public class InventoryItem
     return category;
   }
 
-  public InventoryManager getInventoryManager()
+  public Inventory getInventory()
   {
-    return inventoryManager;
+    return inventory;
   }
 
-  public boolean setInventoryManager(InventoryManager aInventoryManager)
+  public boolean setInventory(Inventory aInventory)
   {
     boolean wasSet = false;
-    if (aInventoryManager == null)
+    if (aInventory == null)
     {
       return wasSet;
     }
 
-    InventoryManager existingInventoryManager = inventoryManager;
-    inventoryManager = aInventoryManager;
-    if (existingInventoryManager != null && !existingInventoryManager.equals(aInventoryManager))
+    Inventory existingInventory = inventory;
+    inventory = aInventory;
+    if (existingInventory != null && !existingInventory.equals(aInventory))
     {
-      existingInventoryManager.removeInventoryItem(this);
+      existingInventory.removeInventoryItem(this);
     }
-    inventoryManager.addInventoryItem(this);
+    inventory.addInventoryItem(this);
     wasSet = true;
     return wasSet;
   }
 
   public void delete()
   {
-    InventoryManager placeholderInventoryManager = inventoryManager;
-    this.inventoryManager = null;
-    placeholderInventoryManager.removeInventoryItem(this);
+    Inventory placeholderInventory = inventory;
+    this.inventory = null;
+    placeholderInventory.removeInventoryItem(this);
   }
 
 
@@ -116,6 +116,6 @@ public class InventoryItem
             "name" + ":" + getName()+ "," +
             "cost" + ":" + getCost()+ "," +
             "category" + ":" + getCategory()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "inventoryManager = "+(getInventoryManager()!=null?Integer.toHexString(System.identityHashCode(getInventoryManager())):"null");
+            "  " + "inventory = "+(getInventory()!=null?Integer.toHexString(System.identityHashCode(getInventory())):"null");
   }
 }

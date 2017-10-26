@@ -7,8 +7,8 @@ import java.io.IOException;
 
 import com.thoughtworks.xstream.XStream;
 
-
-import ca.mcgill.ecse321.urlms.model.StaffManager;
+import ca.mcgill.ecse321.urlms.model.Lab;
+import ca.mcgill.ecse321.urlms.model.Staff;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
@@ -34,7 +34,9 @@ public abstract class PersistenceXStream {
                 e.printStackTrace();
                 System.exit(1);
             }
-            urlms = new URLMS(0);
+            urlms = new URLMS();
+            Lab aLab = new Lab(0, urlms);
+            urlms.addLab(aLab);
             saveToXMLwithXStream(urlms);
         }
         return urlms;
