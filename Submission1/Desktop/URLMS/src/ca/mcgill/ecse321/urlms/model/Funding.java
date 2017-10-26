@@ -5,44 +5,44 @@ package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 33 "../../../../../URLMS.ump"
-public class FundingManager
+// line 38 "../../../../../URLMS.ump"
+public class Funding
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //FundingManager Attributes
+  //Funding Attributes
   private double totalBalance;
 
-  //FundingManager Associations
+  //Funding Associations
   private List<FundingAccount> fundingAccounts;
   private List<Report> reports;
-  private URLMS uRLMS;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public FundingManager(double aTotalBalance, URLMS aURLMS)
+  public Funding(double aTotalBalance, Lab aLab)
   {
     totalBalance = aTotalBalance;
     fundingAccounts = new ArrayList<FundingAccount>();
     reports = new ArrayList<Report>();
-    if (aURLMS == null || aURLMS.getFundingManager() != null)
+    if (aLab == null || aLab.getFunding() != null)
     {
-      throw new RuntimeException("Unable to create FundingManager due to aURLMS");
+      throw new RuntimeException("Unable to create Funding due to aLab");
     }
-    uRLMS = aURLMS;
+    lab = aLab;
   }
 
-  public FundingManager(double aTotalBalance, StaffManager aStaffManagerForURLMS, InventoryManager aInventoryManagerForURLMS)
+  public Funding(double aTotalBalance, Staff aStaffForLab, Inventory aInventoryForLab, URLMS aURLMSForLab)
   {
     totalBalance = aTotalBalance;
     fundingAccounts = new ArrayList<FundingAccount>();
     reports = new ArrayList<Report>();
-    uRLMS = new URLMS(aStaffManagerForURLMS, aInventoryManagerForURLMS, this);
+    lab = new Lab(aStaffForLab, aInventoryForLab, this, aURLMSForLab);
   }
 
   //------------------------
@@ -122,9 +122,9 @@ public class FundingManager
     return index;
   }
 
-  public URLMS getURLMS()
+  public Lab getLab()
   {
-    return uRLMS;
+    return lab;
   }
 
   public static int minimumNumberOfFundingAccounts()
@@ -141,11 +141,11 @@ public class FundingManager
   {
     boolean wasAdded = false;
     if (fundingAccounts.contains(aFundingAccount)) { return false; }
-    FundingManager existingFundingManager = aFundingAccount.getFundingManager();
-    boolean isNewFundingManager = existingFundingManager != null && !this.equals(existingFundingManager);
-    if (isNewFundingManager)
+    Funding existingFunding = aFundingAccount.getFunding();
+    boolean isNewFunding = existingFunding != null && !this.equals(existingFunding);
+    if (isNewFunding)
     {
-      aFundingAccount.setFundingManager(this);
+      aFundingAccount.setFunding(this);
     }
     else
     {
@@ -158,8 +158,8 @@ public class FundingManager
   public boolean removeFundingAccount(FundingAccount aFundingAccount)
   {
     boolean wasRemoved = false;
-    //Unable to remove aFundingAccount, as it must always have a fundingManager
-    if (!this.equals(aFundingAccount.getFundingManager()))
+    //Unable to remove aFundingAccount, as it must always have a funding
+    if (!this.equals(aFundingAccount.getFunding()))
     {
       fundingAccounts.remove(aFundingAccount);
       wasRemoved = true;
@@ -213,11 +213,11 @@ public class FundingManager
   {
     boolean wasAdded = false;
     if (reports.contains(aReport)) { return false; }
-    FundingManager existingFundingManager = aReport.getFundingManager();
-    boolean isNewFundingManager = existingFundingManager != null && !this.equals(existingFundingManager);
-    if (isNewFundingManager)
+    Funding existingFunding = aReport.getFunding();
+    boolean isNewFunding = existingFunding != null && !this.equals(existingFunding);
+    if (isNewFunding)
     {
-      aReport.setFundingManager(this);
+      aReport.setFunding(this);
     }
     else
     {
@@ -230,8 +230,8 @@ public class FundingManager
   public boolean removeReport(Report aReport)
   {
     boolean wasRemoved = false;
-    //Unable to remove aReport, as it must always have a fundingManager
-    if (!this.equals(aReport.getFundingManager()))
+    //Unable to remove aReport, as it must always have a funding
+    if (!this.equals(aReport.getFunding()))
     {
       reports.remove(aReport);
       wasRemoved = true;
@@ -285,11 +285,11 @@ public class FundingManager
       Report aReport = reports.get(i - 1);
       aReport.delete();
     }
-    URLMS existingURLMS = uRLMS;
-    uRLMS = null;
-    if (existingURLMS != null)
+    Lab existingLab = lab;
+    lab = null;
+    if (existingLab != null)
     {
-      existingURLMS.delete();
+      existingLab.delete();
     }
   }
 
@@ -298,6 +298,6 @@ public class FundingManager
   {
     return super.toString() + "["+
             "totalBalance" + ":" + getTotalBalance()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "uRLMS = "+(getURLMS()!=null?Integer.toHexString(System.identityHashCode(getURLMS())):"null");
+            "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

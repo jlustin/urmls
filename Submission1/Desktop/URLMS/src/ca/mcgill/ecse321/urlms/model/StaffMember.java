@@ -3,8 +3,9 @@
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
+import java.sql.Date;
 
-// line 65 "../../../../../URLMS.ump"
+// line 70 "../../../../../URLMS.ump"
 public class StaffMember
 {
 
@@ -19,22 +20,22 @@ public class StaffMember
   //StaffMember Associations
   private List<ResearchRole> researchRoles;
   private List<ProgressUpdate> progressUpdates;
-  private StaffManager staffManager;
+  private Staff staff;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(String aName, int aId, StaffManager aStaffManager)
+  public StaffMember(String aName, int aId, Staff aStaff)
   {
     name = aName;
     id = aId;
     researchRoles = new ArrayList<ResearchRole>();
     progressUpdates = new ArrayList<ProgressUpdate>();
-    boolean didAddStaffManager = setStaffManager(aStaffManager);
-    if (!didAddStaffManager)
+    boolean didAddStaff = setStaff(aStaff);
+    if (!didAddStaff)
     {
-      throw new RuntimeException("Unable to create staffMember due to staffManager");
+      throw new RuntimeException("Unable to create staffMember due to staff");
     }
   }
 
@@ -128,9 +129,9 @@ public class StaffMember
     return index;
   }
 
-  public StaffManager getStaffManager()
+  public Staff getStaff()
   {
-    return staffManager;
+    return staff;
   }
 
   public static int minimumNumberOfResearchRoles()
@@ -210,9 +211,9 @@ public class StaffMember
     return 0;
   }
 
-  public ProgressUpdate addProgressUpdate()
+  public ProgressUpdate addProgressUpdate(Date aDate)
   {
-    return new ProgressUpdate(this);
+    return new ProgressUpdate(aDate, this);
   }
 
   public boolean addProgressUpdate(ProgressUpdate aProgressUpdate)
@@ -277,21 +278,21 @@ public class StaffMember
     return wasAdded;
   }
 
-  public boolean setStaffManager(StaffManager aStaffManager)
+  public boolean setStaff(Staff aStaff)
   {
     boolean wasSet = false;
-    if (aStaffManager == null)
+    if (aStaff == null)
     {
       return wasSet;
     }
 
-    StaffManager existingStaffManager = staffManager;
-    staffManager = aStaffManager;
-    if (existingStaffManager != null && !existingStaffManager.equals(aStaffManager))
+    Staff existingStaff = staff;
+    staff = aStaff;
+    if (existingStaff != null && !existingStaff.equals(aStaff))
     {
-      existingStaffManager.removeStaffMember(this);
+      existingStaff.removeStaffMember(this);
     }
-    staffManager.addStaffMember(this);
+    staff.addStaffMember(this);
     wasSet = true;
     return wasSet;
   }
@@ -310,9 +311,9 @@ public class StaffMember
       progressUpdates.remove(aProgressUpdate);
     }
     
-    StaffManager placeholderStaffManager = staffManager;
-    this.staffManager = null;
-    placeholderStaffManager.removeStaffMember(this);
+    Staff placeholderStaff = staff;
+    this.staff = null;
+    placeholderStaff.removeStaffMember(this);
   }
 
 
@@ -321,6 +322,6 @@ public class StaffMember
     return super.toString() + "["+
             "name" + ":" + getName()+ "," +
             "id" + ":" + getId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "staffManager = "+(getStaffManager()!=null?Integer.toHexString(System.identityHashCode(getStaffManager())):"null");
+            "  " + "staff = "+(getStaff()!=null?Integer.toHexString(System.identityHashCode(getStaff())):"null");
   }
 }

@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 22 "../../../../../URLMS.ump"
+// line 27 "../../../../../URLMS.ump"
 public class SupplyType extends InventoryItem
 {
 
@@ -18,9 +18,9 @@ public class SupplyType extends InventoryItem
   // CONSTRUCTOR
   //------------------------
 
-  public SupplyType(String aName, double aCost, String aCategory, InventoryManager aInventoryManager, int aQuantity)
+  public SupplyType(String aName, double aCost, String aCategory, Inventory aInventory, int aQuantity)
   {
-    super(aName, aCost, aCategory, aInventoryManager);
+    super(aName, aCost, aCategory, aInventory);
     quantity = aQuantity;
   }
 

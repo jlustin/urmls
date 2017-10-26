@@ -4,7 +4,7 @@
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 
-// line 40 "../../../../../URLMS.ump"
+// line 45 "../../../../../URLMS.ump"
 public class FundingAccount
 {
 
@@ -18,21 +18,21 @@ public class FundingAccount
 
   //FundingAccount Associations
   private List<Expense> expenses;
-  private FundingManager fundingManager;
+  private Funding funding;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public FundingAccount(String aType, double aBalance, FundingManager aFundingManager)
+  public FundingAccount(String aType, double aBalance, Funding aFunding)
   {
     type = aType;
     balance = aBalance;
     expenses = new ArrayList<Expense>();
-    boolean didAddFundingManager = setFundingManager(aFundingManager);
-    if (!didAddFundingManager)
+    boolean didAddFunding = setFunding(aFunding);
+    if (!didAddFunding)
     {
-      throw new RuntimeException("Unable to create fundingAccount due to fundingManager");
+      throw new RuntimeException("Unable to create fundingAccount due to funding");
     }
   }
 
@@ -96,9 +96,9 @@ public class FundingAccount
     return index;
   }
 
-  public FundingManager getFundingManager()
+  public Funding getFunding()
   {
-    return fundingManager;
+    return funding;
   }
 
   public static int minimumNumberOfExpenses()
@@ -173,21 +173,21 @@ public class FundingAccount
     return wasAdded;
   }
 
-  public boolean setFundingManager(FundingManager aFundingManager)
+  public boolean setFunding(Funding aFunding)
   {
     boolean wasSet = false;
-    if (aFundingManager == null)
+    if (aFunding == null)
     {
       return wasSet;
     }
 
-    FundingManager existingFundingManager = fundingManager;
-    fundingManager = aFundingManager;
-    if (existingFundingManager != null && !existingFundingManager.equals(aFundingManager))
+    Funding existingFunding = funding;
+    funding = aFunding;
+    if (existingFunding != null && !existingFunding.equals(aFunding))
     {
-      existingFundingManager.removeFundingAccount(this);
+      existingFunding.removeFundingAccount(this);
     }
-    fundingManager.addFundingAccount(this);
+    funding.addFundingAccount(this);
     wasSet = true;
     return wasSet;
   }
@@ -199,9 +199,9 @@ public class FundingAccount
       Expense aExpense = expenses.get(i - 1);
       aExpense.delete();
     }
-    FundingManager placeholderFundingManager = fundingManager;
-    this.fundingManager = null;
-    placeholderFundingManager.removeFundingAccount(this);
+    Funding placeholderFunding = funding;
+    this.funding = null;
+    placeholderFunding.removeFundingAccount(this);
   }
 
 
@@ -210,6 +210,6 @@ public class FundingAccount
     return super.toString() + "["+
             "type" + ":" + getType()+ "," +
             "balance" + ":" + getBalance()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "fundingManager = "+(getFundingManager()!=null?Integer.toHexString(System.identityHashCode(getFundingManager())):"null");
+            "  " + "funding = "+(getFunding()!=null?Integer.toHexString(System.identityHashCode(getFunding())):"null");
   }
 }
