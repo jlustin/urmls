@@ -14,20 +14,20 @@ class Report
   private $date;
 
   //Report Associations
-  private $fundingManager;
+  private $funding;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aTitle, $aDate, $aFundingManager)
+  public function __construct($aTitle, $aDate, $aFunding)
   {
     $this->title = $aTitle;
     $this->date = $aDate;
-    $didAddFundingManager = $this->setFundingManager($aFundingManager);
-    if (!$didAddFundingManager)
+    $didAddFunding = $this->setFunding($aFunding);
+    if (!$didAddFunding)
     {
-      throw new Exception("Unable to create report due to fundingManager");
+      throw new Exception("Unable to create report due to funding");
     }
   }
 
@@ -61,26 +61,26 @@ class Report
     return $this->date;
   }
 
-  public function getFundingManager()
+  public function getFunding()
   {
-    return $this->fundingManager;
+    return $this->funding;
   }
 
-  public function setFundingManager($aFundingManager)
+  public function setFunding($aFunding)
   {
     $wasSet = false;
-    if ($aFundingManager == null)
+    if ($aFunding == null)
     {
       return $wasSet;
     }
     
-    $existingFundingManager = $this->fundingManager;
-    $this->fundingManager = $aFundingManager;
-    if ($existingFundingManager != null && $existingFundingManager != $aFundingManager)
+    $existingFunding = $this->funding;
+    $this->funding = $aFunding;
+    if ($existingFunding != null && $existingFunding != $aFunding)
     {
-      $existingFundingManager->removeReport($this);
+      $existingFunding->removeReport($this);
     }
-    $this->fundingManager->addReport($this);
+    $this->funding->addReport($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -92,9 +92,9 @@ class Report
 
   public function delete()
   {
-    $placeholderFundingManager = $this->fundingManager;
-    $this->fundingManager = null;
-    $placeholderFundingManager->removeReport($this);
+    $placeholderFunding = $this->funding;
+    $this->funding = null;
+    $placeholderFunding->removeReport($this);
   }
 
 }

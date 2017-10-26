@@ -10,60 +10,133 @@ class URLMS
   //------------------------
 
   //URLMS Associations
-  private $staffManager;
-  private $inventoryManager;
-  private $fundingManager;
+  private $labs;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aStaffManager = null, $aInventoryManager = null, $aFundingManager = null)
+  public function __construct()
   {
-    if (func_num_args() == 0) { return; }
-
-    if ($aStaffManager == null || $aStaffManager->getURLMS() != null)
-    {
-      throw new Exception("Unable to create URLMS due to aStaffManager");
-    }
-    $this->staffManager = $aStaffManager;
-    if ($aInventoryManager == null || $aInventoryManager->getURLMS() != null)
-    {
-      throw new Exception("Unable to create URLMS due to aInventoryManager");
-    }
-    $this->inventoryManager = $aInventoryManager;
-    if ($aFundingManager == null || $aFundingManager->getURLMS() != null)
-    {
-      throw new Exception("Unable to create URLMS due to aFundingManager");
-    }
-    $this->fundingManager = $aFundingManager;
-  }
-  public static function newInstance($aTotalBalanceForFundingManager)
-  {
-    $thisInstance = new URLMS();
-    $thisInstance->staffManager = new StaffManager($thisInstance);
-    $thisInstance->inventoryManager = new InventoryManager($thisInstance);
-    $thisInstance->fundingManager = new FundingManager($aTotalBalanceForFundingManager, $thisInstance);
-    return $thisInstance;
+    $this->labs = array();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public function getStaffManager()
+  public function getLab_index($index)
   {
-    return $this->staffManager;
+    $aLab = $this->labs[$index];
+    return $aLab;
   }
 
-  public function getInventoryManager()
+  public function getLabs()
   {
-    return $this->inventoryManager;
+    $newLabs = $this->labs;
+    return $newLabs;
   }
 
-  public function getFundingManager()
+  public function numberOfLabs()
   {
-    return $this->fundingManager;
+    $number = count($this->labs);
+    return $number;
+  }
+
+  public function hasLabs()
+  {
+    $has = $this->numberOfLabs() > 0;
+    return $has;
+  }
+
+  public function indexOfLab($aLab)
+  {
+    $wasFound = false;
+    $index = 0;
+    foreach($this->labs as $lab)
+    {
+      if ($lab->equals($aLab))
+      {
+        $wasFound = true;
+        break;
+      }
+      $index += 1;
+    }
+    $index = $wasFound ? $index : -1;
+    return $index;
+  }
+
+  public static function minimumNumberOfLabs()
+  {
+    return 0;
+  }
+
+  public function addLabVia($aStaff, $aInventory, $aFunding)
+  {
+    return new Lab($aStaff, $aInventory, $aFunding, $this);
+  }
+
+  public function addLab($aLab)
+  {
+    $wasAdded = false;
+    if ($this->indexOfLab($aLab) !== -1) { return false; }
+    $existingURLMS = $aLab->getURLMS();
+    $isNewURLMS = $existingURLMS != null && $this !== $existingURLMS;
+    if ($isNewURLMS)
+    {
+      $aLab->setURLMS($this);
+    }
+    else
+    {
+      $this->labs[] = $aLab;
+    }
+    $wasAdded = true;
+    return $wasAdded;
+  }
+
+  public function removeLab($aLab)
+  {
+    $wasRemoved = false;
+    //Unable to remove aLab, as it must always have a uRLMS
+    if ($this !== $aLab->getURLMS())
+    {
+      unset($this->labs[$this->indexOfLab($aLab)]);
+      $this->labs = array_values($this->labs);
+      $wasRemoved = true;
+    }
+    return $wasRemoved;
+  }
+
+  public function addLabAt($aLab, $index)
+  {  
+    $wasAdded = false;
+    if($this->addLab($aLab))
+    {
+      if($index < 0 ) { $index = 0; }
+      if($index > $this->numberOfLabs()) { $index = $this->numberOfLabs() - 1; }
+      array_splice($this->labs, $this->indexOfLab($aLab), 1);
+      array_splice($this->labs, $index, 0, array($aLab));
+      $wasAdded = true;
+    }
+    return $wasAdded;
+  }
+
+  public function addOrMoveLabAt($aLab, $index)
+  {
+    $wasAdded = false;
+    if($this->indexOfLab($aLab) !== -1)
+    {
+      if($index < 0 ) { $index = 0; }
+      if($index > $this->numberOfLabs()) { $index = $this->numberOfLabs() - 1; }
+      array_splice($this->labs, $this->indexOfLab($aLab), 1);
+      array_splice($this->labs, $index, 0, array($aLab));
+      $wasAdded = true;
+    } 
+    else 
+    {
+      $wasAdded = $this->addLabAt($aLab, $index);
+    }
+    return $wasAdded;
   }
 
   public function equals($compareTo)
@@ -73,24 +146,14 @@ class URLMS
 
   public function delete()
   {
-    $existingStaffManager = $this->staffManager;
-    $this->staffManager = null;
-    if ($existingStaffManager != null)
+    while (count($this->labs) > 0)
     {
-      $existingStaffManager->delete();
+      $aLab = $this->labs[count($this->labs) - 1];
+      $aLab->delete();
+      unset($this->labs[$this->indexOfLab($aLab)]);
+      $this->labs = array_values($this->labs);
     }
-    $existingInventoryManager = $this->inventoryManager;
-    $this->inventoryManager = null;
-    if ($existingInventoryManager != null)
-    {
-      $existingInventoryManager->delete();
-    }
-    $existingFundingManager = $this->fundingManager;
-    $this->fundingManager = null;
-    if ($existingFundingManager != null)
-    {
-      $existingFundingManager->delete();
-    }
+    
   }
 
 }
