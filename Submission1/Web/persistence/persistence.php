@@ -1,44 +1,39 @@
 <?php
-	include '../model/URLMS.php';
-	include '../model/StaffManager.php';
-	include '../model/StaffMember.php';
-	include '../model/InventoryManager.php';
-	include '../model/FundingManager.php';
-	include '../model/InventoryItem.php';
-	include '../model/SupplyType.php';
-	include '../model/ResearchRole.php';
-	include '../model/ResearchAssociate.php';
-	include '../model/ResearchAssistant.php';
-	include '../model/Report.php';
-	include '../model/ProgressUpdate.php';
-	include '../model/Expense.php';
-	include '../model/Equipment.php';
-	include '../model/FundingAccount.php';
 	
 	class Persistence{
 		
-		public function __construct(){}
+		private $filename;
 		
 		/*
-		 * Load XML file
+		 * Constructor
 		 */
-		function loadData($string){
-			$xml = simplexml_load_file($string) or die ("Error: Cannot create object");
-			
-			$urlms = URLMS::newInstance(0);
-			foreach($xml->children() as $staffs){ //TODO MODIFY TO INCLUDE ALL
-				$member = new StaffMember($staffs->name, $staffs['id'], $urlms->getStaffManager());
-				$urlms->getStaffManager()->addStaffMember($member);
+		function __construct($filename = 'data.txt') {
+			$this->filename = $filename;
+		}
+		
+		/*
+		 * Load data from file
+		 */
+		function loadDataFromStore() {
+			// check if file exists, if yes, unserialize data file
+			if (file_exists($this->filename)) {
+				$str = file_get_contents($this->filename);
+				$urlms = unserialize($str);
+			} else {
+				// if doesn't exist, create new instance of URLMS
+				$urlms = URLMS::newInstance(0);
 			}
-			
+			// return urlms
 			return $urlms;
 		}
 		
 		/*
-		 * Save to XML file
+		 * Write data to file
 		 */
-		function saveData($xml, $string){
-			file_put_contents($string, $xml->asXML());
+		function writeDataToStore($rm) {
+			// serialize data and put content to data file
+			$str = serialize($rm);
+			file_put_contents($this->filename, $str);
 		}
 	}
 ?>

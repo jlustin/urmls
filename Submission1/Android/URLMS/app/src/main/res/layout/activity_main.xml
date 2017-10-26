@@ -89,13 +89,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="66dp"
         android:ems="10"
+        android:hint="@string/insertName"
         android:inputType="textPersonName"
-        android:text="@string/insertName"
         app:layout_constraintBottom_toTopOf="@+id/viewStaff"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintRight_creator="1"
-        />
+        tools:layout_constraintRight_creator="1"/>
 
     <Button
         android:id="@+id/updateMember"
@@ -111,16 +110,16 @@
         android:id="@+id/editID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/insertID"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
+        android:layout_marginBottom="6dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintRight_toRightOf="@+id/editName"
         android:layout_marginRight="1dp"
+        android:ems="10"
+        android:hint="@string/insertID"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editName"
-        android:layout_marginBottom="6dp"/>
+        app:layout_constraintRight_toRightOf="@+id/editName"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintRight_creator="1"/>
 
     <Button
         android:id="@+id/deleteMember"

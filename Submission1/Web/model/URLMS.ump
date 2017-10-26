@@ -1,11 +1,18 @@
+namespace ca.mcgill.ecse321.urlms.model;
+
 class URLMS
 {
-  1 <@>- 1 StaffManager;
-  1 <@>- 1 InventoryManager;
-  1 <@>- 1 FundingManager;
+  1 <@>- * Lab;
 }
 
-class InventoryManager
+class Lab
+{
+  1 <@>- 1 Staff;
+  1 <@>- 1 Inventory;
+  1 <@>- 1 Funding;
+}
+
+class Inventory
 {
   1 -- * InventoryItem;
 }
@@ -28,7 +35,7 @@ class Equipment
   isA InventoryItem;
 }
 
-class FundingManager
+class Funding
 {
   double totalBalance;
   1 <@>- * FundingAccount;
@@ -55,7 +62,7 @@ class Report
   Date date;
 }
 
-class StaffManager
+class Staff
 {
   1 -- * StaffMember;
 }
