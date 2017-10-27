@@ -79,8 +79,8 @@ class Controller {
 			$urlms = $persistence->loadDataFromStore();
 			
 			//add the new member to the staff manager
-			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0));
-			$urlms->getLabs_index(0)->getStaff()->addStaffMember($newStaffMember);
+			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0)->getStaff());
+			$urlms->getLab_index(0)->getStaff()->addStaffMember($newStaffMember);
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
