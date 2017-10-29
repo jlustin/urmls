@@ -36,6 +36,14 @@
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
 			}
 			break;
+		case "11/10":
+			try {
+				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
+			} catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			}
+			break;
 	}
 		
 class Controller {
@@ -70,7 +78,6 @@ class Controller {
 	 * add new staff to urlms
 	 */
 	function addStaff($name){
-		
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
@@ -94,5 +101,41 @@ class Controller {
 		}
 	}
 	
+	/*
+	 * remove a staff member from urlms
+	 */
+	function removeStaff($name, $id){
+		if($name == null || strlen($name) == 0){
+			throw new Exception ("Please enter a name.");
+		} else {
+			// Load data
+			$persistence = new Persistence();
+			$urlms = $persistence->loadDataFromStore();
+			
+			//add the new member to the staff manager
+			$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
+			for ($i = 0; $i < sizeof($members); $i++){
+				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
+					$staffMember = $members{$i};
+				}
+			}
+			
+			if($staffMember == null){
+				throw new Exception ("Staff Member not found.");
+			}
+			
+			$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
+			
+			// Write data
+			$persistence->writeDataToStore($urlms);
+			
+			?>
+			<!-- Add back button to page -->
+			<HTML>
+				<p>Staff member removed succesfully</p>
+				<a href="../index.php">Back</a>
+			</HTML><?php
+		}		
+	}
 }
 ?>
