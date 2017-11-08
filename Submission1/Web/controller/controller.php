@@ -112,7 +112,7 @@ class Controller {
 			$persistence = new Persistence();
 			$urlms = $persistence->loadDataFromStore();
 			
-			//add the new member to the staff manager
+			//Find the member to remove
 			$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
 			for ($i = 0; $i < sizeof($members); $i++){
 				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
@@ -124,7 +124,7 @@ class Controller {
 				throw new Exception ("Staff Member not found.");
 			}
 			
-			$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
+			$result = $urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
@@ -133,6 +133,10 @@ class Controller {
 			<!-- Add back button to page -->
 			<HTML>
 				<p>Staff member removed succesfully</p>
+				<?php  //if($result) 
+// 					echo "yes";
+// 				else 
+// 					echo "no";?>
 				<a href="../index.php">Back</a>
 			</HTML><?php
 		}		

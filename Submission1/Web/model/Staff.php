@@ -118,7 +118,7 @@ class Staff
   {
     $wasRemoved = false;
     //Unable to remove aStaffMember, as it must always have a staff
-    if ($this !== $aStaffMember->getStaff())
+    if ($this == $aStaffMember->getStaff())
     {
       unset($this->staffMembers[$this->indexOfStaffMember($aStaffMember)]);
       $this->staffMembers = array_values($this->staffMembers);
