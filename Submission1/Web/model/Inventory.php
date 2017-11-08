@@ -118,7 +118,7 @@ class Inventory
   {
     $wasRemoved = false;
     //Unable to remove aInventoryItem, as it must always have a inventory
-    if ($this !== $aInventoryItem->getInventory())
+    if ($this == $aInventoryItem->getInventory())
     {
       unset($this->inventoryItems[$this->indexOfInventoryItem($aInventoryItem)]);
       $this->inventoryItems = array_values($this->inventoryItems);

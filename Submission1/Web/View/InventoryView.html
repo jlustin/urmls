@@ -6,6 +6,44 @@
 </head>
 <body>
 	<h1 align="center"><a href="../index.php" style="color: black;text-decoration: none;">University Research Lab Management System</a></h1>
+	<h2 align="center">Inventory</h2>
+		<br><br>
+		<form action="../controller/InventoryController.php" method="get">
+			<br>
+			<h3>View Inventory List</h3>
+			<input type="hidden" name="action" value="9/10" />
+ 			<input type="submit" value="View Inventory!" />
+ 			<br>
+		</form>
+		
+		<form action="../controller/InventoryController.php" method="get">
+			<br>
+			<h3>Add Inventory Item</h3>
+			<input type="hidden" name="action" value="10/10" />
+			<input type="text" name="newInventoryName" value=""/>Name<br>
+			<input type="text" name="category" value=""/>Category<br>
+			<input type="radio" name="type" value="Equipment"/>Equipment <br>
+			<input type="radio" name="type" value="Supply"/>Supply <br>
+ 			<input type="submit" value="Add inventory!" />
+ 			<br>
+		</form>
+		
+		<form action="../controller/InventoryController.php" method="get">
+			<br>
+			<h3>Remove Inventory Item</h3>
+			<input type="hidden" name="action" value="11/10" />
+			<p>Name: </p><input type="text" name="oldInventoryName" value=""/><br>
+	<!-- 	<p>ID: </p><input type="text" name="oldstaffid" value=""/> -->
+ 			<input type="submit" value="Remove inventory!" />
+ 			<br>
+		</form>
+		<br>
+	
+	
+	
+	
+	
+	
 	<a href="../index.php">Back to homepage</a>
 
 </body>

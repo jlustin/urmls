@@ -21,9 +21,9 @@
 	// start session
 	session_start();
 	
-	$c = new InventoryController();
-	// check with button was clicked by user
-	// and run the right controller method with respect to user choice
+	$c = new StaffController();
+	// Check which button was clicked by user
+	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
 		case "9/10":
 			$c->getStaffList();
@@ -46,7 +46,7 @@
 			break;
 	}
 		
-class Controller {
+class StaffController {
 	
 	/*
 	 * Constructor
@@ -133,10 +133,6 @@ class Controller {
 			<!-- Add back button to page -->
 			<HTML>
 				<p>Staff member removed succesfully</p>
-				<?php  //if($result) 
-// 					echo "yes";
-// 				else 
-// 					echo "no";?>
 				<a href="../index.php">Back</a>
 			</HTML><?php
 		}		

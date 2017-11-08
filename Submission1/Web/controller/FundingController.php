@@ -21,32 +21,32 @@
 	// start session
 	session_start();
 	
-	$c = new InventoryController();
-	// check with button was clicked by user
-	// and run the right controller method with respect to user choice
+	$c = new FundingController();
+	// Check which button was clicked by user
+	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
 		case "9/10":
-			$c->getStaffList();
+			//$c->getStaffList();
 			break;
 		case "10/10":
-			try {
-			$c->addStaff($_GET['newstaffname']); 
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
+// 			try {
+// 			$c->addStaff($_GET['newstaffname']); 
+// 			} catch (Exception $e){
+// 				echo $e->getMessage() . "<br>";
+// 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+// 			}
 			break;
 		case "11/10":
-			try {
-				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
+// 			try {
+// 				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
+// 			} catch (Exception $e){
+// 				echo $e->getMessage() . "<br>";
+// 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+// 			}
 			break;
 	}
 		
-class Controller {
+class FundingController {
 	
 	/*
 	 * Constructor

@@ -22,23 +22,23 @@
 	session_start();
 	
 	$c = new InventoryController();
-	// check with button was clicked by user
-	// and run the right controller method with respect to user choice
+	// Check which button was clicked by user
+	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
 		case "9/10":
-			$c->getStaffList();
+			$c->getInventoryList();
 			break;
 		case "10/10":
 			try {
-			$c->addStaff($_GET['newstaffname']); 
+			$c->addInventory($_GET['newInventoryName'], $_GET['category'], $_GET['type']); 
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
+ 			}
 			break;
 		case "11/10":
 			try {
-				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
+				$c->removeInventory($_GET['oldInventoryName']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
@@ -46,7 +46,7 @@
 			break;
 	}
 		
-class Controller {
+class InventoryController {
 	
 	/*
 	 * Constructor
@@ -54,40 +54,48 @@ class Controller {
 	public function __construct(){}
 	
 	/*
-	 * get list of staff from urlms
+	 * get list of inventory from urlms
 	 */
-	function getStaffList(){
+	function getInventoryList(){
 		// Load data
 		$persistence = new Persistence();
 		$urlms = $persistence->loadDataFromStore();
-		// Get staff members from urlms
-		$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
-		for ($i = 0; $i < sizeof($members); $i++){
-			// display each staff member represented by their ID and name
-			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
+		
+		// Get inventory items from urlms
+		$items = $urlms->getLab_index(0)->getInventory()->getInventoryItems();
+		for ($i = 0; $i < sizeof($items); $i++){
+			// display each inventory item represented by their type, name and cost
+			echo $items{$i}->getName() . ", " . $items{$i}->getCategory() . ", $" . $items{$i}->getCost();
+			if(get_class($items{$i})=="SupplyType")
+				echo ", " . $items{$i}->getQuantity();
+			echo "<br>";
 		} 
 		?>
 		<!-- Add back button to page -->
 		<HTML>
 			<a href="../index.php">Back</a>
 		</HTML><?php
-		//Can use echo "<a href= \"../index.php\">Back</a>" . "<br>"; as alternative
 	}
 	
 	/*
-	 * add new staff to urlms
+	 * add new inventory item to urlms
 	 */
-	function addStaff($name){
+	function addInventory($name, $category, $type){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
 			// Load data
 			$persistence = new Persistence();
 			$urlms = $persistence->loadDataFromStore();
+			$newInventoryItem;
 			
-			//add the new member to the staff manager
-			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0)->getStaff());
-			$urlms->getLab_index(0)->getStaff()->addStaffMember($newStaffMember);
+			if($type == "Equipment"){
+				$newInventoryItem = new Equipment($name, rand(0,1000), $category,$urlms->getLab_index(0)->getInventory());
+			} else{
+				$newInventoryItem = new SupplyType($name, rand(0,1000), $category,$urlms->getLab_index(0)->getInventory(), rand(0,1000));
+			}
+			//add the new item to the Inventory 
+			$urlms->getLab_index(0)->getInventory()->addInventoryItem($newInventoryItem);
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
@@ -95,16 +103,15 @@ class Controller {
 			?>
 			<!-- Add back button to page -->
 			<HTML>
-				<p>New staff member successfully added!</p>
+				<p>New inventory item successfully added!</p>
 				<a href="../index.php">Back</a>
 			</HTML><?php
 		}
 	}
-	
 	/*
-	 * remove a staff member from urlms
+	 * remove an inventory item from urlms
 	 */
-	function removeStaff($name, $id){
+	function removeInventory($name){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
@@ -112,19 +119,19 @@ class Controller {
 			$persistence = new Persistence();
 			$urlms = $persistence->loadDataFromStore();
 			
-			//Find the member to remove
-			$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
-			for ($i = 0; $i < sizeof($members); $i++){
-				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
-					$staffMember = $members{$i};
+			//Find the item to remove
+			$items = $urlms->getLab_index(0)->getInventory()->getInventoryItems();
+			for ($i = 0; $i < sizeof($items); $i++){
+				if($name == $items{$i}->getName()){
+					$inventoryItem = $items{$i};
 				}
 			}
 			
-			if($staffMember == null){
-				throw new Exception ("Staff Member not found.");
+			if($inventoryItem == null){
+				throw new Exception ("Inventory item not found.");
 			}
 			
-			$result = $urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
+			$urlms->getLab_index(0)->getInventory()->removeInventoryItem($inventoryItem);
 			
 			// Write data
 			$persistence->writeDataToStore($urlms);
@@ -132,11 +139,7 @@ class Controller {
 			?>
 			<!-- Add back button to page -->
 			<HTML>
-				<p>Staff member removed succesfully</p>
-				<?php  //if($result) 
-// 					echo "yes";
-// 				else 
-// 					echo "no";?>
+				<p>Inventory item removed succesfully</p>
 				<a href="../index.php">Back</a>
 			</HTML><?php
 		}		
