@@ -21,45 +21,55 @@
 	// start session
 	session_start();
 	
-	$c = new StaffController();
+	$persistence = new Persistence();
+	$urlms = $persistence->loadDataFromStore();
+	
+	$c = new StaffController($urlms);
+	
+	
 	// Check which button was clicked by user
 	// Run appropriate controller method with respect to user request
-	switch($_GET['action']){
-		case "9/10":
-			$c->getStaffList();
-			break;
-		case "10/10":
-			try {
-			$c->addStaff($_GET['newstaffname']); 
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
-			break;
-		case "11/10":
-			try {
-				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
-			break;
+	if(!empty($_GET['action'])){
+		switch($_GET['action']){
+			case "9/10":
+				$c->getStaffList();
+				break;
+			case "10/10":
+				try {
+				$c->addStaff($_GET['newstaffname']); 
+				} catch (Exception $e){
+					echo $e->getMessage() . "<br>";
+					echo "<a href= \"../index.php\">Back</a>" . "<br>";
+				}
+				break;
+			case "11/10":
+				try {
+					$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
+				} catch (Exception $e){
+					echo $e->getMessage() . "<br>";
+					echo "<a href= \"../index.php\">Back</a>" . "<br>";
+				}
+				break;
+		}
 	}
 		
 class StaffController {
 	
+	protected $urlms;
 	/*
 	 * Constructor
 	 */
-	public function __construct(){}
+	public function __construct($urlms){
+		$this->urlms = $urlms;
+	}
 	
 	/*
 	 * get list of staff from urlms
 	 */
 	function getStaffList(){
 		// Load data
-		$persistence = new Persistence();
-		$urlms = $persistence->loadDataFromStore();
+		//$persistence = new Persistence();
+		$urlms = $this->urlms;//$persistence->loadDataFromStore();
 		// Get staff members from urlms
 		$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
 		for ($i = 0; $i < sizeof($members); $i++){
@@ -83,7 +93,7 @@ class StaffController {
 		} else {
 			// Load data
 			$persistence = new Persistence();
-			$urlms = $persistence->loadDataFromStore();
+			$urlms = $this->urlms;//$persistence->loadDataFromStore();
 			
 			//add the new member to the staff manager
 			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0)->getStaff());
@@ -110,7 +120,7 @@ class StaffController {
 		} else {
 			// Load data
 			$persistence = new Persistence();
-			$urlms = $persistence->loadDataFromStore();
+			$urlms = $this->urlms;//$persistence->loadDataFromStore();
 			
 			//Find the member to remove
 			$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();

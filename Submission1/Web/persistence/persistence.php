@@ -32,9 +32,9 @@
 		/*
 		 * Write data to file
 		 */
-		function writeDataToStore($rm) {
+		function writeDataToStore($urlms) {
 			// serialize data and put content to data file
-			$str = serialize($rm);
+			$str = serialize($urlms);
 			file_put_contents($this->filename, $str);
 		}
 	}

@@ -49,8 +49,9 @@ class Lab
     $thisInstance = new Lab();
     $thisInstance->staff = new Staff($thisInstance);
     $thisInstance->inventory = new Inventory($thisInstance);
-    $thisInstance->funding = new Funding($aTotalBalanceForFunding, $thisInstance);$this->uRLMSs = array();
-    $this->uRLMSs[] = $aURLMS;
+    $thisInstance->funding = new Funding($aTotalBalanceForFunding, $thisInstance);
+//     $this->uRLMSs = array();
+//     $this->uRLMSs[] = $aURLMS;
     return $thisInstance;
   }
 
