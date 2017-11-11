@@ -6,6 +6,7 @@
 		<h1 align="center"><a href="../index.php" style="color: black;text-decoration: none;">University Research Lab Management System</a></h1>
 		<h2 align="center">Staff</h2>
 		<br><br>
+		
 		<form action="../controller/StaffController.php" method="get">
 			<br>
 			<h3>View Staff List</h3>
@@ -32,6 +33,17 @@
  			<input type="submit" value="Remove staff!" />
  			<br>
 		</form>
+		
+		<form action="../controller/StaffController.php" method="get">
+			<br>
+			<h3>View Staff Member Record</h3>
+			<input type="hidden" name="action" value="12/10" />
+			<p>Name: </p><input type="text" name="staffname" value=""/><br>
+			<p>ID: </p><input type="text" name="staffid" value=""/>
+ 			<input type="submit" value="View record!" />
+ 			<br>
+		</form>
+		
 		<br>
 		<a href="../index.php">Back to homepage</a>
 	</body>
