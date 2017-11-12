@@ -32,18 +32,37 @@
 			<br>
 			<h3>Remove Inventory Item</h3>
 			<input type="hidden" name="action" value="11/10" />
-			<p>Name: </p><input type="text" name="oldInventoryName" value=""/><br>
+			Name: <input type="text" name="oldInventoryName" value=""/>
 	<!-- 	<p>ID: </p><input type="text" name="oldstaffid" value=""/> -->
  			<input type="submit" value="Remove inventory!" />
  			<br>
 		</form>
+		
+		<form action="../controller/InventoryController.php" method="get">
+			<br>
+			<h3>View Inventory Item</h3>
+			<input type="hidden" name="action" value="12/10" />
+			Name: <input type="text" name="inventoryName" value=""/>
+	<!-- 	<p>ID: </p><input type="text" name="inventoryId" value=""/> -->
+ 			<input type="submit" value="View inventory!" />
+ 			<br>
+		</form>
+		
+		<form action="../controller/InventoryController.php" method="get">
+			<br>
+			<h3>Edit Inventory Item</h3>
+			<input type="hidden" name="action" value="8/10" />
+			Name of inventory item you want to edit: <input type="text" name="editInventoryName" value=""/><br>
+	<!-- 	<p>ID: </p><input type="text" name="editInventoryId" value=""/> -->
+			<br>
+			New name: <input type="text" name="editedInventoryName" value=""/><br>				
+			New cost: <input type="text" name="editedInventoryCost" value=""/><br>
+			New category: <input type="text" name="editedInventoryCat" value=""/><br>
+ 			<input type="submit" value="Edit inventory!" />
+ 			<br>
+		</form>
+		
 		<br>
-	
-	
-	
-	
-	
-	
 	<a href="../index.php">Back to homepage</a>
 
 </body>
