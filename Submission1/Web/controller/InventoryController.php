@@ -56,6 +56,14 @@
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
 			}
 			break;
+		case "8/10":
+			try {
+				$c->editInventoryItem($_GET['editInventoryName'], $_GET['editedInventoryName'], $_GET['editedInventoryCost'], $_GET['editedInventoryCat']);
+			} catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			}
+			break;
 	}
 		
 class InventoryController {
@@ -138,7 +146,7 @@ class InventoryController {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<p>Inventory item removed succesfully</p>
+			<p>Inventory item removed succesfully!</p>
 			<a href="../index.php">Back</a>
 		</HTML><?php
 	}		
@@ -151,6 +159,33 @@ class InventoryController {
 		echo "Category: " . $inventoryItem->getCategory() . "<br>";
 		echo "<br>";
 		echo "<a href= \"../index.php\">Back</a>" . "<br>";
+	}
+	
+	function editInventoryItem($name, $newname, $newcost, $newcat){
+		$urlms = $this->urlms;
+		$inventoryItem = $this->findInventoryItem($name);
+		
+		if(strlen($newname) > 0){
+			$inventoryItem->setName($newname);
+		}else $inventoryItem->setName($inventoryItem->getName());
+		if(strlen($newcost) > 0){
+			$inventoryItem->setCost($newcost);
+		}else $inventoryItem->setCost($inventoryItem->getCost());
+		if(strlen($newcat) > 0){
+			$inventoryItem->setCategory($newcat);
+		}else $inventoryItem->setCategory($inventoryItem->getCategory());
+		
+		// Write data
+		$persistence = new Persistence();
+		$persistence->writeDataToStore($urlms);
+		
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>Inventory item updated succesfully!</p>
+			<a href="../index.php">Back</a>
+		</HTML><?php
+		
 	}
 	
 	

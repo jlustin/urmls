@@ -80,11 +80,6 @@ class StaffController {
 			// display each staff member represented by their ID and name
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		} 
-		
-// 		<!-- Add back button to page -->
-// 		<HTML>
-// 			<a href="../index.php">Back</a>
-// 		</HTML><?php
 		echo "<a href= \"../index.php\">Back</a>" . "<br>";
 	}
 	
@@ -95,7 +90,6 @@ class StaffController {
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
-			//TODO replace $urlms by $this->urlms
 			$urlms = $this->urlms;
 			
 			//add the new member to the staff manager
@@ -119,88 +113,49 @@ class StaffController {
 	 * remove a staff member from urlms
 	 */
 	function removeStaff($name, $id){
-// 		if($name == null || strlen($name) == 0){
-// 			throw new Exception ("Please enter a name.");
-// 		} else {
-// 			//TODO replace $urlms by $this->urlms
-// 			$urlms = $this->urlms;
-			
-// 			//Find the member to remove
-// 			$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
-// 			for ($i = 0; $i < sizeof($members); $i++){
-// 				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
-// 					$staffMember = $members{$i};
-// 				}
-// 			}
-			
-// 			if($staffMember == null){
-// 				throw new Exception ("Staff Member not found.");
-// 			}
-// 		}
-
-		//TODO replace $urlms by $this->urlms
 		$urlms = $this->urlms;
 		$staffMember = $this->findMember($name, $id);
 		
+		//Remove staff member
+		$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
 		
-			//Remove staff member
-			$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
-			
-			//Save
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
-			
-			?>
-			<!-- Add back button to page -->
-			<HTML>
-				<p>Staff member removed succesfully</p>
-				<a href="../index.php">Back</a>
-			</HTML><?php
-//		}		
+		//Save
+		$persistence = new Persistence();
+		$persistence->writeDataToStore($urlms);
+		
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>Staff member removed succesfully</p>
+			<a href="../index.php">Back</a>
+		</HTML><?php		
 	}
 	
 	function viewMemberRecord($name, $id){
-// 		if($name == null || strlen($name) == 0){
-// 			throw new Exception ("Please enter a name.");
-// 		} else{
-// 			//Find the member
-// 			$members = $this->urlms->getLab_index(0)->getStaff()->getStaffMembers();
-// 			for ($i = 0; $i < sizeof($members); $i++){
-// 				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
-// 					$staffMember = $members{$i};
-// 				}
-// 			}	
-			
-// 			if($staffMember == null){
-// 				throw new Exception ("Staff Member not found.");
-// 			}
-// 		}
-		
 		$staffMember = $this->findMember($name, $id);
 		
-			//Display member info
-			echo "ID: " . $staffMember->getId() . "<br>";
-			echo "Name: " . $staffMember->getName() . "<br>";
-			echo "Role(s):";
-			if(!$staffMember->hasResearchRoles()){
-				echo " None";
-			}
-			for($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++){
-				echo " " . $staffMember->get_class(getResearchRole_index($i));
-			}
-			echo "<br>";
-			echo "Progress Updates:";
-			if(!$staffMember->hasProgressUpdates()){
-				echo " None";
-			}
-			for($i = 0; $i < $staffMember->numberOfProgressUpdates(); $i++){
-				//TODO Update domain model to add text in progress update
-				//echo " " . $staffMember->getProgressUpdate_index($i)->getDescription();
-			}
-			echo "<br>";
-			
-			echo "<a href= \"../index.php\">Back</a>" . "<br>";
-//		}
+		//Display member info
+		echo "ID: " . $staffMember->getId() . "<br>";
+		echo "Name: " . $staffMember->getName() . "<br>";
+		echo "Role(s):";
+		if(!$staffMember->hasResearchRoles()){
+			echo " None";
+		}
+		for($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++){
+			echo " " . $staffMember->get_class(getResearchRole_index($i));
+		}
+		echo "<br>";
+		echo "Progress Updates:";
+		if(!$staffMember->hasProgressUpdates()){
+			echo " None";
+		}
+		for($i = 0; $i < $staffMember->numberOfProgressUpdates(); $i++){
+			//TODO Update domain model to add text in progress update
+			//echo " " . $staffMember->getProgressUpdate_index($i)->getDescription();
+		}
+		echo "<br>";
+		
+		echo "<a href= \"../index.php\">Back</a>" . "<br>";
 	}
 	
 	function editMemberRecord($name, $id){
@@ -222,7 +177,6 @@ class StaffController {
 					$staffMember = $members{$i};
 				}
 			}
-				
 			if($staffMember == null){
 				throw new Exception ("Staff Member not found.");
 			}
