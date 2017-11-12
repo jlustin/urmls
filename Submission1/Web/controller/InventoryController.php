@@ -137,7 +137,8 @@ class InventoryController {
 		$urlms = $this->urlms;
 		$inventoryItem = $this->findInventoryItem($name);
 		
-		$urlms->getLab_index(0)->getInventory()->removeInventoryItem($inventoryItem);
+		$inventoryItem->delete();
+// 		$urlms->getLab_index(0)->getInventory()->removeInventoryItem($inventoryItem);
 		
 		// Write data
 		$persistence = new Persistence();

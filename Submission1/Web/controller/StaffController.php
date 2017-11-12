@@ -117,7 +117,8 @@ class StaffController {
 		$staffMember = $this->findMember($name, $id);
 		
 		//Remove staff member
-		$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
+// 		$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
+		$staffMember->delete();
 		
 		//Save
 		$persistence = new Persistence();
