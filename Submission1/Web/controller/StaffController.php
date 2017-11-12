@@ -206,10 +206,9 @@ class StaffController {
 	function editMemberRecord($name, $id){
 		
 		$staffMember = $this->findMember($name, $id);
-		
+
 		//TODO Insert some html here to create form maybe 
 		//OR redirect to editMember.html or something
-		
 	}
 	
 	function findMember($name,$id){

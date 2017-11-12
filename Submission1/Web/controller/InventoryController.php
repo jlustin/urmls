@@ -21,7 +21,11 @@
 	// start session
 	session_start();
 	
-	$c = new InventoryController();
+	$persistence = new Persistence();
+	$urlms = $persistence->loadDataFromStore();
+	
+	$c = new InventoryController($urlms);
+	
 	// Check which button was clicked by user
 	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
@@ -44,25 +48,36 @@
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
 			}
 			break;
+		case "12/10":
+			try {
+				$c->viewInventoryItem($_GET['inventoryName']);
+			} catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			}
+			break;
 	}
 		
 class InventoryController {
 	
+	protected $urlms;
 	/*
 	 * Constructor
 	 */
-	public function __construct(){}
+	public function __construct($urlms){
+		$this->urlms = $urlms;
+	}
 	
 	/*
 	 * get list of inventory from urlms
 	 */
 	function getInventoryList(){
-		// Load data
-		$persistence = new Persistence();
-		$urlms = $persistence->loadDataFromStore();
+// 		// Load data
+// 		$persistence = new Persistence();
+// 		$urlms = $persistence->loadDataFromStore();
 		
 		// Get inventory items from urlms
-		$items = $urlms->getLab_index(0)->getInventory()->getInventoryItems();
+		$items = $this->urlms->getLab_index(0)->getInventory()->getInventoryItems();
 		for ($i = 0; $i < sizeof($items); $i++){
 			// display each inventory item represented by their type, name and cost
 			echo $items{$i}->getName() . ", " . $items{$i}->getCategory() . ", $" . $items{$i}->getCost();
@@ -84,9 +99,7 @@ class InventoryController {
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
-			// Load data
-			$persistence = new Persistence();
-			$urlms = $persistence->loadDataFromStore();
+			$urlms = $this->urlms;
 			$newInventoryItem;
 			
 			if($type == "Equipment"){
@@ -98,6 +111,7 @@ class InventoryController {
 			$urlms->getLab_index(0)->getInventory()->addInventoryItem($newInventoryItem);
 			
 			// Write data
+			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			
 			?>
@@ -112,37 +126,51 @@ class InventoryController {
 	 * remove an inventory item from urlms
 	 */
 	function removeInventory($name){
-		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter a name.");
-		} else {
-			// Load data
-			$persistence = new Persistence();
-			$urlms = $persistence->loadDataFromStore();
+		$urlms = $this->urlms;
+		$inventoryItem = $this->findInventoryItem($name);
+		
+		$urlms->getLab_index(0)->getInventory()->removeInventoryItem($inventoryItem);
+		
+		// Write data
+		$persistence = new Persistence();
+		$persistence->writeDataToStore($urlms);
+		
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>Inventory item removed succesfully</p>
+			<a href="../index.php">Back</a>
+		</HTML><?php
+	}		
+	
+	function viewInventoryItem($name){
+		$inventoryItem = $this->findInventoryItem($name);
 			
-			//Find the item to remove
-			$items = $urlms->getLab_index(0)->getInventory()->getInventoryItems();
+		echo "ID: " . $inventoryItem->getName() . "<br>";
+		echo "Cost: $" . $inventoryItem->getCost() . "<br>";
+		echo "Category: " . $inventoryItem->getCategory() . "<br>";
+		echo "<br>";
+		echo "<a href= \"../index.php\">Back</a>" . "<br>";
+	}
+	
+	
+	function findInventoryItem($name){
+		if($name == null || strlen($name) == 0){
+			throw new Exception ("Please enter an inventory item name.");
+		} else{
+			//Find the member
+			$items = $this->urlms->getLab_index(0)->getInventory()->getInventoryItems();
 			for ($i = 0; $i < sizeof($items); $i++){
 				if($name == $items{$i}->getName()){
 					$inventoryItem = $items{$i};
 				}
 			}
-			
 			if($inventoryItem == null){
 				throw new Exception ("Inventory item not found.");
 			}
-			
-			$urlms->getLab_index(0)->getInventory()->removeInventoryItem($inventoryItem);
-			
-			// Write data
-			$persistence->writeDataToStore($urlms);
-			
-			?>
-			<!-- Add back button to page -->
-			<HTML>
-				<p>Inventory item removed succesfully</p>
-				<a href="../index.php">Back</a>
-			</HTML><?php
-		}		
+		}
+		return $inventoryItem;
 	}
+	
 }
 ?>
