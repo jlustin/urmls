@@ -4,6 +4,7 @@ import java.util.*;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.Lab;
+import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
 import ca.mcgill.ecse321.urlms.model.Staff;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
@@ -54,5 +55,34 @@ public class StaffController extends Controller {
 		return URLMSApplication.getURLMS().getLab(0).getStaff().getStaffMembers().get(index).getName();
 	}
 	
+	//TODO: use cases implementation
+	
+	public void editStaffmemberRecord(int id) {
+		
+	}
+	
+	public ProgressUpdate viewProgressUpdate(int id) {
+		
+		//TODO: remove this when working on implementation
+		return null;
+	}
+	
+	public void viewStaffMemberRecord(int id) {
+		
+	}
+	
+	public void addStaffMember(String name, int id) {
+		
+	}
+	
+	public void removeStaffMember(int id) {
+		
+	}
+	
+	public HashMap<String, String> viewStatus() {
+		
+		//TODO: remove this when working on implementation
+		return null;
+	}
 
 }
