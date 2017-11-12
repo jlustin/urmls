@@ -48,37 +48,65 @@ public class StaffController extends Controller {
 	
 	/**
 	 * This method will get the name of a specific staff member in the list and return its name as a string.
-	 * @param index of the staff member in the list
+	 * @param int index of the staff member in the list
 	 * @return name of the staff member as a String
 	 */
 	public String viewStaffMember(int index){
 		return URLMSApplication.getURLMS().getLab(0).getStaff().getStaffMembers().get(index).getName();
 	}
 	
-	//TODO: use cases implementation
+	//TODO: USE CASES IMPLEMENTATION -----------------------------------------------
 	
+	
+	/** This method will edit the record of a specific staff member by ID
+	 * @param id of the staff member by int
+	 */
 	public void editStaffmemberRecord(int id) {
 		
 	}
 	
+	
+	/** This method will get the progress update of a specific staff member by ID number
+	 * @param id of the staff member by int
+	 * @return the progress update of the specific member
+	 */
 	public ProgressUpdate viewProgressUpdate(int id) {
 		
 		//TODO: remove this when working on implementation
 		return null;
 	}
 	
+	
+	/** This method will get the records of a specific staff member by ID number
+	 * @param id of the staff member by int
+	 */
 	public void viewStaffMemberRecord(int id) {
 		
 	}
 	
+	
+	/** This method will add a staff member in the lab
+	 * @param name of the staff member by String
+	 * @param id of the staff member by int
+	 */
 	public void addStaffMember(String name, int id) {
 		
 	}
 	
+	
+	
+	/** This method will remove a staff member in the lab by id
+	 * @param id of the staff member by int
+	 */
 	public void removeStaffMember(int id) {
 		
 	}
 	
+	
+	
+	/** This method will give a summary of the overall URLMS staff
+	 * @return a hash map containing all information
+	 */
 	public HashMap<String, String> viewStatus() {
 		
 		//TODO: remove this when working on implementation
