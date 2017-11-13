@@ -28,18 +28,18 @@
 			<br>
 			<h3>Remove Staff Member</h3>
 			<input type="hidden" name="action" value="11/10" />
-			<p>Name: </p><input type="text" name="oldstaffname" value=""/><br>
-			<p>ID: </p><input type="text" name="oldstaffid" value=""/>
+			Name: <input type="text" name="oldstaffname" value=""/>
+			ID: <input type="text" name="oldstaffid" value=""/>
  			<input type="submit" value="Remove staff!" />
  			<br>
 		</form>
 		
 		<form action="../controller/StaffController.php" method="get">
 			<br>
-			<h3>View Staff Member Record</h3>
+			<h3>View or Edit Staff Member Record</h3>
 			<input type="hidden" name="action" value="12/10" />
-			<p>Name: </p><input type="text" name="staffname" value=""/><br>
-			<p>ID: </p><input type="text" name="staffid" value=""/>
+			Name: <input type="text" name="staffname" value=""/>
+			ID: <input type="text" name="staffid" value=""/>
  			<input type="submit" value="View record!" />
  			<br>
 		</form>

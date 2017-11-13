@@ -1,15 +1,33 @@
 <html>
 	<head>
 		<title>URLMS</title>
+		<link rel="stylesheet" type="text/css" href="style/homepagecss.css">
 	</head>
 	<body>
-		<h1 align="center"><a href="index.php" style="color: black;text-decoration: none;">University Research Lab Management System</a></h1>
+		<h1 style="text-align: center"><a href="index.php" style="color: white;text-decoration: none;">University Research Lab Management System</a></h1>
 		
-		<h2 align="center"><a href="View/StaffView.html">Staff</a></h2>
+		<ul>
+ 				<li><h2><a href="View/StaffView.html">Staff</a></h2></li>
+  				<li><h2><a href="View/InventoryView.html">Inventory</a></h2></li>
+  				<li><h2><a href="View/FundingView.html">Funding</a></h2></li>
+		</ul>
+
+	
+<!-- 		<h2 align="center"><a href="View/StaffView.html">Staff</a></h2> -->
 		
-		<h2 align="center"><a href="View/InventoryView.html">Inventory</a></h2>
+<!-- 		<h2 align="center"><a href="View/InventoryView.html">Inventory</a></h2> -->
 				
-		<h2 align="center"><a href="View/FundingView.html">Funding</a></h2>
+<!-- 		<h2 align="center"><a href="View/FundingView.html">Funding</a></h2> -->
+
+
+
+
+
+
+
+
+
+
 
 <!-- commented out section below since moved to StaffView -->
 

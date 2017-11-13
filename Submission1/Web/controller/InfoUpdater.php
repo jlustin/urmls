@@ -21,7 +21,7 @@
 	require('InventoryController.php');
 	
 	// start session
-	session_start();
+// 	session_start();
 	
 	$persistence = new Persistence();
 	$urlms = $persistence->loadDataFromStore();
@@ -34,6 +34,10 @@
 		case "editInvetoryItem":
 			$iu->updateInventory($_GET['editedInventoryName'],$_GET['editedInventoryCost'], $_GET['editedInventoryCat']);
 			break;
+		case "editStaffMember":
+			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
+			break;
+			
 	}
 	
 	class InfoUpdater {
@@ -56,6 +60,24 @@
 			
 			echo "Inventory item updated succesfully! <br>";
 			echo "<a href= \"../view/InventoryView.html\">Back</a>" . "<br>";
+		}
+		
+		function updateStaffMember($name, $id){
+			$urlms = $_SESSION['urlms'];
+			$staffMember = $_SESSION['staffmember'];
+			
+			$staffMember->setName($name);
+			$staffMember->setId($id);
+			
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+			
+			?>
+			<!-- Add back button to page -->
+			<HTML>
+				<p>Staff member edited succesfully</p>
+				<a href="../index.php">Back</a>
+			</HTML><?php		
 		}
 		
 		function findInventoryItem($name){

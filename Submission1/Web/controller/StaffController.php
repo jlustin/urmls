@@ -133,7 +133,10 @@ class StaffController {
 	}
 	
 	function viewMemberRecord($name, $id){
+		$urlms = $this->urlms;
 		$staffMember = $this->findMember($name, $id);
+		$_SESSION['staffmember'] = $staffMember;
+		$_SESSION['urlms'] = $urlms;
 		
 		//Display member info
 		echo "ID: " . $staffMember->getId() . "<br>";
@@ -155,6 +158,33 @@ class StaffController {
 			//echo " " . $staffMember->getProgressUpdate_index($i)->getDescription();
 		}
 		echo "<br>";
+		?>
+		<HTML>
+			<form action="InfoUpdater.php" method="get">
+			<br>
+			<h3>Edit Staff Member</h3>
+			<input type="hidden" name="action" value="editStaffMember" />
+			New Name: <input type="text" name="editedstaffname" value="<?php echo $staffMember->getName();?>"/>
+			New ID: <input type="text" name="editedstaffid" value="<?php echo $staffMember->getId();?>"/>
+			
+			<?php
+			for ($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++) {
+			?>
+			    <input type="radio" name="num<?php echo $i; ?>" value="<?php echo $staffMember->get_class(getResearchRole_index($i));?>"><br>
+			<?php
+			}
+			?>
+					
+			<?php
+// 			for ($i = 1; $i <= 3; $i++) {
+// 			    echo $_POST['num' . $i];
+// 			}
+// 			?>
+ 			<input type="submit" value="Edit staff!" />
+ 			<br>
+		</form>
+		</HTML>
+		<?php 
 		
 		echo "<a href= \"../index.php\">Back</a>" . "<br>";
 	}
