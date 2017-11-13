@@ -8,14 +8,12 @@ import java.io.IOException;
 import com.thoughtworks.xstream.XStream;
 
 import ca.mcgill.ecse321.urlms.model.Lab;
-import ca.mcgill.ecse321.urlms.model.Staff;
-import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
 public abstract class PersistenceXStream {
 
     private static XStream xstream = new XStream();
-    private static String filename = "urlms.xml";
+    private static String filename;
 
     public static URLMS initializeModelManager(String fileName) {
         // Initialization for persistence
@@ -65,7 +63,7 @@ public abstract class PersistenceXStream {
             return xstream.fromXML(fileReader);
         }
         catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             return null;
         }
     }

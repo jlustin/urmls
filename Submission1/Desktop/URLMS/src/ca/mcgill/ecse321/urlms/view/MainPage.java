@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 
 import javax.swing.GroupLayout;
@@ -34,6 +35,8 @@ public class MainPage extends JFrame {
 	JLabel feelFreeLabel;
 	
 	public static Controller controller = new Controller();
+	public static StaffController staffController = new StaffController();
+	
 
 	/**
 	 * Launch the application.
@@ -68,7 +71,7 @@ public class MainPage extends JFrame {
 		JButton btnAddSampleStaff = new JButton("Add Sample Staff");
 		btnAddSampleStaff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.addSampleMembers();
+				staffController.addSampleMembers();
 			}
 		});
 		panel.add(btnAddSampleStaff);
@@ -78,7 +81,7 @@ public class MainPage extends JFrame {
 		btnViewStaffList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				staffMemberListLabel.setText("");
-				List<StaffMember> staffList = controller.viewStaffList();
+				List<StaffMember> staffList = staffController.viewStaffList();
 				String name;
 				int id;
 				staffMemberListLabel.setText("<html>");
