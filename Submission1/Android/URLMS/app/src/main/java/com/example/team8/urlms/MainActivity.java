@@ -10,15 +10,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.ContextWrapper;
 
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.*;
+import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
 import android.content.res.XmlResourceParser;
 import android.widget.Toast;
+
+import static ca.mcgill.ecse321.urlms.persistence.DatabaseHelper.urlms;
 
 
 //import static com.example.team8.urlms.MainActivity.load;
@@ -41,9 +46,17 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper myDb;
 
     Controller controller = new Controller();
+//    private String fileName;
+//    private URLMS urlms = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        fileName = getFilesDir().getAbsolutePath() + "/urlms.xml";
+//        urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+//        toastMessage(  urlms.getStaffManager().getStaffMember(0).getName());
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import com.example.team8.urlms.R;
 
 import java.util.*;
-
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.StaffManager;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
@@ -14,8 +13,10 @@ import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.DatabaseHelper;
 import ca.mcgill.ecse321.urlms.persistence.Persistence;
 
-public class Controller {
+import static ca.mcgill.ecse321.urlms.persistence.DatabaseHelper.urlms;
 
+public class Controller {
+    private String fileName;
     URLMS urlms = new URLMS(0);
     Cursor cursor;
 

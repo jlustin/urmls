@@ -3,27 +3,26 @@ package ca.mcgill.ecse321.urlms.application;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 //import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
-import ca.mcgill.ecse321.urlms.view.MainPage;
-import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
+
 
 public class URLMSApplication {
 
 		private static URLMS urlms;						//main urlms for the whole application
 		
-		private static String filename = "urlms.xml";	//persistence data file name
+		private static String filename;	//persistence data file name
 		
 		/**
 		 * @param args
 		 */
-		public static void main(String[] args) {
-			// start the Main Page UI
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	            	new MainPage().setVisible(true);
-	            	
-	            }
-	        });        
-		}
+//		public static void main(String[] args) {
+//			// start the Main Page UI
+//	        java.awt.EventQueue.invokeLater(new Runnable() {
+//	            public void run() {
+//	            	new MainPage().setVisible(true);
+//	            	
+//	            }
+//	        });        
+//		}
 
 		/**
 		 * This method will get the current urlms. If it is null, it will fetch for the urlms saved.
@@ -50,15 +49,15 @@ public class URLMSApplication {
 		 * @return loaded urlms
 		 */
 		public static URLMS load() {
-			PersistenceXStream.setFilename(filename);
+			//PersistenceXStream.setFilename(filename);
 			URLMS urlms;
 			urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			
 			//if the file does not exist, create a new save file
 			if (urlms == null) {
 				urlms = PersistenceXStream.initializeModelManager("urlms.xml");
-				NewSaveFilePO nsfpo = new NewSaveFilePO();
-				nsfpo.setVisible(true);
+//				NewSaveFilePO nsfpo = new NewSaveFilePO();
+//				nsfpo.setVisible(true);
 			}
 			return urlms;
 		}

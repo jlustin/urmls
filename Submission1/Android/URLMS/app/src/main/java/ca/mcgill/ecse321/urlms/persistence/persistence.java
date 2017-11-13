@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.urlms.persistence;
 
+//import urlms.*;
+
 /**
  * Created by ericvuong on 2017-10-08.
  */
@@ -34,6 +36,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.File;
 
 import static android.R.attr.name;
+import static ca.mcgill.ecse321.urlms.persistence.DatabaseHelper.urlms;
 import static com.example.team8.urlms.R.id.toDisplay;
 
 public class Persistence
