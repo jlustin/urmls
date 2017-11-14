@@ -56,14 +56,14 @@
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
 			}
 			break;
-		case "8/10":
-			try {
-				$c->editInventoryItem($_GET['editInventoryName'], $_GET['editedInventoryName'], $_GET['editedInventoryCost'], $_GET['editedInventoryCat']);
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
-			break;
+// 		case "8/10":
+// 			try {
+// 				$c->editInventoryItem($_GET['editInventoryName'], $_GET['editedInventoryName'], $_GET['editedInventoryCost'], $_GET['editedInventoryCat']);
+// 			} catch (Exception $e){
+// 				echo $e->getMessage() . "<br>";
+// 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+// 			}
+// 			break;
 	}
 		
 class InventoryController {
@@ -153,12 +153,31 @@ class InventoryController {
 	}		
 	
 	function viewInventoryItem($name){
+		$urlms = $this->urlms;
 		$inventoryItem = $this->findInventoryItem($name);
+		$_SESSION['inventoryitem'] = $inventoryItem;
+		$_SESSION['urlms'] = $urlms;
 			
 		echo "ID: " . $inventoryItem->getName() . "<br>";
 		echo "Cost: $" . $inventoryItem->getCost() . "<br>";
 		echo "Category: " . $inventoryItem->getCategory() . "<br>";
 		echo "<br>";
+		
+		?>
+		<HTML>
+			<form action="InfoUpdater.php" method="get">
+			<br>
+			<h3>Edit Inventory Item</h3>
+			<input type="hidden" name="action" value="editInventoryItem" />
+			New Name: <input type="text" name="editedinventoryname" value="<?php echo $inventoryItem->getName();?>"/>
+			New Cost: <input type="text" name="editedinventorycost" value="<?php echo $inventoryItem->getCost();?>"/>
+			New Category: <input type="text" name="editedinventorycat" value="<?php echo $inventoryItem->getCategory();?>"/>
+ 			<input type="submit" value="Edit inventory item!" />
+ 			<br>
+		</form>
+		</HTML>
+		<?php 
+		
 		echo "<a href= \"../index.php\">Back</a>" . "<br>";
 	}
 	

@@ -31,8 +31,8 @@
 	// Check which button was clicked by user
 	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
-		case "editInvetoryItem":
-			$iu->updateInventory($_GET['editedInventoryName'],$_GET['editedInventoryCost'], $_GET['editedInventoryCat']);
+		case "editInventoryItem":
+			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat']);
 			break;
 		case "editStaffMember":
 			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
@@ -51,12 +51,15 @@
 		}
 		
 		function updateInventory($name, $cost, $category){
-			$name = $_SESSION['inventoryItem'];
-			$inventoryItem = findInventoryItem($name);
+			$urlms = $_SESSION['urlms'];
+			$inventoryItem = $_SESSION['inventoryitem'];
 			
 			$inventoryItem->setName($name);
-			$inventoryItem->setName($cost);
-			$inventoryItem->setName($category);
+			$inventoryItem->setCost($cost);
+			$inventoryItem->setCategory($category);
+			
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
 			
 			echo "Inventory item updated succesfully! <br>";
 			echo "<a href= \"../view/InventoryView.html\">Back</a>" . "<br>";
@@ -78,23 +81,5 @@
 				<p>Staff member edited succesfully</p>
 				<a href="../index.php">Back</a>
 			</HTML><?php		
-		}
-		
-		function findInventoryItem($name){
-			if($name == null || strlen($name) == 0){
-				throw new Exception ("Please enter an inventory item name.");
-			} else{
-				//Find the member
-				$items = $this->urlms->getLab_index(0)->getInventory()->getInventoryItems();
-				for ($i = 0; $i < sizeof($items); $i++){
-					if($name == $items{$i}->getName()){
-						$inventoryItem = $items{$i};
-					}
-				}
-				if($inventoryItem == null){
-					throw new Exception ("Inventory item not found.");
-				}
-			}
-			return $inventoryItem;
 		}
 }
