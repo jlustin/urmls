@@ -65,6 +65,15 @@ public class StaffController extends Controller {
 		
 	}
 	
+	/**Edit staff name
+	 * @param desired name change by string & id of the staff member by int
+	 */
+	public void editStaffmemberName(String desiredName, int id) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		Staff aStaff = aLab.getStaff();
+		aStaff.getStaffMember(id).setName(desiredName);
+	}
 	
 	/** This method will get the progress update of a specific staff member by ID number
 	 * @param id of the staff member by int
@@ -72,8 +81,11 @@ public class StaffController extends Controller {
 	 */
 	public ProgressUpdate viewProgressUpdate(int id) {
 		
-		//TODO: remove this when working on implementation
-		return null;
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		Staff aStaff = aLab.getStaff();
+		ProgressUpdate progress = aStaff.getStaffMember(id).getProgressUpdate(id);
+		return progress;
 	}
 	
 	
