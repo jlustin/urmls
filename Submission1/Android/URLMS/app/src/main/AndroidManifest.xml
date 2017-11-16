@@ -15,16 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".StaffPage">
-        </activity>
-        <activity android:name=".InventoryPage">
-        </activity>
-        <activity android:name=".FundingPage">
-        </activity>
-        <activity android:name=".StaffListPage">
-        </activity>
-        <activity android:name=".StaffMemberPage">
-        </activity>
     </application>
 
 </manifest>

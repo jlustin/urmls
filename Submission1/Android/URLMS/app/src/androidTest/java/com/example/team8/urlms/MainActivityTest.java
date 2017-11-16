@@ -37,7 +37,17 @@ public class MainActivityTest {
         //tests viewStaffList button==============
         Looper.prepare();
 
+        mActivity.viewStaffMembers();
         mActivity.viewStaffButton.callOnClick();
+        //retrieve the expected result from current database
+        Cursor cursor = mActivity.myDb.getAllData();
+        StringBuffer expected = new StringBuffer();
+        while(cursor.moveToNext()){
+            expected.append("ID :" + cursor.getString(0)+"\n");
+            expected.append("Name :" + cursor.getString(1)+"\n\n");
+        }
+        //checks if expected matches what actually displays on the screen
+        assertEquals(mActivity.toDisplay.getText().toString(), expected.toString());
 
     }
 
