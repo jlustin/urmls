@@ -24,6 +24,20 @@
     <string name="addMember">Add Member</string>
     <string name="viewProgressButton">View Progress Updates</string>
     <string name="insertName">Insert Name</string>
+    <!--
+        inventory related
+    -->
+
+    <string name="viewInventoryList">View Inventory Items</string>
+    <string name="insertItemName">Insert name of the item</string>
+    <string name="insertCostItem">Insert cost of the item</string>
+    <string name="addNewItem">Add New Item</string>
+    <string name="select_type">Select Type</string>
+    <string-array name="item_types">
+        <item>Whats up</item>
+        <item>Sike, not implemented yet</item>
+    </string-array>
+
 
     <string name="insertID">Insert ID</string>
     <string name="insertNewName">Insert new name</string>

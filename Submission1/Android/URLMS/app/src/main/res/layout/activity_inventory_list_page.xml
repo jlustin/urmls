@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.team8.urlms.StaffListPage">
+    tools:context="com.example.team8.urlms.InventoryListPage">
 
     <Button
         android:id="@+id/backButton"
@@ -70,5 +70,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"/>
+
 
 </android.support.constraint.ConstraintLayout>
