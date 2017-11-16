@@ -37,7 +37,6 @@ public class MainActivityTest {
         //tests viewStaffList button==============
         Looper.prepare();
 
-        mActivity.viewStaffButton.callOnClick();
 
     }
 
