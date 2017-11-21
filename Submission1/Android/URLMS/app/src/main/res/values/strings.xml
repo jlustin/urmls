@@ -1,16 +1,70 @@
 <resources>
     <string name="app_name">URLMS</string>
 
+    <!--
+        Homepage Buttons Strings
+-->
+    <string name="staff">Staff</string>
+    <string name="funding">Funding</string>
+    <string name="inventory">Inventory</string>
+
+    <!--
+        Generic  Strings
+    -->
+    <string name="appTitle">U R L M S</string>
+    <string name="backButton">Back</string>
+    <string name="edit">Edit</string>
+
+    <!--
+        staff related
+    -->
 
     <string name="view_stafflist">View Staff Members </string>
     <string name="refreshButton">Refresh</string>
     <string name="addMember">Add Member</string>
-    <string name="appTitle">U R L M S</string>
+    <string name="viewProgressButton">View Progress Updates</string>
+    <string name="insertName">Insert Name</string>
+    <string name="addProgress">Add New Progress</string>
+
+    <string-array name="role_types">
+        <item>Research Associate</item>
+        <item>Research Assistant</item>
+    </string-array>
+
+
+    <!--
+        inventory related
+    -->
+
+    <string name="viewInventoryList">View Inventory Items</string>
+    <string name="insertItemName">Insert name of the item</string>
+    <string name="insertCostItem">Insert cost of the item</string>
+    <string name="addNewItem">Add New Item</string>
+    <string name="select_type">Select Type</string>
+    <string-array name="item_types">
+        <item>Whats up</item>
+        <item>Sike, not implemented yet</item>
+    </string-array>
+
 
     <string name="insertID">Insert ID</string>
-    <string name="insertName">Insert name</string>
+    <string name="insertNewName">Insert new name</string>
     <string name="deleteButton">Delete</string>
     <string name="updateButton">Update</string>
     <string name="deleteAll">Erase Database</string>
+    <string name="costString">Cost</string>
+    <string name="nameString">Name</string>
+    <string name="insertRoleDescriptrion">Role Description</string>
+    <string name="RoleDescription">Description</string>
+    <string name="RoleType">Role Type</string>
+    <string name="viewFunding">View Funding Accounts</string>
+    <string name="addNewTransaction">Add New Transaction</string>
+    <string name="viewTransactions">View Transactions</string>
+    <string name="accountString">Account</string>
+    <string name="balanceString">Balance</string>
+    <string name="addFundingString">Add Funding</string>
+    <string name="currentBalanceString">Current Balance</string>
+    <string name="accountName">Account Name</string>
+    <string name="currentBalanceValue">Current Balance</string>
 
 </resources>

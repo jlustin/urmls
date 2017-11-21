@@ -9,20 +9,20 @@ public class URLMSApplication {
 
 		private static URLMS urlms;						//main urlms for the whole application
 		
-		private static String filename = "urlms.xml";	//persistence data file name
+		private static String filename;	//persistence data file name
 		
 		/**
 		 * @param args
 		 */
-		public static void main(String[] args) {
-			// start the Main Page UI
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	            	new MainPage().setVisible(true);
-	            	
-	            }
-	        });        
-		}
+//		public static void main(String[] args) {
+//			// start the Main Page UI
+//	        java.awt.EventQueue.invokeLater(new Runnable() {
+//	            public void run() {
+//	            	new MainPage().setVisible(true);
+//	            	
+//	            }
+//	        });        
+//		}
 
 		/**
 		 * This method will get the current urlms. If it is null, it will fetch for the urlms saved.
@@ -49,6 +49,7 @@ public class URLMSApplication {
 		 * @return loaded urlms
 		 */
 		public static URLMS load() {
+
 			PersistenceXStream.setFilename(filename);
 			URLMS urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			
