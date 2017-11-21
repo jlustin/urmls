@@ -27,6 +27,10 @@
         </activity>
         <activity android:name=".InventoryListPage">
         </activity>
+        <activity android:name=".FundingListPage">
+        </activity>
+        <activity android:name=".FundingAccountPage">
+        </activity>
     </application>
 
 </manifest>

@@ -58,5 +58,13 @@
     <string name="RoleDescription">Description</string>
     <string name="RoleType">Role Type</string>
     <string name="viewFunding">View Funding Accounts</string>
+    <string name="addNewTransaction">Add New Transaction</string>
+    <string name="viewTransactions">View Transactions</string>
+    <string name="accountString">Account</string>
+    <string name="balanceString">Balance</string>
+    <string name="addFundingString">Add Funding</string>
+    <string name="currentBalanceString">Current Balance</string>
+    <string name="accountName">Account Name</string>
+    <string name="currentBalanceValue">Current Balance</string>
 
 </resources>

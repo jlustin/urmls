@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.team8.urlms.FundingAccountPage"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <TextView
+        android:id="@+id/currentBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/currentBalanceValue"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="160dp"/>
+
+    <TextView
+        android:id="@+id/memberName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accountString"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteY="122dp"
+        tools:layout_editor_absoluteX="16dp"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/backButton"
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="16dp"/>
+
+    <TextView
+        android:id="@+id/memberID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/currentBalanceString"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="160dp"/>
+
+    <Button
+        android:id="@+id/viewProgressButton"
+        android:layout_width="149dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/viewTransactions"
+        tools:layout_editor_absoluteY="226dp"
+        tools:layout_editor_absoluteX="16dp"/>
+
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="329dp"
+        android:layout_height="274dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteY="304dp"
+        tools:layout_editor_absoluteX="16dp"/>
+
+    <Button
+        android:id="@+id/editNameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/addFundingString"
+        tools:layout_editor_absoluteX="230dp"
+        tools:layout_editor_absoluteY="16dp"/>
+
+    <Button
+        android:id="@+id/addProgress"
+        android:layout_width="180dp"
+        android:layout_height="79dp"
+        android:text="@string/addNewTransaction"
+        tools:layout_editor_absoluteY="226dp"
+        tools:layout_editor_absoluteX="164dp"/>
+
+    <TextView
+        android:id="@+id/accountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accountName"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="122dp"/>
+</android.support.constraint.ConstraintLayout>
