@@ -71,7 +71,9 @@ public class StaffPage extends AppCompatActivity {
     public void setBackButton(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {finish();}
+            public void onClick(View v) {
+                finish();
+            }
         });
     }
 
