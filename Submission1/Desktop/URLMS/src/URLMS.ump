@@ -1,5 +1,7 @@
 namespace ca.mcgill.ecse321.urlms.model;
 
+//TODO CHANGE AGREGATION TO DIRECTIONAL ASSOCIATION OR SOMETHING AND LEAVE COMMENT
+
 class URLMS
 {
   1 <@>- * Lab;
@@ -7,15 +9,21 @@ class URLMS
 
 class Lab
 {
-  1 <@>- 1 Staff;
-  1 <@>- 1 Inventory;
-  1 <@>- 1 Funding;
+  name;
+//  1 <@>- 1 Staff;
+//  1 <@>- 1 Inventory;
+//  1 <@>- 1 Funding;
+  1 -- * StaffMember;
+  1 -- * InventoryItem;
+  1 -- * FundingAccount;
+  1 -- * Report;
 }
 
-class Inventory
-{
-  1 -- * InventoryItem;
-}
+
+//class Inventory
+//{
+//  1 -- * InventoryItem;
+//}
 
 class InventoryItem
 {
@@ -33,14 +41,15 @@ isA InventoryItem;
 class Equipment
 {
   isA InventoryItem;
+  boolean isDamaged;
 }
 
-class Funding
-{
-  double totalBalance;
-  1 <@>- * FundingAccount;
-  1 -- * Report;
-}
+//class Funding
+//{
+//  double totalBalance;
+//  1 <@>- * FundingAccount;
+//  1 -- * Report;
+//}
 
 class FundingAccount
 {
@@ -60,12 +69,13 @@ class Report
 {
   title;
   Date date;
+  content;
 }
 
-class Staff
-{
-  1 -- * StaffMember;
-}
+//class Staff
+//{
+//  1 -- * StaffMember;
+//}
 
 class StaffMember
 {
@@ -77,6 +87,7 @@ class StaffMember
 
 class ResearchRole
 {
+  taskDescription;
 }
 
 class ResearchAssociate
@@ -92,5 +103,6 @@ class ResearchAssistant
 class ProgressUpdate
 {
   Date date;
+  description;
 }
 
