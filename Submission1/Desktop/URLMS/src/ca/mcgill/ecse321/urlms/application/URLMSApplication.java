@@ -1,10 +1,9 @@
 package ca.mcgill.ecse321.urlms.application;
 
 import ca.mcgill.ecse321.urlms.model.URLMS;
-//import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
-import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
+//import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
 
 public class URLMSApplication {
 
@@ -51,14 +50,13 @@ public class URLMSApplication {
 		 */
 		public static URLMS load() {
 			PersistenceXStream.setFilename(filename);
-			URLMS urlms;
-			urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+			URLMS urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 			
 			//if the file does not exist, create a new save file
 			if (urlms == null) {
-				urlms = PersistenceXStream.initializeModelManager("urlms.xml");
-				NewSaveFilePO nsfpo = new NewSaveFilePO();
-				nsfpo.setVisible(true);
+				urlms = PersistenceXStream.initializeModelManager(filename);
+//				NewSaveFilePO nsfpo = new NewSaveFilePO();
+//				nsfpo.setVisible(true);
 			}
 			return urlms;
 		}

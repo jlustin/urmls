@@ -66,7 +66,7 @@ public class ControllerTest {
 		
 		String name = "Feras"; //test name
 		
-		Controller urlmsController = new Controller(); //create instance of controller
+		StaffController urlmsController = new StaffController(); //create instance of controller
 		urlmsController.addSampleMembers(); //add some sample members
 		
 		//check model in memory
