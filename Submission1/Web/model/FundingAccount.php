@@ -2,6 +2,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
+// class Funding
+// {
+// double totalBalance;
+// 1 <@>- * FundingAccount;
+// 1 -- * Report;
+// }
 class FundingAccount
 {
 
@@ -15,21 +21,21 @@ class FundingAccount
 
   //FundingAccount Associations
   private $expenses;
-  private $funding;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aType, $aBalance, $aFunding)
+  public function __construct($aType, $aBalance, $aLab)
   {
     $this->type = $aType;
     $this->balance = $aBalance;
     $this->expenses = array();
-    $didAddFunding = $this->setFunding($aFunding);
-    if (!$didAddFunding)
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create fundingAccount due to funding");
+      throw new Exception("Unable to create fundingAccount due to lab");
     }
   }
 
@@ -104,9 +110,9 @@ class FundingAccount
     return $index;
   }
 
-  public function getFunding()
+  public function getLab()
   {
-    return $this->funding;
+    return $this->lab;
   }
 
   public static function minimumNumberOfExpenses()
@@ -182,21 +188,21 @@ class FundingAccount
     return $wasAdded;
   }
 
-  public function setFunding($aFunding)
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aFunding == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingFunding = $this->funding;
-    $this->funding = $aFunding;
-    if ($existingFunding != null && $existingFunding != $aFunding)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingFunding->removeFundingAccount($this);
+      $existingLab->removeFundingAccount($this);
     }
-    $this->funding->addFundingAccount($this);
+    $this->lab->addFundingAccount($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -212,9 +218,9 @@ class FundingAccount
     {
       $aExpense->delete();
     }
-    $placeholderFunding = $this->funding;
-    $this->funding = null;
-    $placeholderFunding->removeFundingAccount($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeFundingAccount($this);
   }
 
 }
