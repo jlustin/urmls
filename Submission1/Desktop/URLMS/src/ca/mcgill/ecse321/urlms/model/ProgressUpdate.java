@@ -4,7 +4,7 @@
 package ca.mcgill.ecse321.urlms.model;
 import java.sql.Date;
 
-// line 92 "../../../../../URLMS.ump"
+// line 103 "../../../../../URLMS.ump"
 public class ProgressUpdate
 {
 
@@ -14,6 +14,7 @@ public class ProgressUpdate
 
   //ProgressUpdate Attributes
   private Date date;
+  private String description;
 
   //ProgressUpdate Associations
   private StaffMember staffMember;
@@ -22,9 +23,10 @@ public class ProgressUpdate
   // CONSTRUCTOR
   //------------------------
 
-  public ProgressUpdate(Date aDate, StaffMember aStaffMember)
+  public ProgressUpdate(Date aDate, String aDescription, StaffMember aStaffMember)
   {
     date = aDate;
+    description = aDescription;
     boolean didAddStaffMember = setStaffMember(aStaffMember);
     if (!didAddStaffMember)
     {
@@ -44,9 +46,22 @@ public class ProgressUpdate
     return wasSet;
   }
 
+  public boolean setDescription(String aDescription)
+  {
+    boolean wasSet = false;
+    description = aDescription;
+    wasSet = true;
+    return wasSet;
+  }
+
   public Date getDate()
   {
     return date;
+  }
+
+  public String getDescription()
+  {
+    return description;
   }
 
   public StaffMember getStaffMember()
@@ -83,7 +98,8 @@ public class ProgressUpdate
 
   public String toString()
   {
-    return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
+    return super.toString() + "["+
+            "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "staffMember = "+(getStaffMember()!=null?Integer.toHexString(System.identityHashCode(getStaffMember())):"null");
   }

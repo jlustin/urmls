@@ -4,7 +4,10 @@
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 
-// line 3 "../../../../../URLMS.ump"
+/**
+ * TODO CHANGE AGREGATION TO DIRECTIONAL ASSOCIATION OR SOMETHING AND LEAVE COMMENT
+ */
+// line 5 "../../../../../URLMS.ump"
 public class URLMS
 {
 
@@ -63,9 +66,9 @@ public class URLMS
     return 0;
   }
 
-  public Lab addLab(Staff aStaff, Inventory aInventory, Funding aFunding)
+  public Lab addLab(String aName)
   {
-    return new Lab(aStaff, aInventory, aFunding, this);
+    return new Lab(aName, this);
   }
 
   public boolean addLab(Lab aLab)

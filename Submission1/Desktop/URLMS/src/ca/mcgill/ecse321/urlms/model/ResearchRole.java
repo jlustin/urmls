@@ -3,13 +3,16 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 78 "../../../../../URLMS.ump"
+// line 88 "../../../../../URLMS.ump"
 public class ResearchRole
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //ResearchRole Attributes
+  private String taskDescription;
 
   //ResearchRole Associations
   private StaffMember staffMember;
@@ -18,8 +21,9 @@ public class ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchRole(StaffMember aStaffMember)
+  public ResearchRole(String aTaskDescription, StaffMember aStaffMember)
   {
+    taskDescription = aTaskDescription;
     boolean didAddStaffMember = setStaffMember(aStaffMember);
     if (!didAddStaffMember)
     {
@@ -30,6 +34,19 @@ public class ResearchRole
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setTaskDescription(String aTaskDescription)
+  {
+    boolean wasSet = false;
+    taskDescription = aTaskDescription;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getTaskDescription()
+  {
+    return taskDescription;
+  }
 
   public StaffMember getStaffMember()
   {
@@ -62,4 +79,11 @@ public class ResearchRole
     placeholderStaffMember.removeResearchRole(this);
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "taskDescription" + ":" + getTaskDescription()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "staffMember = "+(getStaffMember()!=null?Integer.toHexString(System.identityHashCode(getStaffMember())):"null");
+  }
 }
