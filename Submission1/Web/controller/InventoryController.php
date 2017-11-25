@@ -3,9 +3,6 @@
 	require_once $my_dir . '/../persistence/persistence.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
-	require_once $my_dir . '/../model/Staff.php';
-	require_once $my_dir . '/../model/Funding.php';
-	require_once $my_dir . '/../model/Inventory.php';
 	require_once $my_dir . '/../model/StaffMember.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
@@ -85,7 +82,7 @@ class InventoryController {
 // 		$urlms = $persistence->loadDataFromStore();
 		
 		// Get inventory items from urlms
-		$items = $this->urlms->getLab_index(0)->getInventory()->getInventoryItems();
+		$items = $this->urlms->getLab_index(0)->getInventoryItems();
 		for ($i = 0; $i < sizeof($items); $i++){
 			// display each inventory item represented by their type, name and cost
 			echo $items{$i}->getName() . ", " . $items{$i}->getCategory() . ", $" . $items{$i}->getCost();
@@ -96,7 +93,7 @@ class InventoryController {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../index.php">Back</a>
+			<a href="../View/InventoryView.html">Back</a>
 		</HTML><?php
 	}
 	
@@ -111,12 +108,12 @@ class InventoryController {
 			$newInventoryItem;
 			
 			if($type == "Equipment"){
-				$newInventoryItem = new Equipment($name, rand(0,1000), $category,$urlms->getLab_index(0)->getInventory());
+				$newInventoryItem = new Equipment($name, rand(0,1000), $category,$urlms->getLab_index(0),false);
 			} else{
-				$newInventoryItem = new SupplyType($name, rand(0,1000), $category,$urlms->getLab_index(0)->getInventory(), rand(0,1000));
+				$newInventoryItem = new SupplyType($name, rand(0,1000), $category,$urlms->getLab_index(0), rand(0,1000));
 			}
 			//add the new item to the Inventory 
-			$urlms->getLab_index(0)->getInventory()->addInventoryItem($newInventoryItem);
+			$urlms->getLab_index(0)->addInventoryItem($newInventoryItem);
 			
 			// Write data
 			$persistence = new Persistence();
@@ -126,7 +123,7 @@ class InventoryController {
 			<!-- Add back button to page -->
 			<HTML>
 				<p>New inventory item successfully added!</p>
-				<a href="../index.php">Back</a>
+				<a href="../View/InventoryView.html">Back</a>
 			</HTML><?php
 		}
 	}
@@ -138,7 +135,6 @@ class InventoryController {
 		$inventoryItem = $this->findInventoryItem($name);
 		
 		$inventoryItem->delete();
-// 		$urlms->getLab_index(0)->getInventory()->removeInventoryItem($inventoryItem);
 		
 		// Write data
 		$persistence = new Persistence();
@@ -148,7 +144,7 @@ class InventoryController {
 		<!-- Add back button to page -->
 		<HTML>
 			<p>Inventory item removed succesfully!</p>
-			<a href="../index.php">Back</a>
+			<a href="../View/InventoryView.html">Back</a>
 		</HTML><?php
 	}		
 	
@@ -161,7 +157,16 @@ class InventoryController {
 		echo "ID: " . $inventoryItem->getName() . "<br>";
 		echo "Cost: $" . $inventoryItem->getCost() . "<br>";
 		echo "Category: " . $inventoryItem->getCategory() . "<br>";
+		
+		if(get_class($inventoryItem) == "Equipment"){
+			if($inventoryItem->getIsDamaged()){
+				echo $inventoryItem->getName() . "is damaged! <br>";	
+			}
+		} else{
+			echo "Quantity: " . $inventoryItem->getQuantity() . "<br>";
+		}
 		echo "<br>";
+		
 		
 		?>
 		<HTML>
@@ -176,9 +181,20 @@ class InventoryController {
  			<br>
 		</form>
 		</HTML>
-		<?php 
 		
-		echo "<a href= \"../index.php\">Back</a>" . "<br>";
+ 
+		
+<!-- 		if($type == "Equipment"){ -->
+<!-- 				<HTML> -->
+					
+<!-- 				</HTML> -->
+<!-- 			} else{ -->
+<!-- 				$newInventoryItem = new SupplyType($name, rand(0,1000), $category,$urlms->getLab_index(0), rand(0,1000)); -->
+<!-- 			} -->
+		
+		<?php //TODO ^Add edit for supply quantity or equipment state
+		
+		echo "<a href= \"../View/InventoryView.html\">Back</a>" . "<br>";
 	}
 	
 	function editInventoryItem($name, $newname, $newcost, $newcat){
@@ -203,7 +219,7 @@ class InventoryController {
 		<!-- Add back button to page -->
 		<HTML>
 			<p>Inventory item updated succesfully!</p>
-			<a href="../index.php">Back</a>
+			<a href="../View/InventoryView.html">Back</a>
 		</HTML><?php
 		
 	}
@@ -214,7 +230,7 @@ class InventoryController {
 			throw new Exception ("Please enter an inventory item name.");
 		} else{
 			//Find the member
-			$items = $this->urlms->getLab_index(0)->getInventory()->getInventoryItems();
+			$items = $this->urlms->getLab_index(0)->getInventoryItems();
 			for ($i = 0; $i < sizeof($items); $i++){
 				if($name == $items{$i}->getName()){
 					$inventoryItem = $items{$i};

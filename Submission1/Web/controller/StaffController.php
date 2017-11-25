@@ -3,9 +3,6 @@
 	require_once $my_dir . '/../persistence/persistence.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
-	require_once $my_dir . '/../model/Staff.php';
-	require_once $my_dir . '/../model/Funding.php';
-	require_once $my_dir . '/../model/Inventory.php';
 	require_once $my_dir . '/../model/StaffMember.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
@@ -75,12 +72,12 @@ class StaffController {
 	 */
 	function getStaffList(){
 		// Get staff members from urlms
-		$members = $this->urlms->getLab_index(0)->getStaff()->getStaffMembers();
+		$members = $this->urlms->getLab_index(0)->getStaffMembers();
 		for ($i = 0; $i < sizeof($members); $i++){
 			// display each staff member represented by their ID and name
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		} 
-		echo "<a href= \"../index.php\">Back</a>" . "<br>";
+		echo "<a href= \"../View/StaffView.html\">Back</a>" . "<br>";
 	}
 	
 	/*
@@ -93,8 +90,8 @@ class StaffController {
 			$urlms = $this->urlms;
 			
 			//add the new member to the staff manager
-			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0)->getStaff());
-			$urlms->getLab_index(0)->getStaff()->addStaffMember($newStaffMember);
+			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0));
+			$urlms->getLab_index(0)->addStaffMember($newStaffMember);
 			
 			//Save
 			$persistence = new Persistence();
@@ -104,7 +101,7 @@ class StaffController {
 			<!-- Add back button to page -->
 			<HTML>
 				<p>New staff member successfully added!</p>
-				<a href="../index.php">Back</a>
+				<a href="../View/StaffView.html">Back</a>
 			</HTML><?php
 		}
 	}
@@ -128,7 +125,7 @@ class StaffController {
 		<!-- Add back button to page -->
 		<HTML>
 			<p>Staff member removed succesfully</p>
-			<a href="../index.php">Back</a>
+			<a href="../View/StaffView.html">Back</a>
 		</HTML><?php		
 	}
 	
@@ -186,7 +183,7 @@ class StaffController {
 		</HTML>
 		<?php 
 		
-		echo "<a href= \"../index.php\">Back</a>" . "<br>";
+		echo "<a href= \"../View/StaffView.html\">Back</a>" . "<br>";
 	}
 	
 	function editMemberRecord($name, $id){
@@ -202,7 +199,7 @@ class StaffController {
 			throw new Exception ("Please enter a name.");
 		} else{
 			//Find the member
-			$members = $this->urlms->getLab_index(0)->getStaff()->getStaffMembers();
+			$members = $this->urlms->getLab_index(0)->getStaffMembers();
 			for ($i = 0; $i < sizeof($members); $i++){
 				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
 					$staffMember = $members{$i};

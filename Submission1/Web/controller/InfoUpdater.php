@@ -3,9 +3,6 @@
 	require_once $my_dir . '/../persistence/persistence.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
-	require_once $my_dir . '/../model/Staff.php';
-	require_once $my_dir . '/../model/Funding.php';
-	require_once $my_dir . '/../model/Inventory.php';
 	require_once $my_dir . '/../model/StaffMember.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
@@ -75,11 +72,7 @@
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			
-			?>
-			<!-- Add back button to page -->
-			<HTML>
-				<p>Staff member edited succesfully</p>
-				<a href="../index.php">Back</a>
-			</HTML><?php		
+			echo "Staff member updated succesfully! <br>";
+			echo "<a href= \"../view/StaffView.html\">Back</a>" . "<br>";	
 		}
 }
