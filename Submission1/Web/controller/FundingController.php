@@ -18,29 +18,85 @@
 	// start session
 	session_start();
 	
-	$c = new FundingController();
+	$persistence = new Persistence();
+	$urlms = $persistence->loadDataFromStore();
+	
+	$c = new FundingController($urlms);
 	// Check which button was clicked by user
 	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
-		case "9/10":
-
+		case "1/10":
+			$c->addAccount($_GET['type'], $_GET['balance']);
 			break;
-		case "10/10":
-
+		case "2/10":
+			$c->viewNetBalance();
 			break;
-		case "11/10":
-
+		case "3/10":
+			$c->addTransaction($_GET['amount'], $_GET['type']);
 			break;
 	}
 		
 class FundingController {
 	
+	protected $urlms;
 	/*
 	 * Constructor
 	 */
-	public function __construct(){}
+	public function __construct($urlms){
+		$this->urlms = $urlms;
+	}
 	
+	function addAccount($type, $balance){
+		$urlmsLab = $this->urlms->getLab_index(0);
+		$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>New account successfully added!</p>
+			<a href="../View/FundingView.html">Back</a>
+		</HTML><?php
+		
+	}
+	
+	function viewNetBalance(){
+		$urlms = $this->urlms;
+	//	echo $urlms->getLab_index(0)->numberOfFundingAccounts();
+		echo $urlms->getLab_index(0)->getFundingAccount_index(0)->getBalance();
+		
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>New transation item successfully added!</p>
+			<a href="../View/FundingView.html">Back</a>
+		</HTML><?php
+	}
+	
+	function addTransaction($amount, $type){
+		if($amount == null || strlen($amount) == 0){
+			throw new Exception ("Please enter a amount.");
+		} else {
+			$urlms = $this->urlms;
 			
+			$currentBalance = $urlms->getLab_index(0)->getFundingAccount_index(0)->getBalance();
+			
+			if($type == "expense"){
+				$urlms->getLab_index(0)->getFundingAccount_index(0)->setBalance($currentBalance - $amount);
+			} else{
+				$urlms->getLab_index(0)->getFundingAccount_index(0)->setBalance($currentBalance + $amount);
+			}
+			// Write data
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+			
+			?>
+			<!-- Add back button to page -->
+			<HTML>
+				<p>New transation item successfully added!</p>
+				<a href="../View/FundingView.html">Back</a>
+			</HTML><?php
+		}
+	}
 }
-
 ?>
