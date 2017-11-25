@@ -77,7 +77,11 @@ class StaffController {
 			// display each staff member represented by their ID and name
 			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
 		} 
-		echo "<a href= \"../View/StaffView.html\">Back</a>" . "<br>";
+		foreach ($members as $m){
+			echo $m->getId() . " " . $m->getName() . "<br>";
+		}
+		
+		echo "<a href= \"../View/StaffView.php\">Back</a>" . "<br>";
 	}
 	
 	/*
@@ -101,7 +105,7 @@ class StaffController {
 			<!-- Add back button to page -->
 			<HTML>
 				<p>New staff member successfully added!</p>
-				<a href="../View/StaffView.html">Back</a>
+				<a href="../View/StaffView.php">Back</a>
 			</HTML><?php
 		}
 	}
@@ -125,7 +129,7 @@ class StaffController {
 		<!-- Add back button to page -->
 		<HTML>
 			<p>Staff member removed succesfully</p>
-			<a href="../View/StaffView.html">Back</a>
+			<a href="../View/StaffView.php">Back</a>
 		</HTML><?php		
 	}
 	
@@ -183,7 +187,7 @@ class StaffController {
 		</HTML>
 		<?php 
 		
-		echo "<a href= \"../View/StaffView.html\">Back</a>" . "<br>";
+		echo "<a href= \"../View/StaffView.php\">Back</a>" . "<br>";
 	}
 	
 	function editMemberRecord($name, $id){

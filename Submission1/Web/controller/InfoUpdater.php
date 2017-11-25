@@ -73,6 +73,6 @@
 			$persistence->writeDataToStore($urlms);
 			
 			echo "Staff member updated succesfully! <br>";
-			echo "<a href= \"../view/StaffView.html\">Back</a>" . "<br>";	
+			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";	
 		}
 }
