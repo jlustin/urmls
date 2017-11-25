@@ -146,7 +146,7 @@ class InventoryController {
 			<p>Inventory item removed succesfully!</p>
 			<a href="../View/InventoryView.html">Back</a>
 		</HTML><?php
-	}		
+	}
 	
 	function viewInventoryItem($name){
 		$urlms = $this->urlms;
@@ -177,23 +177,26 @@ class InventoryController {
 			New Name: <input type="text" name="editedinventoryname" value="<?php echo $inventoryItem->getName();?>"/>
 			New Cost: <input type="text" name="editedinventorycost" value="<?php echo $inventoryItem->getCost();?>"/>
 			New Category: <input type="text" name="editedinventorycat" value="<?php echo $inventoryItem->getCategory();?>"/>
+			<?php
+			if(get_class($inventoryItem) == "Equipment"){
+			?>
+				<input type="radio" name="isdamaged" value="damaged"/> Damaged
+				<input type="radio" name="isdamaged" value="notdamaged"/> Not Damaged <br>
+				<input type="hidden" name="editedsupplyquantity" value="" />
+			<?php 
+			} else{
+			?>
+				New Qunatity: <input type="text" name="editedsupplyquantity" value="<?php echo $inventoryItem->getQuantity();?>"/>
+				<input type="hidden" name="isdamaged" value="" />
+			<?php
+			}
+			?>
  			<input type="submit" value="Edit inventory item!" />
  			<br>
 		</form>
 		</HTML>
-		
- 
-		
-<!-- 		if($type == "Equipment"){ -->
-<!-- 				<HTML> -->
-					
-<!-- 				</HTML> -->
-<!-- 			} else{ -->
-<!-- 				$newInventoryItem = new SupplyType($name, rand(0,1000), $category,$urlms->getLab_index(0), rand(0,1000)); -->
-<!-- 			} -->
-		
-		<?php //TODO ^Add edit for supply quantity or equipment state
-		
+	
+	<?php	
 		echo "<a href= \"../View/InventoryView.html\">Back</a>" . "<br>";
 	}
 	
