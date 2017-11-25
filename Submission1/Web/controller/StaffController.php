@@ -167,20 +167,53 @@ class StaffController {
 			<input type="hidden" name="action" value="editStaffMember" />
 			New Name: <input type="text" name="editedstaffname" value="<?php echo $staffMember->getName();?>"/>
 			New ID: <input type="text" name="editedstaffid" value="<?php echo $staffMember->getId();?>"/>
+			<br>
+			
+			Roles:<br>
+			
+			<?php 
+			
+			$isRoleA = false; $isRoleB = false;
+			
+			foreach ($staffMember->getResearchRoles() as $r){
+				if(get_class($r) == "ResearchAssistant"){
+					$isRoleA = true;
+				}
+				elseif (get_class($r)== "ResearchAssociate"){
+					$isRoleB = true;
+				}
+			}
+			
+			if($isRoleA){
+				echo "<input type=\"checkbox\" name=\"roleA checked \"> Research Associate <br>";
+			}else{
+				echo "<input type=\"checkbox\" name=\"roleA\"> Research Associate <br>";
+			}
+			if($isRoleB){
+				echo "<input type=\"checkbox\" name=\"roleB checked \"> Research Assistant <br>";
+			}else{
+				echo "<input type=\"checkbox\" name=\"roleB\"> Research Assistant <br>";
+			}
+			?>
+
+			
 			
 			<?php
-			for ($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++) {
-			?>
+ 			for ($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++) {
+ 			?>
 			    <input type="radio" name="num<?php echo $i; ?>" value="<?php echo $staffMember->get_class(getResearchRole_index($i));?>"><br>
 			<?php
 			}
-			?>
+ 			?>
+				
+				<?php ?>
 					
 			<?php
 // 			for ($i = 1; $i <= 3; $i++) {
 // 			    echo $_POST['num' . $i];
 // 			}
-// 			?>
+ 			?>
+ 			
  			<input type="submit" value="Edit staff!" />
  			<br>
 		</form>

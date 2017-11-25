@@ -33,6 +33,7 @@
 			break;
 		case "editStaffMember":
 			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
+			//$iu->updateRoles($_GET['roleA'],$_GET['roleB']);
 			break;
 			
 	}
