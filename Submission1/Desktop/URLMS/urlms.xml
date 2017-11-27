@@ -1,42 +1,11 @@
 <ca.mcgill.ecse321.urlms.model.URLMS id="1">
   <labs id="2">
     <ca.mcgill.ecse321.urlms.model.Lab id="3">
-      <staff id="4">
-        <staffMembers id="5">
-          <ca.mcgill.ecse321.urlms.model.StaffMember id="6">
-            <name>Victor</name>
-            <id>123</id>
-            <researchRoles id="7"/>
-            <progressUpdates id="8"/>
-            <staff reference="4"/>
-          </ca.mcgill.ecse321.urlms.model.StaffMember>
-          <ca.mcgill.ecse321.urlms.model.StaffMember id="9">
-            <name>Feras</name>
-            <id>111</id>
-            <researchRoles id="10"/>
-            <progressUpdates id="11"/>
-            <staff reference="4"/>
-          </ca.mcgill.ecse321.urlms.model.StaffMember>
-          <ca.mcgill.ecse321.urlms.model.StaffMember id="12">
-            <name>Jun2Yu</name>
-            <id>222</id>
-            <researchRoles id="13"/>
-            <progressUpdates id="14"/>
-            <staff reference="4"/>
-          </ca.mcgill.ecse321.urlms.model.StaffMember>
-        </staffMembers>
-        <lab reference="3"/>
-      </staff>
-      <inventory id="15">
-        <inventoryItems id="16"/>
-        <lab reference="3"/>
-      </inventory>
-      <funding id="17">
-        <totalBalance>0.0</totalBalance>
-        <fundingAccounts id="18"/>
-        <reports id="19"/>
-        <lab reference="3"/>
-      </funding>
+      <name>Lab</name>
+      <staffMembers id="4"/>
+      <inventoryItems id="5"/>
+      <fundingAccounts id="6"/>
+      <reports id="7"/>
       <uRLMS reference="1"/>
     </ca.mcgill.ecse321.urlms.model.Lab>
   </labs>
