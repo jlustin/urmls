@@ -60,8 +60,8 @@ public class StaffMemberPage extends AppCompatActivity {
         memberName = (TextView) findViewById(R.id.memberName);
         memberID = (TextView) findViewById(R.id.memberID);
 
-        memberName.setText(urlms.getLab(0).getStaff().getStaffMember(position).getName());
-        memberID.setText(Integer.toString(urlms.getLab(0).getStaff().getStaffMember(position).getId()));
+        memberName.setText(urlms.getLab(0).getStaffMember(position).getName());
+        memberID.setText(Integer.toString(urlms.getLab(0).getStaffMember(position).getId()));
 
         editName = (EditText) findViewById(R.id.editName);
 

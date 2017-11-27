@@ -63,6 +63,7 @@ public class StaffPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toastMessage("Not implemented yet");
+                sc.addSampleMembers();
             }
         });
     }

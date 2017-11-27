@@ -16,7 +16,6 @@ import java.util.List;
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
-import ca.mcgill.ecse321.urlms.model.Staff;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.*;

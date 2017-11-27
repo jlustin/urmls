@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //load controller and model
-        fileName = getFilesDir().getAbsolutePath() + "/urlms.xml";
+        fileName = getFilesDir().getAbsolutePath() + "/urlms2.xml";
         URLMSApplication.setFilename(fileName);
         urlms = URLMSApplication.getURLMS();
 
