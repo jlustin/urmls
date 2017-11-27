@@ -1,15 +1,19 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 78 "../../../../../URLMS.ump"
+// line 89 "../../../../../../../../ump/tmp574231/model.ump"
+// line 155 "../../../../../../../../ump/tmp574231/model.ump"
 public class ResearchRole
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //ResearchRole Attributes
+  private String taskDescription;
 
   //ResearchRole Associations
   private StaffMember staffMember;
@@ -18,8 +22,9 @@ public class ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchRole(StaffMember aStaffMember)
+  public ResearchRole(String aTaskDescription, StaffMember aStaffMember)
   {
+    taskDescription = aTaskDescription;
     boolean didAddStaffMember = setStaffMember(aStaffMember);
     if (!didAddStaffMember)
     {
@@ -30,6 +35,19 @@ public class ResearchRole
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setTaskDescription(String aTaskDescription)
+  {
+    boolean wasSet = false;
+    taskDescription = aTaskDescription;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getTaskDescription()
+  {
+    return taskDescription;
+  }
 
   public StaffMember getStaffMember()
   {
@@ -62,4 +80,11 @@ public class ResearchRole
     placeholderStaffMember.removeResearchRole(this);
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "taskDescription" + ":" + getTaskDescription()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "staffMember = "+(getStaffMember()!=null?Integer.toHexString(System.identityHashCode(getStaffMember())):"null");
+  }
 }

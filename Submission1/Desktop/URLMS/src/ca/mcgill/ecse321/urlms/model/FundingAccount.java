@@ -1,10 +1,19 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 
-// line 45 "../../../../../URLMS.ump"
+/**
+ * class Funding
+ * {
+ * double totalBalance;
+ * 1 <@>- * FundingAccount;
+ * 1 -- * Report;
+ * }
+ */
+// line 55 "../../../../../../../../ump/tmp574231/model.ump"
+// line 135 "../../../../../../../../ump/tmp574231/model.ump"
 public class FundingAccount
 {
 
@@ -18,21 +27,21 @@ public class FundingAccount
 
   //FundingAccount Associations
   private List<Expense> expenses;
-  private Funding funding;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public FundingAccount(String aType, double aBalance, Funding aFunding)
+  public FundingAccount(String aType, double aBalance, Lab aLab)
   {
     type = aType;
     balance = aBalance;
     expenses = new ArrayList<Expense>();
-    boolean didAddFunding = setFunding(aFunding);
-    if (!didAddFunding)
+    boolean didAddLab = setLab(aLab);
+    if (!didAddLab)
     {
-      throw new RuntimeException("Unable to create fundingAccount due to funding");
+      throw new RuntimeException("Unable to create fundingAccount due to lab");
     }
   }
 
@@ -96,9 +105,9 @@ public class FundingAccount
     return index;
   }
 
-  public Funding getFunding()
+  public Lab getLab()
   {
-    return funding;
+    return lab;
   }
 
   public static int minimumNumberOfExpenses()
@@ -173,21 +182,21 @@ public class FundingAccount
     return wasAdded;
   }
 
-  public boolean setFunding(Funding aFunding)
+  public boolean setLab(Lab aLab)
   {
     boolean wasSet = false;
-    if (aFunding == null)
+    if (aLab == null)
     {
       return wasSet;
     }
 
-    Funding existingFunding = funding;
-    funding = aFunding;
-    if (existingFunding != null && !existingFunding.equals(aFunding))
+    Lab existingLab = lab;
+    lab = aLab;
+    if (existingLab != null && !existingLab.equals(aLab))
     {
-      existingFunding.removeFundingAccount(this);
+      existingLab.removeFundingAccount(this);
     }
-    funding.addFundingAccount(this);
+    lab.addFundingAccount(this);
     wasSet = true;
     return wasSet;
   }
@@ -199,9 +208,9 @@ public class FundingAccount
       Expense aExpense = expenses.get(i - 1);
       aExpense.delete();
     }
-    Funding placeholderFunding = funding;
-    this.funding = null;
-    placeholderFunding.removeFundingAccount(this);
+    Lab placeholderLab = lab;
+    this.lab = null;
+    placeholderLab.removeFundingAccount(this);
   }
 
 
@@ -210,6 +219,6 @@ public class FundingAccount
     return super.toString() + "["+
             "type" + ":" + getType()+ "," +
             "balance" + ":" + getBalance()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "funding = "+(getFunding()!=null?Integer.toHexString(System.identityHashCode(getFunding())):"null");
+            "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

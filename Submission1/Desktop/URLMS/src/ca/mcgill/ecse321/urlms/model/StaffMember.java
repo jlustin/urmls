@@ -1,11 +1,18 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 70 "../../../../../URLMS.ump"
+/**
+ * class Staff
+ * {
+ * 1 -- * StaffMember;
+ * }
+ */
+// line 81 "../../../../../../../../ump/tmp574231/model.ump"
+// line 150 "../../../../../../../../ump/tmp574231/model.ump"
 public class StaffMember
 {
 
@@ -20,22 +27,22 @@ public class StaffMember
   //StaffMember Associations
   private List<ResearchRole> researchRoles;
   private List<ProgressUpdate> progressUpdates;
-  private Staff staff;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(String aName, int aId, Staff aStaff)
+  public StaffMember(String aName, int aId, Lab aLab)
   {
     name = aName;
     id = aId;
     researchRoles = new ArrayList<ResearchRole>();
     progressUpdates = new ArrayList<ProgressUpdate>();
-    boolean didAddStaff = setStaff(aStaff);
-    if (!didAddStaff)
+    boolean didAddLab = setLab(aLab);
+    if (!didAddLab)
     {
-      throw new RuntimeException("Unable to create staffMember due to staff");
+      throw new RuntimeException("Unable to create staffMember due to lab");
     }
   }
 
@@ -129,9 +136,9 @@ public class StaffMember
     return index;
   }
 
-  public Staff getStaff()
+  public Lab getLab()
   {
-    return staff;
+    return lab;
   }
 
   public static int minimumNumberOfResearchRoles()
@@ -139,9 +146,9 @@ public class StaffMember
     return 0;
   }
 
-  public ResearchRole addResearchRole()
+  public ResearchRole addResearchRole(String aTaskDescription)
   {
-    return new ResearchRole(this);
+    return new ResearchRole(aTaskDescription, this);
   }
 
   public boolean addResearchRole(ResearchRole aResearchRole)
@@ -211,9 +218,9 @@ public class StaffMember
     return 0;
   }
 
-  public ProgressUpdate addProgressUpdate(Date aDate)
+  public ProgressUpdate addProgressUpdate(Date aDate, String aDescription)
   {
-    return new ProgressUpdate(aDate, this);
+    return new ProgressUpdate(aDate, aDescription, this);
   }
 
   public boolean addProgressUpdate(ProgressUpdate aProgressUpdate)
@@ -278,21 +285,21 @@ public class StaffMember
     return wasAdded;
   }
 
-  public boolean setStaff(Staff aStaff)
+  public boolean setLab(Lab aLab)
   {
     boolean wasSet = false;
-    if (aStaff == null)
+    if (aLab == null)
     {
       return wasSet;
     }
 
-    Staff existingStaff = staff;
-    staff = aStaff;
-    if (existingStaff != null && !existingStaff.equals(aStaff))
+    Lab existingLab = lab;
+    lab = aLab;
+    if (existingLab != null && !existingLab.equals(aLab))
     {
-      existingStaff.removeStaffMember(this);
+      existingLab.removeStaffMember(this);
     }
-    staff.addStaffMember(this);
+    lab.addStaffMember(this);
     wasSet = true;
     return wasSet;
   }
@@ -311,9 +318,9 @@ public class StaffMember
       progressUpdates.remove(aProgressUpdate);
     }
     
-    Staff placeholderStaff = staff;
-    this.staff = null;
-    placeholderStaff.removeStaffMember(this);
+    Lab placeholderLab = lab;
+    this.lab = null;
+    placeholderLab.removeStaffMember(this);
   }
 
 
@@ -322,6 +329,6 @@ public class StaffMember
     return super.toString() + "["+
             "name" + ":" + getName()+ "," +
             "id" + ":" + getId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "staff = "+(getStaff()!=null?Integer.toHexString(System.identityHashCode(getStaff())):"null");
+            "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

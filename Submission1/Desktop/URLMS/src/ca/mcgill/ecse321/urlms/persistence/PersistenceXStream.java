@@ -33,7 +33,7 @@ public abstract class PersistenceXStream {
                 System.exit(1);
             }
             urlms = new URLMS();
-            Lab aLab = new Lab(0, urlms);
+            Lab aLab = new Lab("Lab", urlms);
             urlms.addLab(aLab);
             saveToXMLwithXStream(urlms);
         }

@@ -1,10 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 import java.sql.Date;
 
-// line 59 "../../../../../URLMS.ump"
+// line 69 "../../../../../../../../ump/tmp574231/model.ump"
+// line 145 "../../../../../../../../ump/tmp574231/model.ump"
 public class Report
 {
 
@@ -15,22 +16,24 @@ public class Report
   //Report Attributes
   private String title;
   private Date date;
+  private String content;
 
   //Report Associations
-  private Funding funding;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Report(String aTitle, Date aDate, Funding aFunding)
+  public Report(String aTitle, Date aDate, String aContent, Lab aLab)
   {
     title = aTitle;
     date = aDate;
-    boolean didAddFunding = setFunding(aFunding);
-    if (!didAddFunding)
+    content = aContent;
+    boolean didAddLab = setLab(aLab);
+    if (!didAddLab)
     {
-      throw new RuntimeException("Unable to create report due to funding");
+      throw new RuntimeException("Unable to create report due to lab");
     }
   }
 
@@ -54,6 +57,14 @@ public class Report
     return wasSet;
   }
 
+  public boolean setContent(String aContent)
+  {
+    boolean wasSet = false;
+    content = aContent;
+    wasSet = true;
+    return wasSet;
+  }
+
   public String getTitle()
   {
     return title;
@@ -64,43 +75,49 @@ public class Report
     return date;
   }
 
-  public Funding getFunding()
+  public String getContent()
   {
-    return funding;
+    return content;
   }
 
-  public boolean setFunding(Funding aFunding)
+  public Lab getLab()
+  {
+    return lab;
+  }
+
+  public boolean setLab(Lab aLab)
   {
     boolean wasSet = false;
-    if (aFunding == null)
+    if (aLab == null)
     {
       return wasSet;
     }
 
-    Funding existingFunding = funding;
-    funding = aFunding;
-    if (existingFunding != null && !existingFunding.equals(aFunding))
+    Lab existingLab = lab;
+    lab = aLab;
+    if (existingLab != null && !existingLab.equals(aLab))
     {
-      existingFunding.removeReport(this);
+      existingLab.removeReport(this);
     }
-    funding.addReport(this);
+    lab.addReport(this);
     wasSet = true;
     return wasSet;
   }
 
   public void delete()
   {
-    Funding placeholderFunding = funding;
-    this.funding = null;
-    placeholderFunding.removeReport(this);
+    Lab placeholderLab = lab;
+    this.lab = null;
+    placeholderLab.removeReport(this);
   }
 
 
   public String toString()
   {
     return super.toString() + "["+
-            "title" + ":" + getTitle()+ "]" + System.getProperties().getProperty("line.separator") +
+            "title" + ":" + getTitle()+ "," +
+            "content" + ":" + getContent()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "funding = "+(getFunding()!=null?Integer.toHexString(System.identityHashCode(getFunding())):"null");
+            "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.urlms.application;
 
+import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
@@ -14,15 +15,13 @@ public class URLMSApplication {
 		/**
 		 * @param args
 		 */
-//		public static void main(String[] args) {
-//			// start the Main Page UI
-//	        java.awt.EventQueue.invokeLater(new Runnable() {
-//	            public void run() {
-//	            	new MainPage().setVisible(true);
-//	            	
-//	            }
-//	        });        
-//		}
+		public static void main(String[] args) {
+//			URLMSApplication.setFilename("urmls.xml");
+//			StaffController sc = new StaffController();
+//			sc.addSampleMembers();
+//			System.out.println(sc.viewStaffMember(22));
+//			sc.save();
+	        }
 
 		/**
 		 * This method will get the current urlms. If it is null, it will fetch for the urlms saved.
