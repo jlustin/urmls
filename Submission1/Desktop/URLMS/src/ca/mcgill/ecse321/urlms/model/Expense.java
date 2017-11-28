@@ -1,9 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 61 "../../../../../URLMS.ump"
+// line 133 "../../../../../../../../ump/tmp725626/model.ump"
+// line 265 "../../../../../../../../ump/tmp725626/model.ump"
 public class Expense
 {
 

@@ -1,6 +1,9 @@
 package ca.mcgill.ecse321.urlms.application;
 
+import java.util.List;
+
 import ca.mcgill.ecse321.urlms.controller.StaffController;
+import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 import ca.mcgill.ecse321.urlms.view.MainPage;
@@ -18,8 +21,37 @@ public class URLMSApplication {
 		public static void main(String[] args) {
 //			URLMSApplication.setFilename("urlms.xml");
 //			StaffController sc =  new StaffController();
-//			sc.addSampleMembers();
-//			System.out.println(sc.viewStaffMember(1));
+//			sc.addStaffMember("Victor",true,true);
+//			sc.addStaffMember("Eric",false,true);
+//
+//			System.out.println(sc.viewStaffMemberName(0));
+//			System.out.println(sc.viewStaffMemberID(0));
+//			System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
+//			System.out.println(sc.viewStaffMemberName(1));
+//			System.out.println(sc.viewStaffMemberID(1));
+//			System.out.println(urlms.getLab(0).getStaffMember(1).getResearchRole(0).toString());
+//			sc.removeStaffMember(0);
+//			System.out.println(sc.viewStaffMemberName(0));
+//			System.out.println(sc.viewStaffMemberID(0));
+//			System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
+//			sc.addProgress("november 27", "du ma", 0);
+//			sc.addProgress("dec 8", "du ma presentation", 0);
+//			List<ProgressUpdate> progress = sc.viewProgressUpdate(0);
+//			for(int i=0; i<progress.size();i++) {
+//				System.out.println(progress.get(i).getDate());
+//				System.out.println(progress.get(i).getDescription());
+//			}
+//			sc.addStaffMember("Feras", true, false);
+//			System.out.println(urlms.getLab(0).getStaffMember(1).getId());
+//			System.out.println(urlms.getLab(0).getStaffMember(1).getName());
+//			sc.addStaffMember("JustinToMessUp", true, false);
+//			System.out.println(urlms.getLab(0).getStaffMember(2).getId());
+//			System.out.println(urlms.getLab(0).getStaffMember(2).getName());
+
+
+
+
+
 }
 
 		/**

@@ -1,11 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 10 "../../../../../URLMS.ump"
+// line 23 "../../../../../../../../ump/tmp725626/model.ump"
+// line 240 "../../../../../../../../ump/tmp725626/model.ump"
 public class Lab
 {
 
