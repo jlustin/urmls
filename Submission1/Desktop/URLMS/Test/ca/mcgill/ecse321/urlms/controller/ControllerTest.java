@@ -57,9 +57,6 @@ public class ControllerTest {
 
 	@Test
 	public void testViewStaffList() {
-		//fail("Not yet implemented");
-		
-		//check if the staff manager is empty
 		
 		String name = "Feras"; //test name
 		
@@ -67,6 +64,7 @@ public class ControllerTest {
 		urlmsController.addSampleMembers(); //add some sample members
 		
 		//check model in memory
+		
 		//save the file
 		urlmsController.save();
 		

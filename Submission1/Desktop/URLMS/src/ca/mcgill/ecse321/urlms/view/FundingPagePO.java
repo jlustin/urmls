@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 public class FundingPagePO extends JFrame {
 
+	//TODO: create your button or component (Design Tab at the bottom) and test if you want
+	
 	private JPanel contentPane;
 
 	/**
