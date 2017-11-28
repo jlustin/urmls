@@ -5,6 +5,7 @@ import java.util.*;
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
+import ca.mcgill.ecse321.urlms.model.Staff;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
@@ -18,8 +19,9 @@ public class StaffController extends Controller {
 	public List<StaffMember> viewStaffList(){
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		Staff aStaff = aLab.getStaff();
 		
-		List<StaffMember> staffList = aLab.getStaffMembers();
+		List<StaffMember> staffList = aStaff.getStaffMembers();
 		
 		return staffList;
 	}
@@ -32,15 +34,15 @@ public class StaffController extends Controller {
 	 */
 	public void addSampleMembers() {
 		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		StaffMember member = new StaffMember("Victor", 123, aLab);
-		aLab.addStaffMember(member);
+		Staff aStaff = urlms.getLab(0).getStaff();
+		StaffMember member = new StaffMember("Victor", 123, aStaff);
+		aStaff.addStaffMember(member);
 		
-		StaffMember member2 = new StaffMember("Feras", 111, aLab);
-		aLab.addStaffMember(member2);
+		StaffMember member2 = new StaffMember("Feras", 111, aStaff);
+		aStaff.addStaffMember(member2);
 		
-		StaffMember member3 = new StaffMember("Jun2Yu", 222, aLab);
-		aLab.addStaffMember(member3);
+		StaffMember member3 = new StaffMember("Jun2Yu", 222, aStaff);
+		aStaff.addStaffMember(member3);
 	}
 	
 	
@@ -50,7 +52,7 @@ public class StaffController extends Controller {
 	 * @return name of the staff member as a String
 	 */
 	public String viewStaffMember(int index){
-		return URLMSApplication.getURLMS().getLab(0).getStaffMembers().get(index).getName();
+		return URLMSApplication.getURLMS().getLab(0).getStaff().getStaffMembers().get(index).getName();
 	}
 	
 	//TODO: USE CASES IMPLEMENTATION -----------------------------------------------
@@ -69,7 +71,8 @@ public class StaffController extends Controller {
 	public void editStaffmemberName(String desiredName, int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		aLab.getStaffMember(id).setName(desiredName);
+		Staff aStaff = aLab.getStaff();
+		aStaff.getStaffMember(id).setName(desiredName);
 	}
 	
 	/** This method will get the progress update of a specific staff member by ID number
@@ -80,7 +83,8 @@ public class StaffController extends Controller {
 		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		ProgressUpdate progress = aLab.getStaffMember(id).getProgressUpdate(id);
+		Staff aStaff = aLab.getStaff();
+		ProgressUpdate progress = aStaff.getStaffMember(id).getProgressUpdate(id);
 		return progress;
 	}
 	
