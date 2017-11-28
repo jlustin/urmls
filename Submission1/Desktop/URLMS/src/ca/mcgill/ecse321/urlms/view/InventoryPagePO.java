@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 public class InventoryPagePO extends JFrame {
 
+	//TODO: add your buttons or components (Design Tab at the bottom) that you want and test
+	
 	private JPanel contentPane;
 
 	/**
