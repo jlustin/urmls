@@ -66,5 +66,8 @@
     <string name="currentBalanceString">Current Balance</string>
     <string name="accountName">Account Name</string>
     <string name="currentBalanceValue">Current Balance</string>
+    <string name="ResearchAssistant">Research Assistant</string>
+    <string name="ResearchAssociate">Research Associate</string>
+    <string name="insertNewId">Insert new ID</string>
 
 </resources>

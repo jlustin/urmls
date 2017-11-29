@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
 public class StaffPage extends AppCompatActivity {
+
     private URLMS urlms;
     private String fileName;
     Controller controller = new Controller();
@@ -30,6 +32,9 @@ public class StaffPage extends AppCompatActivity {
     Button viewStaffListButton;
     Button addMemberButton;
     EditText insertName;
+
+    CheckBox researchAssistantBox;
+    CheckBox researchAssociateBox;
 
 
     @Override
@@ -47,23 +52,32 @@ public class StaffPage extends AppCompatActivity {
         viewStaffListButton = (Button) findViewById(R.id.viewStaffList);
 
         addMemberButton = (Button) findViewById(R.id.addMemberButton);
-        setAddMemberButton();
 
         //textviews
         toDisplay = (TextView) findViewById(R.id.toDisplay);
 
+        int numberOfMember = sc.viewStaffList().size();
+        String currentMembers = "Current Staff: " + numberOfMember;
+        toDisplay.setText(currentMembers);
+
+        //checkbox
+        researchAssistantBox = (CheckBox) findViewById(R.id.researchAssistantBox);
+        researchAssociateBox = (CheckBox) findViewById(R.id.researchAssociateBox);
+
+        //EditText
+        insertName = (EditText) findViewById(R.id.insertName);
 
         //initiate buttons
         setBackButton();
         setViewStaffListButton();
+        setAddMemberButton();
     }
 
     private void setAddMemberButton() {
         addMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastMessage("Not implemented yet");
-                sc.addSampleMembers();
+                sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(),researchAssociateBox.isChecked());
             }
         });
     }
