@@ -31,6 +31,7 @@ public class StaffListPage extends AppCompatActivity {
 
 
     Button backButton;
+    Button refreshButton;
 
 
 
@@ -65,8 +66,9 @@ public class StaffListPage extends AppCompatActivity {
             }
         });
 
-
+        refreshButton = (Button) findViewById(R.id.refreshButton);
         backButton = (Button) findViewById(R.id.backButton);
+        setRefreshButton();
         setBackButton();
     }
 
@@ -85,5 +87,18 @@ public class StaffListPage extends AppCompatActivity {
         Intent intent = new Intent(this,cls );
         startActivity(intent);
         finish();
+    }
+    public void setRefreshButton(){
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastMessage("Not implemented yet");
+            }
+        });
+
+    }
+    public void toastMessage(String message){
+        Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
+        myToast.show();
     }
 }

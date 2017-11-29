@@ -82,7 +82,9 @@ public class StaffMemberPage extends AppCompatActivity {
         memberID.setText(sc.viewStaffMemberID(position));
 
         editName = (EditText) findViewById(R.id.editName);
+        editName.setText(sc.viewStaffMemberName(position));
         editId = (EditText) findViewById(R.id.editId);
+        editId.setText(sc.viewStaffMemberID(position));
 
         progressUpdate = (TextView) findViewById(R.id.progressText);
         progressUpdate.setVisibility(View.INVISIBLE);
@@ -115,35 +117,29 @@ public class StaffMemberPage extends AppCompatActivity {
         addProgressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(StaffMemberPage.this);
-                builder.setTitle("Write Progress");
-
-// Set up the input
-                final EditText input = new EditText(StaffMemberPage.this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
-                builder.setView(input);
-
-// Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(StaffMemberPage.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_add_progress, null);
+                final EditText mDate = (EditText) mView.findViewById(R.id.editTextDate);
+                final EditText mProgress = (EditText) mView.findViewById(R.id.editTextProgress);
+                Button mConfirm = (Button) mView.findViewById(R.id.buttonConfirm);
+                mConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        m_ProgressUpdateText = input.getText().toString();
-                        sc.addProgress("What day is today?", m_ProgressUpdateText, position);
+                    public void onClick(View v) {
+                        if(!mDate.getText().toString().isEmpty() && !mProgress.getText().toString().isEmpty()){
+                            sc.addProgress(mDate.getText().toString(), mProgress.getText().toString(),position);
+                            toastMessage("Progress Updated");
+                        }
+                        else{
+                            toastMessage("Please fill any empty fields.");
+                        }
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
             }
         });
+        sc.save();
       }
     private void setViewProgressButton() {
         viewProgressButton.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +155,7 @@ public class StaffMemberPage extends AppCompatActivity {
                 }
             }
         });
+        sc.save();
     }
 
     public void setBackButton(){
@@ -175,10 +172,11 @@ public class StaffMemberPage extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editName.getText().toString().equals("")){
+                if(editName.getText().toString().isEmpty()){
                     toastMessage("you didn't enter a string");
                 }
-else sc.editStaffmemberRecord(position,Integer.parseInt(editId.getText().toString()), editName.getText().toString(), researchAssistantBox.isChecked(), researchAssociateBox.isChecked());
+                else sc.editStaffmemberRecord(position,Integer.parseInt(editId.getText().toString()), editName.getText().toString(), researchAssistantBox.isChecked(), researchAssociateBox.isChecked());
+                toastMessage("Member successfully updated, refresh page to see");
                 sc.save();
             }
         });
@@ -188,3 +186,4 @@ else sc.editStaffmemberRecord(position,Integer.parseInt(editId.getText().toStrin
         myToast.show();
     }
 }
+
