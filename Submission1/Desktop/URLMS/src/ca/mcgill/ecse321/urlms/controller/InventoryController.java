@@ -5,6 +5,9 @@ import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
+import ca.mcgill.ecse321.urlms.model.Lab;
+import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 
 public class InventoryController extends Controller {
 
@@ -19,9 +22,11 @@ public class InventoryController extends Controller {
 	 * @return a list of the inventory items
 	 */
 	public List<InventoryItem> viewInventoryList() {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
 		
-		//TODO: remove this when working on the implementation
-		return null;
+		List<InventoryItem> inventorylist = aLab.getInventoryItems();
+		return inventorylist;
 	}
 	
 	
@@ -32,15 +37,18 @@ public class InventoryController extends Controller {
 	 * @param category of item by String
 	 */
 	public void addInventoryItem(String name, double cost, String category) {
-		
-	}
-	
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		aLab.addInventoryItem(name, cost, category);		
+	}	
 	
 	/** This method will remove an item from the inventory list
 	 * @param name of the item by String
 	 */
-	public void removeInventoryItem(String name) {
-		
+	public void removeInventoryItem(String name, int index) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		aLab.getInventoryItem(index).delete();
 	}
 	
 	
