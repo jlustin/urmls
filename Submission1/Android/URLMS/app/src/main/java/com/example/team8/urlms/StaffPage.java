@@ -78,6 +78,7 @@ public class StaffPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(),researchAssociateBox.isChecked());
+                toastMessage("Member successfully added.");
             }
         });
     }

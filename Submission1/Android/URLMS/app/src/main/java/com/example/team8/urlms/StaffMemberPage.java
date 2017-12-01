@@ -27,6 +27,7 @@ import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.*;
 
 import static android.R.id.input;
+import static ca.mcgill.ecse321.urlms.application.URLMSApplication.save;
 import static com.example.team8.urlms.R.id.toDisplay;
 
 public class StaffMemberPage extends AppCompatActivity {
@@ -48,6 +49,7 @@ public class StaffMemberPage extends AppCompatActivity {
     Button viewProgressButton;
     Button addProgressButton;
     Button editButton;
+    Button deleteButton;
 
     EditText editName;
     EditText editId;
@@ -74,6 +76,8 @@ public class StaffMemberPage extends AppCompatActivity {
         editButton = (Button) findViewById(R.id.editNameButton);
         viewProgressButton = (Button) findViewById(R.id.viewProgressButton);
         addProgressButton = (Button) findViewById(R.id.addProgress);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
+
 
         memberName = (TextView) findViewById(R.id.memberName);
         memberName.setText(sc.viewStaffMemberName(position));
@@ -110,9 +114,10 @@ public class StaffMemberPage extends AppCompatActivity {
         setBackButton();
         setViewProgressButton();
         setAddProgressButton();
+        setDeleteButton();
 
     }
-    //// TODO: 2017-11-29 Add date input also
+
     private void setAddProgressButton(){
         addProgressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +172,6 @@ public class StaffMemberPage extends AppCompatActivity {
             }
         });
     }
-//// TODO: 2017-11-29 add special cases: user enters string in id, or user doesn't enter anything...
     public void setEditButton(){
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,9 +185,25 @@ public class StaffMemberPage extends AppCompatActivity {
             }
         });
     }
+
+    public void setDeleteButton(){
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sc.removeStaffMember(position);
+                toastMessage("Member sucessfully deleted.");
+                sc.save();
+                finish();
+            }
+        });
+    }
+
     public void toastMessage(String message){
         Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
         myToast.show();
     }
+
+
+
 }
 
