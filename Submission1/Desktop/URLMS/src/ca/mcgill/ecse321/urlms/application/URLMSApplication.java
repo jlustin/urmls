@@ -25,7 +25,7 @@ public class URLMSApplication {
 			
 			URLMSApplication.setFilename("urlms.xml");
 			InventoryController ic = new InventoryController();
-			ic.addEquipmentItem("Hi", 180.50);
+			ic.addEquipmentItem("Computer", 180.50);
 			System.out.println(urlms.getLab(0).getInventoryItem(0).getName());
 			ic.addSupplyItem("Crayon", 2, 100);
 			System.out.println(urlms.getLab(0).getInventoryItem(1).getName());
@@ -45,8 +45,8 @@ public class URLMSApplication {
 			System.out.println(ic.viewInventoryItemName(2));
 			System.out.println(ic.viewSupplyItemQuantity(2));
 			System.out.println(ic.viewInventoryItemCost(2));
-			ic.editInventoryItemDetails(1, "Eric", 2.1, 100);
-			ic.editInventoryItemDetails(2, "Victor", 2.5, 80);
+			ic.editInventoryItemDetails(1, "Eraser", 2.1, 100);
+			ic.editInventoryItemDetails(2, "GTX 1080", 2.5, 80);
 			System.out.println(ic.viewInventoryItemName(1));
 			System.out.println(ic.viewSupplyItemQuantity(1));
 			System.out.println(ic.viewInventoryItemCost(1));
@@ -54,6 +54,23 @@ public class URLMSApplication {
 			System.out.println(ic.viewSupplyItemQuantity(2));
 			System.out.println(ic.viewInventoryItemCost(2));
 			
+			System.out.println("Checking if it's supply"+"\n");
+			int InventorySize = ic.viewInventoryList().size();
+			for(int i=0; i<InventorySize; i++) {
+				if(ic.inventoryItemIsSupply(i)) {
+					System.out.println(ic.viewInventoryItemName(i) + " is supply");
+				}
+				else  System.out.println(ic.viewInventoryItemName(i) + " is NOT supply");
+			}
+			System.out.println("\n"+ "Checking if it's equipment"+"\n");
+			
+
+			for(int i=0; i<InventorySize; i++) {
+				if(ic.inventoryItemIsEquipment(i)) {
+					System.out.println(ic.viewInventoryItemName(i) + " is equipment");
+				}
+				else System.out.println(ic.viewInventoryItemName(i) + " is NOT equipment");
+			}
 		
 			
 			//staff tests=================================
