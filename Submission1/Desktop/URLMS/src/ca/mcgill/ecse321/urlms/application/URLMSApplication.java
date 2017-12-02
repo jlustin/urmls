@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.urlms.application;
 
 import java.util.List;
 
+import ca.mcgill.ecse321.urlms.controller.InventoryController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
 import ca.mcgill.ecse321.urlms.model.URLMS;
@@ -19,6 +20,43 @@ public class URLMSApplication {
 		 * @param args
 		 */
 		public static void main(String[] args) {
+			
+			//inventory tests=============================
+			
+			URLMSApplication.setFilename("urlms.xml");
+			InventoryController ic = new InventoryController();
+			ic.addEquipmentItem("Hi", 180.50);
+			System.out.println(urlms.getLab(0).getInventoryItem(0).getName());
+			ic.addSupplyItem("Crayon", 2, 100);
+			System.out.println(urlms.getLab(0).getInventoryItem(1).getName());
+			System.out.println(ic.viewSupplyItemQuantity(0));
+			System.out.println(ic.viewSupplyItemQuantity(1));
+			System.out.println(ic.viewInventoryItemName(0));
+			System.out.println(ic.viewInventoryItemName(1));
+			System.out.println("current size is " +ic.viewInventoryList().size());
+			ic.removeInventoryItem(0);
+			System.out.println("current size is " +ic.viewInventoryList().size() +" after deleting");
+			ic.addSupplyItem("Crayola", 2.00, 80);
+			ic.addEquipmentItem("Oscilloscope", 54.8);
+			System.out.println("current size is " +ic.viewInventoryList().size());
+			System.out.println(ic.viewInventoryItemName(1));
+			System.out.println(ic.viewSupplyItemQuantity(1));
+			System.out.println(ic.viewInventoryItemCost(1));
+			System.out.println(ic.viewInventoryItemName(2));
+			System.out.println(ic.viewSupplyItemQuantity(2));
+			System.out.println(ic.viewInventoryItemCost(2));
+			ic.editInventoryItemDetails(1, "Eric", 2.1, 100);
+			ic.editInventoryItemDetails(2, "Victor", 2.5, 80);
+			System.out.println(ic.viewInventoryItemName(1));
+			System.out.println(ic.viewSupplyItemQuantity(1));
+			System.out.println(ic.viewInventoryItemCost(1));
+			System.out.println(ic.viewInventoryItemName(2));
+			System.out.println(ic.viewSupplyItemQuantity(2));
+			System.out.println(ic.viewInventoryItemCost(2));
+			
+		
+			
+			//staff tests=================================
 //			URLMSApplication.setFilename("urlms.xml");
 //			StaffController sc =  new StaffController();
 //			sc.addStaffMember("Victor",true,true);
