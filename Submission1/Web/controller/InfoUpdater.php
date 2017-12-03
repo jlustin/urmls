@@ -80,7 +80,7 @@
 			$persistence->writeDataToStore($urlms);
 			
 			echo "Inventory item updated succesfully! <br>";
-			echo "<a href= \"../view/InventoryView.html\">Back</a>" . "<br>";
+			echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
 		}
 		
 		function updateStaffMember($name, $id){
