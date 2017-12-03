@@ -12,12 +12,21 @@ $c = new FundingController($urlms);
 // Run appropriate controller method with respect to user request
 switch($_GET['action']){
 	case "1/10":
-		$c->addAccount($_GET['type'], $_GET['balance']);
+		$c->addAccount($_GET['addtype'], $_GET['addbalance']);
 		break;
 	case "2/10":
-		$c->viewNetBalance($_GET['type']);
+		$c->viewAccount($_GET['viewtype']);
 		break;
 	case "3/10":
 		$c->addTransaction($_GET['amount'], $_GET['type']);
+		break;
+	case "4/10":
+		$c->removeAccount($_GET['removetype']);
+		break;
+	case "9/10":
+		$c->getAccounts();
+		break;
+	case "9/10":
+		$c->getNetBalance();
 		break;
 }
