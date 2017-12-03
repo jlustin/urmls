@@ -26,7 +26,7 @@
 			<br>
 			<h3>View Staff List</h3>
 			<input type="hidden" name="action" value="9/10" />
- 			<input type="submit" value="View Staff!" />
+ 			<input type="submit" class="btn btn-secondary" value="View Staff!" />
  			<br>
 		</form>
 		
@@ -34,28 +34,48 @@
 			<br>
 			<h3>Add Staff Member</h3>
 			<input type="hidden" name="action" value="10/10" />
-			<input type="text" name="newstaffname" value=""/>
- 			<input type="submit" value="Add staff!" />
+			
+ 			<label for="newStaffName">Name</label>
+			<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/>
+			
+ 			<input type="submit" class="btn btn-primary" value="Add staff!" />
  			<br>
 		</form>
 		
 		<form action="StaffRequest.php" method="get">
+			<div class="form-group">
 			<br>
 			<h3>Remove Staff Member</h3>
 			<input type="hidden" name="action" value="11/10" />
-			Name: <input type="text" name="oldstaffname" value=""/>
-			ID: <input type="text" name="oldstaffid" value=""/>
- 			<input type="submit" value="Remove staff!" />
+			<div class="form-row">
+			<div class="form-col">
+			<label for="oldStaffName">Name</label>
+			<input type="text" class="form-control" name="oldstaffname" id="oldStaffName" placeholder="Enter staff name"/>
+			</div><div class="form-col">
+			<label for="oldStaffID">ID</label>
+			<input type="text" class="form-control" name="oldstaffid" id="oldStaffID" placeholder="Enter staff ID"/>
+ 			</div>
+ 			</div>
+ 			<input type="submit" class="btn btn-primary" value="Remove staff!" />
  			<br>
+ 			</div>
 		</form>
 		
 		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>View and Edit Staff Member Record</h3>
 			<input type="hidden" name="action" value="12/10" />
-			Name: <input type="text" name="staffname" value=""/>
-			ID: <input type="text" name="staffid" value=""/>
- 			<input type="submit" value="View record!" />
+			<div class="form-row">
+			<div class="form-col">
+			<label for="staffName">Name</label>
+			<input type="text" class="form-control" name="staffname" id="staffName" placeholder="Enter staff name"/>
+			</div><div class="form-col">
+			<label for="staffID">ID</label>
+			<input type="text" class="form-control" name="staffid" id="staffID" placeholder="Enter staff ID"/>
+ 			</div>
+ 			</div>
+			
+ 			<input type="submit" class="btn btn-primary" value="View record!" />
  			<br>
 		</form>
 		

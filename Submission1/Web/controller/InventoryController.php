@@ -40,7 +40,7 @@ class InventoryController {
 	/*
 	 * add new inventory item to urlms
 	 */
-	function addInventory($name, $category, $type){
+	function addInventory($name, $category, $type, $cost, $quantity){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
 		} else {
@@ -48,9 +48,9 @@ class InventoryController {
 			$newInventoryItem;
 			
 			if($type == "Equipment"){
-				$newInventoryItem = new Equipment($name, rand(0,1000), $category,$urlms->getLab_index(0),false);
+				$newInventoryItem = new Equipment($name, $cost, $category,$urlms->getLab_index(0),false);
 			} else{
-				$newInventoryItem = new SupplyType($name, rand(0,1000), $category,$urlms->getLab_index(0), rand(0,1000));
+				$newInventoryItem = new SupplyType($name, $cost, $category,$urlms->getLab_index(0), $quantity);
 			}
 			//add the new item to the Inventory 
 			$urlms->getLab_index(0)->addInventoryItem($newInventoryItem);
@@ -127,7 +127,7 @@ class InventoryController {
 			<?php 
 			} else{
 			?>
-				New Qunatity: <input type="text" name="editedsupplyquantity" value="<?php echo $inventoryItem->getQuantity();?>"/>
+				Add/Remove Quantity: <input type="text" name="editedsupplyquantity" value=""/>
 				<input type="hidden" name="isdamaged" value="" />
 			<?php
 			}
@@ -145,7 +145,7 @@ class InventoryController {
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter an inventory item name.");
 		} else{
-			//Find the member
+			//Find the item
 			$items = $this->urlms->getLab_index(0)->getInventoryItems();
 			for ($i = 0; $i < sizeof($items); $i++){
 				if($name == $items{$i}->getName()){

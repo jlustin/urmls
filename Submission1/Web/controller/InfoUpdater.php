@@ -71,8 +71,8 @@
 				$inventoryItem->setIsDamaged(false);
 			}
 			else {
-				if($quantity > 0){
-					$inventoryItem->setQuantity($quantity);
+				if($quantity != null){
+					$inventoryItem->setQuantity($inventoryItem->getQuantity() + $quantity);
 				}
 			}
 						

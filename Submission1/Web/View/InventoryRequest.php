@@ -17,7 +17,7 @@ switch($_GET['action']){
 		break;
 	case "10/10":
 		try {
-			$c->addInventory($_GET['newInventoryName'], $_GET['category'], $_GET['type']);
+			$c->addInventory($_GET['newInventoryName'], $_GET['category'], $_GET['type'],$_GET['cost'],$_GET['quantity']);
 		} catch (Exception $e){
 			echo $e->getMessage() . "<br>";
 			echo "<a href= \"../index.php\">Back</a>" . "<br>";

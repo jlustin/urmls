@@ -23,33 +23,64 @@
 	<h2 align="center">Inventory</h2>
 		<br><br>
 		<form action="InventoryRequest.php" method="get">
+			
 			<br>
 			<h3>View Inventory List</h3>
 			<input type="hidden" name="action" value="9/10" />
- 			<input type="submit" value="View Inventory!" />
+ 			<input class="btn btn-secondary" type="submit" value="View Inventory!" />
  			<br>
+ 			
 		</form>
 		
 		<form action="InventoryRequest.php" method="get">
+			<div class="form-group">
 			<br>
-			<h3>Add Inventory Item</h3>
 			<input type="hidden" name="action" value="10/10" />
-			<input type="text" name="newInventoryName" value=""/>Name<br>
-			<input type="text" name="category" value=""/>Category<br>
-			<input type="radio" name="type" value="Equipment"/>Equipment <br>
+			<h3>Add Inventory Item</h3>
+			
+			<div class="form-row">	
+			<div class="col">	
+			<label for="newInventoryName">Name</label>
+    		<input type="text" class="form-control" name="newInventoryName" id="newInventoryName" aria-describedby="nameHelp" placeholder="Enter item name">
+    		<small id="nameHelp" class="form-text text-muted">Enter the model or name of your item.</small>
+			<br>
+			</div><div class="col">
+			<label for="newInventoryCategory">Category</label>
+    		<input type="text" class="form-control" name="category" id="newInventoryCategory" aria-describedby="categoryHelp" placeholder="Enter item category">
+    		<small id="categoryHelp" class="form-text text-muted">Enter the category of your item (eg. Computer, chair, ...).</small>
+			<br>
+			</div>
+			</div>
+			<div class="form-row">	
+			<div class="col">	
+			<label for="newInventoryCost">Cost</label>
+    		<input type="text" class="form-control" name="cost" id="newInventoryCost" aria-describedby="costHelp" placeholder="Enter item cost">
+    		<small id="costHelp" class="form-text text-muted">Enter the cost of your item (eg. $50.00).</small>
+			<br>
+			</div><div class="col">
+			<label for="newInventoryQuantity">Quantity</label>
+    		<input type="text" class="form-control" name="quantity" id="newInventoryQuantity" aria-describedby="quantityHelp" placeholder="Enter supply quantity">
+    		<small id="quantityHelp" class="form-text text-muted">Enter the quantiy of your item (eg. 100).</small>
+			<br>
+			</div>
+			</div>
+				
+			
+			<div class="form-row">		
+			Type:<input type="radio" name="type" value="Equipment"/>Equipment <br>
 			<input type="radio" name="type" value="Supply"/>Supply <br>
- 			<input type="submit" value="Add inventory!" />
- 			<br>
+			<input class="btn btn-primary" type="submit" value="Add inventory!" />
+ 			<br></div>
+ 			</div>
 		</form>
 		
 		<form action="InventoryRequest.php" method="get">
 			<br>
 			<h3>Remove Inventory Item</h3>
 			<input type="hidden" name="action" value="11/10" />
-			Name: <input type="text" name="oldInventoryName" value=""/>
-	<!-- 	<p>ID: </p><input type="text" name="oldstaffid" value=""/> -->
- 			<input type="submit" value="Remove inventory!" />
- 			<br>
+			Name:<input type="text" name="oldInventoryName" value=""/> 			
+ 			<input class="btn btn-primary" type="submit" value="Remove inventory!" />
+ 			<br> 			
 		</form>
 		
 		<form action="InventoryRequest.php" method="get">
@@ -57,8 +88,7 @@
 			<h3>View and Edit Inventory Item</h3>
 			<input type="hidden" name="action" value="12/10" />
 			Name: <input type="text" name="inventoryName" value=""/>
-	<!-- 	<p>ID: </p><input type="text" name="inventoryId" value=""/> -->
- 			<input type="submit" value="View inventory!" />
+ 			<input class="btn btn-primary" type="submit" value="View inventory!" />
  			<br>
 		</form>
 				
@@ -74,6 +104,7 @@
 				<th>Name</th>
 				<th>Category</th>
 				<th>Type</th>
+				<th>Cost</th>
 			</tr>
 			</thread>
 			<tbody>
@@ -100,6 +131,7 @@
 				echo "<tr><td><button type=\"button\" class=\"btn btn-outline-primary\">" . $item->getName() . "</button></td>
 					<td>". $item->getCategory() ."</td>
 					<td>" . get_class($item) . "</td>
+					<td>$" . $item->getCost() . "</td>
 					</tr>";
 			}?>
 			</tbody>
