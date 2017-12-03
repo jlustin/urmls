@@ -1,8 +1,26 @@
+<?php
+
+$my_dir = dirname(__FILE__);
+require_once $my_dir . '/../persistence/persistence.php';
+require_once $my_dir . '/../controller/FundingController.php';
+require_once $my_dir . '/../model/URLMS.php';
+require_once $my_dir . '/../model/Lab.php';
+require_once $my_dir . '/../model/Report.php';
+require_once $my_dir . '/../model/Expense.php';
+require_once $my_dir . '/../model/FundingAccount.php';
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>URLMS - Funding</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../style/TableView.css">
+	
 </head>
 <body>
 	<h1 align="center"><a href="../index.php" style="color: black;text-decoration: none;">University Research Lab Management System</a></h1>
@@ -62,6 +80,50 @@
 		<br>
 	</form>
 	<a href="../index.php">Back to homepage</a>
+
+	<br><br>
+<div class="container-fluid">
+		<table class="table table-hover" style="width: 100%;">
+			
+			<thread>
+			<tr>
+				<th>Account</th>
+				<th>Net balance</th>
+				<th>Latest Expense</th>
+			</tr>
+			</thread>
+			<tbody>
+			<?php 
+			
+			$urlms = (new Persistence())->loadDataFromStore();
+			
+			
+			foreach ($urlms->getLab_index(0)->getFundingAccounts() as $account){
+				$expense = "";
+				if($account->hasExpenses()){
+					$expense = $account->getExpense_index(sizeof($account->getExpenses())-1);
+					$lastestExpense = $expense->getType() ." ". $expense->getAmount();
+				}else{$latestExpense = "None";}
+				
+				
+// 				if($member->hasProgressUpdates()){
+// 					$progress = $member->getProgressUpdate_index(sizeof($member->getProgressUpdates())-1)->getDescription();
+// 					if(strlen($progress)>50){
+// 						$progress = substr($progress, 0, 50) . "...";
+// 					}
+// 				}else{$progress = "None";}
+				
+				echo "<tr><td><button type=\"button\" class=\"btn btn-outline-primary\">" . $account->getType() . "</button></td>
+					<td>". $account->getBalance() ."</td>
+					<td>" . $latestExpense . "</td>
+					</tr>";
+			}?>
+			</tbody>
+		</table>
+		</div>
+		<br><br>
+		
+			
 
 </body>
 </html>
