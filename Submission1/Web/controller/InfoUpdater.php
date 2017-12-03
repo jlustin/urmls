@@ -33,6 +33,7 @@
 			break;
 		case "editStaffMember":
 			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
+			//$iu->updateRoles($_GET['roleA'],$_GET['roleB']);
 			break;
 			
 	}
@@ -85,6 +86,6 @@
 			$persistence->writeDataToStore($urlms);
 			
 			echo "Staff member updated succesfully! <br>";
-			echo "<a href= \"../view/StaffView.html\">Back</a>" . "<br>";	
+			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";	
 		}
 }
