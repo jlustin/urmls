@@ -40,7 +40,7 @@
 				$iu->updateRoles([]);
 			}
 			if(!empty($_GET['newProgressUpdate'])){
-				$iu->addProgressUpdate($_GET['newProgressUpdate'],"LOL");
+				$iu->addProgressUpdate($_GET['newProgressUpdate'],$_GET['date']);
 			}
 			break;
 			
@@ -75,7 +75,7 @@
 					$inventoryItem->setQuantity($quantity);
 				}
 			}
-			
+						
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			
@@ -89,7 +89,7 @@
 			
 			$staffMember->setName($name);
 			$staffMember->setId($id);
-			
+						
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			
@@ -108,31 +108,25 @@
 			
 			foreach ($roles as $r){
 				switch ($r){
-					case "A":
+					case "ResearchAssociate":
 						$staffMember->addResearchRole(new ResearchAssociate("", $staffMember));
 						break;
-					case "B":
+					case "ResearchAssistant":
 						$staffMember->addResearchRole(new ResearchAssistant("", $staffMember));
 						break;
 				}
-			}
-			
-// 			if($roleA=='Yes'){
-// 				$staffMember->addResearchRole(new ResearchAssistant("", $staffMember));
-// 			}
-// 			if($roleB=='Yes'){
-// 				$staffMember->addResearchRole(new ResearchAssociate("", $staffMember));
-// 			}
+			}	
 			
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 		}
 		
-		function addProgressUpdate($desc, $date="LOL"){
+		function addProgressUpdate($desc, $date){
 			$urlms = $_SESSION['urlms'];
 			$staffMember = $_SESSION['staffmember'];
 			
 			$staffMember->addProgressUpdate(new ProgressUpdate($date, $desc,$staffMember));
+			
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 		}

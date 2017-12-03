@@ -131,31 +131,32 @@ class StaffController {
 			
 			<?php 
 			
-			$isRoleA = false; $isRoleB = false;
+			$isResearchAssociate = false; $isResearchAssistant = false;
 			
 			foreach ($staffMember->getResearchRoles() as $r){
 				if(get_class($r) == "ResearchAssociate"){
-					$isRoleA = true;
+					$isResearchAssociate = true;
 				}
 				elseif (get_class($r)== "ResearchAssistant"){
-					$isRoleB = true;
+					$isResearchAssistant = true;
 				}
 			}
 			
-			if($isRoleA){
-				echo "<input type=\"checkbox\" name=\"role[]\" value=\"A\" checked \"> Research Associate <br>";
+			if($isResearchAssociate){
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"ResearchAssociate\" checked \"> Research Associate <br>";
 			}else{
-				echo "<input type=\"checkbox\" name=\"role[]\" value=\"A\"> Research Associate <br>";
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"ResearchAssociate\"> Research Associate <br>";
 			}
-			if($isRoleB){
-				echo "<input type=\"checkbox\" name=\"role[]\" value=\"B\" checked \"> Research Assistant <br>";
+			if($isResearchAssistant){
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"ResearchAssistant\" checked \"> Research Assistant <br>";
 			}else{
-				echo "<input type=\"checkbox\" name=\"role[]\" value=\"B\"> Research Assistant <br>";
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"ResearchAssistant\"> Research Assistant <br>";
 			}
 			?>
  			<br>
- 			New Progress Update: 
- 			<br>
+ 			<b>New Progress Update:</b> 
+ 			<br><br>
+ 			Date:<input type="text" name="date" /><br><br>
  			<textarea name="newProgressUpdate" cols="40" rows="5"></textarea>
  			<br><br>
  			
