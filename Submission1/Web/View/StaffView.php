@@ -22,7 +22,7 @@
 		<h2 align="center">Staff</h2>
 		<br><br>
 		
-		<form action="../controller/StaffController.php" method="get">
+		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>View Staff List</h3>
 			<input type="hidden" name="action" value="9/10" />
@@ -30,7 +30,7 @@
  			<br>
 		</form>
 		
-		<form action="../controller/StaffController.php" method="get">
+		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>Add Staff Member</h3>
 			<input type="hidden" name="action" value="10/10" />
@@ -39,7 +39,7 @@
  			<br>
 		</form>
 		
-		<form action="../controller/StaffController.php" method="get">
+		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>Remove Staff Member</h3>
 			<input type="hidden" name="action" value="11/10" />
@@ -49,7 +49,7 @@
  			<br>
 		</form>
 		
-		<form action="../controller/StaffController.php" method="get">
+		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>View and Edit Staff Member Record</h3>
 			<input type="hidden" name="action" value="12/10" />
@@ -76,7 +76,7 @@
 			</thread>
 			<?php 
 			
-			$urlms = (new Persistence("../controller/data.txt"))->loadDataFromStore();
+			$urlms = (new Persistence())->loadDataFromStore();
 			
 			
 			foreach ($urlms->getLab_index(0)->getStaffMembers() as $member){

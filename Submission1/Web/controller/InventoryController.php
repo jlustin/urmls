@@ -15,54 +15,6 @@
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
 	
-	// start session
-	session_start();
-	
-	$persistence = new Persistence();
-	$urlms = $persistence->loadDataFromStore();
-	
-	$c = new InventoryController($urlms);
-	
-	// Check which button was clicked by user
-	// Run appropriate controller method with respect to user request
-	switch($_GET['action']){
-		case "9/10":
-			$c->getInventoryList();
-			break;
-		case "10/10":
-			try {
-			$c->addInventory($_GET['newInventoryName'], $_GET['category'], $_GET['type']); 
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
- 			}
-			break;
-		case "11/10":
-			try {
-				$c->removeInventory($_GET['oldInventoryName']);
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
-			break;
-		case "12/10":
-			try {
-				$c->viewInventoryItem($_GET['inventoryName']);
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-			}
-			break;
-// 		case "8/10":
-// 			try {
-// 				$c->editInventoryItem($_GET['editInventoryName'], $_GET['editedInventoryName'], $_GET['editedInventoryCost'], $_GET['editedInventoryCat']);
-// 			} catch (Exception $e){
-// 				echo $e->getMessage() . "<br>";
-// 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-// 			}
-// 			break;
-	}
-		
 class InventoryController {
 	
 	protected $urlms;
@@ -77,10 +29,6 @@ class InventoryController {
 	 * get list of inventory from urlms
 	 */
 	function getInventoryList(){
-// 		// Load data
-// 		$persistence = new Persistence();
-// 		$urlms = $persistence->loadDataFromStore();
-		
 		// Get inventory items from urlms
 		$items = $this->urlms->getLab_index(0)->getInventoryItems();
 		for ($i = 0; $i < sizeof($items); $i++){
@@ -151,6 +99,7 @@ class InventoryController {
 	function viewInventoryItem($name){
 		$urlms = $this->urlms;
 		$inventoryItem = $this->findInventoryItem($name);
+		session_start();
 		$_SESSION['inventoryitem'] = $inventoryItem;
 		$_SESSION['urlms'] = $urlms;
 			
@@ -170,7 +119,7 @@ class InventoryController {
 		
 		?>
 		<HTML>
-			<form action="InfoUpdater.php" method="get">
+			<form action="../Controller/InfoUpdater.php" method="get">
 			<br>
 			<h3>Edit Inventory Item</h3>
 			<input type="hidden" name="action" value="editInventoryItem" />
@@ -196,35 +145,7 @@ class InventoryController {
 		
 		echo "<a href= \"../View/InventoryView.html\">Back</a>" . "<br>";
 	}
-	
-	function editInventoryItem($name, $newname, $newcost, $newcat){
-		$urlms = $this->urlms;
-		$inventoryItem = $this->findInventoryItem($name);
 		
-		if(strlen($newname) > 0){
-			$inventoryItem->setName($newname);
-		}else $inventoryItem->setName($inventoryItem->getName());
-		if(strlen($newcost) > 0){
-			$inventoryItem->setCost($newcost);
-		}else $inventoryItem->setCost($inventoryItem->getCost());
-		if(strlen($newcat) > 0){
-			$inventoryItem->setCategory($newcat);
-		}else $inventoryItem->setCategory($inventoryItem->getCategory());
-		
-		// Write data
-		$persistence = new Persistence();
-		$persistence->writeDataToStore($urlms);
-		
-		?>
-		<!-- Add back button to page -->
-		<HTML>
-			<p>Inventory item updated succesfully!</p>
-			<a href="../View/InventoryView.html">Back</a>
-		</HTML><?php
-		
-	}
-	
-	
 	function findInventoryItem($name){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter an inventory item name.");

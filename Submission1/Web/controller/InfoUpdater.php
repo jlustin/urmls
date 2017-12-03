@@ -18,7 +18,7 @@
 	require('InventoryController.php');
 	
 	// start session
-// 	session_start();
+ 	session_start();
 	
 	$persistence = new Persistence();
 	$urlms = $persistence->loadDataFromStore();
@@ -76,4 +76,21 @@
 			echo "Staff member updated succesfully! <br>";
 			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";	
 		}
+		
+// 		function updateRoles($roleA, $roleB){
+// 			$urlms = $_SESSION['urlms'];
+// 			$staffMember = $_SESSION['staffmember'];
+			
+			
+// 			foreach ($staffMember->getResearchRoles() as $r){
+// 				$staffMember->removeResearchRole($r);
+// 			}
+// 			if($roleA=='Yes'){
+// 				$staffMember->addResearchRole(new ResearchAssistant("", $staffMember));
+// 			}
+// 			if($roleB=='Yes'){
+// 				$staffMember->addResearchRole(new ResearchAssociate("", $staffMember));
+// 			}
+			
+// 		}
 }

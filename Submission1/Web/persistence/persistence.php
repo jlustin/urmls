@@ -7,7 +7,7 @@
 		/*
 		 * Constructor
 		 */
-		function __construct($filename = 'data.txt') {
+		function __construct($filename = '../Persistence/data.txt') {
 			$this->filename = $filename;
 		}
 		

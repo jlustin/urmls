@@ -14,48 +14,6 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-	
-	// start session
-	session_start();
-	
-	$persistence = new Persistence();
-	$urlms = $persistence->loadDataFromStore();
-	
-	$c = new StaffController($urlms);
-	
-	
-	// Check which button was clicked by user
-	// Run appropriate controller method with respect to user request
-	if(!empty($_GET['action'])){
-		switch($_GET['action']){
-			case "9/10":
-				$c->getStaffList();
-				break;
-			case "10/10":
-				try {
-				$c->addStaff($_GET['newstaffname']); 
-				} catch (Exception $e){
-					echo $e->getMessage() . "<br>";
-					echo "<a href= \"../index.php\">Back</a>" . "<br>";
-				}
-				break;
-			case "11/10":
-				try {
-					$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
-				} catch (Exception $e){
-					echo $e->getMessage() . "<br>";
-					echo "<a href= \"../index.php\">Back</a>" . "<br>";
-				}
-				break;
-			case "12/10":
-				try {
-					$c->viewMemberRecord($_GET['staffname'], $_GET['staffid']);
-				} catch (Exception $e){
-					echo $e->getMessage() . "<br>";
-					echo "<a href= \"../index.php\">Back</a>" . "<br>";
-				}
-		}
-	}
 		
 class StaffController {
 	
@@ -118,7 +76,6 @@ class StaffController {
 		$staffMember = $this->findMember($name, $id);
 		
 		//Remove staff member
-// 		$urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
 		$staffMember->delete();
 		
 		//Save
@@ -136,6 +93,7 @@ class StaffController {
 	function viewMemberRecord($name, $id){
 		$urlms = $this->urlms;
 		$staffMember = $this->findMember($name, $id);
+		session_start();
 		$_SESSION['staffmember'] = $staffMember;
 		$_SESSION['urlms'] = $urlms;
 		
@@ -161,7 +119,7 @@ class StaffController {
 		echo "<br>";
 		?>
 		<HTML>
-			<form action="InfoUpdater.php" method="get">
+			<form action="../Controller/InfoUpdater.php" method="get">
 			<br>
 			<h3>Edit Staff Member</h3>
 			<input type="hidden" name="action" value="editStaffMember" />
@@ -195,24 +153,6 @@ class StaffController {
 				echo "<input type=\"checkbox\" name=\"roleB\"> Research Assistant <br>";
 			}
 			?>
-
-			
-			
-			<?php
- 			for ($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++) {
- 			?>
-			    <input type="radio" name="num<?php echo $i; ?>" value="<?php echo $staffMember->get_class(getResearchRole_index($i));?>"><br>
-			<?php
-			}
- 			?>
-				
-				<?php ?>
-					
-			<?php
-// 			for ($i = 1; $i <= 3; $i++) {
-// 			    echo $_POST['num' . $i];
-// 			}
- 			?>
  			
  			<input type="submit" value="Edit staff!" />
  			<br>
@@ -222,15 +162,7 @@ class StaffController {
 		
 		echo "<a href= \"../View/StaffView.php\">Back</a>" . "<br>";
 	}
-	
-	function editMemberRecord($name, $id){
 		
-		$staffMember = $this->findMember($name, $id);
-
-		//TODO Insert some html here to create form maybe 
-		//OR redirect to editMember.html or something
-	}
-	
 	function findMember($name,$id){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
