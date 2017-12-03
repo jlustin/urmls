@@ -16,7 +16,7 @@ class Lab
   1 -- * StaffMember;
   1 -- * InventoryItem;
   1 -- * FundingAccount;
-  1 -- * Report;
+  1 -- * FinancialReport;
 }
 
 
@@ -65,10 +65,10 @@ class Expense
 
 }
 
-class Report
+class FinancialReport
 {
   title;
-  Date date;
+  String date;
   content;
 }
 
@@ -102,7 +102,7 @@ class ResearchAssistant
 
 class ProgressUpdate
 {
-  Date date;
+  String date;
   description;
 }
 

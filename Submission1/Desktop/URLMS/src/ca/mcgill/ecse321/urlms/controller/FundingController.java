@@ -2,7 +2,7 @@ package ca.mcgill.ecse321.urlms.controller;
 
 import java.util.HashMap;
 
-import ca.mcgill.ecse321.urlms.model.Report;
+import ca.mcgill.ecse321.urlms.model.FinancialReport;
 
 public class FundingController extends Controller {
 
@@ -17,7 +17,7 @@ public class FundingController extends Controller {
 	/** This method will generate a financial report of the lab
 	 * @return a report containing all financial information
 	 */
-	public Report generateFinancialReport() {
+	public FinancialReport generateFinancialReport() {
 		
 		//TODO: remove this when working on implementation
 		return null;

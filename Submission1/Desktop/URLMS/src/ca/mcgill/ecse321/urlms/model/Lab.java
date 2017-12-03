@@ -1,12 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
-import java.sql.Date;
 
-// line 23 "../../../../../../../../ump/tmp725626/model.ump"
-// line 240 "../../../../../../../../ump/tmp725626/model.ump"
+// line 10 "../../../../../URLMS.ump"
 public class Lab
 {
 
@@ -21,7 +19,7 @@ public class Lab
   private List<StaffMember> staffMembers;
   private List<InventoryItem> inventoryItems;
   private List<FundingAccount> fundingAccounts;
-  private List<Report> reports;
+  private List<FinancialReport> financialReports;
   private URLMS uRLMS;
 
   //------------------------
@@ -34,7 +32,7 @@ public class Lab
     staffMembers = new ArrayList<StaffMember>();
     inventoryItems = new ArrayList<InventoryItem>();
     fundingAccounts = new ArrayList<FundingAccount>();
-    reports = new ArrayList<Report>();
+    financialReports = new ArrayList<FinancialReport>();
     boolean didAddURLMS = setURLMS(aURLMS);
     if (!didAddURLMS)
     {
@@ -154,33 +152,33 @@ public class Lab
     return index;
   }
 
-  public Report getReport(int index)
+  public FinancialReport getFinancialReport(int index)
   {
-    Report aReport = reports.get(index);
-    return aReport;
+    FinancialReport aFinancialReport = financialReports.get(index);
+    return aFinancialReport;
   }
 
-  public List<Report> getReports()
+  public List<FinancialReport> getFinancialReports()
   {
-    List<Report> newReports = Collections.unmodifiableList(reports);
-    return newReports;
+    List<FinancialReport> newFinancialReports = Collections.unmodifiableList(financialReports);
+    return newFinancialReports;
   }
 
-  public int numberOfReports()
+  public int numberOfFinancialReports()
   {
-    int number = reports.size();
+    int number = financialReports.size();
     return number;
   }
 
-  public boolean hasReports()
+  public boolean hasFinancialReports()
   {
-    boolean has = reports.size() > 0;
+    boolean has = financialReports.size() > 0;
     return has;
   }
 
-  public int indexOfReport(Report aReport)
+  public int indexOfFinancialReport(FinancialReport aFinancialReport)
   {
-    int index = reports.indexOf(aReport);
+    int index = financialReports.indexOf(aFinancialReport);
     return index;
   }
 
@@ -405,74 +403,74 @@ public class Lab
     return wasAdded;
   }
 
-  public static int minimumNumberOfReports()
+  public static int minimumNumberOfFinancialReports()
   {
     return 0;
   }
 
-  public Report addReport(String aTitle, Date aDate, String aContent)
+  public FinancialReport addFinancialReport(String aTitle, String aDate, String aContent)
   {
-    return new Report(aTitle, aDate, aContent, this);
+    return new FinancialReport(aTitle, aDate, aContent, this);
   }
 
-  public boolean addReport(Report aReport)
+  public boolean addFinancialReport(FinancialReport aFinancialReport)
   {
     boolean wasAdded = false;
-    if (reports.contains(aReport)) { return false; }
-    Lab existingLab = aReport.getLab();
+    if (financialReports.contains(aFinancialReport)) { return false; }
+    Lab existingLab = aFinancialReport.getLab();
     boolean isNewLab = existingLab != null && !this.equals(existingLab);
     if (isNewLab)
     {
-      aReport.setLab(this);
+      aFinancialReport.setLab(this);
     }
     else
     {
-      reports.add(aReport);
+      financialReports.add(aFinancialReport);
     }
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeReport(Report aReport)
+  public boolean removeFinancialReport(FinancialReport aFinancialReport)
   {
     boolean wasRemoved = false;
-    //Unable to remove aReport, as it must always have a lab
-    if (!this.equals(aReport.getLab()))
+    //Unable to remove aFinancialReport, as it must always have a lab
+    if (!this.equals(aFinancialReport.getLab()))
     {
-      reports.remove(aReport);
+      financialReports.remove(aFinancialReport);
       wasRemoved = true;
     }
     return wasRemoved;
   }
 
-  public boolean addReportAt(Report aReport, int index)
+  public boolean addFinancialReportAt(FinancialReport aFinancialReport, int index)
   {  
     boolean wasAdded = false;
-    if(addReport(aReport))
+    if(addFinancialReport(aFinancialReport))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfReports()) { index = numberOfReports() - 1; }
-      reports.remove(aReport);
-      reports.add(index, aReport);
+      if(index > numberOfFinancialReports()) { index = numberOfFinancialReports() - 1; }
+      financialReports.remove(aFinancialReport);
+      financialReports.add(index, aFinancialReport);
       wasAdded = true;
     }
     return wasAdded;
   }
 
-  public boolean addOrMoveReportAt(Report aReport, int index)
+  public boolean addOrMoveFinancialReportAt(FinancialReport aFinancialReport, int index)
   {
     boolean wasAdded = false;
-    if(reports.contains(aReport))
+    if(financialReports.contains(aFinancialReport))
     {
       if(index < 0 ) { index = 0; }
-      if(index > numberOfReports()) { index = numberOfReports() - 1; }
-      reports.remove(aReport);
-      reports.add(index, aReport);
+      if(index > numberOfFinancialReports()) { index = numberOfFinancialReports() - 1; }
+      financialReports.remove(aFinancialReport);
+      financialReports.add(index, aFinancialReport);
       wasAdded = true;
     } 
     else 
     {
-      wasAdded = addReportAt(aReport, index);
+      wasAdded = addFinancialReportAt(aFinancialReport, index);
     }
     return wasAdded;
   }
@@ -513,10 +511,10 @@ public class Lab
       FundingAccount aFundingAccount = fundingAccounts.get(i - 1);
       aFundingAccount.delete();
     }
-    for(int i=reports.size(); i > 0; i--)
+    for(int i=financialReports.size(); i > 0; i--)
     {
-      Report aReport = reports.get(i - 1);
-      aReport.delete();
+      FinancialReport aFinancialReport = financialReports.get(i - 1);
+      aFinancialReport.delete();
     }
     URLMS placeholderURLMS = uRLMS;
     this.uRLMS = null;

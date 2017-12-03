@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
@@ -9,8 +9,7 @@ package ca.mcgill.ecse321.urlms.model;
  * 1 -- * InventoryItem;
  * }
  */
-// line 62 "../../../../../../../../ump/tmp725626/model.ump"
-// line 245 "../../../../../../../../ump/tmp725626/model.ump"
+// line 28 "../../../../../URLMS.ump"
 public class InventoryItem
 {
 
