@@ -36,6 +36,7 @@ public class StaffPagePO extends JFrame {
 	JLabel feelFreeLabel;
 	private JPanel contentPane;
 	JLabel welcomeToStaffLabel;
+	public AddStaffMemberPO asmpo = new AddStaffMemberPO();
 	
 	public static StaffController controller = new StaffController();
 	
@@ -74,7 +75,7 @@ public class StaffPagePO extends JFrame {
 		JButton btnAddStaff = new JButton("Add Staff");
 		btnAddStaff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.addSampleMembers();
+				asmpo.setVisible(true);
 //				String staffMemberName = txtName.getText();
 //				boolean box1 = ResearchAssistantBox.isSelected();
 //				boolean box2 = ResearchAssociateBox.isSelected();
