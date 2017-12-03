@@ -119,5 +119,5 @@ public class AddInventoryItemPO extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
+//
 }
