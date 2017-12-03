@@ -105,16 +105,16 @@ class StaffController {
 			echo " None";
 		}
 		for($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++){
-			echo " " . $staffMember->get_class(getResearchRole_index($i));
+			echo " " . get_class($staffMember->getResearchRole_index($i));
 		}
 		echo "<br>";
 		echo "Progress Updates:";
 		if(!$staffMember->hasProgressUpdates()){
 			echo " None";
 		}
-		for($i = 0; $i < $staffMember->numberOfProgressUpdates(); $i++){
-			//TODO Update domain model to add text in progress update
-			//echo " " . $staffMember->getProgressUpdate_index($i)->getDescription();
+		
+		foreach($staffMember->getProgressUpdates() as $pu){
+			echo "<br>" . $pu->getDate() . ", " . $pu->getDescription();
 		}
 		echo "<br>";
 		?>
@@ -126,7 +126,7 @@ class StaffController {
 			New Name: <input type="text" name="editedstaffname" value="<?php echo $staffMember->getName();?>"/>
 			New ID: <input type="text" name="editedstaffid" value="<?php echo $staffMember->getId();?>"/>
 			<br>
-			
+			<br>
 			Roles:<br>
 			
 			<?php 
@@ -134,25 +134,30 @@ class StaffController {
 			$isRoleA = false; $isRoleB = false;
 			
 			foreach ($staffMember->getResearchRoles() as $r){
-				if(get_class($r) == "ResearchAssistant"){
+				if(get_class($r) == "ResearchAssociate"){
 					$isRoleA = true;
 				}
-				elseif (get_class($r)== "ResearchAssociate"){
+				elseif (get_class($r)== "ResearchAssistant"){
 					$isRoleB = true;
 				}
 			}
 			
 			if($isRoleA){
-				echo "<input type=\"checkbox\" name=\"roleA checked \"> Research Associate <br>";
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"A\" checked \"> Research Associate <br>";
 			}else{
-				echo "<input type=\"checkbox\" name=\"roleA\"> Research Associate <br>";
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"A\"> Research Associate <br>";
 			}
 			if($isRoleB){
-				echo "<input type=\"checkbox\" name=\"roleB checked \"> Research Assistant <br>";
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"B\" checked \"> Research Assistant <br>";
 			}else{
-				echo "<input type=\"checkbox\" name=\"roleB\"> Research Assistant <br>";
+				echo "<input type=\"checkbox\" name=\"role[]\" value=\"B\"> Research Assistant <br>";
 			}
 			?>
+ 			<br>
+ 			New Progress Update: 
+ 			<br>
+ 			<textarea name="newProgressUpdate" cols="40" rows="5"></textarea>
+ 			<br><br>
  			
  			<input type="submit" value="Edit staff!" />
  			<br>
