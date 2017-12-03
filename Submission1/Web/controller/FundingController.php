@@ -50,6 +50,38 @@ class FundingController {
 		</HTML><?php
 	}
 	
+	function generateFinancialReport($accountType){
+		$urlms = $this->urlms;
+		$fundingAccount = $this->findFundingAccount($accountType);
+
+		$expenses = $fundingAccount->getExpenses();
+		foreach ($expenses as $e){
+			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . "<br>";
+		}
+		
+		session_start();
+		$_SESSION['fundingAccount'] = $fundingAccount;
+		$_SESSION['urlms'] = $urlms;
+		?>
+		<HTML>
+			<form action="../Controller/InfoUpdater.php" method="get">
+			<br>
+			<h3>Edit Expense</h3>
+			<input type="hidden" name="action" value="editExpense" />
+			Expense Type: <input type="text" name="expensename" value=""/>
+			New Expense Type: <input type="text" name="newexpensename" value=""/>
+			New Amount: <input type="text" name="newexpenseamount" value=""/><br>
+			New Date: <input type="text" name="newexpensedate" value=""/><br>
+			<input type="submit" value="Edit expense!" />
+ 			<br>
+		</form>
+		</HTML>
+		<!-- Add back button to page -->
+		<HTML>
+			<a href="../View/FundingView.html">Back</a>
+		</HTML><?php
+	}
+	
 	function removeAccount($type){
 		$urlms = $this->urlms;
 		$urlmsLab = $urlms->getLab_index(0);
@@ -75,14 +107,12 @@ class FundingController {
 	}
 	
 	function getNetBalance(){
-		// Get staff members from urlms
 		$netBalance = 0;
 		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
 		foreach ($accounts as $a){
-			$a->getBalance();
-			$netBalance = $netBalance + $a;
+			$netBalance = $netBalance + $a->getBalance();
 		}
-		echo $netBalance;
+		echo "Net Balance of Lab: " . $netBalance . "<br>";
 		echo "<a href= \"../View/FundingView.html\">Back</a>" . "<br>";
 	}
 	
@@ -90,29 +120,48 @@ class FundingController {
 		$urlms = $this->urlms;
 		//echo $urlms->getLab_index(0)->numberOfFundingAccounts();
 		$fundingAccount = $this->findFundingAccount($type);
-		echo $fundingAccount->getType();
+		session_start();
+		$_SESSION['fundingaccount'] = $fundingAccount;
+		$_SESSION['urlms'] = $urlms;
+		echo "Type: " . $fundingAccount->getType();
 		echo "<br>";
-		echo $fundingAccount->getBalance();
+		echo "Balance: " . $fundingAccount->getBalance();
 		echo "<br>";
 		?>
+		<HTML>
+			<form action="../Controller/InfoUpdater.php" method="get">
+			<br>
+			<h3>Edit Account</h3>
+			<input type="hidden" name="action" value="editAccount" />
+			New Name: <input type="text" name="editedaccountname" value="<?php echo $fundingAccount->getType();?>"/>
+			<input type="submit" value="Edit account!" />
+ 			<br>
+		</form>
+		</HTML>
+
 		<!-- Add back button to page -->
 		<HTML>
 			<a href="../View/FundingView.html">Back</a>
 		</HTML><?php
 	}
 	
-	function addTransaction($amount, $type){
+	function addTransaction($labtype, $expensetype, $amount, $type, $date){
 		if($amount == null || strlen($amount) == 0){
 			throw new Exception ("Please enter a amount.");
 		} else {
 			$urlms = $this->urlms;
+			$urlmsLab = $urlms->getLab_index(0);
+			$fundingAccount = $this->findFundingAccount($labtype);
 			
-			$currentBalance = $urlms->getLab_index(0)->getFundingAccount_index(0)->getBalance();
+			$newExpense = new Expense($amount, $expensetype, $fundingAccount);
+			
+			$fundingAccount->addExpense($newExpense);
 			
 			if($type == "expense"){
-				$urlms->getLab_index(0)->getFundingAccount_index(0)->setBalance($currentBalance - $amount);
+				$fundingAccount->setBalance($fundingAccount->getBalance() - $newExpense->getAmount());
+				$newExpense->setAmount(-$amount);
 			} else{
-				$urlms->getLab_index(0)->getFundingAccount_index(0)->setBalance($currentBalance + $amount);
+				$fundingAccount->setBalance($fundingAccount->getBalance() + $newExpense->getAmount());
 			}
 			// Write data
 			$persistence = new Persistence();
@@ -126,7 +175,6 @@ class FundingController {
 			</HTML><?php
 		}
 	}
-	
 	
 	function findFundingAccount($type){
 		if($type == null || strlen($type) == 0){

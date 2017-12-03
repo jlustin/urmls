@@ -43,7 +43,12 @@
 				$iu->addProgressUpdate($_GET['newProgressUpdate'],$_GET['date']);
 			}
 			break;
-			
+		case "editAccount":
+			$iu->updateAccount($_GET['editedaccountname']);
+			break;
+		case "editExpense":
+			$iu->updateExpense($_GET['expensename'], $_GET['newexpensename'],$_GET['newexpenseamount'], $_GET['newexpensedate']);
+			break;
 	}
 	
 	class InfoUpdater {
@@ -130,4 +135,52 @@
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 		}
+		
+		function updateAccount($newType){
+			$fundingAccount = $_SESSION['fundingaccount'];
+			$urlms = $_SESSION['urlms'];
+			
+			$fundingAccount->setType($newType);
+			
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+			
+			echo "Account updated successfully! <br>";
+			echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
+		}
+		
+		function updateExpense($expenseType, $newExpenseType, $newAmount, $newDate){
+			$fundingAccount = $_SESSION['fundingAccount'];
+			$urlms = $_SESSION['urlms'];
+			$expense = null;
+			
+			$fundingAccountBalance = $fundingAccount->getBalance();
+			
+			$expenses = $fundingAccount->getExpenses();
+			foreach ($expenses as $e){
+				if($expenseType == $e->getType()){
+					$expense = $e;
+				}
+			}
+			if($expense == null){
+				throw new Exception ("Please enter a valid expense type.");
+			}
+			
+			$oldExpenseAmount = $expense->getAmount();
+			
+			$expense->setType($newExpenseType);
+			$expense->setAmount($newAmount);
+// 			$expense->setDate($newDate);
+
+			
+			$expenseAmountDiff = $expense->getAmount() - $oldExpenseAmount;			
+			$fundingAccount->setBalance($fundingAccountBalance + $expenseAmountDiff);
+			
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+			
+			echo "Expense updated successfully! <br>";
+			echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
+		}
+		
 }
