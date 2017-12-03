@@ -38,6 +38,8 @@ public class InventoryPagePO extends JFrame {
 	
 	public static InventoryController controller = new InventoryController();
 	public AddInventoryItemPO aiipo = new AddInventoryItemPO();
+	public EditInventoryItemPO eiipo = new EditInventoryItemPO();
+	
 	
 
 	/**
@@ -108,6 +110,12 @@ public class InventoryPagePO extends JFrame {
 		panel.add(btnAddInventoryItem);
 		
 		JButton btnRemoveItem = new JButton("Edit Item");
+		btnRemoveItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				eiipo.setVisible(true);
+			}
+		});
 		panel.add(btnRemoveItem);
 		
 		JButton btnSave = new JButton("Save");
