@@ -1,5 +1,6 @@
 package com.example.team8.urlms;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ public class StaffListPage extends AppCompatActivity {
     private String fileName;
     Controller controller = new Controller();
     StaffController sc = new StaffController();
-
+    ListAdapter viewStaffAdapter;
 
     Button backButton;
     Button refreshButton;
@@ -48,16 +49,24 @@ public class StaffListPage extends AppCompatActivity {
         Bundle b =this.getIntent().getExtras();
         final String[] staffList = b.getStringArray("data");
 
+        List<StaffMember> sm = sc.viewStaffList();
+        final String[] staffMembers = new String[sm.size()];
+        int i=0;
+        for(StaffMember member : sm){
+            staffMembers[i]="ID: "+ member.getId()+ " Name: " + member.getName();
+            i++;
+        }
 
 
-        ListAdapter viewStaffAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, staffList);
+
+        viewStaffAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, staffMembers);
         ListView buckyListView = (ListView) findViewById(R.id.buckyListView);
         buckyListView.setAdapter(viewStaffAdapter);
 
         buckyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast myToast= Toast.makeText(getApplicationContext(),"You have clicked on " +staffList[position],Toast.LENGTH_SHORT);
+                Toast myToast= Toast.makeText(getApplicationContext(),"You have clicked on " +staffMembers[position],Toast.LENGTH_SHORT);
                 myToast.show();
                 sc.save();
                 Intent intent = new Intent(getApplicationContext(),StaffMemberPage.class );
@@ -92,7 +101,8 @@ public class StaffListPage extends AppCompatActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastMessage("Not implemented yet");
+                toastMessage("Refreshed");
+                recreate();
             }
         });
 

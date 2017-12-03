@@ -1,13 +1,9 @@
 package com.example.team8.urlms;
 
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -24,11 +20,6 @@ import ca.mcgill.ecse321.urlms.model.ResearchAssistant;
 import ca.mcgill.ecse321.urlms.model.ResearchAssociate;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
-import ca.mcgill.ecse321.urlms.persistence.*;
-
-import static android.R.id.input;
-import static ca.mcgill.ecse321.urlms.application.URLMSApplication.save;
-import static com.example.team8.urlms.R.id.toDisplay;
 
 public class StaffMemberPage extends AppCompatActivity {
 
@@ -73,7 +64,7 @@ public class StaffMemberPage extends AppCompatActivity {
 
 
         backButton = (Button) findViewById(R.id.backButton);
-        editButton = (Button) findViewById(R.id.editNameButton);
+        editButton = (Button) findViewById(R.id.editButton);
         viewProgressButton = (Button) findViewById(R.id.viewProgressButton);
         addProgressButton = (Button) findViewById(R.id.addProgress);
         deleteButton = (Button) findViewById(R.id.deleteButton);
@@ -89,7 +80,7 @@ public class StaffMemberPage extends AppCompatActivity {
         editName.setText(sc.viewStaffMemberName(position));
         editId = (EditText) findViewById(R.id.editId);
         editId.setText(sc.viewStaffMemberID(position));
-
+        //TODO set scrollable
         progressUpdate = (TextView) findViewById(R.id.progressText);
         progressUpdate.setVisibility(View.INVISIBLE);
 

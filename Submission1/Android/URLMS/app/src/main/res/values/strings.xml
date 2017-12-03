@@ -42,8 +42,8 @@
     <string name="addNewItem">Add New Item</string>
     <string name="select_type">Select Type</string>
     <string-array name="item_types">
-        <item>Whats up</item>
-        <item>Sike, not implemented yet</item>
+        <item>Equipment</item>
+        <item>Supply</item>
     </string-array>
 
 
@@ -75,5 +75,9 @@
     <string name="ProgressString">Progress</string>
     <string name="confirmString">Confirm</string>
     <string name="monthDayYear">mm-dd-yyyy</string>
+    <string name="currentInventoryStatus">Inventory Status</string>
+    <string name="insertQuantityItem">Insert the quantity</string>
+    <string name="quantityString">Quantity</string>
+    <string name="totalCostStatus">Total Cost Status</string>
 
 </resources>

@@ -16,7 +16,6 @@ public class FundingPage extends AppCompatActivity {
 
     Button backButton;
     Button viewFundingAccounts;
-    Button lol;
 
     FundingController fc = new FundingController();
 
