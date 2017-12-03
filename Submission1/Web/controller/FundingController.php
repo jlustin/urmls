@@ -29,7 +29,7 @@
 			$c->addAccount($_GET['type'], $_GET['balance']);
 			break;
 		case "2/10":
-			$c->viewNetBalance();
+			$c->viewNetBalance($_GET['type']);
 			break;
 		case "3/10":
 			$c->addTransaction($_GET['amount'], $_GET['type']);
@@ -47,28 +47,32 @@ class FundingController {
 	}
 	
 	function addAccount($type, $balance){
-		$urlmsLab = $this->urlms->getLab_index(0);
-		$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
-		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
-		
+		$urlms = $this->urlms;
+		$urlmsLab = $urlms->getLab_index(0);
+ 		$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
+ 		$urlmsLab->addFundingAccount($newFundingAccount);
+// 		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		//$urlms->getLab_index(0)->addFundingAccount($type, $balance, $urlms->getLab_index(0));
+ 		$persistence = new Persistence();
+ 		$persistence->writeDataToStore($urlms);
 		?>
 		<!-- Add back button to page -->
 		<HTML>
 			<p>New account successfully added!</p>
 			<a href="../View/FundingView.html">Back</a>
 		</HTML><?php
-		
 	}
 	
-	function viewNetBalance(){
+	function viewNetBalance($type){
 		$urlms = $this->urlms;
-	//	echo $urlms->getLab_index(0)->numberOfFundingAccounts();
-		echo $urlms->getLab_index(0)->getFundingAccount_index(0)->getBalance();
-		
+////	echo $urlms->getLab_index(0)->numberOfFundingAccounts();
+		//$fundingAccount = $this->findFundingAccount($type);
+		//echo $fundingAccount->getBalance();
+////	echo $urlms->getLab_index(0)->getFundingAccount_index($index)->getBalance();
+	 
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<p>New transation item successfully added!</p>
 			<a href="../View/FundingView.html">Back</a>
 		</HTML><?php
 	}
@@ -98,5 +102,24 @@ class FundingController {
 			</HTML><?php
 		}
 	}
+	
+	function findFundingAccount($type){
+		if($type == null || strlen($type) == 0){
+			throw new Exception ("Please enter an funding account type.");
+		} else{
+			//Find the account
+			$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+			for ($i = 0; $i < sizeof($items); $i++){
+				if($type == $accounts{$i}->getType()){
+					$fundingAccount = $accounts{$i};
+				}
+			}
+			if($fundingAccoung == null){
+				throw new Exception ("Funding account not found.");
+			}
+		}
+		return $fundingAccount;
+	}
+	
 }
 ?>
