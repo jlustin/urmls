@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>URLMS - Funding</title>
+	<meta charset="ISO-8859-1">
+	<title>URLMS - Funding</title>
 </head>
 <body>
 	<h1 align="center"><a href="../index.php" style="color: black;text-decoration: none;">University Research Lab Management System</a></h1>
+	<form action="../controller/FundingController.php" method="get">
+		<br>
+		<h3>Add Funding Account</h3>
+		<input type="hidden" name="action" value="1/10" />
+		<input type="text" name="type" value=""/>Type<br>
+		<input type="text" name="balance" value=""/>Balance<br>
+		<input type="submit" value="Add Funding Account!!!"/>
+		<br>
+	</form>
+
+	<form action="../controller/FundingController.php" method="get">
+		<br>
+		<h3>View Net Balance</h3>
+		<input type="hidden" name="action" value="2/10" />
+		<input type="submit" value="View Net Balance!!!"/>
+		<br>
+	</form>
+	
+	<form action="../controller/FundingController.php" method="get">
+		<br>
+		<h3>Add Transaction</h3>
+		<input type="hidden" name="action" value="3/10" />
+		<input type="text" name="amount" value=""/>Amount<br>
+		<input type="radio" name="type" value="fund"/>Fund<br>
+		<input type="radio" name="type" value="expense"/>Expense<br>
+		<input type="submit" value="Add Transation!!!"/>
+		<br>
+	</form>
 	<a href="../index.php">Back to homepage</a>
 
 </body>

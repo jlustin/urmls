@@ -14,16 +14,91 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-
 		
 class FundingController {
 	
+	protected $urlms;
 	/*
 	 * Constructor
 	 */
-	public function __construct(){}
+	public function __construct($urlms){
+		$this->urlms = $urlms;
+	}
 	
+	function addAccount($type, $balance){
+		$urlms = $this->urlms;
+		$urlmsLab = $urlms->getLab_index(0);
+ 		$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
+ 		$urlmsLab->addFundingAccount($newFundingAccount);
+// 		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		//$urlms->getLab_index(0)->addFundingAccount($type, $balance, $urlms->getLab_index(0));
+ 		$persistence = new Persistence();
+ 		$persistence->writeDataToStore($urlms);
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>New account successfully added!</p>
+			<a href="../View/FundingView.html">Back</a>
+		</HTML><?php
+	}
+	
+	function viewNetBalance($type){
+		$urlms = $this->urlms;
+////	echo $urlms->getLab_index(0)->numberOfFundingAccounts();
+		//$fundingAccount = $this->findFundingAccount($type);
+		//echo $fundingAccount->getBalance();
+////	echo $urlms->getLab_index(0)->getFundingAccount_index($index)->getBalance();
+	 
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<a href="../View/FundingView.html">Back</a>
+		</HTML><?php
+	}
+	
+	function addTransaction($amount, $type){
+		if($amount == null || strlen($amount) == 0){
+			throw new Exception ("Please enter a amount.");
+		} else {
+			$urlms = $this->urlms;
 			
+			$currentBalance = $urlms->getLab_index(0)->getFundingAccount_index(0)->getBalance();
+			
+			if($type == "expense"){
+				$urlms->getLab_index(0)->getFundingAccount_index(0)->setBalance($currentBalance - $amount);
+			} else{
+				$urlms->getLab_index(0)->getFundingAccount_index(0)->setBalance($currentBalance + $amount);
+			}
+			// Write data
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+			
+			?>
+			<!-- Add back button to page -->
+			<HTML>
+				<p>New transation item successfully added!</p>
+				<a href="../View/FundingView.html">Back</a>
+			</HTML><?php
+		}
+	}
+	
+	function findFundingAccount($type){
+		if($type == null || strlen($type) == 0){
+			throw new Exception ("Please enter an funding account type.");
+		} else{
+			//Find the account
+			$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+			for ($i = 0; $i < sizeof($items); $i++){
+				if($type == $accounts{$i}->getType()){
+					$fundingAccount = $accounts{$i};
+				}
+			}
+			if($fundingAccoung == null){
+				throw new Exception ("Funding account not found.");
+			}
+		}
+		return $fundingAccount;
+	}
+	
 }
-
 ?>

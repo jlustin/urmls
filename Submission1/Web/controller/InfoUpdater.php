@@ -29,7 +29,7 @@
 	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
 		case "editInventoryItem":
-			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat']);
+			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);
 			break;
 		case "editStaffMember":
 			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
@@ -48,13 +48,25 @@
 			$this->urlms = $urlms;
 		}
 		
-		function updateInventory($name, $cost, $category){
+		function updateInventory($name, $cost, $category, $isDamaged, $quantity){
 			$urlms = $_SESSION['urlms'];
 			$inventoryItem = $_SESSION['inventoryitem'];
 			
 			$inventoryItem->setName($name);
 			$inventoryItem->setCost($cost);
 			$inventoryItem->setCategory($category);
+
+			if($isDamaged == "damaged"){
+				$inventoryItem->setIsDamaged(true);
+			}
+			else if($isDamaged == "notdamaged"){
+				$inventoryItem->setIsDamaged(false);
+			}
+			else {
+				if($quantity > 0){
+					$inventoryItem->setQuantity($quantity);
+				}
+			}
 			
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
