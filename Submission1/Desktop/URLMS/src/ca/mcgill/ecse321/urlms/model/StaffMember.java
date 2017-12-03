@@ -10,7 +10,7 @@ import java.util.*;
  * 1 -- * StaffMember;
  * }
  */
-// line 80 "../../../../../URLMS.ump"
+// line 81 "../../../../../URLMS.ump"
 public class StaffMember
 {
 
@@ -21,6 +21,7 @@ public class StaffMember
   //StaffMember Attributes
   private String name;
   private int id;
+  private double weeklySalary;
 
   //StaffMember Associations
   private List<ResearchRole> researchRoles;
@@ -31,10 +32,11 @@ public class StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public StaffMember(String aName, int aId, Lab aLab)
+  public StaffMember(String aName, int aId, double aWeeklySalary, Lab aLab)
   {
     name = aName;
     id = aId;
+    weeklySalary = aWeeklySalary;
     researchRoles = new ArrayList<ResearchRole>();
     progressUpdates = new ArrayList<ProgressUpdate>();
     boolean didAddLab = setLab(aLab);
@@ -64,6 +66,14 @@ public class StaffMember
     return wasSet;
   }
 
+  public boolean setWeeklySalary(double aWeeklySalary)
+  {
+    boolean wasSet = false;
+    weeklySalary = aWeeklySalary;
+    wasSet = true;
+    return wasSet;
+  }
+
   public String getName()
   {
     return name;
@@ -72,6 +82,11 @@ public class StaffMember
   public int getId()
   {
     return id;
+  }
+
+  public double getWeeklySalary()
+  {
+    return weeklySalary;
   }
 
   public ResearchRole getResearchRole(int index)
@@ -326,7 +341,8 @@ public class StaffMember
   {
     return super.toString() + "["+
             "name" + ":" + getName()+ "," +
-            "id" + ":" + getId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "id" + ":" + getId()+ "," +
+            "weeklySalary" + ":" + getWeeklySalary()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

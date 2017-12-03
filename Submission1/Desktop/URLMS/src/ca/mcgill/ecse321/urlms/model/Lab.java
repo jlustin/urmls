@@ -192,9 +192,9 @@ public class Lab
     return 0;
   }
 
-  public StaffMember addStaffMember(String aName, int aId)
+  public StaffMember addStaffMember(String aName, int aId, double aWeeklySalary)
   {
-    return new StaffMember(aName, aId, this);
+    return new StaffMember(aName, aId, aWeeklySalary, this);
   }
 
   public boolean addStaffMember(StaffMember aStaffMember)

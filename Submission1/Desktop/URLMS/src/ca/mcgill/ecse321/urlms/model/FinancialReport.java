@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 68 "../../../../../URLMS.ump"
+// line 69 "../../../../../URLMS.ump"
 public class FinancialReport
 {
 
