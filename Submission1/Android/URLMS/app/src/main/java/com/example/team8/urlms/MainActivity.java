@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         funding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            toastMessage("NEXT EXPANSION");
                 startActivity(FundingPage.class);
             }
         });
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            toastMessage("Subscribe monthly to get the latest features");
                 startActivity(InventoryPage.class);
 
             }
@@ -124,27 +122,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void deleteAllAuthorization(){
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage("Admin Access Required.")
-                .setCancelable(false)
-                .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                toDisplay.setText("");
-                toastMessage("All members deleted");
-
-            }
-        })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-            AlertDialog display = alert.create();
-            alert.setTitle("Admin");
-            alert.show();
-    }
 
 }

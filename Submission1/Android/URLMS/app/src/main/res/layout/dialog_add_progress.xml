@@ -3,7 +3,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:padding="10dp">
+              android:padding="10dp"
+              android:weightSum="1">
 
     <TextView
         android:id="@+id/progressUpdateTitle"
@@ -14,16 +15,6 @@
         android:text="@string/addDateAndProgress"
         android:textSize="20sp"
         android:layout_marginTop="5dp"/>
-
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="@string/monthDayYear"
-        android:inputType="date"/>
 
     <EditText
         android:id="@+id/editTextProgress"
@@ -40,9 +31,15 @@
         android:id="@+id/buttonConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/confirmString"
         android:background="@color/colorAccent"
-        android:textColor="@android:color/white"/>
+        android:text="@string/confirmString"
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/holo_blue_bright"/>
 
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"/>
 
 </LinearLayout>

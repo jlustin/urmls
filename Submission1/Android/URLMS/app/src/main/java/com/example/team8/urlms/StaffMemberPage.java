@@ -1,11 +1,14 @@
 package com.example.team8.urlms;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,10 +24,13 @@ import ca.mcgill.ecse321.urlms.model.ResearchAssociate;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
+import static com.example.team8.urlms.R.id.toDisplay;
+
 public class StaffMemberPage extends AppCompatActivity {
 
     private URLMS urlms;
     private String fileName;
+    String date = "";
 
     private String m_Date;
     private String m_ProgressUpdateText;
@@ -80,9 +86,11 @@ public class StaffMemberPage extends AppCompatActivity {
         editName.setText(sc.viewStaffMemberName(position));
         editId = (EditText) findViewById(R.id.editId);
         editId.setText(sc.viewStaffMemberID(position));
-        //TODO set scrollable
+
+
         progressUpdate = (TextView) findViewById(R.id.progressText);
         progressUpdate.setVisibility(View.INVISIBLE);
+        progressUpdate.setMovementMethod(new ScrollingMovementMethod());
 
         researchAssistantBox = (CheckBox) findViewById(R.id.researchAssistantBox);
         researchAssociateBox = (CheckBox) findViewById(R.id.researchAssociateBox);
@@ -115,24 +123,32 @@ public class StaffMemberPage extends AppCompatActivity {
             public void onClick(View v) {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(StaffMemberPage.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_add_progress, null);
-                final EditText mDate = (EditText) mView.findViewById(R.id.editTextDate);
                 final EditText mProgress = (EditText) mView.findViewById(R.id.editTextProgress);
+                final DatePicker mDatePicker = (DatePicker) mView.findViewById(R.id.datePicker);
                 Button mConfirm = (Button) mView.findViewById(R.id.buttonConfirm);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                mDatePicker.init(2017, 11, 03, new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        date = (monthOfYear+1)+ "-"+dayOfMonth+ "-"+year;
+                    }
+                });
+//                mDate.getText().toString()
                 mConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!mDate.getText().toString().isEmpty() && !mProgress.getText().toString().isEmpty()){
-                            sc.addProgress(mDate.getText().toString(), mProgress.getText().toString(),position);
+                        if(!mProgress.getText().toString().isEmpty()){
+                            sc.addProgress(date, mProgress.getText().toString(),position);
                             toastMessage("Progress Updated");
                         }
                         else{
                             toastMessage("Please fill any empty fields.");
                         }
+                        dialog.dismiss();
                     }
                 });
-                mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
             }
         });
         sc.save();
@@ -181,10 +197,7 @@ public class StaffMemberPage extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sc.removeStaffMember(position);
-                toastMessage("Member sucessfully deleted.");
-                sc.save();
-                finish();
+            deleteAllAuthorization();
             }
         });
     }
@@ -194,6 +207,29 @@ public class StaffMemberPage extends AppCompatActivity {
         myToast.show();
     }
 
+    public void deleteAllAuthorization(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Admin Access Required.")
+                .setCancelable(false)
+                .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sc.removeStaffMember(position);
+                        toastMessage("Member sucessfully deleted.");
+                        sc.save();
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog display = alert.create();
+        alert.setTitle("Admin");
+        alert.show();
+    }
 
 
 }

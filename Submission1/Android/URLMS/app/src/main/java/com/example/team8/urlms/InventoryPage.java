@@ -67,7 +67,6 @@ public class InventoryPage extends AppCompatActivity {
         insertCost = (EditText) findViewById(R.id.insertCostItem);
         insertQuantity = (EditText) findViewById(R.id.insertQuantityItem);
 
-        //todo add refresh button
 
 
 
@@ -117,6 +116,7 @@ public class InventoryPage extends AppCompatActivity {
                     toastMessage("Please fill the appropriate categories.");
                 }
                 ic.save();
+                recreate();
             }
         });
     }
