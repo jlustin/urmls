@@ -26,13 +26,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import java.awt.Window.Type;
 
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
 	JLabel staffMemberListLabel;
 	JLabel welcomeToUrlmsLabel;
-	JLabel feelFreeLabel;
 	
 	public static Controller controller = new Controller();
 	public static StaffController staffController = new StaffController();
@@ -58,6 +58,8 @@ public class MainPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MainPage() {
+		setTitle("Jun2yu");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 462, 300);
 		contentPane = new JPanel();
@@ -68,33 +70,32 @@ public class MainPage extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnAddSampleStaff = new JButton("Add Sample Staff");
-		btnAddSampleStaff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				staffController.addSampleMembers();
+		JButton btnStaff = new JButton("Staff");
+		btnStaff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				StaffPagePO sppo = new StaffPagePO();
+				sppo.setVisible(true);
 			}
 		});
-		panel.add(btnAddSampleStaff);
+		panel.add(btnStaff);
 		
-		JButton btnViewStaffList = new JButton("View Staff List");
-		panel.add(btnViewStaffList);
-		btnViewStaffList.addActionListener(new ActionListener() {
+		JButton btnInventory = new JButton("Inventory");
+		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				staffMemberListLabel.setText("");
-				List<StaffMember> staffList = staffController.viewStaffList();
-				String name;
-				int id;
-				staffMemberListLabel.setText("<html>");
-				for (StaffMember aMember : staffList) {
-					String previousText = staffMemberListLabel.getText();
-					name = aMember.getName();
-					id = aMember.getId();
-					staffMemberListLabel.setText(previousText + name + " " + id + " <br/>");
-				}
-				String previousText = staffMemberListLabel.getText();
-				staffMemberListLabel.setText(previousText + "</html>");
+				InventoryPagePO ippo = new InventoryPagePO();
+				ippo.setVisible(true);
 			}
 		});
+		panel.add(btnInventory);
+		
+		JButton btnFunding = new JButton("Funding");
+		btnFunding.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FundingPagePO fppo = new FundingPagePO();
+				fppo.setVisible(true);
+			}
+		});
+		panel.add(btnFunding);
 		
 		JButton btnSave = new JButton("Save");
 		panel.add(btnSave);
@@ -107,8 +108,9 @@ public class MainPage extends JFrame {
 			staffMemberListLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			scrollPane.setViewportView(staffMemberListLabel);
 			
-			feelFreeLabel = new JLabel("Feel free to try adding sample staff, and then viewing them.");
-			scrollPane.setColumnHeaderView(feelFreeLabel);
+			JLabel lblFeelFreeTo = new JLabel("Feel free to check out the various amazing functionalites.");
+			lblFeelFreeTo.setHorizontalAlignment(SwingConstants.CENTER);
+			scrollPane.setColumnHeaderView(lblFeelFreeTo);
 			
 			JPanel panel_1 = new JPanel();
 			contentPane.add(panel_1, BorderLayout.NORTH);

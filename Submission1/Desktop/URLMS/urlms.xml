@@ -2,10 +2,53 @@
   <labs id="2">
     <ca.mcgill.ecse321.urlms.model.Lab id="3">
       <name>Lab</name>
-      <staffMembers id="4"/>
-      <inventoryItems id="5"/>
-      <fundingAccounts id="6"/>
-      <reports id="7"/>
+      <staffMembers id="4">
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="5">
+          <name>Victor</name>
+          <id>123</id>
+          <researchRoles id="6"/>
+          <progressUpdates id="7"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="8">
+          <name>Feras</name>
+          <id>111</id>
+          <researchRoles id="9"/>
+          <progressUpdates id="10"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="11">
+          <name>Jun2Yu</name>
+          <id>222</id>
+          <researchRoles id="12"/>
+          <progressUpdates id="13"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="14">
+          <name>Victor</name>
+          <id>123</id>
+          <researchRoles id="15"/>
+          <progressUpdates id="16"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="17">
+          <name>Feras</name>
+          <id>111</id>
+          <researchRoles id="18"/>
+          <progressUpdates id="19"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="20">
+          <name>Jun2Yu</name>
+          <id>222</id>
+          <researchRoles id="21"/>
+          <progressUpdates id="22"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+      </staffMembers>
+      <inventoryItems id="23"/>
+      <fundingAccounts id="24"/>
+      <financialReports id="25"/>
       <uRLMS reference="1"/>
     </ca.mcgill.ecse321.urlms.model.Lab>
   </labs>

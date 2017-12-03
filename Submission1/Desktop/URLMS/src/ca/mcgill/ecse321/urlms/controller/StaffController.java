@@ -77,7 +77,6 @@ public class StaffController extends Controller {
 		aStaffMember.setName(desiredName);
 		aStaffMember.setId(id);
 		addRoles(aStaffMember, box1, box2);
-
 	}
 
 	/**
@@ -152,6 +151,7 @@ public class StaffController extends Controller {
 	 *            box2==staff associate
 	 */
 	public void addStaffMember(String name, boolean box1, boolean box2) {
+		//TODO: bad input arguments. See Google Doc for more details.
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		// "auto-unique"
@@ -164,14 +164,13 @@ public class StaffController extends Controller {
 	/**
 	 * This method will remove a staff member in the lab by id
 	 * 
-	 * @param id
-	 *            of the staff member by int
+	 * @param id of the staff member by index
 	 */
 	public void removeStaffMember(int index) {
+		//TODO: ID, not index. 
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		aLab.getStaffMember(index).delete();
-
 	}
 
 	/**
@@ -187,6 +186,8 @@ public class StaffController extends Controller {
 
 	// helper method for adding roles specificied by checkbox / radio button
 	public void addRoles(StaffMember aStaffMember, boolean box1, boolean box2) {
+
+		// TODO: use a for loop instead!!!
 		if (aStaffMember.hasResearchRoles()) {
 			aStaffMember.getResearchRole(0).delete();
 		}
@@ -194,6 +195,7 @@ public class StaffController extends Controller {
 			aStaffMember.getResearchRole(0).delete();
 		}
 		// add desired roles
+		// TODO: can be very much simplified. See google doc for more details.
 		if (box1 && box2) {
 			aStaffMember.addResearchRole(new ResearchAssistant("Why you read this", aStaffMember));
 			aStaffMember.addResearchRole(new ResearchAssociate("Why you read this", aStaffMember));

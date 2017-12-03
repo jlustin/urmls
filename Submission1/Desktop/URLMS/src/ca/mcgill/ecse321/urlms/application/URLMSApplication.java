@@ -18,7 +18,8 @@ public class URLMSApplication {
 		URLMSApplication.setFilename("urlms.xml");
 		MainPage mp = new MainPage();
 		mp.setVisible(true);
-
+		
+		//TODO: add this as legitimate JUnits tests
 		// //inventory tests=============================
 		//
 		//
