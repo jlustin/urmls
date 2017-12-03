@@ -187,5 +187,40 @@ public class StaffController extends Controller {
             //do nothing
         }
     }
+    
+    public void editStaffmemberRecordByID(int id, int newID, String desiredName, boolean box1, boolean box2, double weeklySalary) {
+        URLMS urlms = URLMSApplication.getURLMS();
+        Lab aLab = urlms.getLab(0);
+        StaffMember aStaffMember = aLab.getStaffMember(0);
+        
+        if(aStaffMember == null) return;
+        
+        for(StaffMember iteratedStaffMember: aLab.getStaffMembers()) {
+        		if(id == iteratedStaffMember.getId()) {
+        			aStaffMember = iteratedStaffMember;
+        		}
+        }
+        
+        aStaffMember.setName(desiredName);
+        aStaffMember.setId(newID);
+        aStaffMember.setWeeklySalary(weeklySalary);
+        addRoles(aStaffMember,box1,box2);
+ 
+    }
+    
+    public void removeStaffMemberByID(int id) {
+        URLMS urlms = URLMSApplication.getURLMS();
+        Lab aLab = urlms.getLab(0);
+        StaffMember aStaffMember = aLab.getStaffMember(0);      
+        if(aStaffMember == null) return;
+        
+        for(StaffMember iteratedStaffMember: aLab.getStaffMembers()) {
+    			if(id == iteratedStaffMember.getId()) {
+    					iteratedStaffMember.delete();
+    				}
+        		}
+        
+       
+    }
  
 }

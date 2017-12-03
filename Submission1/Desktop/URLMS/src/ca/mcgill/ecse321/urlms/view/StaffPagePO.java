@@ -37,8 +37,10 @@ public class StaffPagePO extends JFrame {
 	private JPanel contentPane;
 	JLabel welcomeToStaffLabel;
 	public AddStaffMemberPO asmpo = new AddStaffMemberPO();
+	public EditStaffMemberPO esmpo = new EditStaffMemberPO();
 	
 	public static StaffController controller = new StaffController();
+
 	
 
 	/**
@@ -86,6 +88,11 @@ public class StaffPagePO extends JFrame {
 		panel.add(btnAddStaff);
 		
 		JButton btnEditStaffMember = new JButton("Edit Staff Member");
+		btnEditStaffMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				esmpo.setVisible(true);
+			}
+		});
 		panel.add(btnEditStaffMember);
 		
 		JButton btnViewStaffList = new JButton("View Staff List");
