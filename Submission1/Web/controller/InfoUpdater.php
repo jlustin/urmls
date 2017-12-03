@@ -33,7 +33,15 @@
 			break;
 		case "editStaffMember":
 			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
-			//$iu->updateRoles($_GET['roleA'],$_GET['roleB']);
+			if(!empty($_GET['role'])){
+				$iu->updateRoles($_GET['role']);
+			}
+			else{
+				$iu->updateRoles([]);
+			}
+			if(!empty($_GET['newProgressUpdate'])){
+				$iu->addProgressUpdate($_GET['newProgressUpdate'],"LOL");
+			}
 			break;
 			
 	}
@@ -89,14 +97,26 @@
 			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";	
 		}
 		
-// 		function updateRoles($roleA, $roleB){
-// 			$urlms = $_SESSION['urlms'];
-// 			$staffMember = $_SESSION['staffmember'];
+		function updateRoles($roles){
+			$urlms = $_SESSION['urlms'];
+			$staffMember = $_SESSION['staffmember'];
 			
 			
-// 			foreach ($staffMember->getResearchRoles() as $r){
-// 				$staffMember->removeResearchRole($r);
-// 			}
+			foreach ($staffMember->getResearchRoles() as $r){
+				$r->delete();
+			}
+			
+			foreach ($roles as $r){
+				switch ($r){
+					case "A":
+						$staffMember->addResearchRole(new ResearchAssociate("", $staffMember));
+						break;
+					case "B":
+						$staffMember->addResearchRole(new ResearchAssistant("", $staffMember));
+						break;
+				}
+			}
+			
 // 			if($roleA=='Yes'){
 // 				$staffMember->addResearchRole(new ResearchAssistant("", $staffMember));
 // 			}
@@ -104,5 +124,16 @@
 // 				$staffMember->addResearchRole(new ResearchAssociate("", $staffMember));
 // 			}
 			
-// 		}
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+		}
+		
+		function addProgressUpdate($desc, $date="LOL"){
+			$urlms = $_SESSION['urlms'];
+			$staffMember = $_SESSION['staffmember'];
+			
+			$staffMember->addProgressUpdate(new ProgressUpdate($date, $desc,$staffMember));
+			$persistence = new Persistence();
+			$persistence->writeDataToStore($urlms);
+		}
 }
