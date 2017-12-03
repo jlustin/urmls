@@ -27,6 +27,7 @@ public class EditInventoryItemPO extends JFrame {
 	private JTextField txtNewQuantity;
 	private JButton btnEditItemDetails;
 	public static InventoryController controller = new InventoryController();
+	private JButton btnDeleteTargetedItem;
 
 	/**
 	 * Launch the application.
@@ -82,6 +83,16 @@ public class EditInventoryItemPO extends JFrame {
 				controller.editInventoryItemDetails(id, newName, cost, quantity);
 			}
 		});
+		
+		btnDeleteTargetedItem = new JButton("Delete Targeted Item");
+		btnDeleteTargetedItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int itemID = Integer.valueOf(txtTargetId.getText());
+				
+				controller.removeInventoryItem(itemID);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -94,7 +105,9 @@ public class EditInventoryItemPO extends JFrame {
 							.addComponent(txtNewCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(txtNewName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(txtTargetId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(169))
+					.addGap(46)
+					.addComponent(btnDeleteTargetedItem)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -108,7 +121,9 @@ public class EditInventoryItemPO extends JFrame {
 					.addGap(18)
 					.addComponent(txtNewQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-					.addComponent(btnEditItemDetails)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEditItemDetails)
+						.addComponent(btnDeleteTargetedItem))
 					.addGap(29))
 		);
 		contentPane.setLayout(gl_contentPane);
