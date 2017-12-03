@@ -58,7 +58,7 @@ public class InventoryController extends Controller {
 	public void addEquipmentItem(String aName, double cost) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		Equipment temp = new Equipment(aName, cost, null, aLab, false);
+		Equipment temp = new Equipment(aName, cost, "Equipment", aLab, false);
 		aLab.addInventoryItem(temp);
 	}
 
@@ -75,7 +75,7 @@ public class InventoryController extends Controller {
 	public void addSupplyItem(String aName, double cost, int quantity) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		SupplyType temp = new SupplyType(aName, cost, null, aLab, quantity);
+		SupplyType temp = new SupplyType(aName, cost, "Supply", aLab, quantity);
 		aLab.addInventoryItem(temp);
 	}
 

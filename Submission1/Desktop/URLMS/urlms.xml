@@ -46,9 +46,20 @@
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.StaffMember>
       </staffMembers>
-      <inventoryItems id="19"/>
-      <fundingAccounts id="20"/>
-      <financialReports id="21"/>
+      <inventoryItems id="19">
+        <ca.mcgill.ecse321.urlms.model.InventoryItem id="20">
+          <name>pololu</name>
+          <cost>10.0</cost>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.InventoryItem>
+        <ca.mcgill.ecse321.urlms.model.InventoryItem id="21">
+          <name>lol</name>
+          <cost>11.0</cost>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.InventoryItem>
+      </inventoryItems>
+      <fundingAccounts id="22"/>
+      <financialReports id="23"/>
       <uRLMS reference="1"/>
     </ca.mcgill.ecse321.urlms.model.Lab>
   </labs>
