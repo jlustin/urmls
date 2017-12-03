@@ -26,14 +26,22 @@ class FundingController {
 	}
 	
 	function addAccount($type, $balance){
-		$urlms = $this->urlms;
-		$urlmsLab = $urlms->getLab_index(0);
- 		$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
- 		$urlmsLab->addFundingAccount($newFundingAccount);
+		if($type == null || strlen($type) == 0){
+			throw new Exception ("Please enter an funding account type.");
+		}
+		else if($balance == null || strlen($balance) == 0){
+			throw new Exception ("Please enter balance.");
+		}
+		else{
+			$urlms = $this->urlms;
+			$urlmsLab = $urlms->getLab_index(0);
+ 			$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
+ 			$urlmsLab->addFundingAccount($newFundingAccount);
 // 		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
 		//$urlms->getLab_index(0)->addFundingAccount($type, $balance, $urlms->getLab_index(0));
- 		$persistence = new Persistence();
- 		$persistence->writeDataToStore($urlms);
+ 			$persistence = new Persistence();
+ 			$persistence->writeDataToStore($urlms);
+		}
 		?>
 		<!-- Add back button to page -->
 		<HTML>
@@ -42,13 +50,50 @@ class FundingController {
 		</HTML><?php
 	}
 	
-	function viewNetBalance($type){
+	function removeAccount($type){
 		$urlms = $this->urlms;
-////	echo $urlms->getLab_index(0)->numberOfFundingAccounts();
-		//$fundingAccount = $this->findFundingAccount($type);
-		//echo $fundingAccount->getBalance();
-////	echo $urlms->getLab_index(0)->getFundingAccount_index($index)->getBalance();
-	 
+		$urlmsLab = $urlms->getLab_index(0);
+		$fundingAccount = $this->findFundingAccount($type);
+		$fundingAccount->delete();
+		$persistence = new Persistence();
+		$persistence->writeDataToStore($urlms);
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>Funding account removed!</p>
+			<a href="../View/FundingView.html">Back</a>
+		</HTML><?php
+	}
+	
+	function getAccounts(){
+		// Get staff members from urlms
+		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+		foreach ($accounts as $a){
+			echo $a->getType() . " " . $a->getBalance() . "<br>";
+		}
+		echo "<a href= \"../View/FundingView.html\">Back</a>" . "<br>";
+	}
+	
+	function getNetBalance(){
+		// Get staff members from urlms
+		$netBalance = 0;
+		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+		foreach ($accounts as $a){
+			$a->getBalance();
+			$netBalance = $netBalance + $a;
+		}
+		echo $netBalance;
+		echo "<a href= \"../View/FundingView.html\">Back</a>" . "<br>";
+	}
+	
+	function viewAccount($type){
+		$urlms = $this->urlms;
+		//echo $urlms->getLab_index(0)->numberOfFundingAccounts();
+		$fundingAccount = $this->findFundingAccount($type);
+		echo $fundingAccount->getType();
+		echo "<br>";
+		echo $fundingAccount->getBalance();
+		echo "<br>";
 		?>
 		<!-- Add back button to page -->
 		<HTML>
@@ -82,18 +127,19 @@ class FundingController {
 		}
 	}
 	
+	
 	function findFundingAccount($type){
 		if($type == null || strlen($type) == 0){
 			throw new Exception ("Please enter an funding account type.");
 		} else{
 			//Find the account
 			$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
-			for ($i = 0; $i < sizeof($items); $i++){
+			for ($i = 0; $i < sizeof($accounts); $i++){
 				if($type == $accounts{$i}->getType()){
 					$fundingAccount = $accounts{$i};
 				}
 			}
-			if($fundingAccoung == null){
+			if($fundingAccount == null){
 				throw new Exception ("Funding account not found.");
 			}
 		}
