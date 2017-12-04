@@ -24,6 +24,10 @@
 				$urlms = new URLMS();
 				$lab = new Lab("9/10", $urlms);
 				$urlms->addLab($lab);
+				
+				$lab->addFundingAccount(new FundingAccount("Staff Funding", 0, $lab));
+				$lab->addFundingAccount(new FundingAccount("Equipment Funding", 0, $lab));
+				$lab->addFundingAccount(new FundingAccount("Supply Funding", 0, $lab));
 			}
 			// return urlms
 			return $urlms;

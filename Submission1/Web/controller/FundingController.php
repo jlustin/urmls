@@ -6,7 +6,7 @@
 	require_once $my_dir . '/../model/StaffMember.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
-	require_once $my_dir . '/../model/Report.php';
+	require_once $my_dir . '/../model/FinancialReport.php';
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
@@ -150,7 +150,7 @@ class FundingController {
 			$urlmsLab = $urlms->getLab_index(0);
 			$fundingAccount = $this->findFundingAccount($account);
 			
-			$newExpense = new Expense($amount, $expensetype, $fundingAccount);
+			$newExpense = new Expense($amount, $date, $expensetype, $fundingAccount);
 			
 			$fundingAccount->addExpense($newExpense);
 			

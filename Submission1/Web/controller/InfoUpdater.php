@@ -9,7 +9,7 @@
 	require_once $my_dir . '/../model/ResearchRole.php';
 	require_once $my_dir . '/../model/ResearchAssociate.php';
 	require_once $my_dir . '/../model/ResearchAssistant.php';
-	require_once $my_dir . '/../model/Report.php';
+	require_once $my_dir . '/../model/FinancialReport.php';
 	require_once $my_dir . '/../model/ProgressUpdate.php';
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
@@ -33,7 +33,7 @@
 			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);		
 			break;
 		case "editStaffMember":
-			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
+			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid'], $_GET['editedstaffsalary']);
 			if(!empty($_GET['role'])){
 				$iu->updateRoles($_GET['role']);
 			}
@@ -96,13 +96,14 @@
 			echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
 		}
 		
-		function updateStaffMember($name, $id){
+		function updateStaffMember($name, $id, $salary){
 			$urlms = $_SESSION['urlms'];
 			$staffMember = $_SESSION['staffmember'];
 			
 			$staffMember->setName($name);
 			$staffMember->setId($id);
-						
+			$staffMember->setWeeklySalary($salary);
+			
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			

@@ -39,14 +39,16 @@ class StaffController {
 	/*
 	 * add new staff to urlms
 	 */
-	function addStaff($name){
+	function addStaff($name, $salary){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
-		} else {
+		} elseif ($salary == null){
+			throw new Exception ("Please enter a salary.");	
+		}else {
 			$urlms = $this->urlms;
 			
 			//add the new member to the staff manager
-			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0));
+			$newStaffMember = new StaffMember($name, rand(0,1000), $salary, $urlms->getLab_index(0));
 			$urlms->getLab_index(0)->addStaffMember($newStaffMember);
 			
 			//Save
@@ -102,6 +104,7 @@ class StaffController {
 			echo " " . get_class($staffMember->getResearchRole_index($i));
 		}
 		echo "<br>";
+		echo "Weekly Salary: $" . $staffMember->getWeeklySalary() . "<br>";
 		echo "Progress Updates:";
 		if(!$staffMember->hasProgressUpdates()){
 			echo " None";
@@ -119,6 +122,7 @@ class StaffController {
 			<input type="hidden" name="action" value="editStaffMember" />
 			New Name: <input type="text" name="editedstaffname" value="<?php echo $staffMember->getName();?>"/>
 			New ID: <input type="text" name="editedstaffid" value="<?php echo $staffMember->getId();?>"/>
+			New Salary: <input type="text" name="editedstaffsalary" value="<?php echo $staffMember->getWeeklySalary();?>"/>
 			<br>
 			<br>
 			Roles:<br>
@@ -169,6 +173,7 @@ class StaffController {
 		} else{
 			//Find the member
 			$members = $this->urlms->getLab_index(0)->getStaffMembers();
+			$staffMember=null;
 			for ($i = 0; $i < sizeof($members); $i++){
 				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
 					$staffMember = $members{$i};

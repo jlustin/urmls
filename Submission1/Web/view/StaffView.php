@@ -29,7 +29,7 @@
 	  			 <span class="navbar-toggler-icon"></span>
 	 		 </button>
 	  			<div class="collapse navbar-collapse" id="navbarNav">
-		    		<ul class="navbar-nav">
+		    		<ul class="navbar-nav mr-auto">
 		      			<!-- li class="nav-item active">
 		        			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 		      			</li> -->
@@ -41,6 +41,11 @@
 		      			</li>
 		      			<li class="nav-item">
 		        			<a class="nav-link" href="FundingView.php">Funding</a>
+		      			</li>
+		      		</ul>
+		      		<ul class="nav-bar">	
+		      			<li class="nav-item">
+		      				<a class="nav-link" href=#>More</a>
 		      			</li>
 		    		</ul>
 	  			</div>
@@ -85,6 +90,10 @@
 				<div class="col-sm-6">
  					<label for="newStaffName">Name</label>
 					<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/>
+				</div>
+				<div class="col-sm-6">
+ 					<label for="newStaffSalary">Salary</label>
+					<input type="text" class="form-control" name="newstaffsalary" id="newStaffSalary" placeholder="Enter staff starting salary"/>
 				</div>
 			</div>
 			

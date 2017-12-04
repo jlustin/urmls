@@ -32,6 +32,9 @@ switch($_GET['action']){
 	case "11/10":
 		$c->generateFinancialReport($_GET['accounttype']);
 		break;
+	case "5/10":
+		$c->payDay();
+		break;
 // 	case "12/10":
 // 		$c->updateAccount($_GET['edittype']);
 // 		break;

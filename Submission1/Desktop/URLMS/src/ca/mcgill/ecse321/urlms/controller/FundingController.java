@@ -10,7 +10,6 @@ import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
-<<<<<<< HEAD
 import ca.mcgill.ecse321.urlms.model.FinancialReport;
 
 public class FundingController extends Controller {

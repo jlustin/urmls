@@ -5,7 +5,7 @@ require_once $my_dir . '/../persistence/persistence.php';
 require_once $my_dir . '/../controller/FundingController.php';
 require_once $my_dir . '/../model/URLMS.php';
 require_once $my_dir . '/../model/Lab.php';
-require_once $my_dir . '/../model/Report.php';
+require_once $my_dir . '/../model/FinancialReport.php';
 require_once $my_dir . '/../model/Expense.php';
 require_once $my_dir . '/../model/FundingAccount.php';
 
@@ -91,6 +91,15 @@ require_once $my_dir . '/../model/FundingAccount.php';
 		<br>
 	</form>
 -->
+
+ 
+ 	<form action="FundingRequest.php" method="get">
+ 		<br>
+ 		<input type="hidden" name="action" value="5/10" />
+ 		<input type="submit" class="btn btn-success" value="PAYDAY!">
+ 		<br>	
+ 	</form>
+ 	
 	<br>
 	<hr>
 	
@@ -142,7 +151,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 // 				}else{$progress = "None";}
 				
 				echo "<tr><td><button type=\"button\" class=\"btn btn-outline-primary\">" . $account->getType() . "</button></td>
-					<td>". $account->getBalance() ."</td>
+					<td>$". $account->getBalance() ."</td>
 					<td>" . $latestExpense . "</td>
 					</tr>";
 			}?>

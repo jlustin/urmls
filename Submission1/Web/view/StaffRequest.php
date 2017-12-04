@@ -18,7 +18,7 @@ if(!empty($_GET['action'])){
 			break;
 		case "10/10":
 			try {
-				$c->addStaff($_GET['newstaffname']);
+				$c->addStaff($_GET['newstaffname'],$_GET['newstaffsalary']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
