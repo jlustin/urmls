@@ -26,7 +26,7 @@ switch($_GET['action']){
 			}
 		} catch (Exception $e){
 			echo $e->getMessage() . "<br>";
-			echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
 		}
 		break;
 	case "11/10":
@@ -34,7 +34,7 @@ switch($_GET['action']){
 			$c->removeInventory($_GET['oldInventoryName']);
 		} catch (Exception $e){
 			echo $e->getMessage() . "<br>";
-			echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
 		}
 		break;
 	case "12/10":
@@ -42,7 +42,7 @@ switch($_GET['action']){
 			$c->viewInventoryItem($_GET['inventoryName']);
 		} catch (Exception $e){
 			echo $e->getMessage() . "<br>";
-			echo "<a href= \"../index.php\">Back</a>" . "<br>";
+			echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
 		}
 		break;
 }

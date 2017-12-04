@@ -21,7 +21,7 @@ if(!empty($_GET['action'])){
 				$c->addStaff($_GET['newstaffname'],$_GET['newstaffsalary']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
 			}
 			break;
 		case "11/10":
@@ -29,7 +29,7 @@ if(!empty($_GET['action'])){
 				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
 			}
 			break;
 		case "12/10":
@@ -37,7 +37,7 @@ if(!empty($_GET['action'])){
 				$c->viewMemberRecord($_GET['staffname'], $_GET['staffid']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"../index.php\">Back</a>" . "<br>";
+				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
 			}
 	}
 }

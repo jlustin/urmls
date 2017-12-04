@@ -1,6 +1,7 @@
 <?php
 	$my_dir = dirname(__FILE__);
 	require_once $my_dir . '/../persistence/persistence.php';
+	require_once $my_dir . '/../controller/Controller.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
 	require_once $my_dir . '/../model/StaffMember.php';
@@ -11,7 +12,7 @@
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
 		
-class FundingController {
+class FundingController extends Controller {
 	
 	protected $urlms;
 	/*
@@ -22,11 +23,11 @@ class FundingController {
 	}
 	
 	function addAccount($type, $balance){
-		if($type == null || strlen($type) == 0){
-			throw new Exception ("Please enter an funding account type.");
+		if($type == null || strlen($type) == 0 || !$this->isValidStr($type)){
+			throw new Exception ("Please enter a valid funding account type.");
 		}
-		else if($balance == null || strlen($balance) == 0){
-			throw new Exception ("Please enter balance.");
+		else if($balance == null || strlen($balance) == 0 || !is_numerical($balance)){
+			throw new Exception ("Please enter a valid balance.");
 		}
 		else{
 			$urlms = $this->urlms;
@@ -115,7 +116,6 @@ class FundingController {
 	
 	function viewAccount($type){
 		$urlms = $this->urlms;
-		//echo $urlms->getLab_index(0)->numberOfFundingAccounts();
 		$fundingAccount = $this->findFundingAccount($type);
 		session_start();
 		$_SESSION['fundingaccount'] = $fundingAccount;
@@ -143,8 +143,14 @@ class FundingController {
 	}
 	
 	function addTransaction($account, $expensetype, $amount, $type, $date){
-		if($amount == null || strlen($amount) == 0){
-			throw new Exception ("Please enter a amount.");
+		if($expensetype == null || strlen($expensetype) == 0 || !$this->isValidStr($expensetype)){
+			throw new Exception ("Please enter a valid expense type.");
+		}
+		else if ($amount == null || strlen($amount) == 0 || !is_numerical($amount)){
+			throw new Exception ("Please enter a valid amount.");
+		} 
+		else if ($date == null){
+			throw new Exception ("Please enter a date.");
 		} else {
 			$urlms = $this->urlms;
 			$urlmsLab = $urlms->getLab_index(0);
@@ -174,8 +180,8 @@ class FundingController {
 	}
 	
 	function findFundingAccount($type){
-		if($type == null || strlen($type) == 0){
-			throw new Exception ("Please enter an funding account type.");
+		if($type == null || strlen($type) == 0 || !$this->isValidStr($type)){
+			throw new Exception ("Please enter a valid funding account type.");
 		} else{
 			//Find the account
 			$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();

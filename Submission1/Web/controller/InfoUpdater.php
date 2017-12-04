@@ -30,25 +30,44 @@
 	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
 		case "editInventoryItem":
-			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);		
+			try{
+				$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);		
+			} catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
+			}
 			break;
 		case "editStaffMember":
-			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid'], $_GET['editedstaffsalary']);
-			if(!empty($_GET['role'])){
-				$iu->updateRoles($_GET['role']);
-			}
-			else{
-				$iu->updateRoles([]);
-			}
-			if(!empty($_GET['newProgressUpdate'])){
-				$iu->addProgressUpdate($_GET['newProgressUpdate'],$_GET['date']);
+			try{
+				$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid'], $_GET['editedstaffsalary']);
+			
+				if(!empty($_GET['role'])){
+					$iu->updateRoles($_GET['role']);
+				}
+				else{
+					$iu->updateRoles([]);
+				}
+				if(!empty($_GET['newProgressUpdate'])){
+					$iu->addProgressUpdate($_GET['newProgressUpdate'],$_GET['date']);
+				}
+			} catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
 			}
 			break;
 		case "editAccount":
-			$iu->updateAccount($_GET['editedaccountname']);
+			try {$iu->updateAccount($_GET['editedaccountname']);
+			}catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"FundingView.php\">Back</a>" . "<br>";
+			}
 			break;
 		case "editExpense":
-			$iu->updateExpense($_GET['expensename'], $_GET['newexpensename'],$_GET['newexpenseamount'], $_GET['newexpensedate']);
+			try {$iu->updateExpense($_GET['expensename'], $_GET['newexpensename'],$_GET['newexpenseamount'], $_GET['newexpensedate']);
+			}catch (Exception $e){
+				echo $e->getMessage() . "<br>";
+				echo "<a href= \"FundingView.php\">Back</a>" . "<br>";
+			}
 			break;
 	}
 	
