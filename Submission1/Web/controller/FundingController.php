@@ -43,7 +43,7 @@ class FundingController {
 		<!-- Add back button to page -->
 		<HTML>
 			<p>New account successfully added!</p>
-			<a href="../View/FundingView.html">Back</a>
+			<a href="../View/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -53,8 +53,8 @@ class FundingController {
 
 		$expenses = $fundingAccount->getExpenses();
 		foreach ($expenses as $e){
-			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . "<br>";
-		}
+			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . " | Date: " ."<br>";
+		}//TODO ADD DATE
 		
 		session_start();
 		$_SESSION['fundingAccount'] = $fundingAccount;
@@ -75,7 +75,7 @@ class FundingController {
 		</HTML>
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../View/FundingView.html">Back</a>
+			<a href="../View/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -90,7 +90,7 @@ class FundingController {
 		<!-- Add back button to page -->
 		<HTML>
 			<p>Funding account removed!</p>
-			<a href="../View/FundingView.html">Back</a>
+			<a href="../View/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -100,7 +100,7 @@ class FundingController {
 		foreach ($accounts as $a){
 			echo $a->getType() . " " . $a->getBalance() . "<br>";
 		}
-		echo "<a href= \"../View/FundingView.html\">Back</a>" . "<br>";
+		echo "<a href= \"../View/FundingView.php\">Back</a>" . "<br>";
 	}
 	
 	function getNetBalance(){
@@ -110,7 +110,7 @@ class FundingController {
 			$netBalance = $netBalance + $a->getBalance();
 		}
 		echo "Net Balance of Lab: " . $netBalance . "<br>";
-		echo "<a href= \"../View/FundingView.html\">Back</a>" . "<br>";
+		echo "<a href= \"../View/FundingView.php\">Back</a>" . "<br>";
 	}
 	
 	function viewAccount($type){
@@ -138,17 +138,17 @@ class FundingController {
 
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../View/FundingView.html">Back</a>
+			<a href="../View/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
-	function addTransaction($labtype, $expensetype, $amount, $type, $date){
+	function addTransaction($account, $expensetype, $amount, $type, $date){
 		if($amount == null || strlen($amount) == 0){
 			throw new Exception ("Please enter a amount.");
 		} else {
 			$urlms = $this->urlms;
 			$urlmsLab = $urlms->getLab_index(0);
-			$fundingAccount = $this->findFundingAccount($labtype);
+			$fundingAccount = $this->findFundingAccount($account);
 			
 			$newExpense = new Expense($amount, $expensetype, $fundingAccount);
 			
@@ -168,7 +168,7 @@ class FundingController {
 			<!-- Add back button to page -->
 			<HTML>
 				<p>New transation item successfully added!</p>
-				<a href="../View/FundingView.html">Back</a>
+				<a href="../View/FundingView.php">Back</a>
 			</HTML><?php
 		}
 	}
@@ -191,5 +191,13 @@ class FundingController {
 		return $fundingAccount;
 	}
 	
+	function payDay(){
+		$totalStaffCost = 0;
+		foreach($this->urlms->getLab_index(0)->getStaffMembers() as $member){
+			$totalStaffCost += $member->getWeeklySalary();
+		}
+		$this->addTransaction("Staff Funding", "PAYDAY!", $totalStaffCost, "expense", "03/12/2017");
+		//TODO CHANGE DATE ARGUMENT	
+	}
 }
 ?>
