@@ -3,143 +3,201 @@
 	require_once $my_dir . '/../persistence/persistence.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
-	require_once $my_dir . '/../model/Staff.php';
-	require_once $my_dir . '/../model/Funding.php';
-	require_once $my_dir . '/../model/Inventory.php';
 	require_once $my_dir . '/../model/StaffMember.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
-	require_once $my_dir . '/../model/ResearchRole.php';
-	require_once $my_dir . '/../model/ResearchAssociate.php';
-	require_once $my_dir . '/../model/ResearchAssistant.php';
 	require_once $my_dir . '/../model/Report.php';
-	require_once $my_dir . '/../model/ProgressUpdate.php';
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-	
-	// start session
-	session_start();
-	
-	$c = new FundingController();
-	// Check which button was clicked by user
-	// Run appropriate controller method with respect to user request
-	switch($_GET['action']){
-		case "9/10":
-			//$c->getStaffList();
-			break;
-		case "10/10":
-// 			try {
-// 			$c->addStaff($_GET['newstaffname']); 
-// 			} catch (Exception $e){
-// 				echo $e->getMessage() . "<br>";
-// 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-// 			}
-			break;
-		case "11/10":
-// 			try {
-// 				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
-// 			} catch (Exception $e){
-// 				echo $e->getMessage() . "<br>";
-// 				echo "<a href= \"../index.php\">Back</a>" . "<br>";
-// 			}
-			break;
-	}
 		
 class FundingController {
 	
+	protected $urlms;
 	/*
 	 * Constructor
 	 */
-	public function __construct(){}
+	public function __construct($urlms){
+		$this->urlms = $urlms;
+	}
 	
-	/*
-	 * get list of staff from urlms
-	 */
-	function getStaffList(){
-		// Load data
-		$persistence = new Persistence();
-		$urlms = $persistence->loadDataFromStore();
-		// Get staff members from urlms
-		$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
-		for ($i = 0; $i < sizeof($members); $i++){
-			// display each staff member represented by their ID and name
-			echo $members{$i}->getId() . " " . $members{$i}->getName() . "<br>";
-		} 
+	function addAccount($type, $balance){
+		if($type == null || strlen($type) == 0){
+			throw new Exception ("Please enter an funding account type.");
+		}
+		else if($balance == null || strlen($balance) == 0){
+			throw new Exception ("Please enter balance.");
+		}
+		else{
+			$urlms = $this->urlms;
+			$urlmsLab = $urlms->getLab_index(0);
+ 			$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
+ 			$urlmsLab->addFundingAccount($newFundingAccount);
+
+ 			$newFundingAccount->addExpense(new Expense($balance, "Initial Balance", $newFundingAccount));
+ 			
+ 			$persistence = new Persistence();
+ 			$persistence->writeDataToStore($urlms);
+		}
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../index.php">Back</a>
+			<p>New account successfully added!</p>
+			<a href="../View/FundingView.php">Back</a>
 		</HTML><?php
-		//Can use echo "<a href= \"../index.php\">Back</a>" . "<br>"; as alternative
 	}
 	
-	/*
-	 * add new staff to urlms
-	 */
-	function addStaff($name){
-		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter a name.");
+	function generateFinancialReport($accountType){
+		$urlms = $this->urlms;
+		$fundingAccount = $this->findFundingAccount($accountType);
+
+		$expenses = $fundingAccount->getExpenses();
+		foreach ($expenses as $e){
+			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . " | Date: " ."<br>";
+		}//TODO ADD DATE
+		
+		session_start();
+		$_SESSION['fundingAccount'] = $fundingAccount;
+		$_SESSION['urlms'] = $urlms;
+		?>
+		<HTML>
+			<form action="../Controller/InfoUpdater.php" method="get">
+			<br>
+			<h3>Edit Expense</h3>
+			<input type="hidden" name="action" value="editExpense" />
+			Expense Type: <input type="text" name="expensename" value=""/>
+			New Expense Type: <input type="text" name="newexpensename" value=""/>
+			New Amount: <input type="text" name="newexpenseamount" value=""/><br>
+			New Date: <input type="text" name="newexpensedate" value=""/><br>
+			<input type="submit" value="Edit expense!" />
+ 			<br>
+		</form>
+		</HTML>
+		<!-- Add back button to page -->
+		<HTML>
+			<a href="../View/FundingView.php">Back</a>
+		</HTML><?php
+	}
+	
+	function removeAccount($type){
+		$urlms = $this->urlms;
+		$urlmsLab = $urlms->getLab_index(0);
+		$fundingAccount = $this->findFundingAccount($type);
+		$fundingAccount->delete();
+		$persistence = new Persistence();
+		$persistence->writeDataToStore($urlms);
+		?>
+		<!-- Add back button to page -->
+		<HTML>
+			<p>Funding account removed!</p>
+			<a href="../View/FundingView.php">Back</a>
+		</HTML><?php
+	}
+	
+	function getAccounts(){
+		// Get staff members from urlms
+		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+		foreach ($accounts as $a){
+			echo $a->getType() . " " . $a->getBalance() . "<br>";
+		}
+		echo "<a href= \"../View/FundingView.php\">Back</a>" . "<br>";
+	}
+	
+	function getNetBalance(){
+		$netBalance = 0;
+		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+		foreach ($accounts as $a){
+			$netBalance = $netBalance + $a->getBalance();
+		}
+		echo "Net Balance of Lab: " . $netBalance . "<br>";
+		echo "<a href= \"../View/FundingView.php\">Back</a>" . "<br>";
+	}
+	
+	function viewAccount($type){
+		$urlms = $this->urlms;
+		//echo $urlms->getLab_index(0)->numberOfFundingAccounts();
+		$fundingAccount = $this->findFundingAccount($type);
+		session_start();
+		$_SESSION['fundingaccount'] = $fundingAccount;
+		$_SESSION['urlms'] = $urlms;
+		echo "Type: " . $fundingAccount->getType();
+		echo "<br>";
+		echo "Balance: " . $fundingAccount->getBalance();
+		echo "<br>";
+		?>
+		<HTML>
+			<form action="../Controller/InfoUpdater.php" method="get">
+			<br>
+			<h3>Edit Account</h3>
+			<input type="hidden" name="action" value="editAccount" />
+			New Name: <input type="text" name="editedaccountname" value="<?php echo $fundingAccount->getType();?>"/>
+			<input type="submit" value="Edit account!" />
+ 			<br>
+		</form>
+		</HTML>
+
+		<!-- Add back button to page -->
+		<HTML>
+			<a href="../View/FundingView.php">Back</a>
+		</HTML><?php
+	}
+	
+	function addTransaction($account, $expensetype, $amount, $type, $date){
+		if($amount == null || strlen($amount) == 0){
+			throw new Exception ("Please enter a amount.");
 		} else {
-			// Load data
-			$persistence = new Persistence();
-			$urlms = $persistence->loadDataFromStore();
+			$urlms = $this->urlms;
+			$urlmsLab = $urlms->getLab_index(0);
+			$fundingAccount = $this->findFundingAccount($account);
 			
-			//add the new member to the staff manager
-			$newStaffMember = new StaffMember($name, rand(0,1000), $urlms->getLab_index(0)->getStaff());
-			$urlms->getLab_index(0)->getStaff()->addStaffMember($newStaffMember);
+			$newExpense = new Expense($amount, $expensetype, $fundingAccount);
 			
+			$fundingAccount->addExpense($newExpense);
+			
+			if($type == "expense"){
+				$fundingAccount->setBalance($fundingAccount->getBalance() - $newExpense->getAmount());
+				$newExpense->setAmount(-$amount);
+			} else{
+				$fundingAccount->setBalance($fundingAccount->getBalance() + $newExpense->getAmount());
+			}
 			// Write data
+			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			
 			?>
 			<!-- Add back button to page -->
 			<HTML>
-				<p>New staff member successfully added!</p>
-				<a href="../index.php">Back</a>
+				<p>New transation item successfully added!</p>
+				<a href="../View/FundingView.php">Back</a>
 			</HTML><?php
 		}
 	}
 	
-	/*
-	 * remove a staff member from urlms
-	 */
-	function removeStaff($name, $id){
-		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter a name.");
-		} else {
-			// Load data
-			$persistence = new Persistence();
-			$urlms = $persistence->loadDataFromStore();
-			
-			//Find the member to remove
-			$members = $urlms->getLab_index(0)->getStaff()->getStaffMembers();
-			for ($i = 0; $i < sizeof($members); $i++){
-				if($name == $members{$i}->getName() && $id == $members{$i}->getID()){
-					$staffMember = $members{$i};
+	function findFundingAccount($type){
+		if($type == null || strlen($type) == 0){
+			throw new Exception ("Please enter an funding account type.");
+		} else{
+			//Find the account
+			$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
+			for ($i = 0; $i < sizeof($accounts); $i++){
+				if($type == $accounts{$i}->getType()){
+					$fundingAccount = $accounts{$i};
 				}
 			}
-			
-			if($staffMember == null){
-				throw new Exception ("Staff Member not found.");
+			if($fundingAccount == null){
+				throw new Exception ("Funding account not found.");
 			}
-			
-			$result = $urlms->getLab_index(0)->getStaff()->removeStaffMember($staffMember);
-			
-			// Write data
-			$persistence->writeDataToStore($urlms);
-			
-			?>
-			<!-- Add back button to page -->
-			<HTML>
-				<p>Staff member removed succesfully</p>
-				<?php  //if($result) 
-// 					echo "yes";
-// 				else 
-// 					echo "no";?>
-				<a href="../index.php">Back</a>
-			</HTML><?php
-		}		
+		}
+		return $fundingAccount;
+	}
+	
+	function payDay(){
+		$totalStaffCost = 0;
+		foreach($this->urlms->getLab_index(0)->getStaffMembers() as $member){
+			$totalStaffCost += $member->getWeeklySalary();
+		}
+		$this->addTransaction("Staff Funding", "PAYDAY!", $totalStaffCost, "expense", "03/12/2017");
+		//TODO CHANGE DATE ARGUMENT	
 	}
 }
 ?>

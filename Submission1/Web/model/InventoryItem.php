@@ -2,6 +2,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
+// class Inventory
+// {
+// 1 -- * InventoryItem;
+// }
 class InventoryItem
 {
 
@@ -15,21 +19,21 @@ class InventoryItem
   private $category;
 
   //InventoryItem Associations
-  private $inventory;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aCost, $aCategory, $aInventory)
+  public function __construct($aName, $aCost, $aCategory, $aLab)
   {
     $this->name = $aName;
     $this->cost = $aCost;
     $this->category = $aCategory;
-    $didAddInventory = $this->setInventory($aInventory);
-    if (!$didAddInventory)
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create inventoryItem due to inventory");
+      throw new Exception("Unable to create inventoryItem due to lab");
     }
   }
 
@@ -76,26 +80,26 @@ class InventoryItem
     return $this->category;
   }
 
-  public function getInventory()
+  public function getLab()
   {
-    return $this->inventory;
+    return $this->lab;
   }
 
-  public function setInventory($aInventory)
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aInventory == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingInventory = $this->inventory;
-    $this->inventory = $aInventory;
-    if ($existingInventory != null && $existingInventory != $aInventory)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingInventory->removeInventoryItem($this);
+      $existingLab->removeInventoryItem($this);
     }
-    $this->inventory->addInventoryItem($this);
+    $this->lab->addInventoryItem($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -107,9 +111,9 @@ class InventoryItem
 
   public function delete()
   {
-    $placeholderInventory = $this->inventory;
-    $this->inventory = null;
-    $placeholderInventory->removeInventoryItem($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeInventoryItem($this);
   }
 
 }

@@ -13,9 +13,9 @@ class ResearchAssistant extends ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aStaffMember)
+  public function __construct($aTaskDescription, $aStaffMember)
   {
-    parent::__construct($aStaffMember);
+    parent::__construct($aTaskDescription, $aStaffMember);
   }
 
   //------------------------

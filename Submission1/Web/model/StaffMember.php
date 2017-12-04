@@ -2,6 +2,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
+// class Staff
+// {
+// 1 -- * StaffMember;
+// }
 class StaffMember
 {
 
@@ -16,22 +20,22 @@ class StaffMember
   //StaffMember Associations
   private $researchRoles;
   private $progressUpdates;
-  private $staff;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aId, $aStaff)
+  public function __construct($aName, $aId, $aLab)
   {
     $this->name = $aName;
     $this->id = $aId;
     $this->researchRoles = array();
     $this->progressUpdates = array();
-    $didAddStaff = $this->setStaff($aStaff);
-    if (!$didAddStaff)
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create staffMember due to staff");
+      throw new Exception("Unable to create staffMember due to lab");
     }
   }
 
@@ -147,9 +151,9 @@ class StaffMember
     return $index;
   }
 
-  public function getStaff()
+  public function getLab()
   {
-    return $this->staff;
+    return $this->lab;
   }
 
   public static function minimumNumberOfResearchRoles()
@@ -157,9 +161,9 @@ class StaffMember
     return 0;
   }
 
-  public function addResearchRoleVia()
+  public function addResearchRoleVia($aTaskDescription)
   {
-    return new ResearchRole($this);
+    return new ResearchRole($aTaskDescription, $this);
   }
 
   public function addResearchRole($aResearchRole)
@@ -230,9 +234,9 @@ class StaffMember
     return 0;
   }
 
-  public function addProgressUpdateVia($aDate)
+  public function addProgressUpdateVia($aDate, $aDescription)
   {
-    return new ProgressUpdate($aDate, $this);
+    return new ProgressUpdate($aDate, $aDescription, $this);
   }
 
   public function addProgressUpdate($aProgressUpdate)
@@ -298,21 +302,21 @@ class StaffMember
     return $wasAdded;
   }
 
-  public function setStaff($aStaff)
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aStaff == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingStaff = $this->staff;
-    $this->staff = $aStaff;
-    if ($existingStaff != null && $existingStaff != $aStaff)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingStaff->removeStaffMember($this);
+      $existingLab->removeStaffMember($this);
     }
-    $this->staff->addStaffMember($this);
+    $this->lab->addStaffMember($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -336,9 +340,9 @@ class StaffMember
       $this->progressUpdates = array_values($this->progressUpdates);
     }
     
-    $placeholderStaff = $this->staff;
-    $this->staff = null;
-    $placeholderStaff->removeStaffMember($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeStaffMember($this);
   }
 
 }

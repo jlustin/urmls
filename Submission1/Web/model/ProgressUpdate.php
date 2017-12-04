@@ -11,6 +11,7 @@ class ProgressUpdate
 
   //ProgressUpdate Attributes
   private $date;
+  private $description;
 
   //ProgressUpdate Associations
   private $staffMember;
@@ -19,9 +20,10 @@ class ProgressUpdate
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aDate, $aStaffMember)
+  public function __construct($aDate, $aDescription, $aStaffMember)
   {
     $this->date = $aDate;
+    $this->description = $aDescription;
     $didAddStaffMember = $this->setStaffMember($aStaffMember);
     if (!$didAddStaffMember)
     {
@@ -41,9 +43,22 @@ class ProgressUpdate
     return $wasSet;
   }
 
+  public function setDescription($aDescription)
+  {
+    $wasSet = false;
+    $this->description = $aDescription;
+    $wasSet = true;
+    return $wasSet;
+  }
+
   public function getDate()
   {
     return $this->date;
+  }
+
+  public function getDescription()
+  {
+    return $this->description;
   }
 
   public function getStaffMember()

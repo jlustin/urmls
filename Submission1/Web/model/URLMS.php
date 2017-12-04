@@ -2,6 +2,7 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
+// TODO CHANGE AGREGATION TO DIRECTIONAL ASSOCIATION OR SOMETHING AND LEAVE COMMENT
 class URLMS
 {
 
@@ -71,9 +72,9 @@ class URLMS
     return 0;
   }
 
-  public function addLabVia($aStaff, $aInventory, $aFunding)
+  public function addLabVia($aName)
   {
-    return new Lab($aStaff, $aInventory, $aFunding, $this);
+    return new Lab($aName, $this);
   }
 
   public function addLab($aLab)

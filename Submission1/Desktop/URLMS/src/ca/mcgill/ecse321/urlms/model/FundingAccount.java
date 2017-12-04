@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
@@ -12,7 +12,8 @@ import java.util.*;
  * 1 -- * Report;
  * }
  */
-// line 54 "../../../../../URLMS.ump"
+// line 55 "../../../../../../../../ump/tmp574231/model.ump"
+// line 135 "../../../../../../../../ump/tmp574231/model.ump"
 public class FundingAccount
 {
 

@@ -12,22 +12,24 @@ class Report
   //Report Attributes
   private $title;
   private $date;
+  private $content;
 
   //Report Associations
-  private $funding;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aTitle, $aDate, $aFunding)
+  public function __construct($aTitle, $aDate, $aContent, $aLab)
   {
     $this->title = $aTitle;
     $this->date = $aDate;
-    $didAddFunding = $this->setFunding($aFunding);
-    if (!$didAddFunding)
+    $this->content = $aContent;
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create report due to funding");
+      throw new Exception("Unable to create report due to lab");
     }
   }
 
@@ -51,6 +53,14 @@ class Report
     return $wasSet;
   }
 
+  public function setContent($aContent)
+  {
+    $wasSet = false;
+    $this->content = $aContent;
+    $wasSet = true;
+    return $wasSet;
+  }
+
   public function getTitle()
   {
     return $this->title;
@@ -61,26 +71,31 @@ class Report
     return $this->date;
   }
 
-  public function getFunding()
+  public function getContent()
   {
-    return $this->funding;
+    return $this->content;
   }
 
-  public function setFunding($aFunding)
+  public function getLab()
+  {
+    return $this->lab;
+  }
+
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aFunding == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingFunding = $this->funding;
-    $this->funding = $aFunding;
-    if ($existingFunding != null && $existingFunding != $aFunding)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingFunding->removeReport($this);
+      $existingLab->removeReport($this);
     }
-    $this->funding->addReport($this);
+    $this->lab->addReport($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -92,9 +107,9 @@ class Report
 
   public function delete()
   {
-    $placeholderFunding = $this->funding;
-    $this->funding = null;
-    $placeholderFunding->removeReport($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeReport($this);
   }
 
 }

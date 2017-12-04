@@ -14,7 +14,7 @@
 		{
 			
 			$this->urlms = new URLMS();
-			$lab = Lab::newInstance(0, $this->urlms);
+			$lab = new Lab("9/10", $this->urlms);
 			$this->urlms->addLab($lab);
 			
 			$this->controller = new StaffController($this->urlms);
@@ -35,15 +35,15 @@
 			$pers->writeDataToStore($this->urlms);
 	
 			// 3. Clear the data from memory
-			//$this->urlms->delete();
+			$this->urlms->delete();
 	
-			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaff()->getStaffMembers()));
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
 	
 			// 4. Load it back in
 			$this->urlms = $pers->loadDataFromStore();
 	
 			// 5. Check that we got it back
-			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffManager()->getStaffMembers()));
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			$myStaff = $this->urlms->getLab_index(0)->getStaffMember_index(0);
 			$this->assertEquals("bob", $myStaff->getName());
 		}

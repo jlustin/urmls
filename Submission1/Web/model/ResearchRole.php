@@ -9,6 +9,9 @@ class ResearchRole
   // MEMBER VARIABLES
   //------------------------
 
+  //ResearchRole Attributes
+  private $taskDescription;
+
   //ResearchRole Associations
   private $staffMember;
 
@@ -16,8 +19,9 @@ class ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aStaffMember)
+  public function __construct($aTaskDescription, $aStaffMember)
   {
+    $this->taskDescription = $aTaskDescription;
     $didAddStaffMember = $this->setStaffMember($aStaffMember);
     if (!$didAddStaffMember)
     {
@@ -28,6 +32,19 @@ class ResearchRole
   //------------------------
   // INTERFACE
   //------------------------
+
+  public function setTaskDescription($aTaskDescription)
+  {
+    $wasSet = false;
+    $this->taskDescription = $aTaskDescription;
+    $wasSet = true;
+    return $wasSet;
+  }
+
+  public function getTaskDescription()
+  {
+    return $this->taskDescription;
+  }
 
   public function getStaffMember()
   {
