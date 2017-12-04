@@ -44,7 +44,7 @@
 		      			</li>
 		      		</ul>
 		      		<ul class="nav-bar">	
-		      			<li class="nav-item" style="text-decoration: none;">
+		      			<li class="nav-item" style="text-decoration: none; list-style: none;">
 		      				<a class="nav-link" href=#>Help</a>
 		      			</li>
 		    		</ul>
@@ -71,11 +71,7 @@
       					3 of 3
     				</div>
   				</div> -->
-	<a href="../index.php" style="color: white;text-decoration: none;">
-		<button type="button" class="btn btn-danger">
-			Back to homepage
-		</button>
-	</a>
+	
 	<br>
 	<br>
 	
@@ -307,16 +303,13 @@
 			</tbody>
 		</table>
 		</div>
-		<br><br>
-	<!--  	
-	<div class="btn-group" role="group" aria-label="Basic example">
-	  <button type="button" class="btn btn-secondary">Left</button>
-	  <button type="button" class="btn btn-secondary">Middle</button>
-	  <button type="button" class="btn btn-secondary">Right</button>
-	</div>
-	-->
+		<br>
 	
-	
+	<a href="../index.php" style="color: white;text-decoration: none;">
+		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Go back to homepage">
+			Back to homepage
+		</button>
+	</a><br><br>
 </div>	
 <!-- Footer -->
 	<footer>

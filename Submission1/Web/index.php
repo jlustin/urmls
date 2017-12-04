@@ -36,7 +36,7 @@
 	      			</li>
 	      		</ul>
 	      		<ul class="nav-bar">	
-	      			<li class="nav-item" style="text-decoration: none;">
+	      			<li class="nav-item" style="text-decoration: none;list-style: none;">
 	      				<a class="nav-link" href=#>Help</a>
 	      			</li>
 	    		</ul>
