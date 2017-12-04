@@ -91,14 +91,6 @@ require_once $my_dir . '/../model/FundingAccount.php';
 		<br>
 	</form>
 -->
-
-	<form action="FundingRequest.php" method="get">
-		<br>
-		<input type="hidden" name="action" value="5/10" />
-		<input type="submit" class="btn btn-success" value="PAYDAY!">
-		<br>	
-	</form>
-	
 	<br>
 	<hr>
 	
@@ -115,9 +107,6 @@ require_once $my_dir . '/../model/FundingAccount.php';
 		<input type="submit" value="Add Transation!!!"/>
 		<br>
 	</form>
-	
-	
-	
 	<a href="../index.php">Back to homepage</a>
 
 	<br><br>
@@ -144,8 +133,16 @@ require_once $my_dir . '/../model/FundingAccount.php';
 					$latestExpense = $expense->getType() .", $". $expense->getAmount();
 				}else{$latestExpense = "None";}
 				
+				
+// 				if($member->hasProgressUpdates()){
+// 					$progress = $member->getProgressUpdate_index(sizeof($member->getProgressUpdates())-1)->getDescription();
+// 					if(strlen($progress)>50){
+// 						$progress = substr($progress, 0, 50) . "...";
+// 					}
+// 				}else{$progress = "None";}
+				
 				echo "<tr><td><button type=\"button\" class=\"btn btn-outline-primary\">" . $account->getType() . "</button></td>
-					<td>$". $account->getBalance() ."</td>
+					<td>". $account->getBalance() ."</td>
 					<td>" . $latestExpense . "</td>
 					</tr>";
 			}?>
