@@ -50,12 +50,6 @@
   			</li>
 		</ul>
   		</div>
-		
-		<ul>
- 			<li><h2><a href="View/StaffView.php">Staff</a></h2></li>
-  			<li><h2><a href="View/InventoryView.php">Inventory</a></h2></li>
-  			<li><h2><a href="View/FundingView.html">Funding</a></h2></li>
-		</ul>
 	</div>
 	</body>
 <html/>
