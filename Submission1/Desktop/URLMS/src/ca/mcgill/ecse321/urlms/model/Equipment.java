@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 33 "../../../../../URLMS.ump"
+// line 41 "../../../../../URLMS.ump"
 public class Equipment extends InventoryItem
 {
 
@@ -11,22 +11,45 @@ public class Equipment extends InventoryItem
   // MEMBER VARIABLES
   //------------------------
 
+  //Equipment Attributes
+  private boolean isDamaged;
+
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Equipment(String aName, double aCost, String aCategory, Inventory aInventory)
+  public Equipment(String aName, double aCost, String aCategory, Lab aLab, boolean aIsDamaged)
   {
-    super(aName, aCost, aCategory, aInventory);
+    super(aName, aCost, aCategory, aLab);
+    isDamaged = aIsDamaged;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
+  public boolean setIsDamaged(boolean aIsDamaged)
+  {
+    boolean wasSet = false;
+    isDamaged = aIsDamaged;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean getIsDamaged()
+  {
+    return isDamaged;
+  }
+
   public void delete()
   {
     super.delete();
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "isDamaged" + ":" + getIsDamaged()+ "]";
+  }
 }

@@ -3,41 +3,35 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-/**
- * class Inventory
- * {
- * 1 -- * InventoryItem;
- * }
- */
-// line 28 "../../../../../URLMS.ump"
-public class InventoryItem
+// line 69 "../../../../../URLMS.ump"
+public class FinancialReport
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //InventoryItem Attributes
-  private String name;
-  private double cost;
-  private String category;
+  //FinancialReport Attributes
+  private String title;
+  private String date;
+  private String content;
 
-  //InventoryItem Associations
+  //FinancialReport Associations
   private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public InventoryItem(String aName, double aCost, String aCategory, Lab aLab)
+  public FinancialReport(String aTitle, String aDate, String aContent, Lab aLab)
   {
-    name = aName;
-    cost = aCost;
-    category = aCategory;
+    title = aTitle;
+    date = aDate;
+    content = aContent;
     boolean didAddLab = setLab(aLab);
     if (!didAddLab)
     {
-      throw new RuntimeException("Unable to create inventoryItem due to lab");
+      throw new RuntimeException("Unable to create financialReport due to lab");
     }
   }
 
@@ -45,43 +39,43 @@ public class InventoryItem
   // INTERFACE
   //------------------------
 
-  public boolean setName(String aName)
+  public boolean setTitle(String aTitle)
   {
     boolean wasSet = false;
-    name = aName;
+    title = aTitle;
     wasSet = true;
     return wasSet;
   }
 
-  public boolean setCost(double aCost)
+  public boolean setDate(String aDate)
   {
     boolean wasSet = false;
-    cost = aCost;
+    date = aDate;
     wasSet = true;
     return wasSet;
   }
 
-  public boolean setCategory(String aCategory)
+  public boolean setContent(String aContent)
   {
     boolean wasSet = false;
-    category = aCategory;
+    content = aContent;
     wasSet = true;
     return wasSet;
   }
 
-  public String getName()
+  public String getTitle()
   {
-    return name;
+    return title;
   }
 
-  public double getCost()
+  public String getDate()
   {
-    return cost;
+    return date;
   }
 
-  public String getCategory()
+  public String getContent()
   {
-    return category;
+    return content;
   }
 
   public Lab getLab()
@@ -101,9 +95,9 @@ public class InventoryItem
     lab = aLab;
     if (existingLab != null && !existingLab.equals(aLab))
     {
-      existingLab.removeInventoryItem(this);
+      existingLab.removeFinancialReport(this);
     }
-    lab.addInventoryItem(this);
+    lab.addFinancialReport(this);
     wasSet = true;
     return wasSet;
   }
@@ -112,16 +106,16 @@ public class InventoryItem
   {
     Lab placeholderLab = lab;
     this.lab = null;
-    placeholderLab.removeInventoryItem(this);
+    placeholderLab.removeFinancialReport(this);
   }
 
 
   public String toString()
   {
     return super.toString() + "["+
-            "name" + ":" + getName()+ "," +
-            "cost" + ":" + getCost()+ "," +
-            "category" + ":" + getCategory()+ "]" + System.getProperties().getProperty("line.separator") +
+            "title" + ":" + getTitle()+ "," +
+            "date" + ":" + getDate()+ "," +
+            "content" + ":" + getContent()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

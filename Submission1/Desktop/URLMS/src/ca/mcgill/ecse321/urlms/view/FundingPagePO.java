@@ -26,16 +26,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import java.awt.Window.Type;
 
-public class MainPage extends JFrame {
+public class FundingPagePO extends JFrame {
 
 	private JPanel contentPane;
 	JLabel staffMemberListLabel;
-	JLabel welcomeToUrlmsLabel;
+	JLabel welcomeToInventoryLabel;
+	JLabel feelFreeLabel;
 	
-	public static Controller controller = new Controller();
-	public static StaffController staffController = new StaffController();
+	public static StaffController controller = new StaffController();
 	
 
 	/**
@@ -45,7 +44,7 @@ public class MainPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainPage frame = new MainPage();
+					FundingPagePO frame = new FundingPagePO();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,11 +56,11 @@ public class MainPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainPage() {
-		setTitle("Jun2yu");
+	public FundingPagePO() {
+		setTitle("Inventory");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 462, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 535, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,32 +69,11 @@ public class MainPage extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnStaff = new JButton("Staff");
-		btnStaff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				StaffPagePO sppo = new StaffPagePO();
-				sppo.setVisible(true);
-			}
-		});
-		panel.add(btnStaff);
+		JButton btnAddInventoryItem = new JButton("Add Item");
+		panel.add(btnAddInventoryItem);
 		
-		JButton btnInventory = new JButton("Inventory");
-		btnInventory.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				InventoryPagePO ippo = new InventoryPagePO();
-				ippo.setVisible(true);
-			}
-		});
-		panel.add(btnInventory);
-		
-		JButton btnFunding = new JButton("Funding");
-		btnFunding.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FundingPagePO fppo = new FundingPagePO();
-				fppo.setVisible(true);
-			}
-		});
-		panel.add(btnFunding);
+		JButton btnRemoveItem = new JButton("Remove Item");
+		panel.add(btnRemoveItem);
 		
 		JButton btnSave = new JButton("Save");
 		panel.add(btnSave);
@@ -108,15 +86,15 @@ public class MainPage extends JFrame {
 			staffMemberListLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			scrollPane.setViewportView(staffMemberListLabel);
 			
-			JLabel lblFeelFreeTo = new JLabel("Feel free to check out the various amazing functionalites.");
-			lblFeelFreeTo.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setColumnHeaderView(lblFeelFreeTo);
+			feelFreeLabel = new JLabel("Feel free to do stuff with the inventory.");
+			feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			scrollPane.setColumnHeaderView(feelFreeLabel);
 			
 			JPanel panel_1 = new JPanel();
 			contentPane.add(panel_1, BorderLayout.NORTH);
 			
-			welcomeToUrlmsLabel = new JLabel("Welcome to URLMS.");
-			panel_1.add(welcomeToUrlmsLabel);
+			welcomeToInventoryLabel = new JLabel("Welcome to Inventory. There's a lot of inventory.");
+			panel_1.add(welcomeToInventoryLabel);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.save();

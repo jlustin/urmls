@@ -2,9 +2,8 @@
 /*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
-import java.sql.Date;
 
-// line 92 "../../../../../URLMS.ump"
+// line 105 "../../../../../URLMS.ump"
 public class ProgressUpdate
 {
 
@@ -13,7 +12,8 @@ public class ProgressUpdate
   //------------------------
 
   //ProgressUpdate Attributes
-  private Date date;
+  private String date;
+  private String description;
 
   //ProgressUpdate Associations
   private StaffMember staffMember;
@@ -22,9 +22,10 @@ public class ProgressUpdate
   // CONSTRUCTOR
   //------------------------
 
-  public ProgressUpdate(Date aDate, StaffMember aStaffMember)
+  public ProgressUpdate(String aDate, String aDescription, StaffMember aStaffMember)
   {
     date = aDate;
+    description = aDescription;
     boolean didAddStaffMember = setStaffMember(aStaffMember);
     if (!didAddStaffMember)
     {
@@ -36,7 +37,7 @@ public class ProgressUpdate
   // INTERFACE
   //------------------------
 
-  public boolean setDate(Date aDate)
+  public boolean setDate(String aDate)
   {
     boolean wasSet = false;
     date = aDate;
@@ -44,9 +45,22 @@ public class ProgressUpdate
     return wasSet;
   }
 
-  public Date getDate()
+  public boolean setDescription(String aDescription)
+  {
+    boolean wasSet = false;
+    description = aDescription;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getDate()
   {
     return date;
+  }
+
+  public String getDescription()
+  {
+    return description;
   }
 
   public StaffMember getStaffMember()
@@ -83,8 +97,9 @@ public class ProgressUpdate
 
   public String toString()
   {
-    return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+    return super.toString() + "["+
+            "date" + ":" + getDate()+ "," +
+            "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "staffMember = "+(getStaffMember()!=null?Integer.toHexString(System.identityHashCode(getStaffMember())):"null");
   }
 }
