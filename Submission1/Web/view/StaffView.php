@@ -12,10 +12,11 @@
 <html>
 	<head>
 		<title>URLMS - Staff</title>
-		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../style/TableView.css">
-		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	</head>
 	<body>
 	<!--  Nav Bar -->
@@ -43,16 +44,13 @@
 		      			</li>
 		      		</ul>
 		      		<ul class="nav-bar">	
-		      			<li class="nav-item">
-		      				<a class="nav-link" href=#>More</a>
+		      			<li class="nav-item" style="text-decoration: none;">
+		      				<a class="nav-link" href=#>Help</a>
 		      			</li>
 		    		</ul>
 	  			</div>
 		</nav>
 	<div class="container">
-		
-		
-		
 		<!-- Bootstrap Template -->
   		<!-- 	<div class="row">
     				<div class="col">
@@ -73,75 +71,192 @@
       					3 of 3
     				</div>
   				</div> -->
-  			
+	<a href="../index.php" style="color: white;text-decoration: none;">
+		<button type="button" class="btn btn-danger">
+			Back to homepage
+		</button>
+	</a>
+	<br>
+	<br>
 	
-		<form action="StaffRequest.php" method="get">
-			<br>
-			<h3><a href="#StaffTable" style="color: black;text-decoration: none;">View Staff List</a></h3>
-			<input type="hidden" name="action" value="9/10" />
- 			<input type="submit" class="btn btn-primary" value="View Staff!" />
- 			<br>
-		</form>
+	
+<!-- 		<form action="StaffRequest.php" method="get"> -->
+<!-- 			<br> -->
+<!-- 			<h3><a href="#StaffTable" style="color: black;text-decoration: none;">View Staff List</a></h3> -->
+<!-- 			<input type="hidden" name="action" value="9/10" /> -->
+<!--  			<input type="submit" class="btn btn-primary" value="View Staff!" /> -->
+<!--  			<br> -->
+<!-- 		</form> -->
 		
-		<form action="StaffRequest.php" method="get">
-			<br>
-			<h3>Add Staff Member</h3>
-			<input type="hidden" name="action" value="10/10" />
-			<div class="row">
-				<div class="col-sm-6">
- 					<label for="newStaffName">Name</label>
-					<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/>
-				</div>
-				<div class="col-sm-6">
- 					<label for="newStaffSalary">Salary</label>
-					<input type="text" class="form-control" name="newstaffsalary" id="newStaffSalary" placeholder="Enter staff starting salary"/>
-				</div>
-			</div>
+		<div id="accordion" role="tablist">
+		
+	  <div class="card">
+	    <div class="card-header" role="tab" id="headingZero">
+	      <h5 class="mb-0">
+	        <a href="#StaffTable" style="color: red;text-decoration: none;">
+	        	View Staff List
+	        </a>
+	      </h5>
+	    </div>
+		    
+		  <div class="card">
+		    <div class="card-header" role="tab" id="headingOne">
+		      <h5 class="mb-0">
+		        <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="color: red;text-decoration: none;">
+		          Add Staff Member
+		        </a>
+		      </h5>
+		    </div>
+		    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+		      <div class="card-body">
+		      		<form action="StaffRequest.php" method="get">
+						<br>
+						<h3>Add Staff Member</h3>
+						<input type="hidden" name="action" value="10/10" />
+						<div class="row">
+							<div class="col-sm-6">
+			 					<label for="newStaffName">Name</label>
+								<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/>
+							</div>
+							<div class="col-sm-6">
+			 					<label for="newStaffSalary">Salary</label>
+								<input type="text" class="form-control" name="newstaffsalary" id="newStaffSalary" placeholder="Enter staff starting salary"/>
+							</div>
+						</div>
+						
+			 			<input type="submit" class="btn btn-danger" value="Add staff!" />
+			 			<br>
+					</form>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  <div class="card">
+		    <div class="card-header" role="tab" id="headingTwo">
+		      <h5 class="mb-0">
+		        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: red;text-decoration: none;">
+		          Remove Staff Member
+		        </a>
+		      </h5>
+		    </div>
+		    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+		      <div class="card-body">
+		      		<form action="StaffRequest.php" method="get">
+						<div class="form-group">
+						<br>
+						<h3>Remove Staff Member</h3>
+						<input type="hidden" name="action" value="11/10" />
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="oldStaffName">Name</label>
+								<input type="text" class="form-control" name="oldstaffname" id="oldStaffName" placeholder="Enter staff name"/>
+							</div>
+							<div class="col-sm-6">
+								<label for="oldStaffID">ID</label>
+								<input type="text" class="form-control" name="oldstaffid" id="oldStaffID" placeholder="Enter staff ID"/>
+			 				</div>
+			 			</div>
+			 			<input type="submit" class="btn btn-danger" value="Remove staff!" />
+			 			<br>
+			 			</div>
+					</form>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  <div class="card">
+		    <div class="card-header" role="tab" id="headingThree">
+		      <h5 class="mb-0">
+		        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: red;text-decoration: none;">
+		          View Staff Member
+		        </a>
+		      </h5>
+		    </div>
+		    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+		      <div class="card-body">
+		        <form action="StaffRequest.php" method="get">
+					<br>
+					<h3>View and Edit Staff Member Record</h3>
+					<input type="hidden" name="action" value="12/10" />
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="staffName">Name</label>
+							<input type="text" class="form-control" name="staffname" id="staffName" placeholder="Enter staff name"/>
+						</div>
+						<div class="col-sm-6">
+							<label for="staffID">ID</label>
+							<input type="text" class="form-control" name="staffid" id="staffID" placeholder="Enter staff ID"/>
+						</div>
+					</div>
+		 			<input type="submit" class="btn btn-danger" value="View record!" />
+		 			<br>
+				</form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	
+	
+<!-- 		<form action="StaffRequest.php" method="get"> -->
+<!-- 			<br> -->
+<!-- 			<h3>Add Staff Member</h3> -->
+<!-- 			<input type="hidden" name="action" value="10/10" /> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-sm-6"> -->
+<!--  					<label for="newStaffName">Name</label> -->
+<!-- 					<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-sm-6"> -->
+<!--  					<label for="newStaffSalary">Salary</label> -->
+<!-- 					<input type="text" class="form-control" name="newstaffsalary" id="newStaffSalary" placeholder="Enter staff starting salary"/> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			
- 			<input type="submit" class="btn btn-primary" value="Add staff!" />
- 			<br>
-		</form>
+<!--  			<input type="submit" class="btn btn-primary" value="Add staff!" /> -->
+<!--  			<br> -->
+<!-- 		</form> -->
 		
-		<form action="StaffRequest.php" method="get">
-			<div class="form-group">
-			<br>
-			<h3>Remove Staff Member</h3>
-			<input type="hidden" name="action" value="11/10" />
-			<div class="row">
-				<div class="col-sm-6">
-					<label for="oldStaffName">Name</label>
-					<input type="text" class="form-control" name="oldstaffname" id="oldStaffName" placeholder="Enter staff name"/>
-				</div>
-				<div class="col-sm-6">
-					<label for="oldStaffID">ID</label>
-					<input type="text" class="form-control" name="oldstaffid" id="oldStaffID" placeholder="Enter staff ID"/>
- 				</div>
- 			</div>
- 			<input type="submit" class="btn btn-primary" value="Remove staff!" />
- 			<br>
- 			</div>
-		</form>
+<!-- 		<form action="StaffRequest.php" method="get"> -->
+<!-- 			<div class="form-group"> -->
+<!-- 			<br> -->
+<!-- 			<h3>Remove Staff Member</h3> -->
+<!-- 			<input type="hidden" name="action" value="11/10" /> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-sm-6"> -->
+<!-- 					<label for="oldStaffName">Name</label> -->
+<!-- 					<input type="text" class="form-control" name="oldstaffname" id="oldStaffName" placeholder="Enter staff name"/> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-sm-6"> -->
+<!-- 					<label for="oldStaffID">ID</label> -->
+<!-- 					<input type="text" class="form-control" name="oldstaffid" id="oldStaffID" placeholder="Enter staff ID"/> -->
+<!--  				</div> -->
+<!--  			</div> -->
+<!--  			<input type="submit" class="btn btn-primary" value="Remove staff!" /> -->
+<!--  			<br> -->
+<!--  			</div> -->
+<!-- 		</form> -->
 		
 		
-		<form action="StaffRequest.php" method="get">
-			<br>
-			<h3>View and Edit Staff Member Record</h3>
-			<input type="hidden" name="action" value="12/10" />
-			<div class="row">
-				<div class="col-sm-6">
-					<label for="staffName">Name</label>
-					<input type="text" class="form-control" name="staffname" id="staffName" placeholder="Enter staff name"/>
-				</div>
-				<div class="col-sm-6">
-					<label for="staffID">ID</label>
-					<input type="text" class="form-control" name="staffid" id="staffID" placeholder="Enter staff ID"/>
-				</div>
-			</div>
- 			<input type="submit" class="btn btn-primary" value="View record!" />
- 			<br>
-		</form>
-		<br>
-		<a href="../index.php">Back to homepage</a>
+<!-- 		<form action="StaffRequest.php" method="get"> -->
+<!-- 			<br> -->
+<!-- 			<h3>View and Edit Staff Member Record</h3> -->
+<!-- 			<input type="hidden" name="action" value="12/10" /> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-sm-6"> -->
+<!-- 					<label for="staffName">Name</label> -->
+<!-- 					<input type="text" class="form-control" name="staffname" id="staffName" placeholder="Enter staff name"/> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-sm-6"> -->
+<!-- 					<label for="staffID">ID</label> -->
+<!-- 					<input type="text" class="form-control" name="staffid" id="staffID" placeholder="Enter staff ID"/> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!--  			<input type="submit" class="btn btn-primary" value="View record!" /> -->
+<!--  			<br> -->
+<!-- 		</form> -->
+<!-- 		<br> -->
+		
 
 		<br><br>
 		<div class="container-fluid">
@@ -182,7 +297,7 @@
 				<input type=\"hidden\" name=\"action\" value=\"12/10\" />
 				<input type=\"hidden\" name=\"staffname\" value=\"" . $member->getName() . "\"/>
 				<input type=\"hidden\" name=\"staffid\" value=\"" . $member->getId() . "\"/>
-				<input type=\"submit\" class=\"btn btn-outline-primary\" value=\" " .$member->getName() . "\" />
+				<input type=\"submit\" class=\"btn btn-outline-danger\" value=\" " .$member->getName() . "\" />
 				</form>
 				</td>
 				<td>". $roles ."</td>
