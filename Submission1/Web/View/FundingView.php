@@ -127,10 +127,10 @@ require_once $my_dir . '/../model/FundingAccount.php';
 			
 			
 			foreach ($urlms->getLab_index(0)->getFundingAccounts() as $account){
-				$expense = "";
+				$latestExpense = "";
 				if($account->hasExpenses()){
 					$expense = $account->getExpense_index(sizeof($account->getExpenses())-1);
-					$lastestExpense = $expense->getType() ." ". $expense->getAmount();
+					$latestExpense = $expense->getType() .", $". $expense->getAmount();
 				}else{$latestExpense = "None";}
 				
 				
