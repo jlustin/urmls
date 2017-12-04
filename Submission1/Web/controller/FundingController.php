@@ -33,8 +33,9 @@ class FundingController {
 			$urlmsLab = $urlms->getLab_index(0);
  			$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
  			$urlmsLab->addFundingAccount($newFundingAccount);
-// 		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
-		//$urlms->getLab_index(0)->addFundingAccount($type, $balance, $urlms->getLab_index(0));
+
+ 			$newFundingAccount->addExpense(new Expense($balance, "Initial Balance", $newFundingAccount));
+ 			
  			$persistence = new Persistence();
  			$persistence->writeDataToStore($urlms);
 		}
