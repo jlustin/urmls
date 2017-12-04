@@ -76,7 +76,7 @@
 	
 		<form action="StaffRequest.php" method="get">
 			<br>
-			<h3>View Staff List</h3>
+			<h3><a href="#StaffTable" style="color: black;text-decoration: none;">View Staff List</a></h3>
 			<input type="hidden" name="action" value="9/10" />
  			<input type="submit" class="btn btn-primary" value="View Staff!" />
  			<br>
@@ -144,7 +144,7 @@
 
 		<br><br>
 		<div class="container-fluid">
-		<table class="table table-hover" style="width: 100%;">
+		<table class="table table-hover" id="StaffTable" style="width: 100%;">
 			
 			<thread>
 			<tr>
@@ -176,10 +176,17 @@
 				}else{$progress = "None";}
 				
 				echo "<tr><td>" . $member->getId() . "</td>
-					<td><button type=\"button\" class=\"btn btn-outline-primary\">" . $member->getName() . "</button></td>
-					<td>". $roles ."</td>
-					<td>" . $progress . "</td>
-					</tr>";
+				<td>
+				<form action=\"StaffRequest.php\" method=\"get\">
+				<input type=\"hidden\" name=\"action\" value=\"12/10\" />
+				<input type=\"hidden\" name=\"staffname\" value=\"" . $member->getName() . "\"/>
+				<input type=\"hidden\" name=\"staffid\" value=\"" . $member->getId() . "\"/>
+				<input type=\"submit\" class=\"btn btn-outline-primary\" value=\" " .$member->getName() . "\" />
+				</form>
+				</td>
+				<td>". $roles ."</td>
+				<td>" . $progress . "</td>
+				</tr>";
 			}?>
 			</tbody>
 		</table>
