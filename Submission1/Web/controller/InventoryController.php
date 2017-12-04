@@ -145,6 +145,7 @@ class InventoryController {
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter an inventory item name.");
 		} else{
+			$inventoryItem=null;
 			//Find the item
 			$items = $this->urlms->getLab_index(0)->getInventoryItems();
 			for ($i = 0; $i < sizeof($items); $i++){
