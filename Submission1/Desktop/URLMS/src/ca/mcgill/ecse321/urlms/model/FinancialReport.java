@@ -1,31 +1,29 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
-import java.sql.Date;
 
-// line 69 "../../../../../../../../ump/tmp574231/model.ump"
-// line 145 "../../../../../../../../ump/tmp574231/model.ump"
-public class Report
+// line 69 "../../../../../URLMS.ump"
+public class FinancialReport
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //Report Attributes
+  //FinancialReport Attributes
   private String title;
-  private Date date;
+  private String date;
   private String content;
 
-  //Report Associations
+  //FinancialReport Associations
   private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Report(String aTitle, Date aDate, String aContent, Lab aLab)
+  public FinancialReport(String aTitle, String aDate, String aContent, Lab aLab)
   {
     title = aTitle;
     date = aDate;
@@ -33,7 +31,7 @@ public class Report
     boolean didAddLab = setLab(aLab);
     if (!didAddLab)
     {
-      throw new RuntimeException("Unable to create report due to lab");
+      throw new RuntimeException("Unable to create financialReport due to lab");
     }
   }
 
@@ -49,7 +47,7 @@ public class Report
     return wasSet;
   }
 
-  public boolean setDate(Date aDate)
+  public boolean setDate(String aDate)
   {
     boolean wasSet = false;
     date = aDate;
@@ -70,7 +68,7 @@ public class Report
     return title;
   }
 
-  public Date getDate()
+  public String getDate()
   {
     return date;
   }
@@ -97,9 +95,9 @@ public class Report
     lab = aLab;
     if (existingLab != null && !existingLab.equals(aLab))
     {
-      existingLab.removeReport(this);
+      existingLab.removeFinancialReport(this);
     }
-    lab.addReport(this);
+    lab.addFinancialReport(this);
     wasSet = true;
     return wasSet;
   }
@@ -108,7 +106,7 @@ public class Report
   {
     Lab placeholderLab = lab;
     this.lab = null;
-    placeholderLab.removeReport(this);
+    placeholderLab.removeFinancialReport(this);
   }
 
 
@@ -116,8 +114,8 @@ public class Report
   {
     return super.toString() + "["+
             "title" + ":" + getTitle()+ "," +
+            "date" + ":" + getDate()+ "," +
             "content" + ":" + getContent()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

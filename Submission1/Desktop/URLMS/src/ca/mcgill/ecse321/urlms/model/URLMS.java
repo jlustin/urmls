@@ -7,8 +7,7 @@ import java.util.*;
 /**
  * TODO CHANGE AGREGATION TO DIRECTIONAL ASSOCIATION OR SOMETHING AND LEAVE COMMENT
  */
-// line 6 "../../../../../../../../ump/tmp574231/model.ump"
-// line 110 "../../../../../../../../ump/tmp574231/model.ump"
+// line 5 "../../../../../URLMS.ump"
 public class URLMS
 {
 

@@ -2,10 +2,8 @@
 /*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
-import java.sql.Date;
 
-// line 104 "../../../../../../../../ump/tmp574231/model.ump"
-// line 170 "../../../../../../../../ump/tmp574231/model.ump"
+// line 105 "../../../../../URLMS.ump"
 public class ProgressUpdate
 {
 
@@ -14,7 +12,7 @@ public class ProgressUpdate
   //------------------------
 
   //ProgressUpdate Attributes
-  private Date date;
+  private String date;
   private String description;
 
   //ProgressUpdate Associations
@@ -24,7 +22,7 @@ public class ProgressUpdate
   // CONSTRUCTOR
   //------------------------
 
-  public ProgressUpdate(Date aDate, String aDescription, StaffMember aStaffMember)
+  public ProgressUpdate(String aDate, String aDescription, StaffMember aStaffMember)
   {
     date = aDate;
     description = aDescription;
@@ -39,7 +37,7 @@ public class ProgressUpdate
   // INTERFACE
   //------------------------
 
-  public boolean setDate(Date aDate)
+  public boolean setDate(String aDate)
   {
     boolean wasSet = false;
     date = aDate;
@@ -55,7 +53,7 @@ public class ProgressUpdate
     return wasSet;
   }
 
-  public Date getDate()
+  public String getDate()
   {
     return date;
   }
@@ -100,8 +98,8 @@ public class ProgressUpdate
   public String toString()
   {
     return super.toString() + "["+
+            "date" + ":" + getDate()+ "," +
             "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "staffMember = "+(getStaffMember()!=null?Integer.toHexString(System.identityHashCode(getStaffMember())):"null");
   }
 }

@@ -7,7 +7,7 @@
 		/*
 		 * Constructor
 		 */
-		function __construct($filename = 'data.txt') {
+		function __construct($filename = '../Persistence/data.txt') {
 			$this->filename = $filename;
 		}
 		
@@ -22,7 +22,7 @@
 			} else {
 				// if doesn't exist, create new instances of URLMS and Lab and add lab to URLMS
 				$urlms = new URLMS();
-				$lab = Lab::newInstance(0, $urlms);
+				$lab = new Lab("9/10", $urlms);
 				$urlms->addLab($lab);
 			}
 			// return urlms
@@ -32,9 +32,9 @@
 		/*
 		 * Write data to file
 		 */
-		function writeDataToStore($rm) {
+		function writeDataToStore($urlms) {
 			// serialize data and put content to data file
-			$str = serialize($rm);
+			$str = serialize($urlms);
 			file_put_contents($this->filename, $str);
 		}
 	}

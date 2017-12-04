@@ -10,22 +10,23 @@ import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
+<<<<<<< HEAD
+import ca.mcgill.ecse321.urlms.model.FinancialReport;
 
 public class FundingController extends Controller {
 
 	public FundingController() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	//TODO: USE CASES IMPLEMENTATION --------------------------
-	
-	
-	/** This method will generate a financial report of the lab
+
+	// TODO: USE CASES IMPLEMENTATION --------------------------
+
+	/**
+	 * This method will generate a financial report of the lab
+	 * 
 	 * @return a report containing all financial information
 	 */
-	public FinancialReport generateFinancialReport() {
-		
+	public FinancialReport generateFinancialReport() {	
 		//TODO: remove this when working on implementation
 		return null;
 	}
@@ -40,11 +41,13 @@ public class FundingController extends Controller {
 		return aLab.getFundingAccounts();
 	}
 
-	
-	
-	/** This method will add a transaction to the lab
-	 * @param amount of the cost of the transaction by double
-	 * @param type of transaction by String
+	/**
+	 * This method will add a transaction to the lab
+	 * 
+	 * @param amount
+	 *            of the cost of the transaction by double
+	 * @param type
+	 *            of transaction by String
 	 */
 	public void addTransaction(String date, double amount, String type, String fundingAccount) {
 		FundingAccount currentFundingAccount;
@@ -107,16 +110,17 @@ public class FundingController extends Controller {
 		}
 		return netBalance;
 	}
-	
-	
-	
-	/** This method will get the balance of a specific account in the lab by type
-	 * @param type of the account by String
+
+	/**
+	 * This method will get the balance of a specific account in the lab by type
+	 * 
+	 * @param type
+	 *            of the account by String
 	 * @return
 	 */
 	public double[] viewBalanceForSpecificAccount(String type) {
-		
-		//TODO: remove this when working on implementation
+
+		// TODO: remove this when working on implementation
 		return null;
 	}
 	public void addFunding(int index, double amount) {
@@ -131,7 +135,7 @@ public class FundingController extends Controller {
 	 * @param type of account by String
 	 */
 	public void editFinancialAccount(String type) {
-		
+
 	}
 	public String viewFundingAccountType(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -177,8 +181,8 @@ public class FundingController extends Controller {
 	 * @return a hash map containing all information
 	 */
 	public HashMap<String, String> viewStatus() {
-		
-		//TODO: remove this when working on implementation
+
+		// TODO: remove this when working on implementation
 		return null;
 	}
 

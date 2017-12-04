@@ -3,8 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 99 "../../../../../../../../ump/tmp574231/model.ump"
-// line 165 "../../../../../../../../ump/tmp574231/model.ump"
+// line 100 "../../../../../URLMS.ump"
 public class ResearchAssistant extends ResearchRole
 {
 

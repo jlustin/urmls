@@ -115,9 +115,9 @@ public class FundingAccount
     return 0;
   }
 
-  public Expense addExpense(double aAmount, String aType)
+  public Expense addExpense(double aAmount, String aDate, String aType)
   {
-    return new Expense(aAmount, aType, this);
+    return new Expense(aAmount, aDate, aType, this);
   }
 
   public boolean addExpense(Expense aExpense)

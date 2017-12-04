@@ -3,8 +3,7 @@
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 36 "../../../../../../../../ump/tmp574231/model.ump"
-// line 125 "../../../../../../../../ump/tmp574231/model.ump"
+// line 35 "../../../../../URLMS.ump"
 public class SupplyType extends InventoryItem
 {
 
