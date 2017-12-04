@@ -148,7 +148,7 @@
     		<div class="col-sm-4">	
 				<div class="card" style="width: 20rem;">
 					<a href="View/StaffView.php">
-					  <img class="card-img-top" src="../image/staff_logo.jpg" alt="Card image cap">
+					  <img class="card-img-top" src="../image/Personnel_Red.png" alt="Card image cap">
 					</a>
 					  <div class="card-body">
 						  <a href="View/StaffView.php">
@@ -162,7 +162,7 @@
   			<div class="col-sm-4">
   				<div class="card" style="width: 20rem;">
 					<a href="View/InventoryView.php">
-					  <img class="card-img-top" src="../image/inventory_logo.jpg" alt="Card image cap">
+					  <img class="card-img-top" src="../image/Utility_Red.png" alt="Card image cap">
 					</a>
 					  <div class="card-body">
 						  <a href="View/InventoryView.php">
@@ -176,7 +176,7 @@
    			<div class="col-sm-4">
   				<div class="card" style="width: 20rem;">
 					<a href="View/FundingView.php">
-					  <img class="card-img-top" src="../image/funding_logo.jpg" alt="Card image cap">
+					  <img class="card-img-top" src="../image/Fiance_Red.png" alt="Card image cap">
 					</a>
 					  <div class="card-body">
 						  <a href="View/FundingView.php">
