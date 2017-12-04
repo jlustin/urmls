@@ -1,6 +1,7 @@
 <?php
 	$my_dir = dirname(__FILE__);
 	require_once $my_dir . '/../persistence/persistence.php';
+	require_once $my_dir . '/../controller/Controller.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
 	require_once $my_dir . '/../model/StaffMember.php';
@@ -9,7 +10,7 @@
 	require_once $my_dir . '/../model/ResearchAssistant.php';
 	require_once $my_dir . '/../model/ProgressUpdate.php';
 		
-class StaffController {
+class StaffController extends Controller {
 	
 	protected $urlms;
 	/*
@@ -66,16 +67,7 @@ class StaffController {
 				<a href="../View/StaffView.php">Back</a>
 			</HTML><?php
 		}
-	}
-	
-	//Check if string is alphabetical letters and spaces
-	function isValidStr($str){
-		for ($i = 0; $i < strlen($str); $i++){
-			if(! ((65 <= ord($str[$i]) && ord($str[$i]) <= 90) || (97 <= ord($str[$i]) && ord($str[$i]) <= 122) || ord($str[$i]) == 32)){				return false;
-			}		
-		}return true;
-	}
-	
+	}	
 	
 	/*
 	 * remove a staff member from urlms
@@ -183,6 +175,12 @@ class StaffController {
 	function findMember($name,$id){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
+		}elseif(!$this->isValidStr($name)){
+			throw new Exception ("Please enter a valid name.");
+		}elseif ($id == null){
+			throw new Exception ("Please enter an id.");
+		}elseif(!is_numeric($id)){
+			throw new Exception ("Please enter a valid id.");
 		} else{
 			//Find the member
 			$members = $this->urlms->getLab_index(0)->getStaffMembers();
