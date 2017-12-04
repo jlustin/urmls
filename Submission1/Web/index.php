@@ -15,32 +15,8 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   		<a class="navbar-brand" href="../index.php">
   			<img src="../image/URLMS_Logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
-  			URLMS
+  			University Research Lab Management System
   		</a>
- 		 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-  			 <span class="navbar-toggler-icon"></span>
- 		 </button>
-  			<div class="collapse navbar-collapse" id="navbarNav">
-	    		<ul class="navbar-nav mr-auto">
-	      			<!-- li class="nav-item active">
-	        			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-	      			</li> -->
-	      			<li class="nav-item">
-	        			<a class="nav-link" href="StaffView.php">Staff</a>
-	      			</li>
-	      			<li class="nav-item">
-	        			<a class="nav-link" href="InventoryView.php">Inventory</a>
-	      			</li>
-	      			<li class="nav-item">
-	        			<a class="nav-link" href="FundingView.php">Funding</a>
-	      			</li>
-	      		</ul>
-	      		<ul class="nav-bar">	
-	      			<li class="nav-item" style="text-decoration: none;">
-	      				<a class="nav-link" href=#>Help</a>
-	      			</li>
-	    		</ul>
-  			</div>
 	</nav>
 	<br><br>
 	<!-- Bootstrap Container -->
@@ -71,7 +47,7 @@
 			    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 			    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 			    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			  </ol>
+		   </ol>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
 		      <div class="jumbotron" style="text-align: center;">
@@ -80,7 +56,7 @@
 				  <hr class="my-4">
 				  <p>MORE STAFF INFO MORE STAFF INFO MORE STAFF INFO</p>
 				  <p class="lead">
-				    <a class="btn btn-primary btn-lg" href="View/StaffView.php" role="button">Go to Staff</a>
+				    <a class="btn btn-danger btn-lg" href="View/StaffView.php" role="button">Go to Staff</a>
 				  </p>
 			  </div>
 		    </div>
@@ -91,7 +67,7 @@
 				  <hr class="my-4">
 				  <p>MORE INV INFO MORE INV INFO MORE INV INFO</p>
 				  <p class="lead">
-				    <a class="btn btn-primary btn-lg" href="View/InventoryView.php" role="button">Go to Inventory</a>
+				    <a class="btn btn-danger btn-lg" href="View/InventoryView.php" role="button">Go to Inventory</a>
 				  </p>
 			  </div>
 		    </div>
@@ -102,7 +78,7 @@
 				  <hr class="my-4">
 				  <p>MORE FUND INFO MORE FUND INFO MORE FUND INFO</p>
 				  <p class="lead">
-				    <a class="btn btn-primary btn-lg" href="View/FundingView.php" role="button">Go to Funding</a>
+				    <a class="btn btn-danger btn-lg" href="View/FundingView.php" role="button">Go to Funding</a>
 				  </p>
 			  </div>
 		    </div>
