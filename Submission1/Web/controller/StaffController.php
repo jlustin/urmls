@@ -42,8 +42,12 @@ class StaffController {
 	function addStaff($name, $salary){
 		if($name == null || strlen($name) == 0){
 			throw new Exception ("Please enter a name.");
-		} elseif ($salary == null){
-			throw new Exception ("Please enter a salary.");	
+		}elseif(!$this->isValidStr($name)){
+			throw new Exception ("Please enter a valid name.");
+		}elseif ($salary == null){
+			throw new Exception ("Please enter a salary.");
+		}elseif(!is_numeric($salary)){
+			throw new Exception ("Please enter a valid number for the salary.");	
 		}else {
 			$urlms = $this->urlms;
 			
@@ -63,6 +67,15 @@ class StaffController {
 			</HTML><?php
 		}
 	}
+	
+	//Check if string is alphabetical letters and spaces
+	function isValidStr($str){
+		for ($i = 0; $i < strlen($str); $i++){
+			if(! ((65 <= ord($str[$i]) && ord($str[$i]) <= 90) || (97 <= ord($str[$i]) && ord($str[$i]) <= 122) || ord($str[$i]) == 32)){				return false;
+			}		
+		}return true;
+	}
+	
 	
 	/*
 	 * remove a staff member from urlms
