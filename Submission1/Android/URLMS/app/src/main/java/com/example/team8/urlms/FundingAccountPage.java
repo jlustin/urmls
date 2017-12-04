@@ -1,8 +1,10 @@
 package com.example.team8.urlms;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -39,6 +41,7 @@ public class FundingAccountPage extends AppCompatActivity {
     Button viewTransactionsButton;
     Button addFundingButton;
     Button addExpenseButton;
+    Button removeButton;
 
     TextView currentAccount;
     TextView currentBalance;
@@ -62,10 +65,12 @@ public class FundingAccountPage extends AppCompatActivity {
         viewTransactionsButton = (Button) findViewById(R.id.viewTransactionsButton);
         addFundingButton = (Button) findViewById(R.id.addFundingButton);
         addExpenseButton = (Button) findViewById(R.id.addNewExpenseButton);
+        removeButton = (Button) findViewById(R.id.removeButton);
 
         currentAccount = (TextView) findViewById(R.id.currentAccountTypeText);
         currentBalance = (TextView) findViewById(R.id.currentBalanceText);
         toDisplayTransactions = (TextView) findViewById(R.id.transactionsText);
+        toDisplayTransactions.setMovementMethod(new ScrollingMovementMethod());
 
 
         currentAccount.setText(fc.viewFundingAccountType(position));
@@ -76,9 +81,19 @@ public class FundingAccountPage extends AppCompatActivity {
         setViewTransactionsButton();
         setAddFundingButton();
         setAddExpenseButton();
+        setRemoveButton();
 
     }
 
+    public void setRemoveButton(){
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteAuthorization();
+            }
+        });
+
+    }
     private void setAddFundingButton() {
 addFundingButton.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -97,13 +112,13 @@ addFundingButton.setOnClickListener(new View.OnClickListener() {
                     fc.addFunding(position, Double.parseDouble(mAmount.getText().toString()));
                     toastMessage("Funding Added");
                     dialog.dismiss();
+                    recreate();
                 }
                 else{
                     toastMessage("Please fill any empty fields.");
                 }
             }
         });
-
     }
 });
     }
@@ -124,7 +139,7 @@ addFundingButton.setOnClickListener(new View.OnClickListener() {
                 for(int i=0; i<expenses.size();i++){
                     expensesList += "Date: " +expenses.get(i).getDate()+"\n" +
                             "Description: " + expenses.get(i).getType() +"\n" + "Amount: "+
-                            String.valueOf(expenses.get(i).getAmount())+"\n";
+                            String.valueOf(expenses.get(i).getAmount())+"\n\n";
                 }
                 toDisplayTransactions.setText(expensesList);
                 toDisplayTransactions.setVisibility(View.VISIBLE);
@@ -156,9 +171,11 @@ addFundingButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         if(!mType.getText().toString().isEmpty()&&!mAmount.getText().toString().isEmpty()){
                             fc.addTransaction(date,Double.parseDouble(mAmount.getText().toString()),
-                                    mType.getText().toString(), position);
+                                    mType.getText().toString(),fc.viewFundingAccountType(position), position);
+
                             toastMessage("Expense Added");
                             dialog.dismiss();
+                            recreate();
                         }
                         else{
                             toastMessage("Please fill any empty fields.");
@@ -172,5 +189,32 @@ addFundingButton.setOnClickListener(new View.OnClickListener() {
     public void toastMessage(String message){
         Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
         myToast.show();
+    }
+    public void deleteAuthorization(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Admin Access Required.")
+                .setCancelable(false)
+                .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(position>2) {
+                            fc.removeFundingAccount(position);
+                            toastMessage("Account sucessfully deleted.");
+                            fc.save();
+                            finish();
+                        }else{
+                            toastMessage("Cannot remove essential accounts");
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog display = alert.create();
+        alert.setTitle("Admin");
+        alert.show();
     }
 }

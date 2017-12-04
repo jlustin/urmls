@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
@@ -32,8 +34,6 @@ public class StaffMemberPage extends AppCompatActivity {
     private String fileName;
     String date = "";
 
-    private String m_Date;
-    private String m_ProgressUpdateText;
 
     Controller c = new Controller();
     StaffController sc = new StaffController();
@@ -89,7 +89,6 @@ public class StaffMemberPage extends AppCompatActivity {
         editId.setText(sc.viewStaffMemberID(position));
         editWeeklySalary =(EditText) findViewById(R.id.editWeeklySalary);
         editWeeklySalary.setText(sc.viewStaffMemberWeeklySalary(position));
-        //todo impement weekly salary
 
 
         progressUpdate = (TextView) findViewById(R.id.progressText);
@@ -133,6 +132,7 @@ public class StaffMemberPage extends AppCompatActivity {
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
+               date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
                 mDatePicker.init(2017, 11, 03, new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -165,7 +165,7 @@ public class StaffMemberPage extends AppCompatActivity {
                 String progressToDisplay = "";
                 for(int i=0; i<progress.size();i++){
                     progressToDisplay+= progress.get(i).getDate()+"\n";
-                    progressToDisplay+= progress.get(i).getDescription()+"\n";
+                    progressToDisplay+= progress.get(i).getDescription()+"\n\n";
                     progressUpdate.setText(progressToDisplay);
                 }
             }

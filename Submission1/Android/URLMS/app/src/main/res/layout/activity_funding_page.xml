@@ -125,4 +125,16 @@
         android:layout_marginLeft="22dp"
         android:layout_marginRight="21dp"/>
 
+    <Button
+        android:id="@+id/payDayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payDayString"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintRight_toRightOf="@+id/viewFundingAccountsButton"
+        app:layout_constraintTop_toBottomOf="@+id/viewFundingAccountsButton"
+        android:layout_marginRight="1dp"/>
+
 </android.support.constraint.ConstraintLayout>

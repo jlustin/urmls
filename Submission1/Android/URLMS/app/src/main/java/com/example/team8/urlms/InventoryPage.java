@@ -12,9 +12,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.InventoryController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
@@ -30,6 +33,7 @@ public class InventoryPage extends AppCompatActivity {
     private String fileName;
     Controller controller = new Controller();
     InventoryController ic = new InventoryController();
+    FundingController fc = new FundingController();
 
 
     Button backButton;
@@ -94,25 +98,29 @@ public class InventoryPage extends AppCompatActivity {
         toDisplayStatus.setText("Number of Equipment Item(s): " +totalEquipmentItem + "\n" +
                 "Number of Supply Item(s): " +totalSupplyItem);
     }
-//TODO: implement funding controller in here too
     private void setAddItemButton() {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean added = false;
                 if(!insertName.getText().toString().equals("")&& !insertCost.getText().toString().equals("")) {
+                    String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
                     if (itemType.equals(type_equipment)) {
-                        ic.addEquipmentItem(insertName.getText().toString(), Double.parseDouble(insertCost.getText().toString()));
+                        double cost = Double.parseDouble(insertCost.getText().toString());
+                        ic.addEquipmentItem(insertName.getText().toString(), cost);
                         added = true;
+                        fc.addTransaction(date, cost,"Purchased " + insertName.getText().toString(), "Equipment Funds");
                     }
                     if (itemType.equals(type_supply) && !insertQuantity.getText().toString().equals("")
                             ) {
                         ic.addSupplyItem(insertName.getText().toString(), Double.parseDouble(insertCost.getText().toString()),
                                 Integer.parseInt(insertQuantity.getText().toString()));
+                        double totalCost = Double.parseDouble(insertCost.getText().toString()) * Integer.parseInt(insertQuantity.getText().toString());
+                        fc.addTransaction(date, totalCost,"Purchased " + insertName.getText().toString(), "Supply Funds");
                         added = true;
                     }
                     if (added) {
-                        toastMessage("Item: " + insertName.getText().toString() + " successfully added.");
+                        toastMessage("Item: " + insertName.getText().toString() + " successfully added."+"\n Transaction recorded.");
                     }
                 }
                 else{

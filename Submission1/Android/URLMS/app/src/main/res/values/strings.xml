@@ -91,5 +91,8 @@
     <string name="addDateAndExpenseString">Add Date and Expense</string>
     <string name="enterAmountString">Enter Amount</string>
     <string name="insertExpenseDescriptionString">Expense Description</string>
+    <string name="removeString">Remove</string>
+    <string name="payDayString">Pay Day!</string>
+    <string name="inventoryString">Inventory</string>
 
 </resources>

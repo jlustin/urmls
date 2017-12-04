@@ -79,6 +79,7 @@ public class InventoryItemPage extends AppCompatActivity {
             totalCostDisplay.setVisibility(View.INVISIBLE);
         }
         else {
+            //TODO: change quantity edit text to text view and add addQuantityButton and incorporate fundingcontroller
             editQuantity.setText(ic.viewSupplyItemQuantity(position));
             currentQuantity.setText(ic.viewInventoryItemName(position));
             double costPerUnit = Double.parseDouble(ic.viewInventoryItemCost(position));
