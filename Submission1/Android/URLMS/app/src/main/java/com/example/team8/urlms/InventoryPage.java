@@ -94,7 +94,7 @@ public class InventoryPage extends AppCompatActivity {
         toDisplayStatus.setText("Number of Equipment Item(s): " +totalEquipmentItem + "\n" +
                 "Number of Supply Item(s): " +totalSupplyItem);
     }
-
+//TODO: implement funding controller in here too
     private void setAddItemButton() {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override

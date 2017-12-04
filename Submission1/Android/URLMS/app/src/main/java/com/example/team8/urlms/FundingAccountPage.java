@@ -1,24 +1,35 @@
 package com.example.team8.urlms;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.InventoryController;
+import ca.mcgill.ecse321.urlms.model.Expense;
+import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+
+import static android.os.Build.VERSION_CODES.O;
 
 public class FundingAccountPage extends AppCompatActivity {
 
     private int position;
     private URLMS urlms;
     private String fileName;
+    String date = "";
 
     Controller controller = new Controller();
     InventoryController ic = new InventoryController();
@@ -69,7 +80,32 @@ public class FundingAccountPage extends AppCompatActivity {
     }
 
     private void setAddFundingButton() {
+addFundingButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(FundingAccountPage.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_add_funding, null);
+        final EditText mAmount = (EditText) mView.findViewById(R.id.editTextAmount);
+        Button mConfirm = (Button) mView.findViewById(R.id.buttonConfirm);
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        mConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mAmount.getText().toString().isEmpty()){
+                    fc.addFunding(position, Double.parseDouble(mAmount.getText().toString()));
+                    toastMessage("Funding Added");
+                    dialog.dismiss();
+                }
+                else{
+                    toastMessage("Please fill any empty fields.");
+                }
+            }
+        });
 
+    }
+});
     }
     public void setBackButton(){
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +116,61 @@ public class FundingAccountPage extends AppCompatActivity {
         });
     }
     public void setViewTransactionsButton(){
+        viewTransactionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Expense> expenses = fc.viewFundingAccountExpenses(position);
+                String expensesList = "";
+                for(int i=0; i<expenses.size();i++){
+                    expensesList += "Date: " +expenses.get(i).getDate()+"\n" +
+                            "Description: " + expenses.get(i).getType() +"\n" + "Amount: "+
+                            String.valueOf(expenses.get(i).getAmount())+"\n";
+                }
+                toDisplayTransactions.setText(expensesList);
+                toDisplayTransactions.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
     public void setAddExpenseButton(){
+        addExpenseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(FundingAccountPage.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_add_expense, null);
+                final EditText mType = (EditText) mView.findViewById(R.id.editExpenseDescription);
+                final DatePicker mDatePicker = (DatePicker) mView.findViewById(R.id.datePicker);
+                final EditText mAmount = (EditText) mView.findViewById(R.id.editTextAmount);
+                Button mConfirm = (Button) mView.findViewById(R.id.buttonConfirm);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                mDatePicker.init(2017, 11, 03, new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        date = (monthOfYear+1)+ "-"+dayOfMonth+ "-"+year;
+                    }
+                });
+                mConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!mType.getText().toString().isEmpty()&&!mAmount.getText().toString().isEmpty()){
+                            fc.addTransaction(date,Double.parseDouble(mAmount.getText().toString()),
+                                    mType.getText().toString(), position);
+                            toastMessage("Expense Added");
+                            dialog.dismiss();
+                        }
+                        else{
+                            toastMessage("Please fill any empty fields.");
+                        }
+                    }
+                });
+            }
+        });
 
+    }
+    public void toastMessage(String message){
+        Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
+        myToast.show();
     }
 }
