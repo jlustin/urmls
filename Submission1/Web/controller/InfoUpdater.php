@@ -16,6 +16,7 @@
 	require_once $my_dir . '/../model/FundingAccount.php';
 	
 	require('InventoryController.php');
+	require('FundingController.php');
 	
 	// start session
  	session_start();
@@ -29,7 +30,7 @@
 	// Run appropriate controller method with respect to user request
 	switch($_GET['action']){
 		case "editInventoryItem":
-			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);
+			$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);		
 			break;
 		case "editStaffMember":
 			$iu->updateStaffMember($_GET['editedstaffname'],$_GET['editedstaffid']);
@@ -78,9 +79,16 @@
 			else {
 				if($quantity != null){
 					$inventoryItem->setQuantity($inventoryItem->getQuantity() + $quantity);
-				}
+					if($quantity>0){
+						// Return date/time info of a timestamp; then format the output
+						$mydate=getdate(date("U"));
+						$date= $mydate[month] . $mydate[mday] . $mydate[year];
+						$fundC = new FundingController($urlms);
+						$fundC->addTransaction("Supply Funding", $inventoryItem->getName() . " bought", $quantity * $inventoryItem->getCost(), "expense", $date);
+					}
+				}//TODO CHANGE DATE ARGUMENT
 			}
-						
+			
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
 			

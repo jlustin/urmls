@@ -11,6 +11,7 @@ class Expense
 
   //Expense Attributes
   private $amount;
+  private $date;
   private $type;
 
   //Expense Associations
@@ -20,9 +21,10 @@ class Expense
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aAmount, $aType, $aFundingAccount)
+  public function __construct($aAmount, $aDate, $aType, $aFundingAccount)
   {
     $this->amount = $aAmount;
+    $this->date = $aDate;
     $this->type = $aType;
     $didAddFundingAccount = $this->setFundingAccount($aFundingAccount);
     if (!$didAddFundingAccount)
@@ -43,6 +45,14 @@ class Expense
     return $wasSet;
   }
 
+  public function setDate($aDate)
+  {
+    $wasSet = false;
+    $this->date = $aDate;
+    $wasSet = true;
+    return $wasSet;
+  }
+
   public function setType($aType)
   {
     $wasSet = false;
@@ -54,6 +64,11 @@ class Expense
   public function getAmount()
   {
     return $this->amount;
+  }
+
+  public function getDate()
+  {
+    return $this->date;
   }
 
   public function getType()

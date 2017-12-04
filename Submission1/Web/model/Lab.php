@@ -13,16 +13,10 @@ class Lab
   private $name;
 
   //Lab Associations
-
-  /**
-   * 1 <@>- 1 Staff;
-   * 1 <@>- 1 Inventory;
-   * 1 <@>- 1 Funding;
-   */
   private $staffMembers;
   private $inventoryItems;
   private $fundingAccounts;
-  private $reports;
+  private $financialReports;
   private $uRLMS;
 
   //------------------------
@@ -35,7 +29,7 @@ class Lab
     $this->staffMembers = array();
     $this->inventoryItems = array();
     $this->fundingAccounts = array();
-    $this->reports = array();
+    $this->financialReports = array();
     $didAddURLMS = $this->setURLMS($aURLMS);
     if (!$didAddURLMS)
     {
@@ -183,37 +177,37 @@ class Lab
     return $index;
   }
 
-  public function getReport_index($index)
+  public function getFinancialReport_index($index)
   {
-    $aReport = $this->reports[$index];
-    return $aReport;
+    $aFinancialReport = $this->financialReports[$index];
+    return $aFinancialReport;
   }
 
-  public function getReports()
+  public function getFinancialReports()
   {
-    $newReports = $this->reports;
-    return $newReports;
+    $newFinancialReports = $this->financialReports;
+    return $newFinancialReports;
   }
 
-  public function numberOfReports()
+  public function numberOfFinancialReports()
   {
-    $number = count($this->reports);
+    $number = count($this->financialReports);
     return $number;
   }
 
-  public function hasReports()
+  public function hasFinancialReports()
   {
-    $has = $this->numberOfReports() > 0;
+    $has = $this->numberOfFinancialReports() > 0;
     return $has;
   }
 
-  public function indexOfReport($aReport)
+  public function indexOfFinancialReport($aFinancialReport)
   {
     $wasFound = false;
     $index = 0;
-    foreach($this->reports as $report)
+    foreach($this->financialReports as $financialReport)
     {
-      if ($report->equals($aReport))
+      if ($financialReport->equals($aFinancialReport))
       {
         $wasFound = true;
         break;
@@ -234,9 +228,9 @@ class Lab
     return 0;
   }
 
-  public function addStaffMemberVia($aName, $aId)
+  public function addStaffMemberVia($aName, $aId, $aWeeklySalary)
   {
-    return new StaffMember($aName, $aId, $this);
+    return new StaffMember($aName, $aId, $aWeeklySalary, $this);
   }
 
   public function addStaffMember($aStaffMember)
@@ -448,75 +442,75 @@ class Lab
     return $wasAdded;
   }
 
-  public static function minimumNumberOfReports()
+  public static function minimumNumberOfFinancialReports()
   {
     return 0;
   }
 
-  public function addReportVia($aTitle, $aDate, $aContent)
+  public function addFinancialReportVia($aTitle, $aDate, $aContent)
   {
-    return new Report($aTitle, $aDate, $aContent, $this);
+    return new FinancialReport($aTitle, $aDate, $aContent, $this);
   }
 
-  public function addReport($aReport)
+  public function addFinancialReport($aFinancialReport)
   {
     $wasAdded = false;
-    if ($this->indexOfReport($aReport) !== -1) { return false; }
-    $existingLab = $aReport->getLab();
+    if ($this->indexOfFinancialReport($aFinancialReport) !== -1) { return false; }
+    $existingLab = $aFinancialReport->getLab();
     $isNewLab = $existingLab != null && $this !== $existingLab;
     if ($isNewLab)
     {
-      $aReport->setLab($this);
+      $aFinancialReport->setLab($this);
     }
     else
     {
-      $this->reports[] = $aReport;
+      $this->financialReports[] = $aFinancialReport;
     }
     $wasAdded = true;
     return $wasAdded;
   }
 
-  public function removeReport($aReport)
+  public function removeFinancialReport($aFinancialReport)
   {
     $wasRemoved = false;
-    //Unable to remove aReport, as it must always have a lab
-    if ($this !== $aReport->getLab())
+    //Unable to remove aFinancialReport, as it must always have a lab
+    if ($this !== $aFinancialReport->getLab())
     {
-      unset($this->reports[$this->indexOfReport($aReport)]);
-      $this->reports = array_values($this->reports);
+      unset($this->financialReports[$this->indexOfFinancialReport($aFinancialReport)]);
+      $this->financialReports = array_values($this->financialReports);
       $wasRemoved = true;
     }
     return $wasRemoved;
   }
 
-  public function addReportAt($aReport, $index)
+  public function addFinancialReportAt($aFinancialReport, $index)
   {  
     $wasAdded = false;
-    if($this->addReport($aReport))
+    if($this->addFinancialReport($aFinancialReport))
     {
       if($index < 0 ) { $index = 0; }
-      if($index > $this->numberOfReports()) { $index = $this->numberOfReports() - 1; }
-      array_splice($this->reports, $this->indexOfReport($aReport), 1);
-      array_splice($this->reports, $index, 0, array($aReport));
+      if($index > $this->numberOfFinancialReports()) { $index = $this->numberOfFinancialReports() - 1; }
+      array_splice($this->financialReports, $this->indexOfFinancialReport($aFinancialReport), 1);
+      array_splice($this->financialReports, $index, 0, array($aFinancialReport));
       $wasAdded = true;
     }
     return $wasAdded;
   }
 
-  public function addOrMoveReportAt($aReport, $index)
+  public function addOrMoveFinancialReportAt($aFinancialReport, $index)
   {
     $wasAdded = false;
-    if($this->indexOfReport($aReport) !== -1)
+    if($this->indexOfFinancialReport($aFinancialReport) !== -1)
     {
       if($index < 0 ) { $index = 0; }
-      if($index > $this->numberOfReports()) { $index = $this->numberOfReports() - 1; }
-      array_splice($this->reports, $this->indexOfReport($aReport), 1);
-      array_splice($this->reports, $index, 0, array($aReport));
+      if($index > $this->numberOfFinancialReports()) { $index = $this->numberOfFinancialReports() - 1; }
+      array_splice($this->financialReports, $this->indexOfFinancialReport($aFinancialReport), 1);
+      array_splice($this->financialReports, $index, 0, array($aFinancialReport));
       $wasAdded = true;
     } 
     else 
     {
-      $wasAdded = $this->addReportAt($aReport, $index);
+      $wasAdded = $this->addFinancialReportAt($aFinancialReport, $index);
     }
     return $wasAdded;
   }
@@ -559,9 +553,9 @@ class Lab
     {
       $aFundingAccount->delete();
     }
-    foreach ($this->reports as $aReport)
+    foreach ($this->financialReports as $aFinancialReport)
     {
-      $aReport->delete();
+      $aFinancialReport->delete();
     }
     $placeholderURLMS = $this->uRLMS;
     $this->uRLMS = null;

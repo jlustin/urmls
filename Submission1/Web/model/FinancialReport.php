@@ -2,19 +2,19 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
-class Report
+class FinancialReport
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //Report Attributes
+  //FinancialReport Attributes
   private $title;
   private $date;
   private $content;
 
-  //Report Associations
+  //FinancialReport Associations
   private $lab;
 
   //------------------------
@@ -29,7 +29,7 @@ class Report
     $didAddLab = $this->setLab($aLab);
     if (!$didAddLab)
     {
-      throw new Exception("Unable to create report due to lab");
+      throw new Exception("Unable to create financialReport due to lab");
     }
   }
 
@@ -93,9 +93,9 @@ class Report
     $this->lab = $aLab;
     if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingLab->removeReport($this);
+      $existingLab->removeFinancialReport($this);
     }
-    $this->lab->addReport($this);
+    $this->lab->addFinancialReport($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -109,7 +109,7 @@ class Report
   {
     $placeholderLab = $this->lab;
     $this->lab = null;
-    $placeholderLab->removeReport($this);
+    $placeholderLab->removeFinancialReport($this);
   }
 
 }

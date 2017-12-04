@@ -2,12 +2,6 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
-// class Funding
-// {
-// double totalBalance;
-// 1 <@>- * FundingAccount;
-// 1 -- * Report;
-// }
 class FundingAccount
 {
 
@@ -120,9 +114,9 @@ class FundingAccount
     return 0;
   }
 
-  public function addExpenseVia($aAmount, $aType)
+  public function addExpenseVia($aAmount, $aDate, $aType)
   {
-    return new Expense($aAmount, $aType, $this);
+    return new Expense($aAmount, $aDate, $aType, $this);
   }
 
   public function addExpense($aExpense)
