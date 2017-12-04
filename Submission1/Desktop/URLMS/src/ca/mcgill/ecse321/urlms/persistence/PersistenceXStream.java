@@ -21,23 +21,23 @@ public abstract class PersistenceXStream {
 		setFilename(fileName);
 		// setAlias("URLMS", URLMS.class);
 
-		// load model if exists, create otherwise
-		File file = new File(fileName);
-		if (file.exists()) {
-			urlms = (URLMS) loadFromXMLwithXStream();
-		} else {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(1);
-			}
-			urlms = new URLMS();
-			Lab aLab = new Lab("Lab", urlms);
-			urlms.addLab(aLab);
-			saveToXMLwithXStream(urlms);
-		}
-		return urlms;
+        // load model if exists, create otherwise
+        File file = new File(fileName);
+        if (file.exists()) {
+            urlms = (URLMS) loadFromXMLwithXStream();
+        } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+            urlms = new URLMS();
+            Lab aLab = new Lab("Lab", urlms);
+            urlms.addLab(aLab);
+            saveToXMLwithXStream(urlms);
+        }
+        return urlms;
 
 	}
 

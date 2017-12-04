@@ -57,6 +57,11 @@ public class ControllerTest {
 
 	@Test
 	public void testViewStaffList() {
+		//fail("Not yet implemented");
+		Lab aLab = urlms.getLab(0);
+		
+		//check if the staff manager is empty
+		assertEquals(0, aLab.getStaffMembers().size());
 		
 		String name = "Feras"; //test name
 		
@@ -64,6 +69,8 @@ public class ControllerTest {
 		urlmsController.addSampleMembers(); //add some sample members
 		
 		//check model in memory
+		assertEquals(3, aLab.getStaffMembers().size()); //checks if the staff manager now contains 3 members
+		assertEquals(name, aLab.getStaffMember(1).getName()); //checks if the 2nd member in the list is "Feras"
 		
 		//save the file
 		urlmsController.save();
@@ -71,6 +78,8 @@ public class ControllerTest {
 		urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 		
 		//check file contents (same checks as above, but with loaded file)
+		assertEquals(3, aLab.getStaffMembers().size());
+		assertEquals(name, aLab.getStaffMember(1).getName());
 	}
 
 }
