@@ -18,7 +18,7 @@ switch($_GET['action']){
 		$c->viewAccount($_GET['viewtype']);
 		break;
 	case "3/10":
-		$c->addTransaction($_GET['amount'], $_GET['type']);
+		$c->addTransaction($_GET['labtype'], $_GET['expensetype'], $_GET['amount'], $_GET['type'], $_GET['date']);
 		break;
 	case "4/10":
 		$c->removeAccount($_GET['removetype']);
@@ -26,7 +26,13 @@ switch($_GET['action']){
 	case "9/10":
 		$c->getAccounts();
 		break;
-	case "9/10":
+	case "10/10":
 		$c->getNetBalance();
 		break;
+	case "11/10":
+		$c->generateFinancialReport($_GET['accounttype']);
+		break;
+// 	case "12/10":
+// 		$c->updateAccount($_GET['edittype']);
+// 		break;
 }

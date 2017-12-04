@@ -15,6 +15,9 @@
 		<br>
 	</form>
 	
+	<br><br>
+	<h2>Funding Accounts Manager</h2>
+	
 	<form action="FundingRequest.php" method="get">
 		<br>
 		<h3>View Funding Accounts</h3>
@@ -41,23 +44,48 @@
 		<input type="submit" value="Remove Funding Account!"/>
 		<br>
 	</form>
-
+	
 	<form action="FundingRequest.php" method="get">
 		<br>
-		<h3>View Account and Account Net Balance</h3>
+		<h3>Generate Financial Report of an Account</h3>
+		Account Type<input type="text" name="accounttype" value=""/><br>
+		<input type="hidden" name="action" value="11/10" />
+ 		<input type="submit" value="View Accounts!" />
+		<br>
+	</form>
+	
+	<form action="FundingRequest.php" method="get">
+		<br>
+		<h3>View/Edit Account and Account Net Balance</h3>
 		Type<input type="text" name="viewtype" value=""/><br>
 		<input type="hidden" name="action" value="2/10" />
 		<input type="submit" value="View Net Balance!"/>
 		<br>
 	</form>
 	
+
+<!-- 	<form action="FundingRequest.php" method="get">
+		<br>
+		<h3>Edit Funding Account</h3>
+		<input type="hidden" name="action" value="12/10" />
+		Type<input type="text" name="edittype" value=""/><br>
+		<input type="submit" value="Remove Funding Account!"/>
+		<br>
+	</form>
+-->
+	<br>
+	<hr>
+	
 	<form action="FundingRequest.php" method="get">
 		<br>
 		<h3>Add Transaction</h3>
 		<input type="hidden" name="action" value="3/10" />
-		<input type="text" name="amount" value=""/>Amount<br>
+		Account Type<input type="text" name="labtype" value=""/><br>
+		Expense Type<input type="text" name="expensetype" value=""/><br>
+		Amount<input type="text" name="amount" value=""/><br>
 		<input type="radio" name="type" value="fund"/>Fund<br>
 		<input type="radio" name="type" value="expense"/>Expense<br>
+		Date<input type="text" name="date" value=""/><br>
 		<input type="submit" value="Add Transation!!!"/>
 		<br>
 	</form>
