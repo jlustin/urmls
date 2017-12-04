@@ -18,8 +18,7 @@
 		
 	</head>
 	<body>
-	<div class="container">
-		<!--  <nav class="navbar navbar-dark bg-dark"> -->
+	<!--  Nav Bar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  		<a class="navbar-brand" href="../index.php">
 	  			<img src="../image/URLMS_Logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
@@ -50,6 +49,8 @@
 		    		</ul>
 	  			</div>
 		</nav>
+	<div class="container">
+		
 		
 		
 		<!-- Bootstrap Template -->
@@ -200,7 +201,9 @@
 	</div>
 	-->
 	
-	<!-- Footer -->
+	
+</div>	
+<!-- Footer -->
 	<footer>
 		<div class="card bg-light mb-12">
   				<div class="card-body">
@@ -212,7 +215,7 @@
   				</div>
 		</div>
 	</footer>
-</div>	
+
 </body>
 </html>
 
