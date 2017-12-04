@@ -1,13 +1,14 @@
 <?php
 	$my_dir = dirname(__FILE__);
 	require_once $my_dir . '/../persistence/persistence.php';
+	require_once $my_dir . '/../controller/Controller.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/Lab.php';
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	
-class InventoryController {
+class InventoryController extends Controller {
 	
 	protected $urlms;
 	/*
@@ -42,14 +43,24 @@ class InventoryController {
 	 */
 	function addInventory($name, $category, $type, $cost, $quantity){
 		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter a name.");
-		} else {
+			throw new Exception ("Please enter a valid name.");
+		}
+		elseif ($category == null || strlen($category) == 0 || (!$this->isValidStr($category))){
+			throw new Exception ("Please enter a valid category.");
+		}
+		elseif ($cost == null || strlen($cost) == 0 || (!is_numeric($cost))){
+			throw new Exception ("Please enter a valid cost.");
+		}
+		else {
 			$urlms = $this->urlms;
 			$newInventoryItem;
 			
 			if($type == "Equipment"){
 				$newInventoryItem = new Equipment($name, $cost, $category,$urlms->getLab_index(0),false);
 			} else{
+				if ($quantity == null || strlen($quantity) == 0 || (!is_numeric($quantity))){
+					throw new Exception ("Please enter a valid quantity.");
+				}
 				$newInventoryItem = new SupplyType($name, $cost, $category,$urlms->getLab_index(0), $quantity);
 			}
 			//add the new item to the Inventory 
@@ -143,8 +154,8 @@ class InventoryController {
 		
 	function findInventoryItem($name){
 		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter an inventory item name.");
-		} else{
+			throw new Exception ("Please enter a valid name.");
+		}else{
 			$inventoryItem=null;
 			//Find the item
 			$items = $this->urlms->getLab_index(0)->getInventoryItems();

@@ -30,17 +30,19 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 		<!--  <link rel="stylesheet" type="text/css" href="style/homepagecss.css"> -->
 	</head>
-	<body background="../image/lab_background.jpg">
+	<body background="../image/lab_background.jpg" style="background-size: 100%; background-attachment: fixed; background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;">
 <!-- 	<h1 style="text-align: center"><a href="index.php">University Research Lab Management System</a></h1> -->
 	
 	<!--  Nav Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
   		<a class="navbar-brand" href="../index.php">
   			<img src="../image/URLMS_Logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
   			University Research Lab Management System
   		</a>
 	</nav>
-	<br><br>
+	<br><br><br><br><br>
 	<!-- Bootstrap Container -->
 	<div class="container">
 		<!-- Bootstrap Continer Template -->
