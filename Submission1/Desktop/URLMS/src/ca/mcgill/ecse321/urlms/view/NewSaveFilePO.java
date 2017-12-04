@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 
 public class NewSaveFilePO extends JDialog {
 
+	//TODO: add your buttons or components (Design Tab at the bottom) that you want and test
+	
 	private final JPanel contentPanel = new JPanel();
 
 	/**

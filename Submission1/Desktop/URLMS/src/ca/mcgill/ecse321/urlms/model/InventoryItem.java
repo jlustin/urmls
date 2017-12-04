@@ -1,9 +1,16 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 20 "../../../../../URLMS.ump"
+/**
+ * class Inventory
+ * {
+ * 1 -- * InventoryItem;
+ * }
+ */
+// line 29 "../../../../../../../../ump/tmp574231/model.ump"
+// line 120 "../../../../../../../../ump/tmp574231/model.ump"
 public class InventoryItem
 {
 
@@ -17,21 +24,21 @@ public class InventoryItem
   private String category;
 
   //InventoryItem Associations
-  private Inventory inventory;
+  private Lab lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public InventoryItem(String aName, double aCost, String aCategory, Inventory aInventory)
+  public InventoryItem(String aName, double aCost, String aCategory, Lab aLab)
   {
     name = aName;
     cost = aCost;
     category = aCategory;
-    boolean didAddInventory = setInventory(aInventory);
-    if (!didAddInventory)
+    boolean didAddLab = setLab(aLab);
+    if (!didAddLab)
     {
-      throw new RuntimeException("Unable to create inventoryItem due to inventory");
+      throw new RuntimeException("Unable to create inventoryItem due to lab");
     }
   }
 
@@ -78,35 +85,35 @@ public class InventoryItem
     return category;
   }
 
-  public Inventory getInventory()
+  public Lab getLab()
   {
-    return inventory;
+    return lab;
   }
 
-  public boolean setInventory(Inventory aInventory)
+  public boolean setLab(Lab aLab)
   {
     boolean wasSet = false;
-    if (aInventory == null)
+    if (aLab == null)
     {
       return wasSet;
     }
 
-    Inventory existingInventory = inventory;
-    inventory = aInventory;
-    if (existingInventory != null && !existingInventory.equals(aInventory))
+    Lab existingLab = lab;
+    lab = aLab;
+    if (existingLab != null && !existingLab.equals(aLab))
     {
-      existingInventory.removeInventoryItem(this);
+      existingLab.removeInventoryItem(this);
     }
-    inventory.addInventoryItem(this);
+    lab.addInventoryItem(this);
     wasSet = true;
     return wasSet;
   }
 
   public void delete()
   {
-    Inventory placeholderInventory = inventory;
-    this.inventory = null;
-    placeholderInventory.removeInventoryItem(this);
+    Lab placeholderLab = lab;
+    this.lab = null;
+    placeholderLab.removeInventoryItem(this);
   }
 
 
@@ -116,6 +123,6 @@ public class InventoryItem
             "name" + ":" + getName()+ "," +
             "cost" + ":" + getCost()+ "," +
             "category" + ":" + getCategory()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "inventory = "+(getInventory()!=null?Integer.toHexString(System.identityHashCode(getInventory())):"null");
+            "  " + "lab = "+(getLab()!=null?Integer.toHexString(System.identityHashCode(getLab())):"null");
   }
 }

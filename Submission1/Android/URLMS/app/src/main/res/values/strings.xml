@@ -42,8 +42,8 @@
     <string name="addNewItem">Add New Item</string>
     <string name="select_type">Select Type</string>
     <string-array name="item_types">
-        <item>Whats up</item>
-        <item>Sike, not implemented yet</item>
+        <item>Equipment</item>
+        <item>Supply</item>
     </string-array>
 
 
@@ -66,5 +66,27 @@
     <string name="currentBalanceString">Current Balance</string>
     <string name="accountName">Account Name</string>
     <string name="currentBalanceValue">Current Balance</string>
+    <string name="ResearchAssistant">Research Assistant</string>
+    <string name="ResearchAssociate">Research Associate</string>
+    <string name="insertNewId">Insert new ID</string>
+    <string name="IDString">ID</string>
+    <string name="addDateAndProgress">Add Date and Update</string>
+    <string name="DateString">Date</string>
+    <string name="ProgressString">Progress</string>
+    <string name="confirmString">Confirm</string>
+    <string name="monthDayYear">mm-dd-yyyy</string>
+    <string name="currentInventoryStatus">Inventory Status</string>
+    <string name="insertQuantityItem">Insert the quantity</string>
+    <string name="quantityString">Quantity</string>
+    <string name="totalCostStatus">Total Cost Status</string>
+    <string name="insertWeeklySalary">Enter weekly salary</string>
+    <string name="weeklySalaryString">Weekly Salary</string>
+    <string name="insertNewWeeklySalaryString">Insert New Weekly Salary</string>
+    <string name="addFundingAccountString">Add Funding Account</string>
+    <string name="insertTypeString">Insert Account Type</string>
+    <string name="insertInitialAmount">Insert Initial Amount</string>
+    <string name="typeString">Type</string>
+    <string name="amountString">Amount</string>
+    <string name="accountsString">Accounts</string>
 
 </resources>

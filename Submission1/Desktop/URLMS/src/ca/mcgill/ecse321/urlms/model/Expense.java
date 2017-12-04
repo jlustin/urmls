@@ -1,9 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 52 "../../../../../URLMS.ump"
+// line 62 "../../../../../../../../ump/tmp574231/model.ump"
+// line 140 "../../../../../../../../ump/tmp574231/model.ump"
 public class Expense
 {
 
@@ -13,6 +14,7 @@ public class Expense
 
   //Expense Attributes
   private double amount;
+  private String date;
   private String type;
 
   //Expense Associations
@@ -22,9 +24,10 @@ public class Expense
   // CONSTRUCTOR
   //------------------------
 
-  public Expense(double aAmount, String aType, FundingAccount aFundingAccount)
+  public Expense(double aAmount, String aDate, String aType, FundingAccount aFundingAccount)
   {
     amount = aAmount;
+    date = aDate;
     type = aType;
     boolean didAddFundingAccount = setFundingAccount(aFundingAccount);
     if (!didAddFundingAccount)
@@ -45,6 +48,14 @@ public class Expense
     return wasSet;
   }
 
+  public boolean setDate(String aDate)
+  {
+    boolean wasSet = false;
+    date = aDate;
+    wasSet = true;
+    return wasSet;
+  }
+
   public boolean setType(String aType)
   {
     boolean wasSet = false;
@@ -56,6 +67,11 @@ public class Expense
   public double getAmount()
   {
     return amount;
+  }
+
+  public String getDate()
+  {
+    return date;
   }
 
   public String getType()
@@ -99,6 +115,7 @@ public class Expense
   {
     return super.toString() + "["+
             "amount" + ":" + getAmount()+ "," +
+            "date" + ":" + getDate()+ "," +
             "type" + ":" + getType()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "fundingAccount = "+(getFundingAccount()!=null?Integer.toHexString(System.identityHashCode(getFundingAccount())):"null");
   }
