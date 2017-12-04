@@ -1,3 +1,25 @@
+<?php $my_dir = dirname(__FILE__);
+	require_once $my_dir . '/persistence/persistence.php';
+	require_once $my_dir . '/model/URLMS.php';
+	require_once $my_dir . '/model/Lab.php';
+	require_once $my_dir . '/model/StaffMember.php';
+	require_once $my_dir . '/model/ResearchRole.php';
+	require_once $my_dir . '/model/ResearchAssociate.php';
+	require_once $my_dir . '/model/ResearchAssistant.php';
+	require_once $my_dir . '/model/ProgressUpdate.php';
+	require_once $my_dir . '/model/URLMS.php';
+	require_once $my_dir . '/model/Lab.php';
+	require_once $my_dir . '/model/InventoryItem.php';
+	require_once $my_dir . '/model/SupplyType.php';
+	require_once $my_dir . '/model/Equipment.php';
+	require_once $my_dir . '/model/URLMS.php';
+	require_once $my_dir . '/model/Lab.php';
+	require_once $my_dir . '/model/FinancialReport.php';
+	require_once $my_dir . '/model/Expense.php';
+	require_once $my_dir . '/model/FundingAccount.php';
+	
+?>
+
 <html>
 	<head>
 		<title>URLMS</title>
@@ -41,6 +63,7 @@
       					3 of 3
     				</div>
   				</div> -->
+  		<?php $urlms = (new Persistence("Persistence/data.txt"))->loadDataFromStore();?>
   		<!-- Carousel -->
   		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   		   <ol class="carousel-indicators">
@@ -52,9 +75,12 @@
 		    <div class="carousel-item active">
 		      <div class="jumbotron" style="text-align: center;">
 				  <h1 class="display-3">Staff</h1>
-				  <p class="lead">Staff Info Staff Info Staff Info</p>
-				  <hr class="my-4">
-				  <p>MORE STAFF INFO MORE STAFF INFO MORE STAFF INFO</p>
+				  <hr class="my-4" style="width: 50%;">
+				  <p>
+				  		Total Number of Staff: <?php echo $urlms->getLab_index(0)->numberOfStaffMembers() . "<br>";?>
+				  		<?php echo "<br>";?>
+				  		
+				  </p>
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/StaffView.php" role="button">Go to Staff</a>
 				  </p>
@@ -63,9 +89,19 @@
 		    <div class="carousel-item">
 		      <div class="jumbotron" style="text-align: center;">
 				  <h1 class="display-3">Inventory</h1>
-				  <p class="lead">Inventory Info Inventory Info Inventory Info</p>
-				  <hr class="my-4">
-				  <p>MORE INV INFO MORE INV INFO MORE INV INFO</p>
+				  <hr class="my-4" style="width: 50%;">
+				  <p>
+				  		Total Number of Inventory Items: <?php echo $urlms->getLab_index(0)->numberOfInventoryItems() . "<br>";?>
+				  		Total Value of Inventory Items:
+				  		<?php 
+				  			$totalValue = 0;
+				  			$inventoryItems = $urlms->getLab_index(0)->getInventoryItems();
+				  			foreach ($inventoryItems as $inventoryItem){
+				  				$totalValue = $totalValue + $inventoryItem->getCost();
+				  			}
+				  			echo $totalValue . " $";
+				  		?>
+				  </p>
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/InventoryView.php" role="button">Go to Inventory</a>
 				  </p>
@@ -74,9 +110,19 @@
 		    <div class="carousel-item">
 		      <div class="jumbotron" style="text-align: center;">
 				  <h1 class="display-3">Funding</h1>
-				  <p class="lead">Funding Info Funding Info Funding Info</p>
-				  <hr class="my-4">
-				  <p>MORE FUND INFO MORE FUND INFO MORE FUND INFO</p>
+				  <hr class="my-4" style="width: 50%;">
+				  <p>
+				  		Net Balance of Laboratory: 
+				  		<?php 
+				  			$netBalance = 0;
+				  			$accounts = $urlms->getLab_index(0)->getFundingAccounts();
+				  			foreach ($accounts as $a){
+				  				$netBalance = $netBalance + $a->getBalance();
+				  			}
+				  			echo $netBalance . " $ <br>";
+				  		?>
+				  		Total Number of Accounts: <?php echo $urlms->getLab_index(0)->numberOfFundingAccounts();?>
+				  </p>
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/FundingView.php" role="button">Go to Funding</a>
 				  </p>
