@@ -50,6 +50,7 @@ public class StaffMemberPage extends AppCompatActivity {
 
     EditText editName;
     EditText editId;
+    EditText editWeeklySalary;
 
     CheckBox researchAssistantBox;
     CheckBox researchAssociateBox;
@@ -86,6 +87,9 @@ public class StaffMemberPage extends AppCompatActivity {
         editName.setText(sc.viewStaffMemberName(position));
         editId = (EditText) findViewById(R.id.editId);
         editId.setText(sc.viewStaffMemberID(position));
+        editWeeklySalary =(EditText) findViewById(R.id.editWeeklySalary);
+        editWeeklySalary.setText(sc.viewStaffMemberWeeklySalary(position));
+        //todo impement weekly salary
 
 
         progressUpdate = (TextView) findViewById(R.id.progressText);
@@ -135,18 +139,17 @@ public class StaffMemberPage extends AppCompatActivity {
                         date = (monthOfYear+1)+ "-"+dayOfMonth+ "-"+year;
                     }
                 });
-//                mDate.getText().toString()
                 mConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(!mProgress.getText().toString().isEmpty()){
                             sc.addProgress(date, mProgress.getText().toString(),position);
                             toastMessage("Progress Updated");
+                            dialog.dismiss();
                         }
                         else{
                             toastMessage("Please fill any empty fields.");
                         }
-                        dialog.dismiss();
                     }
                 });
             }
@@ -186,7 +189,11 @@ public class StaffMemberPage extends AppCompatActivity {
                 if(editName.getText().toString().isEmpty()){
                     toastMessage("you didn't enter a string");
                 }
-                else sc.editStaffmemberRecord(position,Integer.parseInt(editId.getText().toString()), editName.getText().toString(), researchAssistantBox.isChecked(), researchAssociateBox.isChecked());
+                else sc.editStaffmemberRecord(position,Integer.parseInt(editId.getText().toString()),
+                        editName.getText().toString(),
+                        researchAssistantBox.isChecked(),
+                        researchAssociateBox.isChecked(),
+                Double.parseDouble(editWeeklySalary.getText().toString()));
                 toastMessage("Member successfully updated, refresh page to see");
                 sc.save();
             }

@@ -32,6 +32,7 @@ public class StaffPage extends AppCompatActivity {
     Button viewStaffListButton;
     Button addMemberButton;
     EditText insertName;
+    EditText insertWeeklySalary;
 
     CheckBox researchAssistantBox;
     CheckBox researchAssociateBox;
@@ -66,18 +67,20 @@ public class StaffPage extends AppCompatActivity {
 
         //EditText
         insertName = (EditText) findViewById(R.id.insertName);
+        insertWeeklySalary = (EditText) findViewById(R.id.insertWeeklySalary);
 
         //initiate buttons
         setBackButton();
         setViewStaffListButton();
         setAddMemberButton();
     }
-
+//TODO: add weekly salary to member
     private void setAddMemberButton() {
         addMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(),researchAssociateBox.isChecked());
+                sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(),researchAssociateBox.isChecked(),
+                        Double.parseDouble(insertWeeklySalary.getText().toString()));
                 toastMessage("Member successfully added.");
             }
         });

@@ -72,6 +72,7 @@ public class StaffListPage extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),StaffMemberPage.class );
                 intent.putExtra("memberPosition", position);
                 startActivity(intent);
+
             }
         });
 

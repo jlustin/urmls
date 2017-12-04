@@ -56,8 +56,6 @@ public class InventoryListPage extends AppCompatActivity {
             }
         }
 
-
-
        viewItemAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, inventoryItems);
         ListView buckyListView = (ListView) findViewById(R.id.buckyListView);
         buckyListView.setAdapter(viewItemAdapter);

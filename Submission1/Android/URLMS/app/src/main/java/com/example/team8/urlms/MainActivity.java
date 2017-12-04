@@ -16,6 +16,7 @@ import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     Controller c = new Controller();
     StaffController sc = new StaffController();
+    FundingController fc = new FundingController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //load controller and model
-        fileName = getFilesDir().getAbsolutePath() + "/urlms2.xml";
+        fileName = getFilesDir().getAbsolutePath() + "/urlms4.xml";
         URLMSApplication.setFilename(fileName);
         urlms = URLMSApplication.getURLMS();
 
@@ -76,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
          *initiate all buttons
          */
         openFunding();openInventory();openStaff();
+
+        int accountsInitiated = fc.initiateFundingAccounts();
+        if(accountsInitiated == 1){
+            toastMessage("Welcome back to URLMS");
+        }
+        else{
+            toastMessage("Welcome to URLMS, initial funding accounts created.");
+        }
 
 
     }

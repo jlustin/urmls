@@ -43,6 +43,8 @@ public class InventoryPage extends AppCompatActivity {
     TextView toDisplay;
     TextView toDisplayStatus;
 
+    TextView toDisplayQuantity;
+
     String itemType;
     final String type_supply = "supply";
     final String type_equipment = "equipment";
@@ -58,6 +60,7 @@ public class InventoryPage extends AppCompatActivity {
 
         toDisplay = (TextView) findViewById(R.id.toDisplay);
         toDisplayStatus = (TextView) findViewById(R.id.toDisplayStatus);
+        toDisplayQuantity = (TextView) findViewById(R.id.quantityText);
 
         backButton = (Button) findViewById(R.id.backButton);
         viewInventoryItemListButton = (Button) findViewById(R.id.viewInventoryListButton);
@@ -176,10 +179,13 @@ public class InventoryPage extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
                     itemType = type_equipment;
-                    toastMessage("Equipment type selected. You can ignore the quantity section.");
+                    insertQuantity.setVisibility(View.INVISIBLE);
+                    toDisplayQuantity.setVisibility(View.INVISIBLE);
                 }
                 if(position==1){
                     itemType = type_supply;
+                    insertQuantity.setVisibility(View.VISIBLE);
+                    toDisplayQuantity.setVisibility(View.VISIBLE);
                     toastMessage("Supply type selected, please specify the quantity.");
                 }
             }

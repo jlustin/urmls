@@ -79,5 +79,14 @@
     <string name="insertQuantityItem">Insert the quantity</string>
     <string name="quantityString">Quantity</string>
     <string name="totalCostStatus">Total Cost Status</string>
+    <string name="insertWeeklySalary">Enter weekly salary</string>
+    <string name="weeklySalaryString">Weekly Salary</string>
+    <string name="insertNewWeeklySalaryString">Insert New Weekly Salary</string>
+    <string name="addFundingAccountString">Add Funding Account</string>
+    <string name="insertTypeString">Insert Account Type</string>
+    <string name="insertInitialAmount">Insert Initial Amount</string>
+    <string name="typeString">Type</string>
+    <string name="amountString">Amount</string>
+    <string name="accountsString">Accounts</string>
 
 </resources>
