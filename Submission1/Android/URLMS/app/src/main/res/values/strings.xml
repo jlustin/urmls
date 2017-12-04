@@ -88,5 +88,8 @@
     <string name="typeString">Type</string>
     <string name="amountString">Amount</string>
     <string name="accountsString">Accounts</string>
+    <string name="addDateAndExpenseString">Add Date and Expense</string>
+    <string name="enterAmountString">Enter Amount</string>
+    <string name="insertExpenseDescriptionString">Expense Description</string>
 
 </resources>

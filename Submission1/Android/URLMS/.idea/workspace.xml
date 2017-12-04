@@ -56,20 +56,81 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FundingAccountPage.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingAccountPage.java">
+      <file leaf-file-name="StaffListPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/StaffListPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="132">
+              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="92" selection-end-column="11" />
+              <folding>
+                <element signature="e#3015#3163#0" expanded="true" />
+                <element signature="e#3162#3163#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FundingPage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FundingAccountPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingAccountPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="422">
+              <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+              <folding>
+                <element signature="e#2475#2627#0" expanded="true" />
+                <element signature="e#2626#2627#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog_add_progress.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_progress.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog_add_funding.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_funding.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#577#603#0" expanded="false" />
+                <element signature="e#941#968#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog_add_expense.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_expense.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#573#606#0" expanded="false" />
+                <element signature="e#1229#1256#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FundingPage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
+            <state relative-caret-position="152">
               <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
               <folding />
             </state>
@@ -96,26 +157,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_funding_page.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_funding_page.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="activity_funding_account_page.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_funding_account_page.xml">
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="143" column="43" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
+            <state relative-caret-position="258">
+              <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
               <folding>
-                <element signature="e#4127#4153#0" expanded="false" />
+                <element signature="e#4860#4886#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2010,6 +2058,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingPage.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_funding_account_page.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingAccountPage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_add_expense.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_add_funding.xml" />
       </list>
     </option>
   </component>
@@ -2389,6 +2439,7 @@
       <recent name="com.example.team8.urlms" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/libs" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
     </key>
@@ -2919,23 +2970,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_inventory_list_page.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/StaffMemberPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/StaffListPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -3142,17 +3176,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_progress.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_inventory_item_page.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1035">
@@ -3270,14 +3293,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/StaffListPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="113" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/InventoryListPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -3305,14 +3320,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/InventoryPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1233">
@@ -3329,12 +3336,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/StaffListPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="92" selection-end-column="11" />
+          <folding>
+            <element signature="e#3015#3163#0" expanded="true" />
+            <element signature="e#3162#3163#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingAccountPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+          <folding>
+            <element signature="e#2475#2627#0" expanded="true" />
+            <element signature="e#2626#2627#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_funding_account_page.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="143" column="43" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
+        <state relative-caret-position="258">
+          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
           <folding>
-            <element signature="e#4127#4153#0" expanded="false" />
+            <element signature="e#4860#4886#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3342,10 +3371,49 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingAccountPage.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_progress.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_funding.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#577#603#0" expanded="false" />
+            <element signature="e#941#968#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_add_expense.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#573#606#0" expanded="false" />
+            <element signature="e#1229#1256#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+        <state relative-caret-position="152">
+          <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
           <folding />
         </state>
       </provider>

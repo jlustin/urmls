@@ -69,10 +69,15 @@ public class FundingAccountPage extends AppCompatActivity {
     }
 
     private void setAddFundingButton() {
-        
+
     }
     public void setBackButton(){
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {fc.save();
+                finish();
+            }
+        });
     }
     public void setViewTransactionsButton(){
 
