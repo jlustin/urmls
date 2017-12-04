@@ -18,15 +18,62 @@
 		
 	</head>
 	<body>
-		<h1 align="center"><a href="../index.php" style="color: black;text-decoration: none;">University Research Lab Management System</a></h1>
-		<h2 align="center">Staff</h2>
-		<br><br>
+	<div class="container">
+		<!--  <nav class="navbar navbar-dark bg-dark"> -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  		<a class="navbar-brand" href="../index.php">
+	  			<img src="../image/URLMS_Logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+	  			URLMS
+	  		</a>
+	 		 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	  			 <span class="navbar-toggler-icon"></span>
+	 		 </button>
+	  			<div class="collapse navbar-collapse" id="navbarNav">
+		    		<ul class="navbar-nav">
+		      			<!-- li class="nav-item active">
+		        			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		      			</li> -->
+		      			<li class="nav-item">
+		        			<a class="nav-link" href="StaffView.php">Staff</a>
+		      			</li>
+		      			<li class="nav-item">
+		        			<a class="nav-link" href="InventoryView.php">Inventory</a>
+		      			</li>
+		      			<li class="nav-item">
+		        			<a class="nav-link" href="FundingView.php">Funding</a>
+		      			</li>
+		    		</ul>
+	  			</div>
+		</nav>
 		
+		
+		<!-- Bootstrap Template -->
+  		<!-- 	<div class="row">
+    				<div class="col">
+     					1 of 2
+  					</div>
+   					<div class="col">
+      					2 of 2
+    				</div>
+  				</div>
+  				<div class="row">
+    				<div class="col">
+      					1 of 3
+    				</div>
+    				<div class="col">
+      					2 of 3
+    				</div>
+    				<div class="col">
+      					3 of 3
+    				</div>
+  				</div> -->
+  			
+	
 		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>View Staff List</h3>
 			<input type="hidden" name="action" value="9/10" />
- 			<input type="submit" class="btn btn-secondary" value="View Staff!" />
+ 			<input type="submit" class="btn btn-primary" value="View Staff!" />
  			<br>
 		</form>
 		
@@ -34,9 +81,12 @@
 			<br>
 			<h3>Add Staff Member</h3>
 			<input type="hidden" name="action" value="10/10" />
-			
- 			<label for="newStaffName">Name</label>
-			<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/>
+			<div class="row">
+				<div class="col-sm-6">
+ 					<label for="newStaffName">Name</label>
+					<input type="text" class="form-control" name="newstaffname" id="newStaffName" placeholder="Enter staff name"/>
+				</div>
+			</div>
 			
  			<input type="submit" class="btn btn-primary" value="Add staff!" />
  			<br>
@@ -47,43 +97,44 @@
 			<br>
 			<h3>Remove Staff Member</h3>
 			<input type="hidden" name="action" value="11/10" />
-			<div class="form-row">
-			<div class="form-col">
-			<label for="oldStaffName">Name</label>
-			<input type="text" class="form-control" name="oldstaffname" id="oldStaffName" placeholder="Enter staff name"/>
-			</div><div class="form-col">
-			<label for="oldStaffID">ID</label>
-			<input type="text" class="form-control" name="oldstaffid" id="oldStaffID" placeholder="Enter staff ID"/>
- 			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="oldStaffName">Name</label>
+					<input type="text" class="form-control" name="oldstaffname" id="oldStaffName" placeholder="Enter staff name"/>
+				</div>
+				<div class="col-sm-6">
+					<label for="oldStaffID">ID</label>
+					<input type="text" class="form-control" name="oldstaffid" id="oldStaffID" placeholder="Enter staff ID"/>
+ 				</div>
  			</div>
  			<input type="submit" class="btn btn-primary" value="Remove staff!" />
  			<br>
  			</div>
 		</form>
 		
+		
 		<form action="StaffRequest.php" method="get">
 			<br>
 			<h3>View and Edit Staff Member Record</h3>
 			<input type="hidden" name="action" value="12/10" />
-			<div class="form-row">
-			<div class="form-col">
-			<label for="staffName">Name</label>
-			<input type="text" class="form-control" name="staffname" id="staffName" placeholder="Enter staff name"/>
-			</div><div class="form-col">
-			<label for="staffID">ID</label>
-			<input type="text" class="form-control" name="staffid" id="staffID" placeholder="Enter staff ID"/>
- 			</div>
- 			</div>
-			
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="staffName">Name</label>
+					<input type="text" class="form-control" name="staffname" id="staffName" placeholder="Enter staff name"/>
+				</div>
+				<div class="col-sm-6">
+					<label for="staffID">ID</label>
+					<input type="text" class="form-control" name="staffid" id="staffID" placeholder="Enter staff ID"/>
+				</div>
+			</div>
  			<input type="submit" class="btn btn-primary" value="View record!" />
  			<br>
 		</form>
-		
 		<br>
 		<a href="../index.php">Back to homepage</a>
 
 		<br><br>
-<div class="container-fluid">
+		<div class="container-fluid">
 		<table class="table table-hover" style="width: 100%;">
 			
 			<thread>
@@ -125,13 +176,27 @@
 		</table>
 		</div>
 		<br><br>
-		
-		<div class="btn-group" role="group" aria-label="Basic example">
+	<!--  	
+	<div class="btn-group" role="group" aria-label="Basic example">
 	  <button type="button" class="btn btn-secondary">Left</button>
 	  <button type="button" class="btn btn-secondary">Middle</button>
 	  <button type="button" class="btn btn-secondary">Right</button>
+	</div>
+	-->
+	
+	<!-- Footer -->
+	<footer>
+		<div class="card bg-light mb-12">
+  				<div class="card-body">
+  				<center>
+    				<p class="card-text">Montreal, QC, Canada</p>
+    				<p class="card-text">Copyright &copy; URLMS Team 8, 2017</p>
+    				<p class="card-text">Created by Feras Al Taha and Justin Lei</p>
+    			</center>
+  				</div>
 		</div>
-			
+	</footer>
+</div>	
 </body>
 </html>
 

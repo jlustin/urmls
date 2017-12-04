@@ -1,9 +1,9 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 27 "../../../../../URLMS.ump"
+// line 35 "../../../../../URLMS.ump"
 public class SupplyType extends InventoryItem
 {
 
@@ -18,9 +18,9 @@ public class SupplyType extends InventoryItem
   // CONSTRUCTOR
   //------------------------
 
-  public SupplyType(String aName, double aCost, String aCategory, Inventory aInventory, int aQuantity)
+  public SupplyType(String aName, double aCost, String aCategory, Lab aLab, int aQuantity)
   {
-    super(aName, aCost, aCategory, aInventory);
+    super(aName, aCost, aCategory, aLab);
     quantity = aQuantity;
   }
 

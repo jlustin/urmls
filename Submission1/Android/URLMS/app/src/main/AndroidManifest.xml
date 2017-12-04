@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".FundingAccountPage">
         </activity>
+        <activity android:name=".InventoryItemPage">
+        </activity>
     </application>
 
 </manifest>
