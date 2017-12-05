@@ -82,6 +82,16 @@
 		}
 		
 		function updateInventory($name, $cost, $category, $isDamaged, $quantity){
+			if($name == null || strlen($name) == 0){
+				throw new Exception ("Please enter a valid name.");
+			}
+			elseif ($category == null || strlen($category) == 0 || (!$this->isValidStr($category))){
+				throw new Exception ("Please enter a valid category.");
+			}
+			elseif ($cost == null || strlen($cost) == 0 || (!is_numeric($cost))){
+				throw new Exception ("Please enter a valid cost.");
+			}
+			else {
 			$urlms = $_SESSION['urlms'];
 			$inventoryItem = $_SESSION['inventoryitem'];
 			
@@ -97,6 +107,9 @@
 			}
 			else {
 				if($quantity != null){
+					if (!is_numeric($quantity)){
+						throw new Exception ("Please enter a valid quantity.");
+					}
 					$inventoryItem->setQuantity($inventoryItem->getQuantity() + $quantity);
 					if($quantity>0){
 						date_default_timezone_set('America/New_York');
@@ -112,9 +125,15 @@
 			
 			echo "Inventory item updated succesfully! <br>";
 			echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
+			}
 		}
 		
 		function updateStaffMember($name, $id, $salary){
+			if($name == null || strlen($name) == 0 || !$this->isValidStr($name)){
+				throw new Exception ("Please enter a valid name.");
+			}elseif ($salary == null || !is_numeric($salary)){
+				throw new Exception ("Please enter a valid number for the salary.");
+			}else {
 			$urlms = $_SESSION['urlms'];
 			$staffMember = $_SESSION['staffmember'];
 			
@@ -126,7 +145,8 @@
 			$persistence->writeDataToStore($urlms);
 			
 			echo "Staff member updated succesfully! <br>";
-			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";	
+			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";
+			}
 		}
 		
 		function updateRoles($roles){
@@ -154,6 +174,11 @@
 		}
 		
 		function addProgressUpdate($desc, $date){
+			if($desc == null || strlen($desc) == 0 ){
+				throw new Exception ("Please enter a progress update description.");
+			}elseif ($date == null || strlen($date) == 0){
+				throw new Exception ("Please enter a date.");
+			}else {
 			$urlms = $_SESSION['urlms'];
 			$staffMember = $_SESSION['staffmember'];
 			
@@ -161,10 +186,14 @@
 			
 			$persistence = new Persistence();
 			$persistence->writeDataToStore($urlms);
+			}
 		}
 		
 		function updateAccount($newType){
-			$fundingAccount = $_SESSION['fundingaccount'];
+		if($type == null || strlen($type) == 0 || !$this->isValidStr($type)){
+			throw new Exception ("Please enter a valid funding account type.");
+		}else{
+		$fundingAccount = $_SESSION['fundingaccount'];
 			$urlms = $_SESSION['urlms'];
 			
 			$fundingAccount->setType($newType);
@@ -175,8 +204,20 @@
 			echo "Account updated successfully! <br>";
 			echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
 		}
+		}
 		
 		function updateExpense($expenseType, $newExpenseType, $newAmount, $newDate){
+			if($expenseType == null || strlen($expenseType) == 0 || !$this->isValidStr($expenseType)){
+				throw new Exception ("Please enter a valid expense type.");
+			}elseif($newExpenseType== null || strlen($newExpenseType) == 0 || !$this->isValidStr($newExpenseType)){
+				throw new Exception ("Please enter a valid new expense type.");
+			}
+			else if ($newAmount == null || strlen($newAmount) == 0 || !(is_numeric($newAmount))){
+				throw new Exception ("Please enter a valid amount.");
+			}
+			else if ($newDate == null || strlen($newDate) == 0){
+				throw new Exception ("Please enter a date.");
+			} else {
 			$fundingAccount = $_SESSION['fundingAccount'];
 			$urlms = $_SESSION['urlms'];
 			$expense = null;
@@ -197,7 +238,7 @@
 			
 			$expense->setType($newExpenseType);
 			$expense->setAmount($newAmount);
-// 			$expense->setDate($newDate);
+ 			$expense->setDate($newDate);
 
 			
 			$expenseAmountDiff = $expense->getAmount() - $oldExpenseAmount;			
@@ -209,5 +250,5 @@
 			echo "Expense updated successfully! <br>";
 			echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
 		}
-		
+		}
 }
