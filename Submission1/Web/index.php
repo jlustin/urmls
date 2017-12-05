@@ -67,6 +67,7 @@
   				</div> -->
   		<?php $urlms = (new Persistence("Persistence/data.txt"))->loadDataFromStore();?>
   		<!-- Carousel -->
+		<br>
   		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   		   <ol class="carousel-indicators">
 			    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -144,57 +145,33 @@
 		  </a>
 
 		</div>
-		
+		<br>
+		<br>
+		<br>
 		<!-- Links to Staff, Inventory, Funding Pages -->
 		<div class="row">
     		<div class="col-sm-4">	
-				<div class="card home-page-elem" style="width: 20rem;">
-					<a href="View/StaffView.php">
-					  <img class="card-img-top" src="../image/Personnel_Red.png" alt="Card image cap">
-					</a>
-					  <div class="card-body">
-						  <a href="View/StaffView.php">
-						   	<h2 class="card-text">Staff</h2>
-						  </a>
-						    <p class="card-text">Description</p>
-					  </div>
-				</div>
+				<a href="View/StaffView.php">
+				  <img class="card-img-top" src="../image/Personnel_Red.png" alt="Card image cap">
+				</a>
   			</div>
   			
   			<div class="col-sm-4">
-  				<div class="card home-page-elem" style="width: 20rem;">
-					<a href="View/InventoryView.php">
-					  <img class="card-img-top" src="../image/Utility_Red.png" alt="Card image cap">
-					</a>
-					  <div class="card-body">
-						  <a href="View/InventoryView.php">
-						   	<h2 class="card-text">Inventory</h2>
-						  </a>
-						    <p class="card-text">Description</p>
-					  </div>
-				</div>
+				<a href="View/InventoryView.php">
+				  <img class="card-img-top" src="../image/Utility_Red.png" alt="Card image cap">
+				</a>
    			</div>
    			
    			<div class="col-sm-4">
-  				<div class="card home-page-elem" style="width: 20rem;">
-					<a href="View/FundingView.php">
-					  <img class="card-img-top" src="../image/Fiance_Red.png" alt="Card image cap">
-					</a>
-					  <div class="card-body">
-						  <a href="View/FundingView.php">
-						   	<h2 class="card-text">Funding</h2>
-						  </a>
-						    <p class="card-text">Description</p>
-					  </div>
-				</div>
-   			</div>
+				<a href="View/FundingView.php">
+				  <img class="card-img-top" src="../image/Fiance_Red.png" alt="Card image cap">
+				</a>
+  			</div>
   		</div>
-
-
 	</div>
 	
 	<!-- Footer -->
-	<br><br>
+	<br><br><br>
 	<footer>
 		<div class="card bg-light mb-12">
   				<div class="card-body">

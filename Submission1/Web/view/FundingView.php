@@ -222,29 +222,6 @@ require_once $my_dir . '/../model/FundingAccount.php';
 				    </div>
 				  </div>
 				  
-				  <!-- To be removed when table becomes clickable -->
-				  <div class="card">
-				    <div class="card-header" role="tab" id="headingSix">
-				      <h5 class="mb-0">
-				        <a class="collapsed" data-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="color: rgb(220,53,69); text-decoration: none;">
-				          View Account and Account Net Balance
-				        </a>
-				      </h5>
-				    </div>
-				    <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix" data-parent="#accordion">
-				      <div class="card-body">
-				        <form action="FundingRequest.php" method="get">
-							<br>
-							<h3>View/Edit Account and Account Net Balance</h3>
-							Type<input type="text" name="viewtype" value=""/><br>
-							<input type="hidden" name="action" value="2/10" />
-							<input type="submit" value="View Net Balance!"/>
-							<br>
-						</form>
-				      </div>
-				    </div>
-				  </div>
-				  
 				  <div class="card">
 				    <div class="card-header" role="tab" id="headingSeven">
 				      <h5 class="mb-0">
@@ -391,7 +368,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 				  			<div class="col-sm-8">
 						    </div>
 				   			<div class="col-sm-2">
-				      			<a href="#top" style="color: white;text-decoration: none;">
+				      			<a href="#" style="color: white;text-decoration: none;">
 									<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Go back to top of page">
 										Back to top
 									</button>
