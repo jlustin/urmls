@@ -300,7 +300,14 @@ require_once $my_dir . '/../model/FundingAccount.php';
 										$latestExpense = "None";
 									}
 									
-									echo "<tr><td><button type=\"button\" class=\"btn btn-outline-primary\">" . $account->getType() . "</button></td>
+									echo "<tr>
+										<td>
+										<form action=\"FundingRequest.php\" method=\"get\">
+										<input type=\"hidden\" name=\"action\" value=\"2/10\" />
+										<input type=\"hidden\" name=\"viewtype\" value=\"" . $account->getType() . "\"/>
+										<input type=\"submit\" class=\"btn btn-outline-danger\" value=\" " . $account->getType() . "\" />
+										</form>					
+										</td>				
 										<td>$". $account->getBalance() ."</td>
 										<td>" . $latestExpense . "</td>
 										</tr>";

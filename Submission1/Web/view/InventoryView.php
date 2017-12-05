@@ -212,7 +212,14 @@ require_once $my_dir . '/../model/Equipment.php';
 			$urlms = (new Persistence ())->loadDataFromStore ();
 			
 			foreach ( $urlms->getLab_index ( 0 )->getInventoryItems () as $item ) {
-				echo "<tr><td><button type=\"button\" class=\"btn btn-outline-primary\">" . $item->getName () . "</button></td>
+				echo "<tr>
+					<td>
+					<form action=\"InventoryRequest.php\" method=\"get\">
+					<input type=\"hidden\" name=\"action\" value=\"12/10\" />
+					<input type=\"hidden\" name=\"inventoryName\" value=\"" . $item->getName () . "\"/>
+					<input type=\"submit\" class=\"btn btn-outline-danger\" value=\" " . $item->getName () . "\" />
+					</form>				
+					</td>
 					<td>" . $item->getCategory () . "</td>
 					<td>" . get_class ( $item ) . "</td>
 					<td>$" . $item->getCost () . "</td>
