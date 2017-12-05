@@ -5,12 +5,11 @@ import java.util.*;
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
-<<<<<<< HEAD
+
 import ca.mcgill.ecse321.urlms.model.ResearchAssistant;
 import ca.mcgill.ecse321.urlms.model.ResearchAssociate;
 import ca.mcgill.ecse321.urlms.model.ResearchRole;
-=======
->>>>>>> d632cd38c3195b818b1102f01887e2edbb96bfbe
+
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
  

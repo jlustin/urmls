@@ -65,8 +65,21 @@
           <isDamaged>false</isDamaged>
         </ca.mcgill.ecse321.urlms.model.Equipment>
       </inventoryItems>
-      <fundingAccounts id="23"/>
-      <financialReports id="24"/>
+      <fundingAccounts id="23">
+        <ca.mcgill.ecse321.urlms.model.FundingAccount id="24">
+          <type>Hello</type>
+          <balance>123.0</balance>
+          <expenses id="25"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.FundingAccount>
+        <ca.mcgill.ecse321.urlms.model.FundingAccount id="26">
+          <type>sup</type>
+          <balance>321.0</balance>
+          <expenses id="27"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.FundingAccount>
+      </fundingAccounts>
+      <financialReports id="28"/>
       <uRLMS reference="1"/>
     </ca.mcgill.ecse321.urlms.model.Lab>
   </labs>

@@ -9,7 +9,10 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
+import ca.mcgill.ecse321.urlms.model.FundingAccount;
+import ca.mcgill.ecse321.urlms.model.InventoryItem;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 
 import javax.swing.GroupLayout;
@@ -30,11 +33,14 @@ import javax.swing.SwingConstants;
 public class FundingPagePO extends JFrame {
 
 	private JPanel contentPane;
-	JLabel staffMemberListLabel;
+	JLabel accountListLabel;
 	JLabel welcomeToInventoryLabel;
 	JLabel feelFreeLabel;
+
 	
-	public static StaffController controller = new StaffController();
+	AddFundingAccountPO afapo = new AddFundingAccountPO();
+	
+	public static FundingController controller = new FundingController();
 	
 
 	/**
@@ -57,7 +63,7 @@ public class FundingPagePO extends JFrame {
 	 * Create the frame.
 	 */
 	public FundingPagePO() {
-		setTitle("Inventory");
+		setTitle("Funding");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 535, 300);
@@ -69,10 +75,44 @@ public class FundingPagePO extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnAddInventoryItem = new JButton("Add Item");
-		panel.add(btnAddInventoryItem);
+		JButton addFundingAccbtn = new JButton("Add Account");
+		addFundingAccbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				afapo.setVisible(true);
+			}
+		});
 		
-		JButton btnRemoveItem = new JButton("Remove Item");
+		JButton btnViewAccounts = new JButton("View Accounts");
+		btnViewAccounts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				accountListLabel.setText("");
+				List<FundingAccount> accountList = controller.viewFundingAccounts();
+				String name;
+				double balance;
+				int id;
+				accountListLabel.setText("<html>");
+				id = 0;
+				
+				for (FundingAccount aAccount : accountList) {
+					String previousText = accountListLabel.getText();
+					name = aAccount.getType();
+					balance = aAccount.getBalance();
+					accountListLabel.setText(previousText + "Account type: " + name + "&nbsp &nbsp &nbsp "
+					+ "Account Balance: " + balance + "&nbsp &nbsp &nbsp " + "ID: " + id + " <br/>");
+					id ++;
+				}
+				
+				String previousText = accountListLabel.getText();
+				accountListLabel.setText(previousText + "Net balance: " + controller.viewNetBalance());
+				previousText = accountListLabel.getText();
+				accountListLabel.setText(previousText + "</html>");
+			}
+		});
+		panel.add(btnViewAccounts);
+		panel.add(addFundingAccbtn);
+		
+		JButton btnRemoveItem = new JButton("Edit Account");
 		panel.add(btnRemoveItem);
 		
 		JButton btnSave = new JButton("Save");
@@ -82,9 +122,9 @@ public class FundingPagePO extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 			
-			staffMemberListLabel = new JLabel("");
-			staffMemberListLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setViewportView(staffMemberListLabel);
+			accountListLabel = new JLabel("");
+			accountListLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			scrollPane.setViewportView(accountListLabel);
 			
 			feelFreeLabel = new JLabel("Feel free to do stuff with the inventory.");
 			feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
