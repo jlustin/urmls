@@ -28,7 +28,7 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-		<!--  <link rel="stylesheet" type="text/css" href="style/homepagecss.css"> -->
+		<link rel="stylesheet" type="text/css" href="style/homepage.css">
 	</head>
 	<body background="../image/lab_background.jpg" style="background-size: 100%; background-attachment: fixed; background-position: center;
     background-repeat: no-repeat;
@@ -39,7 +39,7 @@
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
   		<a class="navbar-brand" href="../index.php">
   			<img src="../image/URLMS_Logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
-  			University Research Lab Management System
+  			University Research Lab Management System 
   		</a>
 	</nav>
 	<br><br><br><br><br>
@@ -75,7 +75,8 @@
 		   </ol>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <div class="jumbotron" style="text-align: center;">
+		      <div class="jumbotron home-page-elem" style="text-align: center;">
+		      
 				  <h1 class="display-3">Staff</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -86,10 +87,11 @@
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/StaffView.php" role="button">Go to Staff</a>
 				  </p>
+				 
 			  </div>
 		    </div>
 		    <div class="carousel-item">
-		      <div class="jumbotron" style="text-align: center;">
+		      <div class="jumbotron home-page-elem" style="text-align: center;">
 				  <h1 class="display-3">Inventory</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -110,7 +112,7 @@
 			  </div>
 		    </div>
 		    <div class="carousel-item">
-		      <div class="jumbotron" style="text-align: center;">
+		      <div class="jumbotron home-page-elem" style="text-align: center;">
 				  <h1 class="display-3">Funding</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -146,7 +148,7 @@
 		<!-- Links to Staff, Inventory, Funding Pages -->
 		<div class="row">
     		<div class="col-sm-4">	
-				<div class="card" style="width: 20rem;">
+				<div class="card home-page-elem" style="width: 20rem;">
 					<a href="View/StaffView.php">
 					  <img class="card-img-top" src="../image/Personnel_Red.png" alt="Card image cap">
 					</a>
@@ -160,7 +162,7 @@
   			</div>
   			
   			<div class="col-sm-4">
-  				<div class="card" style="width: 20rem;">
+  				<div class="card home-page-elem" style="width: 20rem;">
 					<a href="View/InventoryView.php">
 					  <img class="card-img-top" src="../image/Utility_Red.png" alt="Card image cap">
 					</a>
@@ -174,7 +176,7 @@
    			</div>
    			
    			<div class="col-sm-4">
-  				<div class="card" style="width: 20rem;">
+  				<div class="card home-page-elem" style="width: 20rem;">
 					<a href="View/FundingView.php">
 					  <img class="card-img-top" src="../image/Fiance_Red.png" alt="Card image cap">
 					</a>

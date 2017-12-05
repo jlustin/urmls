@@ -99,13 +99,12 @@
 				if($quantity != null){
 					$inventoryItem->setQuantity($inventoryItem->getQuantity() + $quantity);
 					if($quantity>0){
-						// Return date/time info of a timestamp; then format the output
-						$mydate=getdate(date("U"));
-						$date= $mydate[month] . $mydate[mday] . $mydate[year];
+						date_default_timezone_set('America/New_York');
+						$date = date('m/d/Y', time());
 						$fundC = new FundingController($urlms);
 						$fundC->addTransaction("Supply Funding", $inventoryItem->getName() . " bought", $quantity * $inventoryItem->getCost(), "expense", $date);
 					}
-				}//TODO CHANGE DATE ARGUMENT
+				}
 			}
 			
 			$persistence = new Persistence();

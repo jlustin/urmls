@@ -107,7 +107,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 		<br>
 		<h3>Add Transaction</h3>
 		<input type="hidden" name="action" value="3/10" />
-		Account Type<input type="text" name="labtype" value=""/><br>
+		Account Type<input type="text" name="account" value=""/><br>
 		Expense Type<input type="text" name="expensetype" value=""/><br>
 		Amount<input type="text" name="amount" value=""/><br>
 		<input type="radio" name="type" value="fund"/>Fund<br>

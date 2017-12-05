@@ -26,7 +26,7 @@ class FundingController extends Controller {
 		if($type == null || strlen($type) == 0 || !$this->isValidStr($type)){
 			throw new Exception ("Please enter a valid funding account type.");
 		}
-		else if($balance == null || strlen($balance) == 0 || !is_numerical($balance)){
+		else if($balance == null || strlen($balance) == 0 || !is_numeric($balance)){
 			throw new Exception ("Please enter a valid balance.");
 		}
 		else{
@@ -54,8 +54,8 @@ class FundingController extends Controller {
 
 		$expenses = $fundingAccount->getExpenses();
 		foreach ($expenses as $e){
-			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . " | Date: " ."<br>";
-		}//TODO ADD DATE
+			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . " | Date: ". $e->getDate() ."<br>";
+		}
 		
 		session_start();
 		$_SESSION['fundingAccount'] = $fundingAccount;
@@ -146,7 +146,7 @@ class FundingController extends Controller {
 		if($expensetype == null || strlen($expensetype) == 0 || !$this->isValidStr($expensetype)){
 			throw new Exception ("Please enter a valid expense type.");
 		}
-		else if ($amount == null || strlen($amount) == 0 || !is_numerical($amount)){
+		else if ($amount == null || strlen($amount) == 0 || !(is_numeric($amount))){
 			throw new Exception ("Please enter a valid amount.");
 		} 
 		else if ($date == null){
@@ -202,8 +202,9 @@ class FundingController extends Controller {
 		foreach($this->urlms->getLab_index(0)->getStaffMembers() as $member){
 			$totalStaffCost += $member->getWeeklySalary();
 		}
-		$this->addTransaction("Staff Funding", "PAYDAY!", $totalStaffCost, "expense", "03/12/2017");
-		//TODO CHANGE DATE ARGUMENT	
+		date_default_timezone_set('America/New_York');
+		$date = date('m/d/Y', time());
+		$this->addTransaction("Staff Funding", "PAYDAY", $totalStaffCost, "expense", $date);
 	}
 }
 ?>

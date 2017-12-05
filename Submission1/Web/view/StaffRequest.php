@@ -7,18 +7,18 @@ require_once $my_dir . '/../controller/StaffController.php';
 $persistence = new Persistence();
 $urlms = $persistence->loadDataFromStore();
 
-$c = new StaffController($urlms);
+$invC = new StaffController($urlms);
 
 // Check which button was clicked by user
 // Run appropriate controller method with respect to user request
 if(!empty($_GET['action'])){
 	switch($_GET['action']){
 		case "9/10":
-			$c->getStaffList();
+			$invC->getStaffList();
 			break;
 		case "10/10":
 			try {
-				$c->addStaff($_GET['newstaffname'],$_GET['newstaffsalary']);
+				$invC->addStaff($_GET['newstaffname'],$_GET['newstaffsalary']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
@@ -26,7 +26,7 @@ if(!empty($_GET['action'])){
 			break;
 		case "11/10":
 			try {
-				$c->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
+				$invC->removeStaff($_GET['oldstaffname'], $_GET['oldstaffid']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
@@ -34,7 +34,7 @@ if(!empty($_GET['action'])){
 			break;
 		case "12/10":
 			try {
-				$c->viewMemberRecord($_GET['staffname'], $_GET['staffid']);
+				$invC->viewMemberRecord($_GET['staffname'], $_GET['staffid']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
