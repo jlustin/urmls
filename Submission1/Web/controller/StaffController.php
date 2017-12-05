@@ -41,13 +41,9 @@ class StaffController extends Controller {
 	 * add new staff to urlms
 	 */
 	function addStaff($name, $salary){
-		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter a name.");
-		}elseif(!$this->isValidStr($name)){
+		if($name == null || strlen($name) == 0 || !$this->isValidStr($name)){
 			throw new Exception ("Please enter a valid name.");
-		}elseif ($salary == null){
-			throw new Exception ("Please enter a salary.");
-		}elseif(!is_numeric($salary)){
+		}elseif ($salary == null || !is_numeric($salary)){
 			throw new Exception ("Please enter a valid number for the salary.");	
 		}else {
 			$urlms = $this->urlms;
