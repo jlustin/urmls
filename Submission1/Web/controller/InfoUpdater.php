@@ -31,7 +31,7 @@
 	switch($_GET['action']){
 		case "editInventoryItem":
 			try{
-				$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);		
+				$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
@@ -92,67 +92,68 @@
 				throw new Exception ("Please enter a valid cost.");
 			}
 			else {
-			$urlms = $_SESSION['urlms'];
-			$inventoryItem = $_SESSION['inventoryitem'];
-			
-			$inventoryItem->setName($name);
-			$inventoryItem->setCost($cost);
-			$inventoryItem->setCategory($category);
-
-			if($isDamaged == "damaged"){
-				$inventoryItem->setIsDamaged(true);
-			}
-			else if($isDamaged == "notdamaged"){
-				$inventoryItem->setIsDamaged(false);
-			}
-			else {
-				if($quantity != null){
-					if (!is_numeric($quantity)){
-						throw new Exception ("Please enter a valid quantity.");
-					}
-					$inventoryItem->setQuantity($inventoryItem->getQuantity() + $quantity);
-					if($quantity>0){
-						date_default_timezone_set('America/New_York');
-						$date = date('m/d/Y', time());
-						$fundC = new FundingController($urlms);
-						$fundC->addTransaction("Supply Funding", $inventoryItem->getName() . " bought", $quantity * $inventoryItem->getCost(), "expense", $date);
+				$urlms = $_SESSION['urlms'];
+				$inventoryItem = $_SESSION['inventoryitem'];
+				
+				$inventoryItem->setName($name);
+				$inventoryItem->setCost($cost);
+				$inventoryItem->setCategory($category);
+	
+				if($isDamaged == "damaged"){
+					$inventoryItem->setIsDamaged(true);
+				}
+				else if($isDamaged == "notdamaged"){
+					$inventoryItem->setIsDamaged(false);
+				}
+				else {
+					if($quantity != null){
+						if (!is_numeric($quantity)){
+							throw new Exception ("Please enter a valid quantity.");
+						}
+						$inventoryItem->setQuantity($inventoryItem->getQuantity() + $quantity);
+						if($quantity>0){
+							date_default_timezone_set('America/New_York');
+							$date = date('m/d/Y', time());
+							$fundC = new FundingController($urlms);
+							$fundC->addTransaction("Supply Funding", $inventoryItem->getName() . " bought", $quantity * $inventoryItem->getCost(), "expense", $date);
+						}
 					}
 				}
-			}
 			
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
-			
-			echo "Inventory item updated succesfully! <br>";
-			echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
+				$persistence = new Persistence();
+				$persistence->writeDataToStore($urlms);
+				
+				echo "Inventory item updated succesfully! <br>";
+				echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
 			}
 		}
 		
 		function updateStaffMember($name, $id, $salary){
 			if($name == null || strlen($name) == 0 || !$this->isValidStr($name)){
 				throw new Exception ("Please enter a valid name.");
-			}elseif ($salary == null || !is_numeric($salary)){
+			} elseif ($id == null || !is_numeric($id)){
+				throw new Exception ("Please enter a valid number for the ID.");
+			} elseif ($salary == null || !is_numeric($salary)){
 				throw new Exception ("Please enter a valid number for the salary.");
 			}else {
-			$urlms = $_SESSION['urlms'];
-			$staffMember = $_SESSION['staffmember'];
-			
-			$staffMember->setName($name);
-			$staffMember->setId($id);
-			$staffMember->setWeeklySalary($salary);
-			
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
-			
-			echo "Staff member updated succesfully! <br>";
-			echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";
+				$urlms = $_SESSION['urlms'];
+				$staffMember = $_SESSION['staffmember'];
+				
+				$staffMember->setName($name);
+				$staffMember->setId($id);
+				$staffMember->setWeeklySalary($salary);
+				
+				$persistence = new Persistence();
+				$persistence->writeDataToStore($urlms);
+				
+				echo "Staff member updated succesfully! <br>";
+				echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";
 			}
 		}
 		
 		function updateRoles($roles){
 			$urlms = $_SESSION['urlms'];
 			$staffMember = $_SESSION['staffmember'];
-			
 			
 			foreach ($staffMember->getResearchRoles() as $r){
 				$r->delete();
@@ -179,31 +180,31 @@
 			}elseif ($date == null || strlen($date) == 0){
 				throw new Exception ("Please enter a date.");
 			}else {
-			$urlms = $_SESSION['urlms'];
-			$staffMember = $_SESSION['staffmember'];
-			
-			$staffMember->addProgressUpdate(new ProgressUpdate($date, $desc,$staffMember));
-			
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
+				$urlms = $_SESSION['urlms'];
+				$staffMember = $_SESSION['staffmember'];
+				
+				$staffMember->addProgressUpdate(new ProgressUpdate($date, $desc,$staffMember));
+				
+				$persistence = new Persistence();
+				$persistence->writeDataToStore($urlms);
 			}
 		}
 		
 		function updateAccount($newType){
-		if($type == null || strlen($type) == 0 || !$this->isValidStr($type)){
-			throw new Exception ("Please enter a valid funding account type.");
-		}else{
-		$fundingAccount = $_SESSION['fundingaccount'];
-			$urlms = $_SESSION['urlms'];
-			
-			$fundingAccount->setType($newType);
-			
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
-			
-			echo "Account updated successfully! <br>";
-			echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
-		}
+			if($newType == null || strlen($newType) == 0 || !$this->isValidStr($newType)){
+				throw new Exception ("Please enter a valid funding account type.");
+			}else{
+				$fundingAccount = $_SESSION['fundingaccount'];
+				$urlms = $_SESSION['urlms'];
+				
+				$fundingAccount->setType($newType);
+				
+				$persistence = new Persistence();
+				$persistence->writeDataToStore($urlms);
+				
+				echo "Account updated successfully! <br>";
+				echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
+			}
 		}
 		
 		function updateExpense($expenseType, $newExpenseType, $newAmount, $newDate){
@@ -218,37 +219,47 @@
 			else if ($newDate == null || strlen($newDate) == 0){
 				throw new Exception ("Please enter a date.");
 			} else {
-			$fundingAccount = $_SESSION['fundingAccount'];
-			$urlms = $_SESSION['urlms'];
-			$expense = null;
-			
-			$fundingAccountBalance = $fundingAccount->getBalance();
-			
-			$expenses = $fundingAccount->getExpenses();
-			foreach ($expenses as $e){
-				if($expenseType == $e->getType()){
-					$expense = $e;
+				$fundingAccount = $_SESSION['fundingAccount'];
+				$urlms = $_SESSION['urlms'];
+				$expense = null;
+				
+				$fundingAccountBalance = $fundingAccount->getBalance();
+				
+				$expenses = $fundingAccount->getExpenses();
+				
+				foreach ($expenses as $e){
+					if($expenseType == $e->getType()){
+						$expense = $e;
+					}
 				}
+				
+				if($expense == null){
+					throw new Exception ("Please enter a valid expense type.");
+				}
+				
+				$oldExpenseAmount = $expense->getAmount();
+				
+				$expense->setType($newExpenseType);
+				$expense->setAmount($newAmount);
+	 			$expense->setDate($newDate);
+				
+				$expenseAmountDiff = $expense->getAmount() - $oldExpenseAmount;			
+				$fundingAccount->setBalance($fundingAccountBalance + $expenseAmountDiff);
+				
+				$persistence = new Persistence();
+				$persistence->writeDataToStore($urlms);
+				
+				echo "Expense updated successfully! <br>";
+				echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
 			}
-			if($expense == null){
-				throw new Exception ("Please enter a valid expense type.");
-			}
-			
-			$oldExpenseAmount = $expense->getAmount();
-			
-			$expense->setType($newExpenseType);
-			$expense->setAmount($newAmount);
- 			$expense->setDate($newDate);
-
-			
-			$expenseAmountDiff = $expense->getAmount() - $oldExpenseAmount;			
-			$fundingAccount->setBalance($fundingAccountBalance + $expenseAmountDiff);
-			
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
-			
-			echo "Expense updated successfully! <br>";
-			echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
 		}
+		
+		//Check if string is alphabetical letters and spaces
+		function isValidStr($str){
+			for ($i = 0; $i < strlen($str); $i++){
+				if(! ((65 <= ord($str[$i]) && ord($str[$i]) <= 90) || (97 <= ord($str[$i]) && ord($str[$i]) <= 122) || ord($str[$i]) == 32)){				
+					return false;
+				}
+			}return true;
 		}
 }

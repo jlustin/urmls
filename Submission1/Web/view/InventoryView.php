@@ -282,7 +282,7 @@ require_once $my_dir . '/../model/Equipment.php';
 			</div>
 			<div class="col-sm-8"></div>
 			<div class="col-sm-2">
-				<a href="#top" style="color: white; text-decoration: none;">
+				<a href="#" style="color: white; text-decoration: none;">
 					<button type="button" class="btn btn-danger" data-toggle="tooltip"
 						data-placement="bottom" title="Go back to top of page">Back to top
 					</button>
