@@ -59,9 +59,18 @@ class StaffController extends Controller {
 			?>
 			<!-- Add back button to page -->
 			<HTML>
+				<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
 				<p>New staff member successfully added!</p>
 				<a href="../View/StaffView.php">Back</a>
-			</HTML><?php
+			</HTML>
+			
+			<script>
+				function goBack() {
+   					window.history.back();
+				}
+			</script>
+			
+			<?php
 		}
 	}	
 	
@@ -82,6 +91,7 @@ class StaffController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
+			<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
 			<p>Staff member removed succesfully</p>
 			<a href="../View/StaffView.php">Back</a>
 		</HTML><?php		

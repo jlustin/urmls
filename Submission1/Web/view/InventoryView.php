@@ -128,17 +128,23 @@ require_once $my_dir . '/../model/Equipment.php';
 								</div>
 								
 								<div class="row">
-									<div class="form-check col-sm-6">
+									<div class="form-check col-sm-3">
+									  <label for="newInventoryType">Type</label>
+									  <small id="nameHelp" class="form-text text-muted">Select the type of the intentory item.</small>
+									</div>
+									<div class="form-check col-sm-2">
 									  <label class="form-check-label">
 									    <input class="form-check-input" type="radio" name="type" id="type" value="Equipment">
 									   	Equipement
 									  </label>
 									</div>
-									<div class="form-check col-sm-6">
+									<div class="form-check col-sm-2">
 									  <label class="form-check-label">
 									    <input class="form-check-input" type="radio" name="type" id="type" value="Supply">
 									   	Supply
 									  </label>
+									</div>
+									<div class="form-check col-sm-5">
 									</div>
 								</div>
 								<br>
@@ -165,18 +171,21 @@ require_once $my_dir . '/../model/Equipment.php';
 					aria-labelledby="headingTwo" data-parent="#accordion">
 					<div class="card-body">
 						<form action="InventoryRequest.php" method="get">
+						<div class="form-group">
 							<br>
 							<h3>Remove Inventory Item</h3>
 							<input type="hidden" name="action" value="11/10" />
-							<div class="col-sm-6">
-								<label for="newInventoryName">Name</label> <input type="text"
-									class="form-control" name="oldInventoryName"
-									id="oldInventoryName" aria-describedby="nameHelp"
-									placeholder="Enter item name"> <small id="nameHelp"
-									class="form-text text-muted">Enter name of item to be removed.</small> <br>
-							</div>
-							
+								<div class="row">
+									<div class="col-sm-6">
+										<label for="newInventoryName">Name</label> <input type="text"
+											class="form-control" name="oldInventoryName"
+											id="oldInventoryName" aria-describedby="nameHelp"
+											placeholder="Enter item name"> <small id="nameHelp"
+											class="form-text text-muted">Enter name of item to be removed.</small> <br>
+									</div>
+								</div>
 							<input class="btn btn-danger" type="submit" value="Remove inventory!" />
+						</div>
 							<br>
 						</form>
 					</div>
@@ -199,14 +208,15 @@ require_once $my_dir . '/../model/Equipment.php';
 							<br>
 							<h3>View and Edit Inventory Item</h3>
 							<input type="hidden" name="action" value="12/10" /> 
-							<div class="col-sm-6">
-								<label for="newInventoryName">Name</label> <input type="text"
-									class="form-control" name="inventoryName"
-									id="inventoryName" aria-describedby="nameHelp"
-									placeholder="Enter item name"> <small id="nameHelp"
-									class="form-text text-muted">Enter name of item to be viewed.</small> <br>
-							</div>
-							
+								<div class="row">
+									<div class="col-sm-6">
+										<label for="newInventoryName">Name</label> <input type="text"
+											class="form-control" name="inventoryName"
+											id="inventoryName" aria-describedby="nameHelp"
+											placeholder="Enter item name"> <small id="nameHelp"
+											class="form-text text-muted">Enter name of item to be viewed.</small> <br>
+									</div>
+								</div>
 							<input
 								class="btn btn-danger" type="submit" value="View inventory!" />
 							<br>

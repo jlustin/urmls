@@ -73,6 +73,7 @@ class InventoryController extends Controller {
 			?>
 			<!-- Add back button to page -->
 			<HTML>
+				<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
 				<p>New inventory item successfully added!</p>
 				<a href="../View/InventoryView.php">Back</a>
 			</HTML><?php
@@ -94,6 +95,7 @@ class InventoryController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
+			<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
 			<p>Inventory item removed succesfully!</p>
 			<a href="../View/InventoryView.php">Back</a>
 		</HTML><?php

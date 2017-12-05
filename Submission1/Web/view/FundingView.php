@@ -239,7 +239,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
-				 					<label for="newStaffName">Account Type</label>
+				 					<label for="newExpenseType">Account Type</label>
 									<input type="text" class="form-control" name="account" id="transactionAccountType" placeholder="Enter funding account type"/>
 									<small id="nameHelp" class="form-text text-muted">Enter the name of the funding account that has a new expense.</small>
 								</div>
@@ -247,34 +247,40 @@ require_once $my_dir . '/../model/FundingAccount.php';
 							<br>
 							<div class="row">
 								<div class="col-sm-6">
-				 					<label for="newStaffName">Expense Type</label>
+				 					<label for="newExpenseType">Expense Type</label>
 									<input type="text" class="form-control" name="expensetype" id="expenseType" placeholder="Enter expense type"/>
 									<small id="nameHelp" class="form-text text-muted">Enter the name of the new expense.</small>
 								</div>
 								<div class="col-sm-6">
-				 					<label for="newStaffName">Amount</label>
+				 					<label for="newExpenseAmount">Amount</label>
 									<input type="text" class="form-control" name="amount" id="expenseAmount" placeholder="Enter expense amount"/>
 									<small id="nameHelp" class="form-text text-muted">Enter the amoount of the new expense.</small>
 								</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="form-check col-sm-6">
-								  <label class="form-check-label">
-								    <input class="form-check-input" type="radio" name="type" id="type" value="fund">
-								   	Fund
-								  </label>
-								</div>
-								<div class="form-check col-sm-6">
-								  <label class="form-check-label">
-								    <input class="form-check-input" type="radio" name="type" id="type" value="expense">
-								   	Expense
-								  </label>
+									<div class="form-check col-sm-3">
+									  <label for="newExpenseCat">Category</label>
+									  <small id="nameHelp" class="form-text text-muted">Select the category of the expense.</small>
+									</div>
+									<div class="form-check col-sm-2">
+									  <label class="form-check-label">
+									    <input class="form-check-input" type="radio" name="type" id="type" value="fund">
+									   	Fund
+									  </label>
+									</div>
+									<div class="form-check col-sm-2">
+									  <label class="form-check-label">
+									    <input class="form-check-input" type="radio" name="type" id="type" value="expense">
+									   	Expense
+									  </label>
+									</div>
+								<div class="form-check col-sm-5">
 								</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-sm-12">
+								<div class="col-sm-6">
 				 					<label for="newStaffName">Date</label>
 									<input type="text" class="form-control" name="date" id="expenseDate" placeholder="Enter date of expense"/>
 									<small id="nameHelp" class="form-text text-muted">Enter the date of the new expense.</small>
