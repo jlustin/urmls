@@ -204,6 +204,7 @@ require_once $my_dir . '/../model/Equipment.php';
 								<th>Category</th>
 								<th>Type</th>
 								<th>Cost</th>
+								<th>Delete</th>
 							</tr>
 							</thread>
 							<tbody>
@@ -223,6 +224,13 @@ require_once $my_dir . '/../model/Equipment.php';
 					<td>" . $item->getCategory () . "</td>
 					<td>" . get_class ( $item ) . "</td>
 					<td>$" . $item->getCost () . "</td>
+					<td>
+					<form action=\"InventoryRequest.php\" method=\"get\">
+					<input type=\"hidden\" name=\"action\" value=\"11/10\" />
+					<input type=\"hidden\" name=\"oldInventoryName\" value=\"" . $item->getName () . "\"/>
+					<input type=\"submit\" class=\"btn btn-outline-danger\" value=\"X\" />
+					</form>					
+					</td>
 					</tr>";
 			}
 			?>

@@ -283,6 +283,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 									<th>Account</th>
 									<th>Net balance</th>
 									<th>Latest Expense</th>
+									<th>Delete</th>
 								</tr>
 								</thread>
 								<tbody>
@@ -310,6 +311,13 @@ require_once $my_dir . '/../model/FundingAccount.php';
 										</td>				
 										<td>$". $account->getBalance() ."</td>
 										<td>" . $latestExpense . "</td>
+										<td>
+										<form action=\"FundingRequest.php\" method=\"get\">
+										<input type=\"hidden\" name=\"action\" value=\"4/10\" />
+										<input type=\"hidden\" name=\"removetype\" value=\"" . $account->getType () . "\"/>
+										<input type=\"submit\" class=\"btn btn-outline-danger\" value=\"X\" />
+										</form>										
+										</td>
 										</tr>";
 								}?>
 								</tbody>

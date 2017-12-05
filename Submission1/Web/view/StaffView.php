@@ -230,6 +230,7 @@ require_once $my_dir . '/../model/ProgressUpdate.php';
 								<th>Name</th>
 								<th>Role(s)</th>
 								<th>Progress Updates</th>
+								<th>Delete</th>
 							</tr>
 							</thread>
 							<tbody>
@@ -267,6 +268,14 @@ require_once $my_dir . '/../model/ProgressUpdate.php';
 									</td>
 									<td>" . $roles . "</td>
 									<td>" . $progress . "</td>
+									<td>
+									<form action=\"StaffRequest.php\" method=\"get\">
+									<input type=\"hidden\" name=\"action\" value=\"11/10\" />
+									<input type=\"hidden\" name=\"oldstaffname\" value=\"" . $member->getName () . "\"/>
+									<input type=\"hidden\" name=\"oldstaffid\" value=\"" . $member->getId () . "\"/>
+									<input type=\"submit\" class=\"btn btn-outline-danger\" value=\"X\" />
+									</form>
+									</td>
 									</tr>";
 								}
 								?>
