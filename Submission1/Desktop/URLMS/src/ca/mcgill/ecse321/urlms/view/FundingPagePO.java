@@ -40,6 +40,7 @@ public class FundingPagePO extends JFrame {
 	
 	AddFundingAccountPO afapo = new AddFundingAccountPO();
 	EditFundingAccountPO efapo = new EditFundingAccountPO();
+	TransactionPagePO tppo = new TransactionPagePO();
 	
 	public static FundingController controller = new FundingController();
 	
@@ -122,8 +123,14 @@ public class FundingPagePO extends JFrame {
 		});
 		panel.add(btnRemoveItem);
 		
-		JButton btnSave = new JButton("Save");
-		panel.add(btnSave);
+		JButton btnTransactions = new JButton("Transaction");
+		btnTransactions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tppo.setVisible(true);
+				
+			}
+		});
+		panel.add(btnTransactions);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -142,11 +149,6 @@ public class FundingPagePO extends JFrame {
 			
 			welcomeToInventoryLabel = new JLabel("Welcome to Inventory. There's a lot of inventory.");
 			panel_1.add(welcomeToInventoryLabel);
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controller.save();
-			}
-		});
 	}
 	
 	private void refreshData(){
