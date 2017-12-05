@@ -101,7 +101,8 @@ require_once $my_dir . '/../model/FundingAccount.php';
 								<br>
 								<h3>View Net Balance</h3>
 								<input type="hidden" name="action" value="10/10" />
-						 		<input type="submit" value="View Net Balance!" />
+								<br>
+						 		<input type="submit" class="btn btn-danger" value="View Net Balance!" />
 								<br>
 							</form>
 				      </div>
@@ -143,9 +144,20 @@ require_once $my_dir . '/../model/FundingAccount.php';
 							<br>
 							<h3>Add Funding Account</h3>
 							<input type="hidden" name="action" value="1/10" />
-							Type<input type="text" name="addtype" value=""/><br>
-							Balance<input type="text" name="addbalance" value=""/><br>
-							<input type="submit" value="Add Funding Account!"/>
+							<div class="row">
+								<div class="col-sm-6">
+				 					<label for="newStaffName">Account Type</label>
+									<input type="text" class="form-control" name="addtype" id="addedAccountType" placeholder="Enter funding account name"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the name of the new funding account.</small>
+								</div>
+								<div class="col-sm-6">
+				 					<label for="newStaffSalary">Initial Account Balance</label>
+									<input type="text" class="form-control" name="addbalance" id="addedAccountBalance" placeholder="Enter funding account balance"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the balance of the new funding account.</small>
+								</div>
+							</div>
+							<br>
+							<input type="submit" class="btn btn-danger" value="Add Funding Account!" />
 							<br>
 						</form>
 				      </div>
@@ -166,8 +178,15 @@ require_once $my_dir . '/../model/FundingAccount.php';
 							<br>
 							<h3>Remove Funding Account</h3>
 							<input type="hidden" name="action" value="4/10" />
-							Type<input type="text" name="removetype" value=""/><br>
-							<input type="submit" value="Remove Funding Account!"/>
+							<div class="row">
+								<div class="col-sm-6">
+				 					<label for="newStaffName">Account Type</label>
+									<input type="text" class="form-control" name="removetype" id="removedAccountType" placeholder="Enter funding account type"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the name of the funding account to be removed.</small>
+								</div>
+							</div>
+							<br>
+							<input type="submit" class="btn btn-danger" value="Remove Funding Account!" />
 							<br>
 						</form>
 				      </div>
@@ -187,9 +206,16 @@ require_once $my_dir . '/../model/FundingAccount.php';
 				        <form action="FundingRequest.php" method="get">
 							<br>
 							<h3>Generate Financial Report of an Account</h3>
-							Account Type<input type="text" name="accounttype" value=""/><br>
 							<input type="hidden" name="action" value="11/10" />
-					 		<input type="submit" value="View Accounts!" />
+							<div class="row">
+								<div class="col-sm-6">
+				 					<label for="newStaffName">Account Type</label>
+									<input type="text" class="form-control" name="accounttype" id="removedAccountType" placeholder="Enter funding account type"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the name of the funding account to generate its financial report.</small>
+								</div>
+							</div>
+							<br>
+							<input type="submit" class="btn btn-danger" value="Generate Financial Report!" />
 							<br>
 						</form>
 				      </div>
@@ -233,13 +259,52 @@ require_once $my_dir . '/../model/FundingAccount.php';
 							<br>
 							<h3>Add Transaction</h3>
 							<input type="hidden" name="action" value="3/10" />
-							Account Type<input type="text" name="account" value=""/><br>
-							Expense Type<input type="text" name="expensetype" value=""/><br>
-							Amount<input type="text" name="amount" value=""/><br>
-							<input type="radio" name="type" value="fund"/>Fund<br>
-							<input type="radio" name="type" value="expense"/>Expense<br>
-							Date<input type="text" name="date" value=""/><br>
-							<input type="submit" value="Add Transation!!!"/>
+							<br>
+							<div class="row">
+								<div class="col-sm-12">
+				 					<label for="newStaffName">Account Type</label>
+									<input type="text" class="form-control" name="account" id="transactionAccountType" placeholder="Enter funding account type"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the name of the funding account that has a new expense.</small>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-6">
+				 					<label for="newStaffName">Expense Type</label>
+									<input type="text" class="form-control" name="expensetype" id="expenseType" placeholder="Enter expense type"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the name of the new expense.</small>
+								</div>
+								<div class="col-sm-6">
+				 					<label for="newStaffName">Amount</label>
+									<input type="text" class="form-control" name="amount" id="expenseAmount" placeholder="Enter expense amount"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the amoount of the new expense.</small>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="form-check col-sm-6">
+								  <label class="form-check-label">
+								    <input class="form-check-input" type="radio" name="type" id="type" value="fund">
+								   	Fund
+								  </label>
+								</div>
+								<div class="form-check col-sm-6">
+								  <label class="form-check-label">
+								    <input class="form-check-input" type="radio" name="type" id="type" value="expense">
+								   	Expense
+								  </label>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-12">
+				 					<label for="newStaffName">Date</label>
+									<input type="text" class="form-control" name="date" id="expenseDate" placeholder="Enter date of expense"/>
+									<small id="nameHelp" class="form-text text-muted">Enter the date of the new expense.</small>
+								</div>
+							</div>
+							<br>
+							<input type="submit" class="btn btn-danger" value="Add Transaction!" />
 							<br>
 						</form>
 				      </div>
@@ -260,7 +325,8 @@ require_once $my_dir . '/../model/FundingAccount.php';
 					 		<br>
 					 		<h3>Payday</h3>
 					 		<input type="hidden" name="action" value="5/10" />
-					 		<input type="submit" class="btn btn-success" value="Payday">
+					 		<br>
+					 		<input type="submit" class="btn btn-danger" value="Pay Staff!" />
 					 		<br>	
 					 	</form>
 				      </div>
