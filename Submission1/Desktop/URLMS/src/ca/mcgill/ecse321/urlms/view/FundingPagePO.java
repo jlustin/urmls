@@ -39,6 +39,7 @@ public class FundingPagePO extends JFrame {
 
 	
 	AddFundingAccountPO afapo = new AddFundingAccountPO();
+	EditFundingAccountPO efapo = new EditFundingAccountPO();
 	
 	public static FundingController controller = new FundingController();
 	
@@ -113,6 +114,12 @@ public class FundingPagePO extends JFrame {
 		panel.add(addFundingAccbtn);
 		
 		JButton btnRemoveItem = new JButton("Edit Account");
+		btnRemoveItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				efapo.setVisible(true);
+			}
+		});
 		panel.add(btnRemoveItem);
 		
 		JButton btnSave = new JButton("Save");
