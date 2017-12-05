@@ -35,7 +35,9 @@ class FundingController extends Controller {
  			$newFundingAccount = new FundingAccount($type, $balance, $urlmsLab);
  			$urlmsLab->addFundingAccount($newFundingAccount);
 
- 			$newFundingAccount->addExpense(new Expense($balance, "Initial Balance", $newFundingAccount));
+ 			date_default_timezone_set('America/New_York');
+ 			$date = date('m/d/Y', time());
+ 			$newFundingAccount->addExpense(new Expense($balance, $date, "Initial Balance", $newFundingAccount));
  			
  			$persistence = new Persistence();
  			$persistence->writeDataToStore($urlms);
@@ -81,6 +83,9 @@ class FundingController extends Controller {
 	}
 	
 	function removeAccount($type){
+		if($type == "Staff Funding" || $type == "Equipment Funding" || $type == "Supply Funding"){
+			throw new Exception ("Can't delete this account!");
+		}
 		$urlms = $this->urlms;
 		$urlmsLab = $urlms->getLab_index(0);
 		$fundingAccount = $this->findFundingAccount($type);
