@@ -112,7 +112,7 @@ class InventoryController extends Controller {
 		
 		if(get_class($inventoryItem) == "Equipment"){
 			if($inventoryItem->getIsDamaged()){
-				echo $inventoryItem->getName() . "is damaged! <br>";	
+				echo $inventoryItem->getName() . " is damaged! <br>";	
 			}
 		} else{
 			echo "Quantity: " . $inventoryItem->getQuantity() . "<br>";

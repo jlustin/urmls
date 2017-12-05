@@ -7,13 +7,9 @@
 	require_once $my_dir . '/model/ResearchAssociate.php';
 	require_once $my_dir . '/model/ResearchAssistant.php';
 	require_once $my_dir . '/model/ProgressUpdate.php';
-	require_once $my_dir . '/model/URLMS.php';
-	require_once $my_dir . '/model/Lab.php';
 	require_once $my_dir . '/model/InventoryItem.php';
 	require_once $my_dir . '/model/SupplyType.php';
 	require_once $my_dir . '/model/Equipment.php';
-	require_once $my_dir . '/model/URLMS.php';
-	require_once $my_dir . '/model/Lab.php';
 	require_once $my_dir . '/model/FinancialReport.php';
 	require_once $my_dir . '/model/Expense.php';
 	require_once $my_dir . '/model/FundingAccount.php';
@@ -28,7 +24,7 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-		<link rel="stylesheet" type="text/css" href="style/homepage.css">
+		<link rel="stylesheet" type="text/css" href="style/style.css">
 	</head>
 	<body background="../image/lab_background.jpg" style="background-size: 100%; background-attachment: fixed; background-position: center;
     background-repeat: no-repeat;
@@ -42,7 +38,7 @@
   			University Research Lab Management System 
   		</a>
 	</nav>
-	<br><br><br><br><br>
+	<br><br><br><br>
 	<!-- Bootstrap Container -->
 	<div class="container">
 		<!-- Bootstrap Continer Template -->
@@ -81,9 +77,33 @@
 				  <h1 class="display-3">Staff</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
-				  		Total Number of Staff: <?php echo $urlms->getLab_index(0)->numberOfStaffMembers() . "<br>";?>
-				  		<?php echo "<br>";?>
-				  		
+				  		Total Number of Staff: <?php echo $urlms->getLab_index(0)->numberOfStaffMembers();?>
+				  		<br>
+				  		<?php
+				  		$count = 0;
+				  		$staffs = $urlms->getLab_index(0)->getStaffMembers();
+				  		foreach ($staffs as $s){
+				  			if (!($s->hasProgressUpdates())){
+				  				$count++;
+				  			}
+				  		}
+				  		// warning for not progress updates
+			  			if ($count == 1){
+			  			?>
+			  				<br>
+			  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+			  				<?php echo $count . " staff member has no progress update!";
+			  			}
+			  			else if($count > 1){
+			  				?>
+			  				<br>
+			  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+			  				<?php echo $count . " staff members have no progress update!";
+			  			}
+			  			else echo "<br>";
+				  		?>
+				  		<br>
+				  		<br>
 				  </p>
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/StaffView.php" role="button">Go to Staff</a>
@@ -99,13 +119,58 @@
 				  		Total Number of Inventory Items: <?php echo $urlms->getLab_index(0)->numberOfInventoryItems() . "<br>";?>
 				  		Total Value of Inventory Items:
 				  		<?php 
-				  			$totalValue = 0;
+				  			$totalValue = 0; $countEQ = 0; $countSP = 0;
 				  			$inventoryItems = $urlms->getLab_index(0)->getInventoryItems();
 				  			foreach ($inventoryItems as $inventoryItem){
 				  				$totalValue = $totalValue + $inventoryItem->getCost();
+				  				/**
+				  				 * TO:DO getIsDamaged doesnt seem to work 
+				  				 */ 
+				  				if(get_class($inventoryItem) == "Equipement"){
+				  					if($inventoryItem->getIsDamaged() == true){
+				  						$countEQ++;
+				  					}
+				  				}
+				  				/**
+				  				 * TO:DO getQuantity doesnt seem to "exist"
+				  				 */ 
+// 				  				else {
+// 				  					if($inventoryItem->getQuantity() < 10){
+// 				  						$countSP++;
+// 				  					}
+// 				  				}
 				  			}
 				  			echo $totalValue . " $";
-				  		?>
+				  			// warning for equipement damage
+					  		if ($countEQ == 1){
+				  				?>
+				  				<br>
+				  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				<?php echo $countEQ . " equipement is damaged!";
+				  			}
+				  			else if($countEQ > 1){
+				  				?>
+				  				<br>
+				  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				<?php echo $countEQ . " equipements are damaged!";
+				  			}
+				  			else echo "<br>";
+				  			
+				  			// warning for supply quantity
+				  			if ($countSP == 1){
+				  				?>
+				  				<br>
+				  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				<?php echo $countSP . " supply is running low!";
+				  			}
+				  			else if($countSP > 1){
+				  				?>
+				  				<br>
+				  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				<?php echo $countSP . " supplies are running low!";
+				  			}
+				  			else echo "<br>";?>
+				  		<br>
 				  </p>
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/InventoryView.php" role="button">Go to Inventory</a>
@@ -117,6 +182,7 @@
 				  <h1 class="display-3">Funding</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
+				  		<!-- Checking total net balance of laboratory -->
 				  		Net Balance of Laboratory: 
 				  		<?php 
 				  			$netBalance = 0;
@@ -126,7 +192,34 @@
 				  			}
 				  			echo $netBalance . " $ <br>";
 				  		?>
+				  		<!-- Checking total number of accounts -->
 				  		Total Number of Accounts: <?php echo $urlms->getLab_index(0)->numberOfFundingAccounts();?>
+				  		<br>
+				  		<!-- Checking how many accounts have a negative balance -->
+				  		<?php 
+				  			$balance = 0; $count = 0;
+				  			foreach ($accounts as $a){
+				  				$balance = $a->getBalance();
+				  				if ($balance < 0){
+				  					$count ++;
+				  				}
+				  			}
+				  			
+				  			if ($count == 1){
+				  				?>
+				  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				<?php echo $count . " account has a negative balance!";
+				  			}
+				  			else if($count > 1){
+				  				?>
+				  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				<?php echo $count . " accounts have a negative balance!";
+				  			}
+				  			else echo "<br>";
+				  		?>
+				  		<br>
+				  		<br>
+				  		
 				  </p>
 				  <p class="lead">
 				    <a class="btn btn-danger btn-lg" href="View/FundingView.php" role="button">Go to Funding</a>
@@ -147,24 +240,23 @@
 		</div>
 		<br>
 		<br>
-		<br>
 		<!-- Links to Staff, Inventory, Funding Pages -->
 		<div class="row">
     		<div class="col-sm-4">	
 				<a href="View/StaffView.php">
-				  <img class="card-img-top" src="../image/Personnel_Red.png" alt="Card image cap">
+				  <img class="card-img-top menu" src="../image/Personnel_Red.png" alt="Card image cap">
 				</a>
   			</div>
   			
   			<div class="col-sm-4">
 				<a href="View/InventoryView.php">
-				  <img class="card-img-top" src="../image/Utility_Red.png" alt="Card image cap">
+				  <img class="card-img-top menu" src="../image/Utility_Red.png" alt="Card image cap">
 				</a>
    			</div>
    			
    			<div class="col-sm-4">
 				<a href="View/FundingView.php">
-				  <img class="card-img-top" src="../image/Fiance_Red.png" alt="Card image cap">
+				  <img class="card-img-top menu" src="../image/Fiance_Red.png" alt="Card image cap">
 				</a>
   			</div>
   		</div>
