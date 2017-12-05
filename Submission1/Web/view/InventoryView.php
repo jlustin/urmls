@@ -91,8 +91,8 @@ require_once $my_dir . '/../model/Equipment.php';
 								<br> <input type="hidden" name="action" value="10/10" />
 								<h3>Add Inventory Item</h3>
 
-								<div class="form-row">
-									<div class="col">
+								<div class="row">
+									<div class="col-sm-6">
 										<label for="newInventoryName">Name</label> <input type="text"
 											class="form-control" name="newInventoryName"
 											id="newInventoryName" aria-describedby="nameHelp"
@@ -100,7 +100,7 @@ require_once $my_dir . '/../model/Equipment.php';
 											class="form-text text-muted">Enter the model or name of your
 											item.</small> <br>
 									</div>
-									<div class="col">
+									<div class="col-sm-6">
 										<label for="newInventoryCategory">Category</label> <input
 											type="text" class="form-control" name="category"
 											id="newInventoryCategory" aria-describedby="categoryHelp"
@@ -109,15 +109,15 @@ require_once $my_dir . '/../model/Equipment.php';
 											(eg. Computer, chair, ...).</small> <br>
 									</div>
 								</div>
-								<div class="form-row">
-									<div class="col">
+								<div class="row">
+									<div class="col-sm-6">
 										<label for="newInventoryCost">Cost</label> <input type="text"
 											class="form-control" name="cost" id="newInventoryCost"
 											aria-describedby="costHelp" placeholder="Enter item cost"> <small
 											id="costHelp" class="form-text text-muted">Enter the cost of
 											your item (eg. $50.00).</small> <br>
 									</div>
-									<div class="col">
+									<div class="col-sm-6">
 										<label for="newInventoryQuantity">Quantity</label> <input
 											type="text" class="form-control" name="quantity"
 											id="newInventoryQuantity" aria-describedby="quantityHelp"
@@ -126,13 +126,26 @@ require_once $my_dir . '/../model/Equipment.php';
 											(eg. 100).</small> <br>
 									</div>
 								</div>
-
-
+								
+								<div class="row">
+									<div class="form-check col-sm-6">
+									  <label class="form-check-label">
+									    <input class="form-check-input" type="radio" name="type" id="type" value="Equipment">
+									   	Equipement
+									  </label>
+									</div>
+									<div class="form-check col-sm-6">
+									  <label class="form-check-label">
+									    <input class="form-check-input" type="radio" name="type" id="type" value="Supply">
+									   	Supply
+									  </label>
+									</div>
+								</div>
+								<br>
 								<div class="form-row">
-									Type:<input type="radio" name="type" value="Equipment" />Equipment
-									<br> <input type="radio" name="type" value="Supply" />Supply <br>
-									<input class="btn btn-primary" type="submit"
-										value="Add inventory!" /> <br>
+									<br>
+									<input type="submit" class="btn btn-danger" value="Add Inventory!" /> 
+									<br>
 								</div>
 							</div>
 						</form>
@@ -154,9 +167,16 @@ require_once $my_dir . '/../model/Equipment.php';
 						<form action="InventoryRequest.php" method="get">
 							<br>
 							<h3>Remove Inventory Item</h3>
-							<input type="hidden" name="action" value="11/10" /> Name:<input
-								type="text" name="oldInventoryName" value="" /> <input
-								class="btn btn-primary" type="submit" value="Remove inventory!" />
+							<input type="hidden" name="action" value="11/10" />
+							<div class="col-sm-6">
+								<label for="newInventoryName">Name</label> <input type="text"
+									class="form-control" name="oldInventoryName"
+									id="oldInventoryName" aria-describedby="nameHelp"
+									placeholder="Enter item name"> <small id="nameHelp"
+									class="form-text text-muted">Enter name of item to be removed.</small> <br>
+							</div>
+							
+							<input class="btn btn-danger" type="submit" value="Remove inventory!" />
 							<br>
 						</form>
 					</div>
@@ -178,9 +198,17 @@ require_once $my_dir . '/../model/Equipment.php';
 						<form action="InventoryRequest.php" method="get">
 							<br>
 							<h3>View and Edit Inventory Item</h3>
-							<input type="hidden" name="action" value="12/10" /> Name: <input
-								type="text" name="inventoryName" value="" /> <input
-								class="btn btn-primary" type="submit" value="View inventory!" />
+							<input type="hidden" name="action" value="12/10" /> 
+							<div class="col-sm-6">
+								<label for="newInventoryName">Name</label> <input type="text"
+									class="form-control" name="inventoryName"
+									id="inventoryName" aria-describedby="nameHelp"
+									placeholder="Enter item name"> <small id="nameHelp"
+									class="form-text text-muted">Enter name of item to be viewed.</small> <br>
+							</div>
+							
+							<input
+								class="btn btn-danger" type="submit" value="View inventory!" />
 							<br>
 						</form>
 
