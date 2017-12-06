@@ -43,10 +43,8 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
 	<!-- Bootstrap Container -->
-	<div class="container">
+	<div class="container" style="height: 600px;">
 		<!-- Bootstrap Continer Template -->
 		<!-- 	<div class="row">
     				<div class="col">
@@ -68,6 +66,9 @@
     				</div>
   				</div> -->
   		<?php $urlms = (new Persistence("persistence/data.txt"))->loadDataFromStore();?>
+  		
+  		
+  		
   		<!-- Carousel -->
 		<br>
   		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -78,8 +79,8 @@
 		   </ol>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <div class="jumbotron home-page-elem" style="text-align: center;">
-		      
+		      <div class="jumbotron home-page-elem" style="text-align: center; height: 600px;">
+		      	
 				  <h1 class="display-3">Staff</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -139,7 +140,7 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<div class="jumbotron home-page-elem" style="text-align: center;">
+					<div class="jumbotron home-page-elem" style="text-align: center; height: 600px;">
 						<h1 class="display-3">Inventory</h1>
 						<hr class="my-4" style="width: 50%;">
 						<p>
@@ -152,7 +153,7 @@
 				  			foreach ($inventoryItems as $inventoryItem){
 				  				$totalValue = $totalValue + $inventoryItem->getCost();
 				  				/**
-				  				 * TO:DO getIsDamaged doesnt seem to work 
+				  				 * TODO getIsDamaged doesnt seem to work 
 				  				 */ 
 				  				if(get_class($inventoryItem) == "Equipement"){
 				  					if($inventoryItem->getIsDamaged() == true){
@@ -160,7 +161,7 @@
 				  					}
 				  				}
 				  				/**
-				  				 * TO:DO getQuantity doesnt seem to "exist"
+				  				 * TODO getQuantity doesnt seem to "exist"
 				  				 */ 
 // 				  				else {
 // 				  					if($inventoryItem->getQuantity() < 10){
@@ -190,16 +191,16 @@
 				  				?>
 				  				<div class = "row">
 				  				<div class = "col-sm-3"></div>
-				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
-							role="alert">
-							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-				  				
-							<strong>Alert!</strong> <?php echo $countEQ . " equipements are damaged!";?>
-							<button type="button" class="close" data-dismiss="alert"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div><div class = "col-sm-3"></div></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show" role="alert">
+									 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+						  				
+									<strong>Alert!</strong> <?php echo $countEQ . " equipements are damaged!";?>
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							<div class = "col-sm-3"></div></div>
 				  				<?php 
 				  			}
 				  			else echo "<br>";
@@ -248,7 +249,7 @@
 			  </div>
 		    </div>
 		    <div class="carousel-item">
-		      <div class="jumbotron home-page-elem" style="text-align: center;">
+		      <div class="jumbotron home-page-elem" style="text-align: center; height: 600px;">
 				  <h1 class="display-3">Funding</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -323,9 +324,11 @@
 			</a>
 
 		</div>
-
-		<br>
-		<br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="container">
 		<!-- Links to Staff, Inventory, Funding Pages -->
 		<div class="row">
     		<div class="col-sm-4">	
