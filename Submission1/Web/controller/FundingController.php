@@ -47,7 +47,7 @@ class FundingController extends Controller {
 		<HTML>
 			<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
 			<p>New account successfully added!</p>
-			<a href="../View/FundingView.php">Back</a>
+			<a href="../view/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -79,7 +79,7 @@ class FundingController extends Controller {
 		</HTML>
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../View/FundingView.php">Back</a>
+			<a href="../view/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -98,7 +98,7 @@ class FundingController extends Controller {
 		<HTML>
 			<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
 			<p>Funding account removed!</p>
-			<a href="../View/FundingView.php">Back</a>
+			<a href="../view/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -108,7 +108,7 @@ class FundingController extends Controller {
 		foreach ($accounts as $a){
 			echo $a->getType() . " " . $a->getBalance() . "<br>";
 		}
-		echo "<a href= \"../View/FundingView.php\">Back</a>" . "<br>";
+		echo "<a href= \"../view/FundingView.php\">Back</a>" . "<br>";
 	}
 	
 	function getNetBalance(){
@@ -118,7 +118,7 @@ class FundingController extends Controller {
 			$netBalance = $netBalance + $a->getBalance();
 		}
 		echo "Net Balance of Lab: " . $netBalance . "<br>";
-		echo "<a href= \"../View/FundingView.php\">Back</a>" . "<br>";
+		echo "<a href= \"../view/FundingView.php\">Back</a>" . "<br>";
 	}
 	
 	function viewAccount($type){
@@ -145,7 +145,7 @@ class FundingController extends Controller {
 
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../View/FundingView.php">Back</a>
+			<a href="../view/FundingView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -182,7 +182,7 @@ class FundingController extends Controller {
 			<HTML>
 				<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
 				<p>New transation item successfully added!</p>
-				<a href="../View/FundingView.php">Back</a>
+				<a href="../view/FundingView.php">Back</a>
 			</HTML><?php
 		}
 	}

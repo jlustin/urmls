@@ -34,7 +34,7 @@ class InventoryController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<a href="../View/InventoryView.php">Back</a>
+			<a href="../view/InventoryView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -75,7 +75,7 @@ class InventoryController extends Controller {
 			<HTML>
 				<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
 				<p>New inventory item successfully added!</p>
-				<a href="../View/InventoryView.php">Back</a>
+				<a href="../view/InventoryView.php">Back</a>
 			</HTML><?php
 		}
 	}
@@ -97,7 +97,7 @@ class InventoryController extends Controller {
 		<HTML>
 			<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
 			<p>Inventory item removed succesfully!</p>
-			<a href="../View/InventoryView.php">Back</a>
+			<a href="../view/InventoryView.php">Back</a>
 		</HTML><?php
 	}
 	
@@ -151,7 +151,7 @@ class InventoryController extends Controller {
 		</HTML>
 	
 	<?php	
-		echo "<a href= \"../View/InventoryView.php\">Back</a>" . "<br>";
+		echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
 	}
 		
 	function findInventoryItem($name){

@@ -67,7 +67,7 @@
       					3 of 3
     				</div>
   				</div> -->
-  		<?php $urlms = (new Persistence("Persistence/data.txt"))->loadDataFromStore();?>
+  		<?php $urlms = (new Persistence("persistence/data.txt"))->loadDataFromStore();?>
   		<!-- Carousel -->
 		<br>
   		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -96,15 +96,35 @@
 				  		// warning for not progress updates
 			  			if ($count == 1){
 			  			?>
-			  				<br>
-			  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-			  				<?php echo $count . " staff member has no progress update!";
+			  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				
+							<strong>Alert!</strong> <?php echo $count . " staff member has no progress update!";?>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div><div class = "col-sm-3"></div></div>
+						<?php 
 			  			}
 			  			else if($count > 1){
 			  				?>
-			  				<br>
-			  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-			  				<?php echo $count . " staff members have no progress update!";
+			  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				
+							<strong>Alert!</strong> <?php echo $count . " staff members have no progress update!";?>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div><div class = "col-sm-3"></div></div>
+							<?php 
 			  			}
 			  			else echo "<br>";
 				  		?>
@@ -112,7 +132,7 @@
 				  		<br>
 				  </p>
 						<p class="lead">
-							<a class="btn btn-danger btn-lg" href="View/StaffView.php"
+							<a class="btn btn-danger btn-lg" href="view/StaffView.php"
 								role="button">Go to Staff</a>
 						</p>
 
@@ -152,36 +172,78 @@
 				  			// warning for equipement damage
 					  		if ($countEQ == 1){
 				  				?>
-				  				<br>
-				  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-				  				<?php echo $countEQ . " equipement is damaged!";
+				  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				
+							<strong>Alert!</strong> <?php echo $countEQ . " equipement is damaged!";?>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div><div class = "col-sm-3"></div></div>
+							<?php 
 				  			}
 				  			else if($countEQ > 1){
 				  				?>
-				  				<br>
-				  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-				  				<?php echo $countEQ . " equipements are damaged!";
+				  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				
+							<strong>Alert!</strong> <?php echo $countEQ . " equipements are damaged!";?>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div><div class = "col-sm-3"></div></div>
+				  				<?php 
 				  			}
 				  			else echo "<br>";
 				  			
 				  			// warning for supply quantity
 				  			if ($countSP == 1){
 				  				?>
-				  				<br>
-				  				 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-				  				<?php echo $countSP . " supply is running low!";
+				  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				
+							<strong>Alert!</strong> <?php echo $countSP . " supply is running low!";?>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div><div class = "col-sm-3"></div></div>
+				  				
+				  				<?php 
 				  			}
 				  			else if($countSP > 1){
 				  				?>
-				  				<br>
-				  				<img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
-				  				<?php echo $countSP . " supplies are running low!";
+				  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
+				  				
+							<strong>Alert!</strong> <?php echo $countSP . " supplies are running low!";?>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div><div class = "col-sm-3"></div></div>
+				  				
+				  				<?php 
 				  			}
 				  			else echo "<br>";?>
 				  		<br>
 				  </p>
 				  <p class="lead">
-				    <a class="btn btn-danger btn-lg" href="View/InventoryView.php" role="button">Go to Inventory</a>
+				    <a class="btn btn-danger btn-lg" href="view/InventoryView.php" role="button">Go to Inventory</a>
 				  </p>
 			  </div>
 		    </div>
@@ -198,7 +260,7 @@
 				  			foreach ($accounts as $a){
 				  				$netBalance = $netBalance + $a->getBalance();
 				  			}
-				  			echo $netBalance . " $ <br>";
+				  			echo "$" . $netBalance . "<br>";
 				  		?>
 				  		<!-- Checking total number of accounts -->
 >				  		Total Number of Accounts: <?php echo $urlms->getLab_index(0)->numberOfFundingAccounts();?>
@@ -215,7 +277,9 @@
 				  			
 				  			if ($count == 1){
 				  				?>
-				  				<div class="alert alert-warning alert-dismissible fade show"
+				  				<div class = "row">
+				  				<div class = "col-sm-3"></div>
+				  				<div class="col-sm-6 alert alert-warning alert-dismissible fade show"
 							role="alert">
 							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
 				  				
@@ -224,7 +288,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-						</div>
+						</div><div class = "col-sm-3"></div></div>
 				  				
 				  				<?php
 				  			}
@@ -239,16 +303,9 @@
 				  		<br>
 				  		
 				  </p>
-						<div class="alert alert-warning alert-dismissible fade show"
-							role="alert">
-							<strong>Alert!</strong> You should check out your accounts.
-							<button type="button" class="close" data-dismiss="alert"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
+						
 						<p class="lead">
-							<a class="btn btn-danger btn-lg" href="View/FundingView.php"
+							<a class="btn btn-danger btn-lg" href="view/FundingView.php"
 								role="button">Go to Funding</a>
 						</p>
 					</div>
@@ -272,19 +329,19 @@
 		<!-- Links to Staff, Inventory, Funding Pages -->
 		<div class="row">
     		<div class="col-sm-4">	
-				<a href="View/StaffView.php">
+				<a href="view/StaffView.php">
 				  <img class="card-img-top menu" src="../image/Personnel_Red.png" alt="Card image cap">
 				</a>
   			</div>
   			
   			<div class="col-sm-4">
-				<a href="View/InventoryView.php">
+				<a href="view/InventoryView.php">
 				  <img class="card-img-top menu" src="../image/Utility_Red.png" alt="Card image cap">
 				</a>
    			</div>
    			
    			<div class="col-sm-4">
-				<a href="View/FundingView.php">
+				<a href="view/FundingView.php">
 				  <img class="card-img-top menu" src="../image/Fiance_Red.png" alt="Card image cap">
 				</a>
   			</div>

@@ -34,7 +34,7 @@ class StaffController extends Controller {
 			echo $m->getId() . " " . $m->getName() . "<br>";
 		}
 		
-		echo "<a href= \"../View/StaffView.php\">Back</a>" . "<br>";
+		echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";
 	}
 	
 	/*
@@ -61,7 +61,7 @@ class StaffController extends Controller {
 			<HTML>
 				<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
 				<p>New staff member successfully added!</p>
-				<a href="../View/StaffView.php">Back</a>
+				<a href="../view/StaffView.php">Back</a>
 			</HTML>
 			
 			<script>
@@ -93,7 +93,7 @@ class StaffController extends Controller {
 		<HTML>
 			<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
 			<p>Staff member removed succesfully</p>
-			<a href="../View/StaffView.php">Back</a>
+			<a href="../view/StaffView.php">Back</a>
 		</HTML><?php		
 	}
 	
@@ -175,7 +175,7 @@ class StaffController extends Controller {
 		</HTML>
 		<?php 
 		
-		echo "<a href= \"../View/StaffView.php\">Back</a>" . "<br>";
+		echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";
 	}
 		
 	function findMember($name,$id){
