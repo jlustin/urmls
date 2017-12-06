@@ -314,9 +314,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 					 	</form>
 				      </div>
 				    </div>
-				  </div>
-				  
-				  
+				  </div>  
 				  <div class="card">
 				    <div class="card-header" role="tab" id="headingFour">
 				      <h5 class="mb-0" style="color: rgb(220,53,69)">

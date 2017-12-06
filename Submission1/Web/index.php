@@ -151,10 +151,8 @@
 				  			$inventoryItems = $urlms->getLab_index(0)->getInventoryItems();
 				  			foreach ($inventoryItems as $inventoryItem){
 				  				$totalValue = $totalValue + $inventoryItem->getCost();
-				  				/**
-				  				 * TO:DO getIsDamaged doesnt seem to work 
-				  				 */ 
-				  				if(get_class($inventoryItem) == "Equipement"){
+				  				
+				  				if(get_class($inventoryItem) == "Equipment"){
 				  					if($inventoryItem->getIsDamaged() == true){
 				  						$countEQ++;
 				  					}
@@ -162,14 +160,14 @@
 				  				/**
 				  				 * TO:DO getQuantity doesnt seem to "exist"
 				  				 */ 
-// 				  				else {
-// 				  					if($inventoryItem->getQuantity() < 10){
-// 				  						$countSP++;
-// 				  					}
-// 				  				}
+				  				else {
+				  					if($inventoryItem->getQuantity() < 10){
+				  						$countSP++;
+				  					}
+				  				}
 				  			}
 				  			echo $totalValue . " $";
-				  			// warning for equipement damage
+				  			// warning for equipment damage
 					  		if ($countEQ == 1){
 				  				?>
 				  				<div class = "row">
@@ -178,7 +176,7 @@
 							role="alert">
 							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
 				  				
-							<strong>Alert!</strong> <?php echo $countEQ . " equipement is damaged!";?>
+							<strong>Alert!</strong> <?php echo $countEQ . " equipment is damaged!";?>
 							<button type="button" class="close" data-dismiss="alert"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -194,7 +192,7 @@
 							role="alert">
 							 <img src="../image/warning.png" alt="Warning Sign" style="height: auto; width: auto; max-height: 17.5px; max-width: 17.5px;">
 				  				
-							<strong>Alert!</strong> <?php echo $countEQ . " equipements are damaged!";?>
+							<strong>Alert!</strong> <?php echo $countEQ . " equipments are damaged!";?>
 							<button type="button" class="close" data-dismiss="alert"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
