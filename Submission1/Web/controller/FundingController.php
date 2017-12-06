@@ -59,7 +59,7 @@ class FundingController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
+			<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
 			<p>New account successfully added!</p>
 			<a href="../view/FundingView.php">Back</a>
 		</HTML><?php
@@ -161,7 +161,7 @@ class FundingController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
+			<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
 			<p>Funding account removed!</p>
 			<a href="../view/FundingView.php">Back</a>
 		</HTML><?php
@@ -274,7 +274,7 @@ class FundingController extends Controller {
 		
 			<!-- Add back button to page -->
 			<HTML>
-				<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
+				<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
 				<p>New transation item successfully added!</p>
 				<a href="../view/FundingView.php">Back</a>
 			</HTML><?php
