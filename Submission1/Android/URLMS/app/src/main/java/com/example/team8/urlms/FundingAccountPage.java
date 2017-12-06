@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
@@ -160,6 +162,7 @@ addFundingButton.setOnClickListener(new View.OnClickListener() {
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
+                date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
                 mDatePicker.init(2017, 11, 03, new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

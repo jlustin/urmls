@@ -124,7 +124,7 @@ public class FundingPage extends AppCompatActivity {
     }
     public void payDayAuthorization(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage("Admin Access Required." +"\n" + "All staff members will be paid from staff funds account")
+        alert.setMessage("Admin Access Required." +"\n" + "All staff members will be paid from staff funds account.")
                 .setCancelable(false)
                 .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
                     @Override
