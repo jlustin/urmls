@@ -67,7 +67,7 @@ public class TransactionPagePO extends JFrame {
 	 * Create the frame.
 	 */
 	public TransactionPagePO() {
-		setTitle("Staff");
+		setTitle("Transactions");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 535, 300);

@@ -48,6 +48,7 @@ public class AddStaffMemberPO extends JFrame {
 	 * Create the frame.
 	 */
 	public AddStaffMemberPO() {
+		setTitle("Add Staff Member");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

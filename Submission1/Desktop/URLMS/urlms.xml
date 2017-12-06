@@ -68,18 +68,50 @@
       <fundingAccounts id="23">
         <ca.mcgill.ecse321.urlms.model.FundingAccount id="24">
           <type>Hello</type>
-          <balance>123.0</balance>
-          <expenses id="25"/>
+          <balance>59.0</balance>
+          <expenses id="25">
+            <ca.mcgill.ecse321.urlms.model.Expense id="26">
+              <amount>16.0</amount>
+              <date>2/17/17</date>
+              <type>broke EV3</type>
+              <fundingAccount reference="24"/>
+            </ca.mcgill.ecse321.urlms.model.Expense>
+            <ca.mcgill.ecse321.urlms.model.Expense id="27">
+              <amount>16.0</amount>
+              <date>2/17/17</date>
+              <type>broke EV3</type>
+              <fundingAccount reference="24"/>
+            </ca.mcgill.ecse321.urlms.model.Expense>
+            <ca.mcgill.ecse321.urlms.model.Expense id="28">
+              <amount>16.0</amount>
+              <date>2/17/17</date>
+              <type>broke EV3</type>
+              <fundingAccount reference="24"/>
+            </ca.mcgill.ecse321.urlms.model.Expense>
+            <ca.mcgill.ecse321.urlms.model.Expense id="29">
+              <amount>16.0</amount>
+              <date>2/17/17</date>
+              <type>broke EV3</type>
+              <fundingAccount reference="24"/>
+            </ca.mcgill.ecse321.urlms.model.Expense>
+          </expenses>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.FundingAccount>
-        <ca.mcgill.ecse321.urlms.model.FundingAccount id="26">
+        <ca.mcgill.ecse321.urlms.model.FundingAccount id="30">
           <type>sup</type>
-          <balance>321.0</balance>
-          <expenses id="27"/>
+          <balance>305.0</balance>
+          <expenses id="31">
+            <ca.mcgill.ecse321.urlms.model.Expense id="32">
+              <amount>16.0</amount>
+              <date>2/17/17</date>
+              <type>broke EV3</type>
+              <fundingAccount reference="30"/>
+            </ca.mcgill.ecse321.urlms.model.Expense>
+          </expenses>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.FundingAccount>
       </fundingAccounts>
-      <financialReports id="28"/>
+      <financialReports id="33"/>
       <uRLMS reference="1"/>
     </ca.mcgill.ecse321.urlms.model.Lab>
   </labs>
