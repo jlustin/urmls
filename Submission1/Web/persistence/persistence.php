@@ -1,12 +1,5 @@
 <?php
 
-$my_dir = dirname(__FILE__);
-require_once $my_dir . '/../model/URLMS.php';
-require_once $my_dir . '/../model/Lab.php';
-require_once $my_dir . '/../model/FinancialReport.php';
-require_once $my_dir . '/../model/Expense.php';
-require_once $my_dir . '/../model/FundingAccount.php';
-
 	class Persistence{
 		
 		private $filename;
