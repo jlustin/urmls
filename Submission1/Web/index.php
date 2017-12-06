@@ -43,10 +43,8 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
 	<!-- Bootstrap Container -->
-	<div class="container">
+	<div class="container" style="height: 600px;">
 		<!-- Bootstrap Continer Template -->
 		<!-- 	<div class="row">
     				<div class="col">
@@ -68,6 +66,9 @@
     				</div>
   				</div> -->
   		<?php $urlms = (new Persistence("persistence/data.txt"))->loadDataFromStore();?>
+  		
+  		
+  		
   		<!-- Carousel -->
 		<br>
   		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -78,8 +79,8 @@
 		   </ol>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <div class="jumbotron home-page-elem" style="text-align: center;">
-		      
+		      <div class="jumbotron home-page-elem" style="text-align: center; height: 600px;">
+		      	
 				  <h1 class="display-3">Staff</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -139,27 +140,22 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<div class="jumbotron home-page-elem" style="text-align: center;">
+					<div class="jumbotron home-page-elem" style="text-align: center; height: 600px;">
 						<h1 class="display-3">Inventory</h1>
 						<hr class="my-4" style="width: 50%;">
 						<p>
 				  		Total Number of Inventory Items: <?php echo $urlms->getLab_index(0)->numberOfInventoryItems() . "<br>";?>
 				  		Total Value of Inventory Items:
-<
 				  		<?php 
 				  			$totalValue = 0; $countEQ = 0; $countSP = 0;
 				  			$inventoryItems = $urlms->getLab_index(0)->getInventoryItems();
 				  			foreach ($inventoryItems as $inventoryItem){
 				  				$totalValue = $totalValue + $inventoryItem->getCost();
-				  				
 				  				if(get_class($inventoryItem) == "Equipment"){
 				  					if($inventoryItem->getIsDamaged() == true){
 				  						$countEQ++;
 				  					}
 				  				}
-				  				/**
-				  				 * TO:DO getQuantity doesnt seem to "exist"
-				  				 */ 
 				  				else {
 				  					if($inventoryItem->getQuantity() < 10){
 				  						$countSP++;
@@ -246,7 +242,7 @@
 			  </div>
 		    </div>
 		    <div class="carousel-item">
-		      <div class="jumbotron home-page-elem" style="text-align: center;">
+		      <div class="jumbotron home-page-elem" style="text-align: center; height: 600px;">
 				  <h1 class="display-3">Funding</h1>
 				  <hr class="my-4" style="width: 50%;">
 				  <p>
@@ -261,7 +257,7 @@
 				  			echo "$" . $netBalance . "<br>";
 				  		?>
 				  		<!-- Checking total number of accounts -->
->				  		Total Number of Accounts: <?php echo $urlms->getLab_index(0)->numberOfFundingAccounts();?>
+				  		Total Number of Accounts: <?php echo $urlms->getLab_index(0)->numberOfFundingAccounts();?>
 				  		<br>
 				  		<!-- Checking how many accounts have a negative balance -->
 				  		<?php 
@@ -321,9 +317,11 @@
 			</a>
 
 		</div>
-
-		<br>
-		<br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="container">
 		<!-- Links to Staff, Inventory, Funding Pages -->
 		<div class="row">
     		<div class="col-sm-4">	
