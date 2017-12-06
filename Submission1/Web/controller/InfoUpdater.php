@@ -141,9 +141,9 @@
 				$persistence->writeDataToStore($urlms);
 				
 				?>
-<!-- 				<html> -->
-<!-- 					<meta http-equiv="refresh" content="0; URL='../view/InventoryView.php'" /> -->
-<!-- 				</html> -->
+				<html>
+					<meta http-equiv="refresh" content="0; URL='../view/InventoryView.php'" />
+				</html>
 				<html>
 					<div class="container">
 						<div class="row">
@@ -245,7 +245,9 @@
 		
 		function updateAccount($newType){
 			if($newType == null || strlen($newType) == 0 || !$this->isValidStr($newType)){
-				throw new Exception ("Please enter a valid funding account type.");
+				throw new Exception ("Please enter a valid funding account type.");	
+			}elseif($newType == "Staff Funding" || $newType == "Equipment Funding" || $newType == "Supply Funding"){
+				throw new Exception ("Can't edit account with this name!");
 			}else{
 				$fundingAccount = $_SESSION['fundingaccount'];
 				$urlms = $_SESSION['urlms'];

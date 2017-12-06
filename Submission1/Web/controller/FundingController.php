@@ -39,6 +39,8 @@ class FundingController extends Controller {
 	function addAccount($type, $balance){
 		if($type == null || strlen($type) == 0 || !$this->isValidStr($type)){
 			throw new Exception ("Please enter a valid funding account type.");
+		}elseif($type == "Staff Funding" || $type == "Equipment Funding" || $type == "Supply Funding"){
+			throw new Exception ("Can't add account with this name!");
 		}
 		else if($balance == null || strlen($balance) == 0 || !is_numeric($balance)){
 			throw new Exception ("Please enter a valid balance.");
@@ -198,6 +200,9 @@ class FundingController extends Controller {
 	}
 	
 	function viewAccount($type){
+		if($type == "Staff Funding" || $type == "Equipment Funding" || $type == "Supply Funding"){
+			throw new Exception ("Can't view this account!");
+		}
 		$urlms = $this->urlms;
 		$fundingAccount = $this->findFundingAccount($type);
 		//session_start();
@@ -243,7 +248,7 @@ class FundingController extends Controller {
 	}
 	
 	function addTransaction($account, $expensetype, $amount, $type, $date){
-		if($expensetype == null || strlen($expensetype) == 0 || !$this->isValidStr($expensetype)){
+		if($expensetype == null || strlen($expensetype) == 0){
 			throw new Exception ("Please enter a valid expense type.");
 		}
 		else if ($amount == null || strlen($amount) == 0 || !(is_numeric($amount))){
