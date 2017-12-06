@@ -14,7 +14,7 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-	
+	session_start();
 	?>
 	<html>
 		<head>
@@ -33,7 +33,7 @@
 	require('FundingController.php');
 	
 	// start session
- 	session_start();
+ 	//session_start();
 	
 	$persistence = new Persistence();
 	$urlms = $persistence->loadDataFromStore();

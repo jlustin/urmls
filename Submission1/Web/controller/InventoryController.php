@@ -7,7 +7,7 @@
 	require_once $my_dir . '/../model/InventoryItem.php';
 	require_once $my_dir . '/../model/SupplyType.php';
 	require_once $my_dir . '/../model/Equipment.php';
-	
+	session_start();
 class InventoryController extends Controller {
 	
 	protected $urlms;
@@ -107,7 +107,7 @@ class InventoryController extends Controller {
 	function viewInventoryItem($name){
 		$urlms = $this->urlms;
 		$inventoryItem = $this->findInventoryItem($name);
-		session_start();
+		//session_start();
 		$_SESSION['inventoryitem'] = $inventoryItem;
 		$_SESSION['urlms'] = $urlms;
 		?>

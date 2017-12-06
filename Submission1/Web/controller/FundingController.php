@@ -11,6 +11,7 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
+	session_start();
 	?>	
 	<html>
 		<head>
@@ -93,7 +94,7 @@ class FundingController extends Controller {
 				<td>" . $e->getDate() . "</td>
 			</tr>";}
 		echo "</tbody></table>";
-		session_start();
+		//session_start();
 		$_SESSION['fundingAccount'] = $fundingAccount;
 		$_SESSION['urlms'] = $urlms;
 		?>
@@ -199,7 +200,7 @@ class FundingController extends Controller {
 	function viewAccount($type){
 		$urlms = $this->urlms;
 		$fundingAccount = $this->findFundingAccount($type);
-		session_start();
+		//session_start();
 		$_SESSION['fundingaccount'] = $fundingAccount;
 		$_SESSION['urlms'] = $urlms;
 		?>
