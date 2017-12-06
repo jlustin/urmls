@@ -1,3 +1,14 @@
+<html>
+	<head>
+		<title>URLMS</title>
+		<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+	</head>	
+</html>
 <?php
 	$my_dir = dirname(__FILE__);
 	require_once $my_dir . '/../persistence/persistence.php';
@@ -62,14 +73,7 @@ class StaffController extends Controller {
 				<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
 				<p>New staff member successfully added!</p>
 				<a href="../view/StaffView.php">Back</a>
-			</HTML>
-			
-			<script>
-				function goBack() {
-   					window.history.back();
-				}
-			</script>
-			
+			</HTML>			
 			<?php
 		}
 	}	
@@ -103,20 +107,22 @@ class StaffController extends Controller {
 		session_start();
 		$_SESSION['staffmember'] = $staffMember;
 		$_SESSION['urlms'] = $urlms;
-		
-		//Display member info
-		echo "ID: " . $staffMember->getId() . "<br>";
-		echo "Name: " . $staffMember->getName() . "<br>";
-		echo "Role(s):";
+		?>
+		<html>
+		<div class="container">
+		<h3>Staff Member Record of <?php echo $staffMember->getName();?></h3>
+		ID: <?php echo $staffMember->getId();?><br>
+		Name : <?php echo $staffMember->getName();?><br>
+		Role(s): <?php 
 		if(!$staffMember->hasResearchRoles()){
 			echo " None";
 		}
 		for($i = 0; $i < $staffMember->numberOfResearchRoles(); $i++){
 			echo " " . get_class($staffMember->getResearchRole_index($i));
-		}
-		echo "<br>";
-		echo "Weekly Salary: $" . $staffMember->getWeeklySalary() . "<br>";
-		echo "Progress Updates:";
+		}		
+		?><br>
+		Weekly Salary: $ <?php echo $staffMember->getWeeklySalary();?><br>
+		Progress Updates: <?php 
 		if(!$staffMember->hasProgressUpdates()){
 			echo " None";
 		}
@@ -124,17 +130,33 @@ class StaffController extends Controller {
 		foreach($staffMember->getProgressUpdates() as $pu){
 			echo "<br>" . $pu->getDate() . ", " . $pu->getDescription();
 		}
-		echo "<br>";
-		?>
-		<HTML>
+		?><br>
+		
 			<form action="../Controller/InfoUpdater.php" method="get">
 			<br>
 			<h3>Edit Staff Member</h3>
 			<input type="hidden" name="action" value="editStaffMember" />
-			New Name: <input type="text" name="editedstaffname" value="<?php echo $staffMember->getName();?>"/>
-			New ID: <input type="text" name="editedstaffid" value="<?php echo $staffMember->getId();?>"/>
-			New Salary: <input type="text" name="editedstaffsalary" value="<?php echo $staffMember->getWeeklySalary();?>"/>
-			<br>
+			
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="newName">New Name</label> 
+							<input type="text" class="form-control" name="editedstaffname" id="newName" aria-describedby="nameHelp" value="<?php echo $staffMember->getName();?>"> 
+							<small id="nameHelp" class="form-text text-muted">Enter new name if applicable.</small> <br>
+						</div>
+						<div class="col-sm-6">
+							<label for="newID">New ID</label> 
+							<input type="text" class="form-control" name="editedstaffid" id="newID" aria-describedby="nameHelp" value="<?php echo $staffMember->getId();?>"> 
+							<small id="nameHelp" class="form-text text-muted">Enter new ID if applicable.</small> <br>
+						</div>
+					</div>
+			<div class="row">
+						<div class="col-sm-6">
+							<label for="newSalary">New Salary</label> 
+							<input type="text" class="form-control" name="editedstaffsalary" id="newSalary" aria-describedby="nameHelp" value="<?php echo $staffMember->getWeeklySalary();?>"> 
+							<small id="nameHelp" class="form-text text-muted">Enter new salary if applicable.</small> <br>
+						</div>
+					</div>
+			
 			<br>
 			Roles:<br>
 			
@@ -165,17 +187,34 @@ class StaffController extends Controller {
  			<br>
  			<b>New Progress Update:</b> 
  			<br><br>
- 			Date:<input type="text" name="date" /><br><br>
- 			<textarea name="newProgressUpdate" cols="40" rows="5"></textarea>
- 			<br><br>
+ 			<div class="row">
+						<div class="col-sm-3">
+							<label for="date">Date</label> 
+							<input type="text" class="form-control" name="date" id="date" aria-describedby="dateHelp" placeholder="Enter date of progress update"> 
+							 <br>
+						</div>
+					</div>
+ 			<div class = "row">
+ 			<div class = "col-sm-12">
+ 			<textarea name="newProgressUpdate" cols="120" rows="5" placeholder="Enter progress update"></textarea>
+ 			</div></div><br><br>
  			
- 			<input type="submit" value="Edit staff!" />
+ 			<input class="btn btn-danger" type="submit" value="Edit staff!" />
  			<br>
 		</form>
+		<div class="row">
+				<div class="col-sm-2">
+					<a href="../view/StaffView.php" style="color: white; text-decoration: none;">
+						<button type="button" class="btn btn-danger" data-toggle="tooltip"
+							data-placement="bottom" title="Go back to homepage">Back</button>
+					</a>
+				</div>
+			</div>
+		</div>
 		</HTML>
 		<?php 
 		
-		echo "<a href= \"../view/StaffView.php\">Back</a>" . "<br>";
+		
 	}
 		
 	function findMember($name,$id){

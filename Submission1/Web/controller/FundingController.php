@@ -12,7 +12,6 @@
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
 ?>
-	
 <html>
 	<head>
 		<title>URLMS</title>

@@ -271,10 +271,7 @@
 							</a>
 			    		</div>
 			  		</div>
-				<br><br>
-				
-				
-				
+				<br><br>				
 			</div>
 	</div>	
 
@@ -290,7 +287,6 @@
   				</div>
 		</div>
 	</footer>
-
 </body>
 </html>
 

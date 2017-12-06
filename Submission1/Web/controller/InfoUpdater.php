@@ -31,7 +31,10 @@
 	switch($_GET['action']){
 		case "editInventoryItem":
 			try{
-				$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);
+				if(isset($_GET['isdamaged']))
+					$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], $_GET['isdamaged'], $_GET['editedsupplyquantity']);
+				else
+					$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], false, $_GET['editedsupplyquantity']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
 				echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
