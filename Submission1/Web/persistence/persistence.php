@@ -1,5 +1,12 @@
 <?php
-	
+
+$my_dir = dirname(__FILE__);
+require_once $my_dir . '/../model/URLMS.php';
+require_once $my_dir . '/../model/Lab.php';
+require_once $my_dir . '/../model/FinancialReport.php';
+require_once $my_dir . '/../model/Expense.php';
+require_once $my_dir . '/../model/FundingAccount.php';
+
 	class Persistence{
 		
 		private $filename;
@@ -7,7 +14,7 @@
 		/*
 		 * Constructor
 		 */
-		function __construct($filename = '../Persistence/data.txt') {
+		function __construct($filename = '../persistence/data.txt') {
 			$this->filename = $filename;
 		}
 		

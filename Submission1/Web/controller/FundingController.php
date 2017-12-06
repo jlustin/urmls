@@ -70,12 +70,32 @@ class FundingController extends Controller {
 	function generateFinancialReport($accountType){
 		$urlms = $this->urlms;
 		$fundingAccount = $this->findFundingAccount($accountType);
-
+		
+		echo "
+		<div class=\"container\">
+			<h3>".$accountType."</h3> 
+		<table class=\"table table-hover\" style=\"width: 100%;\">
+		
+		<thread>
+		<tr>
+		<th>Type</th>
+		<th>Amount</th>
+		<th>Date</th>
+		
+		</tr>
+		</thread>
+		<tbody>";
+		
 		$expenses = $fundingAccount->getExpenses();
 		foreach ($expenses as $e){
-			echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . " | Date: ". $e->getDate() ."<br>";
-		}
+			//echo "Type: " . $e->getType() . " | Amount: " . $e->getAmount() . " | Date: ". $e->getDate() ."<br>";
 		
+		echo "<tr>
+				<td>" .$e->getType()."</td>
+				<td>$". $e->getAmount() ."</td>
+				<td>" . $e->getDate() . "</td>
+			</tr>";}
+		echo "</tbody></table>";
 		session_start();
 		$_SESSION['fundingAccount'] = $fundingAccount;
 		$_SESSION['urlms'] = $urlms;
