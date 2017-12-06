@@ -174,8 +174,19 @@ class FundingController extends Controller {
 		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
 		foreach ($accounts as $a){
 			echo $a->getType() . " " . $a->getBalance() . "<br>";
-		}
-		echo "<a href= \"../view/FundingView.php\">Back</a>" . "<br>";
+		}?>
+		<html>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<a href="../view/FundingView.php" style="color: white; text-decoration: none;">
+							<button type="button" class="btn btn-danger" data-toggle="tooltip"
+							data-placement="bottom" title="Go back to homepage">Back</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</html><?php 
 	}
 	
 	function getNetBalance(){
@@ -194,26 +205,43 @@ class FundingController extends Controller {
 		session_start();
 		$_SESSION['fundingaccount'] = $fundingAccount;
 		$_SESSION['urlms'] = $urlms;
-		echo "Type: " . $fundingAccount->getType();
-		echo "<br>";
-		echo "Balance: " . $fundingAccount->getBalance();
-		echo "<br>";
 		?>
-		<HTML>
-			<form action="../Controller/InfoUpdater.php" method="get">
-			<br>
-			<h3>Edit Account</h3>
-			<input type="hidden" name="action" value="editAccount" />
-			New Name: <input type="text" name="editedaccountname" value="<?php echo $fundingAccount->getType();?>"/>
-			<input type="submit" value="Edit account!" />
- 			<br>
-		</form>
-		</HTML>
-
-		<!-- Add back button to page -->
-		<HTML>
-			<a href="../view/FundingView.php">Back</a>
-		</HTML><?php
+		
+		<html>
+			<div class="container">
+				<h3>Account Summary</h3>
+				<br>
+				<label for="AccountType">Account Type :</label> <?php echo $fundingAccount->getType();?>
+				<br>
+				<label for="AccountBalance">Account Balance :</label> <?php echo "$ " . $fundingAccount->getBalance();?> 
+				<br>
+			
+				<form action="../Controller/InfoUpdater.php" method="get">
+				<div class="form-group">
+					<br>
+					<h3>Edit Account</h3>
+					<input type="hidden" name="action" value="editAccount" />
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="NewName">New Name</label> 
+								<input type="text" class="form-control" name="editedaccountname" id="expenseName" aria-describedby="nameHelp" value="<?php echo $fundingAccount->getType();?>"/> 
+								<small id="nameHelp" class="form-text text-muted">Enter new account name.</small> <br>
+							</div>
+							</div>
+							<input class="btn btn-danger" type="submit" value="Edit account!" />
+					</div>
+						<br>
+					</form>
+					<div class="row">
+						<div class="col-sm-2">
+							<a href="../view/FundingView.php" style="color: white; text-decoration: none;">
+								<button type="button" class="btn btn-danger" data-toggle="tooltip"
+									data-placement="bottom" title="Go back to homepage">Back</button>
+							</a>
+						</div>
+					</div>
+			</div>
+		</html><?php
 	}
 	
 	function addTransaction($account, $expensetype, $amount, $type, $date){
@@ -245,6 +273,7 @@ class FundingController extends Controller {
 			$persistence->writeDataToStore($urlms);
 			
 			?>
+		
 			<!-- Add back button to page -->
 			<HTML>
 				<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
