@@ -65,7 +65,8 @@ public class InventoryListPage extends AppCompatActivity {
         buckyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast myToast= Toast.makeText(getApplicationContext(),"You have clicked on " +ic.viewInventoryItemName(position)+".",Toast.LENGTH_SHORT);
+                Toast myToast= Toast.makeText(getApplicationContext(),"You have clicked on "
+                        +ic.viewInventoryItemName(position)+".",Toast.LENGTH_SHORT);
                 myToast.show();
                 ic.save();
                 Intent intent = new Intent(getApplicationContext(),InventoryItemPage.class );

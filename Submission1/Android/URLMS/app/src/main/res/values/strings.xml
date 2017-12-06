@@ -94,5 +94,7 @@
     <string name="removeString">Remove</string>
     <string name="payDayString">Pay Day!</string>
     <string name="inventoryString">Inventory</string>
+    <string name="ADD_QUANTITY">Add Quantity</string>
+    <string name="enterQuantity">Enter Quantity</string>
 
 </resources>

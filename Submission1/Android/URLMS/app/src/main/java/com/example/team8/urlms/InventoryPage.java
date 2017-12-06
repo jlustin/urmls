@@ -131,6 +131,8 @@ public class InventoryPage extends AppCompatActivity {
             }
         });
     }
+
+
     private void setViewInventoryItemListButton(){
         viewInventoryItemListButton.setOnClickListener(new View.OnClickListener() {
             @Override
