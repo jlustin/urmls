@@ -138,9 +138,9 @@
 				$persistence->writeDataToStore($urlms);
 				
 				?>
-				<html>
-					<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
-				</html>
+<!-- 				<html> -->
+<!-- 					<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" /> -->
+<!-- 				</html> -->
 				<html>
 					<div class="container">
 						<div class="row">

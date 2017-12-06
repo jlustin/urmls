@@ -32,6 +32,9 @@ class InventoryController extends Controller {
 			echo "<br>";
 		} 
 		?>
+		<html>
+			<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
+		</html>
 		<!-- Add back button to page -->
 		<HTML>
 			<a href="../view/InventoryView.php">Back</a>
@@ -107,51 +110,91 @@ class InventoryController extends Controller {
 		session_start();
 		$_SESSION['inventoryitem'] = $inventoryItem;
 		$_SESSION['urlms'] = $urlms;
-			
-		echo "ID: " . $inventoryItem->getName() . "<br>";
-		echo "Cost: $" . $inventoryItem->getCost() . "<br>";
-		echo "Category: " . $inventoryItem->getCategory() . "<br>";
-		
-		if(get_class($inventoryItem) == "Equipment"){
-			if($inventoryItem->getIsDamaged()){
-				echo $inventoryItem->getName() . " is damaged! <br>";	
-			}
-		} else{
-			echo "Quantity: " . $inventoryItem->getQuantity() . "<br>";
-		}
-		echo "<br>";
-		
-		
 		?>
-		<HTML>
-			<form action="../Controller/InfoUpdater.php" method="get">
-			<br>
-			<h3>Edit Inventory Item</h3>
-			<input type="hidden" name="action" value="editInventoryItem" />
-			New Name: <input type="text" name="editedinventoryname" value="<?php echo $inventoryItem->getName();?>"/>
-			New Cost: <input type="text" name="editedinventorycost" value="<?php echo $inventoryItem->getCost();?>"/>
-			New Category: <input type="text" name="editedinventorycat" value="<?php echo $inventoryItem->getCategory();?>"/>
-			<?php
-			if(get_class($inventoryItem) == "Equipment"){
-			?>
-				<input type="radio" name="isdamaged" value="damaged"/> Damaged
-				<input type="radio" name="isdamaged" value="notdamaged"/> Not Damaged <br>
-				<input type="hidden" name="editedsupplyquantity" value="" />
-			<?php 
-			} else{
-			?>
-				Add/Remove Quantity: <input type="text" name="editedsupplyquantity" value=""/>
-				<input type="hidden" name="isdamaged" value="" />
-			<?php
-			}
-			?>
- 			<input type="submit" value="Edit inventory item!" />
- 			<br>
-		</form>
-		</HTML>
-	
-	<?php	
-		echo "<a href= \"../view/InventoryView.php\">Back</a>" . "<br>";
+		<html>
+			<div class="container">
+				<h3>Inventory Item Summary</h3>
+				<br>
+				<label for="ItemName">Item Name :</label> <?php echo $inventoryItem->getName();?>
+				<br>
+				<label for="ItemCost">Item Cost :</label> <?php echo "$ " . $inventoryItem->getCost();?> 
+				<br>
+				<label for="ItemCategory">Item Category :</label> <?php echo $inventoryItem->getCategory();?> 
+				<br>
+				<?php 
+				if(get_class($inventoryItem) == "Equipment"){
+					if($inventoryItem->getIsDamaged()){?>
+						<?php echo $inventoryItem->getName();?> <label for="ItemName"> is damaged!</label> <br> <?php					
+					}
+				} else{?>
+					<label for="SupplyQuantity">Quantity :</label> <?php echo $inventoryItem->getQuantity() ;?> 
+					<br>
+					<br>
+				<?php
+				}
+				?>
+			
+				<form action="../Controller/InfoUpdater.php" method="get">
+				<div class="form-group">
+					<br>
+					<h3>Edit Inventory Item</h3>
+					<input type="hidden" name="action" value="editInventoryItem" />
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="NewName">New Name</label> 
+								<input type="text" class="form-control" name="editedinventoryname" id="expenseName" aria-describedby="nameHelp" value="<?php echo $inventoryItem->getName();?>"/>
+								<small id="nameHelp" class="form-text text-muted">Enter new inventory item name.</small> <br>
+							</div>
+							<div class="col-sm-6">
+								<label for="NewName">New Cost</label> 
+								<input type="text" class="form-control" name="editedinventorycost" id="expenseName" aria-describedby="nameHelp" value="<?php echo $inventoryItem->getCost();?>"/>
+								<small id="nameHelp" class="form-text text-muted">Enter new inventory item cost.</small> <br>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="NewName">New Category</label> 
+								<input type="text" class="form-control" name="editedinventorycat" id="expenseName" aria-describedby="nameHelp" value="<?php echo $inventoryItem->getCategory();?>"/>
+								<small id="nameHelp" class="form-text text-muted">Enter new inventory item category.</small> <br>
+							</div>
+						</div>
+						
+						<?php
+							if(get_class($inventoryItem) == "Equipment"){
+							?>
+								<input type="radio" name="isdamaged" value="damaged"/> Damaged<br>
+								<input type="radio" name="isdamaged" value="notdamaged"/> Not Damaged <br>
+								<input type="hidden" name="editedsupplyquantity" value="" />
+							<?php 
+							} else{
+							?>
+								<div class="row">
+									<div class="col-sm-6">
+										<label for="NewName">Add/Remove Quantity</label> 
+										<input type="text" class="form-control" name="editedsupplyquantity" id="expenseName" aria-describedby="nameHelp" value=""/>
+										<small id="nameHelp" class="form-text text-muted">Enter number of supply to remove or add.</small> <br>
+									</div>
+								</div>
+								<input type="hidden" name="isdamaged" value="" />
+							<?php
+							}
+						?>
+						<br>
+						<br>
+					<input class="btn btn-danger" type="submit" value="Edit Inventory Item!" />
+					</div>
+						<br>
+					</form>
+					<div class="row">
+						<div class="col-sm-2">
+							<a href="../view/InventoryView.php" style="color: white; text-decoration: none;">
+								<button type="button" class="btn btn-danger" data-toggle="tooltip"
+									data-placement="bottom" title="Go back to homepage">Back</button>
+							</a>
+						</div>
+					</div>
+			</div>
+		</html><?php
 	}
 		
 	function findInventoryItem($name){
