@@ -11,6 +11,22 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
+?>
+	
+<html>
+	<head>
+		<title>URLMS</title>
+		<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+	</head>	
+</html>
+<?php
+
+
 		
 class FundingController extends Controller {
 	
@@ -64,23 +80,54 @@ class FundingController extends Controller {
 		$_SESSION['fundingAccount'] = $fundingAccount;
 		$_SESSION['urlms'] = $urlms;
 		?>
-		<HTML>
+		<html>
+		<div class="container">
 			<form action="../Controller/InfoUpdater.php" method="get">
-			<br>
-			<h3>Edit Expense</h3>
-			<input type="hidden" name="action" value="editExpense" />
-			Expense Type: <input type="text" name="expensename" value=""/>
-			New Expense Type: <input type="text" name="newexpensename" value=""/>
-			New Amount: <input type="text" name="newexpenseamount" value=""/><br>
-			New Date: <input type="text" name="newexpensedate" value=""/><br>
-			<input type="submit" value="Edit expense!" />
- 			<br>
-		</form>
-		</HTML>
-		<!-- Add back button to page -->
-		<HTML>
-			<a href="../view/FundingView.php">Back</a>
-		</HTML><?php
+			<div class="form-group">
+				<br>
+				<h3>Edit Expense</h3>
+				<input type="hidden" name="action" value="editExpense" />
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="ExpenseType">Expense Type</label> 
+							<input type="text" class="form-control" name="expensename" id="expenseName" aria-describedby="nameHelp" placeholder="Enter Expense Type"> 
+							<small id="nameHelp" class="form-text text-muted">Enter old type of expense.</small> <br>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="newExpenseType">New Expense Type</label> 
+							<input type="text" class="form-control" name="newexpensename" id="expenseName" aria-describedby="nameHelp" placeholder="Enter New Expense Type"> 
+							<small id="nameHelp" class="form-text text-muted">Enter new type of expense.</small> <br>
+						</div>
+						<div class="col-sm-6">
+							<label for="newAmount">New Amount</label> 
+							<input type="text" class="form-control" name="newexpenseamount" id="expenseAmount" aria-describedby="nameHelp" placeholder="Enter New Expense Amount"> 
+							<small id="nameHelp" class="form-text text-muted">Enter new amount of expense.</small> <br>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="ExpenseType">New Date</label> 
+							<input type="text" class="form-control" name="newexpensedate" id="expenseName" aria-describedby="nameHelp" placeholder="Enter Expense Date"> 
+							<small id="nameHelp" class="form-text text-muted">Enter new date of expense.</small> <br>
+						</div>
+					</div>
+				<input class="btn btn-danger" type="submit" value="Edit expense!" />
+			</div>
+				<br>
+			</form>
+			
+			<div class="row">
+				<div class="col-sm-2">
+					<a href="../view/FundingView.php" style="color: white; text-decoration: none;">
+						<button type="button" class="btn btn-danger" data-toggle="tooltip"
+							data-placement="bottom" title="Go back to homepage">Back</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</html><?php
 	}
 	
 	function removeAccount($type){

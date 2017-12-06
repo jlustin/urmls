@@ -203,7 +203,7 @@
 				$persistence->writeDataToStore($urlms);
 				
 				echo "Account updated successfully! <br>";
-				echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
+				echo "<a href= \"../view/FundingView.php\">Back</a>" . "<br>";	
 			}
 		}
 		
@@ -250,7 +250,7 @@
 				$persistence->writeDataToStore($urlms);
 				
 				echo "Expense updated successfully! <br>";
-				echo "<a href= \"../view/FundingView.html\">Back</a>" . "<br>";	
+				echo "<a href= \"../view/FundingView.php\">Back</a>" . "<br>";	
 			}
 		}
 		
