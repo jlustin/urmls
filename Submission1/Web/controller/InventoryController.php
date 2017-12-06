@@ -33,7 +33,7 @@ class InventoryController extends Controller {
 		} 
 		?>
 		<html>
-			<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
+			<meta http-equiv="refresh" content="0; URL='../view/InventoryView.php'" />
 		</html>
 		<!-- Add back button to page -->
 		<HTML>
@@ -76,7 +76,7 @@ class InventoryController extends Controller {
 			?>
 			<!-- Add back button to page -->
 			<HTML>
-				<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
+				<meta http-equiv="refresh" content="0; URL='../view/InventoryView.php'" />
 				<p>New inventory item successfully added!</p>
 				<a href="../view/InventoryView.php">Back</a>
 			</HTML><?php
@@ -98,7 +98,7 @@ class InventoryController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" />
+			<meta http-equiv="refresh" content="0; URL='../view/InventoryView.php'" />
 			<p>Inventory item removed succesfully!</p>
 			<a href="../view/InventoryView.php">Back</a>
 		</HTML><?php
@@ -134,7 +134,7 @@ class InventoryController extends Controller {
 				}
 				?>
 			
-				<form action="../Controller/InfoUpdater.php" method="get">
+				<form action="../controller/InfoUpdater.php" method="get">
 				<div class="form-group">
 					<br>
 					<h3>Edit Inventory Item</h3>

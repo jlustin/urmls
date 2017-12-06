@@ -70,7 +70,7 @@ class StaffController extends Controller {
 			?>
 			<!-- Add back button to page -->
 			<HTML>
-				<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
+				<meta http-equiv="refresh" content="0; URL='../view/StaffView.php'" />
 				<p>New staff member successfully added!</p>
 				<a href="../view/StaffView.php">Back</a>
 			</HTML>			
@@ -95,7 +95,7 @@ class StaffController extends Controller {
 		?>
 		<!-- Add back button to page -->
 		<HTML>
-			<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
+			<meta http-equiv="refresh" content="0; URL='../view/StaffView.php'" />
 			<p>Staff member removed succesfully</p>
 			<a href="../view/StaffView.php">Back</a>
 		</HTML><?php		
@@ -132,7 +132,7 @@ class StaffController extends Controller {
 		}
 		?><br>
 		
-			<form action="../Controller/InfoUpdater.php" method="get">
+			<form action="../controller/InfoUpdater.php" method="get">
 			<br>
 			<h3>Edit Staff Member</h3>
 			<input type="hidden" name="action" value="editStaffMember" />

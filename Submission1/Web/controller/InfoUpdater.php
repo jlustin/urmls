@@ -142,7 +142,7 @@
 				
 				?>
 <!-- 				<html> -->
-<!-- 					<meta http-equiv="refresh" content="0; URL='../View/InventoryView.php'" /> -->
+<!-- 					<meta http-equiv="refresh" content="0; URL='../view/InventoryView.php'" /> -->
 <!-- 				</html> -->
 				<html>
 					<div class="container">
@@ -183,7 +183,7 @@
 				
 				?>
 				<html>
-					<meta http-equiv="refresh" content="0; URL='../View/StaffView.php'" />
+					<meta http-equiv="refresh" content="0; URL='../view/StaffView.php'" />
 				</html>
 				<html>
 					<div class="container">
@@ -257,7 +257,7 @@
 				
 				?>
 				<html>
-					<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
+					<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
 				</html>
 				<html>
 					<div class="container">
@@ -322,7 +322,7 @@
 				
 				?>
 				<html>
-					<meta http-equiv="refresh" content="0; URL='../View/FundingView.php'" />
+					<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
 				</html>
 				<html>
 					<div class="container">

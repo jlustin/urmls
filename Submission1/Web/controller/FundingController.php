@@ -99,7 +99,7 @@ class FundingController extends Controller {
 		?>
 		<html>
 		<div class="container">
-			<form action="../Controller/InfoUpdater.php" method="get">
+			<form action="../controller/InfoUpdater.php" method="get">
 			<div class="form-group">
 				<br>
 				<h3>Edit Expense</h3>
@@ -213,7 +213,7 @@ class FundingController extends Controller {
 				<label for="AccountBalance">Account Balance :</label> <?php echo "$ " . $fundingAccount->getBalance();?> 
 				<br>
 			
-				<form action="../Controller/InfoUpdater.php" method="get">
+				<form action="../controller/InfoUpdater.php" method="get">
 				<div class="form-group">
 					<br>
 					<h3>Edit Account</h3>
