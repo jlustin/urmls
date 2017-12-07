@@ -14,8 +14,9 @@ class InventoryController extends Controller {
 	/*
 	 * Constructor
 	 */
-	public function __construct($urlms){
+	public function __construct($urlms, $persistence){
 		$this->urlms = $urlms;
+		$this->persistence = $persistence;
 	}
 	
 	/*
@@ -70,8 +71,8 @@ class InventoryController extends Controller {
 			$urlms->getLab_index(0)->addInventoryItem($newInventoryItem);
 			
 			// Write data
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
+			//$persistence = new Persistence();
+			$this->persistence->writeDataToStore($urlms);
 			
 			?>
 			<!-- Add back button to page -->
@@ -92,8 +93,8 @@ class InventoryController extends Controller {
 		$inventoryItem->delete();
 		
 		// Write data
-		$persistence = new Persistence();
-		$persistence->writeDataToStore($urlms);
+		//$persistence = new Persistence();
+		$this->persistence->writeDataToStore($urlms);
 		
 		?>
 		<!-- Add back button to page -->

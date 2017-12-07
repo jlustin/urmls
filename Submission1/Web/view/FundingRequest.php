@@ -18,7 +18,7 @@ require_once $my_dir . '/../controller/FundingController.php';
 $persistence = new Persistence();
 $urlms = $persistence->loadDataFromStore();
 
-$invC = new FundingController($urlms);
+$invC = new FundingController($urlms, $persistence);
 // Check which button was clicked by user
 // Run appropriate controller method with respect to user request
 switch($_GET['action']){

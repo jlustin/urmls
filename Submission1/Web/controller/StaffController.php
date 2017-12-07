@@ -92,8 +92,8 @@ class StaffController extends Controller {
 		$staffMember->delete();
 		
 		//Save
-		$persistence = new Persistence();
-		$persistence->writeDataToStore($urlms);
+		//$persistence = new Persistence();
+		$this->persistence->writeDataToStore($urlms);
 		
 		?>
 		<!-- Add back button to page -->

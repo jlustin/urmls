@@ -18,7 +18,7 @@ require_once $my_dir . '/../controller/StaffController.php';
 $persistence = new Persistence();
 $urlms = $persistence->loadDataFromStore();
 
-$invC = new StaffController($urlms);
+$invC = new StaffController($urlms, $persistence);
 
 // Check which button was clicked by user
 // Run appropriate controller method with respect to user request

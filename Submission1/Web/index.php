@@ -1,4 +1,3 @@
-
 <?php $my_dir = dirname(__FILE__);
 	require_once $my_dir . '/persistence/persistence.php';
 	require_once $my_dir . '/model/URLMS.php';

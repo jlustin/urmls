@@ -29,11 +29,13 @@
 class FundingController extends Controller {
 	
 	protected $urlms;
+	protected $persistence;
 	/*
 	 * Constructor
 	 */
-	public function __construct($urlms){
+	public function __construct($urlms, $persistence){
 		$this->urlms = $urlms;
+		$this->persistence = $persistence;
 	}
 	
 	function addAccount($type, $balance){
@@ -55,8 +57,8 @@ class FundingController extends Controller {
  			$date = date('m/d/Y', time());
  			$newFundingAccount->addExpense(new Expense($balance, $date, "Initial Balance", $newFundingAccount));
  			
- 			$persistence = new Persistence();
- 			$persistence->writeDataToStore($urlms);
+ 			//$persistence = new Persistence();
+ 			$this->persistence->writeDataToStore($urlms);
 		}
 		?>
 		<!-- Add back button to page -->
@@ -158,8 +160,8 @@ class FundingController extends Controller {
 		$urlmsLab = $urlms->getLab_index(0);
 		$fundingAccount = $this->findFundingAccount($type);
 		$fundingAccount->delete();
-		$persistence = new Persistence();
-		$persistence->writeDataToStore($urlms);
+		//$persistence = new Persistence();
+		$this->persistence->writeDataToStore($urlms);
 		?>
 		<!-- Add back button to page -->
 		<HTML>
@@ -272,8 +274,8 @@ class FundingController extends Controller {
 				$fundingAccount->setBalance($fundingAccount->getBalance() + $newExpense->getAmount());
 			}
 			// Write data
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
+			//$persistence = new Persistence();
+			$this->persistence->writeDataToStore($urlms);
 			
 			?>
 		

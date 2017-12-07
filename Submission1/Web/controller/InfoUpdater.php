@@ -32,13 +32,10 @@
 	require('InventoryController.php');
 	require('FundingController.php');
 	
-	// start session
- 	//session_start();
-	
 	$persistence = new Persistence();
-	$urlms = $persistence->loadDataFromStore();
+	//$urlms = $persistence->loadDataFromStore();
 	
-	$iu = new InfoUpdater($urlms);
+	$iu = new InfoUpdater($persistence);
 	
 	// Check which button was clicked by user
 	// Run appropriate controller method with respect to user request
@@ -91,11 +88,13 @@
 	class InfoUpdater {
 		
 		protected $urlms;
+		protected $persistence;
 		/*
 		 * Constructor
 		 */
-		public function __construct($urlms){
-			$this->urlms = $urlms;
+		public function __construct($urlms, $persistence){
+			$this->urlms = $persistence->loadDataFromStore();
+			$this->persistence = $persistence;
 		}
 		
 		function updateInventory($name, $cost, $category, $isDamaged, $quantity){
@@ -137,8 +136,8 @@
 					}
 				}
 			
-				$persistence = new Persistence();
-				$persistence->writeDataToStore($urlms);
+				//$persistence = new Persistence();
+				$this->persistence->writeDataToStore($urlms);
 				
 				?>
 				<html>
@@ -178,8 +177,8 @@
 				$staffMember->setId($id);
 				$staffMember->setWeeklySalary($salary);
 				
-				$persistence = new Persistence();
-				$persistence->writeDataToStore($urlms);
+				//$persistence = new Persistence();
+				$this->persistence->writeDataToStore($urlms);
 				
 				?>
 				<html>
@@ -223,8 +222,8 @@
 				}
 			}	
 			
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
+			//$persistence = new Persistence();
+			$this->persistence->writeDataToStore($urlms);
 		}
 		
 		function addProgressUpdate($desc, $date){
@@ -238,8 +237,8 @@
 				
 				$staffMember->addProgressUpdate(new ProgressUpdate($date, $desc,$staffMember));
 				
-				$persistence = new Persistence();
-				$persistence->writeDataToStore($urlms);
+				//$persistence = new Persistence();
+				$this->persistence->writeDataToStore($urlms);
 			}
 		}
 		
@@ -254,8 +253,8 @@
 				
 				$fundingAccount->setType($newType);
 				
-				$persistence = new Persistence();
-				$persistence->writeDataToStore($urlms);
+				//$persistence = new Persistence();
+				$this->persistence->writeDataToStore($urlms);
 				
 				?>
 				<html>
@@ -319,8 +318,8 @@
 				$expenseAmountDiff = $expense->getAmount() - $oldExpenseAmount;			
 				$fundingAccount->setBalance($fundingAccountBalance + $expenseAmountDiff);
 				
-				$persistence = new Persistence();
-				$persistence->writeDataToStore($urlms);
+				//$persistence = new Persistence();
+				$this->persistence->writeDataToStore($urlms);
 				
 				?>
 				<html>
