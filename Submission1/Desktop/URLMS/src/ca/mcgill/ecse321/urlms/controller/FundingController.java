@@ -25,10 +25,6 @@ public class FundingController extends Controller {
 	 * 
 	 * @return a report containing all financial information
 	 */
-	public FinancialReport generateFinancialReport() {	
-		//TODO: remove this when working on implementation
-		return null;
-	}
 	public void addFundingAccount(String fundingType, double fundingBalance) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -203,13 +199,6 @@ public class FundingController extends Controller {
 		currentFundingAccount.delete();
 	}
 	
-	/** This method will give a summary of the overall URLMS Funding
-	 * @return a hash map containing all information
-	 */
-	public HashMap<String, String> viewStatus() {
 
-		// TODO: remove this when working on implementation
-		return null;
-	}
 
 }
