@@ -1,0 +1,16 @@
+#language
+language: java
+
+#jdk version
+jdk:
+  - oraclejdk8
+  
+#safelist  
+branches:
+  only:
+  - dev
+
+script:
+  - ant build
+  - ant AllTests
+  - ant junitreport
