@@ -56,41 +56,50 @@ public class EditFundingAccountPO extends JFrame {
 		txtNewAccountType.setColumns(10);
 		
 		txtTargetAccountID = new JTextField();
-		txtTargetAccountID.setText("Target Account ID");
+		txtTargetAccountID.setText("Target Account Type Name");
 		txtTargetAccountID.setColumns(10);
 		
 		JButton btnEditType = new JButton("Edit Type");
+		btnEditType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String targetAccount = txtTargetAccountID.getText();
+				String newType = txtNewAccountType.getText();
+				
+				controller.editFinancialAccount(targetAccount, newType);
+			}
+		});
 		
 		JButton btnDeleteAccount = new JButton("Delete Account");
 		btnDeleteAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = Integer.valueOf(txtTargetAccountID.getText());
+				String index = txtTargetAccountID.getText();
 				
 				controller.removeFundingAccount(index);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(169, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtTargetAccountID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtNewAccountType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(141))
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(91)
 					.addComponent(btnEditType)
-					.addPreferredGap(ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
 					.addComponent(btnDeleteAccount)
 					.addGap(62))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(123, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(txtNewAccountType, Alignment.TRAILING)
+						.addComponent(txtTargetAccountID, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+					.addGap(110))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(22)
+					.addGap(30)
 					.addComponent(txtTargetAccountID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(34)
+					.addGap(26)
 					.addComponent(txtNewAccountType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(49)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)

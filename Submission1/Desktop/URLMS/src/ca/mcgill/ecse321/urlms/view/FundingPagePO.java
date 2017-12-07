@@ -68,7 +68,7 @@ public class FundingPagePO extends JFrame {
 		setTitle("Funding");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 535, 300);
+		setBounds(100, 100, 640, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -92,17 +92,15 @@ public class FundingPagePO extends JFrame {
 				List<FundingAccount> accountList = controller.viewFundingAccounts();
 				String name;
 				double balance;
-				int id;
 				accountListLabel.setText("<html>");
-				id = 0;
+
 				
 				for (FundingAccount aAccount : accountList) {
 					String previousText = accountListLabel.getText();
 					name = aAccount.getType();
 					balance = aAccount.getBalance();
 					accountListLabel.setText(previousText + "Account type: " + name + "&nbsp &nbsp &nbsp "
-					+ "Account Balance: " + balance + "&nbsp &nbsp &nbsp " + "ID: " + id + " <br/>");
-					id ++;
+					+ "Account Balance: " + balance + "&nbsp &nbsp &nbsp " + " <br/>");
 				}
 				
 				String previousText = accountListLabel.getText();

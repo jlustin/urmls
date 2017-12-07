@@ -41,9 +41,12 @@ public class TransactionPagePO extends JFrame {
 	public AddStaffMemberPO asmpo = new AddStaffMemberPO();
 	public EditStaffMemberPO esmpo = new EditStaffMemberPO();
 	public AddTransactionPO atpo = new AddTransactionPO();
-	
+	JPanel panel = new JPanel();
 	public static FundingController controller = new FundingController();
 	private JTextField txtAccountName;
+	JButton btnAddTransaction = new JButton("Add Transaction");
+	JButton btnViewStaffList = new JButton("View Expenses");
+	JButton btnSave = new JButton("Save");
 
 	
 
@@ -70,16 +73,14 @@ public class TransactionPagePO extends JFrame {
 		setTitle("Transactions");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 535, 300);
+		setBounds(100, 100, 640, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnAddTransaction = new JButton("Add Transaction");
 		btnAddTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -93,7 +94,7 @@ public class TransactionPagePO extends JFrame {
 		panel.add(txtAccountName);
 		txtAccountName.setColumns(10);
 		
-		JButton btnViewStaffList = new JButton("View Expenses");
+
 		panel.add(btnViewStaffList);
 		btnViewStaffList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -119,7 +120,6 @@ public class TransactionPagePO extends JFrame {
 			}
 		});
 		
-		JButton btnSave = new JButton("Save");
 		panel.add(btnSave);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -138,41 +138,7 @@ public class TransactionPagePO extends JFrame {
 			contentPane.add(panel_1, BorderLayout.NORTH);
 			welcomeToStaffLabel = new JLabel("Welcome to Staff. There's a lot of stuff.");
 			panel_1.add(welcomeToStaffLabel);
-			
-//			txtName = new JTextField();
-//			txtName.setText("Name");
-//			txtName.setColumns(10);
-			
-			
-//			GroupLayout gl_contentPane = new GroupLayout(contentPane);
-//			gl_contentPane.setHorizontalGroup(
-//				gl_contentPane.createParallelGroup(Alignment.LEADING)
-//					.addGroup(gl_contentPane.createSequentialGroup()
-//						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-//							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)
-//							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)
-//							.addGroup(gl_contentPane.createSequentialGroup()
-//								.addGap(30)
-//								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-//									.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-//									.addComponent(ResearchAssistantBox)
-//									.addComponent(ResearchAssociateBox))))
-//						.addGap(19))
-//			);
-//			gl_contentPane.setVerticalGroup(
-//				gl_contentPane.createParallelGroup(Alignment.LEADING)
-//					.addGroup(gl_contentPane.createSequentialGroup()
-//						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-//						.addGap(34)
-//						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-//						.addGap(18)
-//						.addComponent(ResearchAssistantBox)
-//						.addGap(18)
-//						.addComponent(ResearchAssociateBox)
-//						.addGap(61)
-//						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-//			);
-//			contentPane.setLayout(gl_contentPane);
+
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.save();

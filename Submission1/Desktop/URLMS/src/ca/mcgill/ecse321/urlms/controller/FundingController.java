@@ -25,10 +25,6 @@ public class FundingController extends Controller {
 	 * 
 	 * @return a report containing all financial information
 	 */
-	public FinancialReport generateFinancialReport() {	
-		//TODO: remove this when working on implementation
-		return null;
-	}
 	public void addFundingAccount(String fundingType, double fundingBalance) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -133,7 +129,20 @@ public class FundingController extends Controller {
 	/** This method will edit a financial account (?)
 	 * @param type of account by String
 	 */
-	public void editFinancialAccount(String type) {
+	public void editFinancialAccount(String targetType, String newType) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		FundingAccount currentFundingAccount = null;
+		try {
+			currentFundingAccount = getFundingAccount(targetType);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		currentFundingAccount.setType(newType);
+		
 
 	}
 	public String viewFundingAccountType(int index) {
@@ -176,13 +185,20 @@ public class FundingController extends Controller {
 		aLab.getFundingAccount(index).delete();
 	}
 	
-	/** This method will give a summary of the overall URLMS Funding
-	 * @return a hash map containing all information
-	 */
-	public HashMap<String, String> viewStatus() {
-
-		// TODO: remove this when working on implementation
-		return null;
+	public void removeFundingAccount(String type) {
+		
+		FundingAccount currentFundingAccount = null;
+		try {
+			currentFundingAccount = getFundingAccount(type);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		currentFundingAccount.delete();
 	}
+	
+
 
 }
