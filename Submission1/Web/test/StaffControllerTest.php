@@ -3,12 +3,14 @@
 
 	require_once $my_dir . '/../controller/StaffController.php';
 	require_once $my_dir . '/../model/URLMS.php';
+	require_once $my_dir.'/../model/FundingAccount.php';
 	
 	
 	class StaffControllerTest extends PHPUnit_Framework_TestCase
 	{
 		protected $urlms;
 		protected $controller;
+		protected $p;
 	
 		protected function setUp()
 		{
@@ -17,8 +19,11 @@
 			$lab = new Lab("9/10", $this->urlms);
 			$this->urlms->addLab($lab);
 			
-			$this->controller = new StaffController($this->urlms);
-			(new Persistence("test.txt"))->writeDataToStore($this->urlms);
+			
+			$this->p = new Persistence(dirname(__FILE__)."/../persistence/test.txt");
+			$this->p->loadDataFromStore();
+			$this->p->writeDataToStore($this->urlms);
+			$this->controller = new StaffController($this->urlms, $this->p);
 		}
 	
 		protected function tearDown()
@@ -28,10 +33,10 @@
 		public function testAddStaffMember()
 		{
 			// 1. Create test data
-			$this->controller->addStaff("bob");
+			$this->controller->addStaff("bob", 100);
 			
 			// 2. Write all of the data
-			$pers = new Persistence("test.txt");
+			$pers = $this->p;
 			$pers->writeDataToStore($this->urlms);
 	
 			// 3. Clear the data from memory

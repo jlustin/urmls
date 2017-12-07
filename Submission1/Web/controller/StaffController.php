@@ -25,11 +25,13 @@
 class StaffController extends Controller {
 	
 	protected $urlms;
+	protected $persistence;
 	/*
 	 * Constructor
 	 */
-	public function __construct($urlms){
+	public function __construct($urlms, $persistence){
 		$this->urlms = $urlms;
+		$this->persistence = $persistence;
 	}
 	
 	/*
@@ -65,8 +67,8 @@ class StaffController extends Controller {
 			$urlms->getLab_index(0)->addStaffMember($newStaffMember);
 			
 			//Save
-			$persistence = new Persistence();
-			$persistence->writeDataToStore($urlms);
+			//$persistence = new Persistence();
+			$this->persistence->writeDataToStore($urlms);
 			
 			?>
 			<!-- Add back button to page -->
