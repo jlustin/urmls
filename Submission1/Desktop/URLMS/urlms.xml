@@ -4,44 +4,44 @@
       <name>Lab</name>
       <staffMembers id="4">
         <ca.mcgill.ecse321.urlms.model.StaffMember id="5">
-          <name>Victor</name>
-          <id>123</id>
-          <weeklySalary>0.0</weeklySalary>
-          <researchRoles id="6"/>
-          <progressUpdates id="7"/>
+          <name>Jack</name>
+          <id>4443</id>
+          <weeklySalary>12.0</weeklySalary>
+          <researchRoles id="6">
+            <ca.mcgill.ecse321.urlms.model.ResearchAssociate id="7">
+              <taskDescription>Why you read this</taskDescription>
+              <staffMember reference="5"/>
+            </ca.mcgill.ecse321.urlms.model.ResearchAssociate>
+          </researchRoles>
+          <progressUpdates id="8"/>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.StaffMember>
-        <ca.mcgill.ecse321.urlms.model.StaffMember id="8">
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="9">
           <name>Jun2Yu</name>
           <id>222</id>
           <weeklySalary>0.0</weeklySalary>
-          <researchRoles id="9"/>
-          <progressUpdates id="10"/>
+          <researchRoles id="10"/>
+          <progressUpdates id="11"/>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.StaffMember>
-        <ca.mcgill.ecse321.urlms.model.StaffMember id="11">
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="12">
           <name>Name</name>
           <id>608</id>
           <weeklySalary>12.0</weeklySalary>
-          <researchRoles id="12">
-            <ca.mcgill.ecse321.urlms.model.ResearchAssistant id="13">
+          <researchRoles id="13">
+            <ca.mcgill.ecse321.urlms.model.ResearchAssistant id="14">
               <taskDescription>Why you read this</taskDescription>
-              <staffMember reference="11"/>
+              <staffMember reference="12"/>
             </ca.mcgill.ecse321.urlms.model.ResearchAssistant>
           </researchRoles>
-          <progressUpdates id="14"/>
+          <progressUpdates id="15"/>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.StaffMember>
-        <ca.mcgill.ecse321.urlms.model.StaffMember id="15">
-          <name>asdasd</name>
-          <id>2312</id>
-          <weeklySalary>66.0</weeklySalary>
-          <researchRoles id="16">
-            <ca.mcgill.ecse321.urlms.model.ResearchAssociate id="17">
-              <taskDescription>Why you read this</taskDescription>
-              <staffMember reference="15"/>
-            </ca.mcgill.ecse321.urlms.model.ResearchAssociate>
-          </researchRoles>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="16">
+          <name>Jack</name>
+          <id>4443</id>
+          <weeklySalary>12.0</weeklySalary>
+          <researchRoles id="17"/>
           <progressUpdates id="18"/>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.StaffMember>
