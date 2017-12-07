@@ -36,23 +36,6 @@ public class MainPage extends JFrame {
 	
 	public static Controller controller = new Controller();
 	public static StaffController staffController = new StaffController();
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainPage frame = new MainPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -120,6 +103,8 @@ public class MainPage extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.save();
+				SavePO spo = new SavePO();
+				spo.setVisible(true);
 			}
 		});
 	}

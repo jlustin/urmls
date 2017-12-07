@@ -149,6 +149,8 @@ public class StaffPagePO extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.save();
+				SavePO spo = new SavePO();
+				spo.setVisible(true);
 			}
 		});
 	}
