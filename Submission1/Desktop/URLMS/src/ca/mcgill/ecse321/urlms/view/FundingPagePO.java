@@ -92,17 +92,15 @@ public class FundingPagePO extends JFrame {
 				List<FundingAccount> accountList = controller.viewFundingAccounts();
 				String name;
 				double balance;
-				int id;
 				accountListLabel.setText("<html>");
-				id = 0;
+
 				
 				for (FundingAccount aAccount : accountList) {
 					String previousText = accountListLabel.getText();
 					name = aAccount.getType();
 					balance = aAccount.getBalance();
 					accountListLabel.setText(previousText + "Account type: " + name + "&nbsp &nbsp &nbsp "
-					+ "Account Balance: " + balance + "&nbsp &nbsp &nbsp " + "ID: " + id + " <br/>");
-					id ++;
+					+ "Account Balance: " + balance + "&nbsp &nbsp &nbsp " + " <br/>");
 				}
 				
 				String previousText = accountListLabel.getText();

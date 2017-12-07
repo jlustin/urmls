@@ -133,7 +133,20 @@ public class FundingController extends Controller {
 	/** This method will edit a financial account (?)
 	 * @param type of account by String
 	 */
-	public void editFinancialAccount(String type) {
+	public void editFinancialAccount(String targetType, String newType) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		FundingAccount currentFundingAccount = null;
+		try {
+			currentFundingAccount = getFundingAccount(targetType);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		currentFundingAccount.setType(newType);
+		
 
 	}
 	public String viewFundingAccountType(int index) {
@@ -174,6 +187,20 @@ public class FundingController extends Controller {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		aLab.getFundingAccount(index).delete();
+	}
+	
+	public void removeFundingAccount(String type) {
+		
+		FundingAccount currentFundingAccount = null;
+		try {
+			currentFundingAccount = getFundingAccount(type);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		currentFundingAccount.delete();
 	}
 	
 	/** This method will give a summary of the overall URLMS Funding
