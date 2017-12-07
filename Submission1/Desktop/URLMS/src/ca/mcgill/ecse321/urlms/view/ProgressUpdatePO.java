@@ -12,7 +12,10 @@ import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.Expense;
+import ca.mcgill.ecse321.urlms.model.Lab;
+import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,19 +36,18 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
-public class TransactionPagePO extends JFrame {
-	JLabel expenseListLabel;
+public class ProgressUpdatePO extends JFrame {
+	JLabel progressUpdatesLabel;
 	JLabel feelFreeLabel;
 	private JPanel contentPane;
 	JLabel welcomeToStaffLabel;
-	public AddStaffMemberPO asmpo = new AddStaffMemberPO();
-	public EditStaffMemberPO esmpo = new EditStaffMemberPO();
-	public AddTransactionPO atpo = new AddTransactionPO();
+
+	public AddProgressUpdatePopOut apupo = new AddProgressUpdatePopOut();
 	JPanel panel = new JPanel();
-	public static FundingController controller = new FundingController();
+	public static StaffController controller = new StaffController();
 	private JTextField txtAccountName;
-	JButton btnAddTransaction = new JButton("Add Transaction");
-	JButton btnViewStaffList = new JButton("View Expenses");
+	JButton btnAddTransaction = new JButton("Add Progress Update");
+	JButton btnViewStaffList = new JButton("View Staff Records");
 	JButton btnSave = new JButton("Save");
 
 	
@@ -69,7 +71,7 @@ public class TransactionPagePO extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TransactionPagePO() {
+	public ProgressUpdatePO() {
 		setTitle("Transactions");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,13 +86,13 @@ public class TransactionPagePO extends JFrame {
 		btnAddTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				atpo.setVisible(true);
+				apupo.setVisible(true);
 			}
 		});
 		panel.add(btnAddTransaction);
 		
 		txtAccountName = new JTextField();
-		txtAccountName.setText("Account Name");
+		txtAccountName.setText("Staff Name to view");
 		panel.add(txtAccountName);
 		txtAccountName.setColumns(10);
 		
@@ -98,25 +100,25 @@ public class TransactionPagePO extends JFrame {
 		panel.add(btnViewStaffList);
 		btnViewStaffList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				expenseListLabel.setText("");
-				String accountName = txtAccountName.getText();
-				List<Expense> expenses = controller.viewFundingAccountExpenses(accountName);
-				String name;
-				int id;
+				progressUpdatesLabel.setText("");
+				int targetStaffID = Integer.valueOf(txtAccountName.getText());
+				List<ProgressUpdate> updates = controller.viewProgressUpdateByID(targetStaffID);
+				String description;
 				String date;
-				double amount;
-				expenseListLabel.setText("<html>");
-				for (Expense aExpense : expenses) {
-					String previousText = expenseListLabel.getText();
-					name = aExpense.getType();
-					date = aExpense.getDate();
-					amount = aExpense.getAmount();
-					expenseListLabel.setText(previousText + "Account Type: " + name + "&nbsp &nbsp &nbsp " + 
-					"Date: " + date + "&nbsp &nbsp &nbsp " + "Amount: " + amount + " <br/>");
+				String staffMember = controller.getStaffMemberByID(targetStaffID).getName();
+				progressUpdatesLabel.setText("<html>");
+				progressUpdatesLabel.setText(progressUpdatesLabel.getText() + "Staff Member: " + staffMember+ "&nbsp &nbsp &nbsp "
+				+ "ID: " + controller.getStaffMemberByID(targetStaffID).getId() + " <br/>" + " <br/>");
+				for (ProgressUpdate aUpdate : updates) {
+					String previousText = progressUpdatesLabel.getText();
+					description = aUpdate.getDescription();
+					date = aUpdate.getDate();
+					progressUpdatesLabel.setText(previousText + "Date: " + date + "&nbsp &nbsp &nbsp " + 
+					"Description " + description + "&nbsp &nbsp &nbsp "  + " <br/>");
 
 				}
-				String previousText = expenseListLabel.getText();
-				expenseListLabel.setText(previousText + "</html>");
+				String previousText = progressUpdatesLabel.getText();
+				progressUpdatesLabel.setText(previousText + "</html>");
 			}
 		});
 		
@@ -126,9 +128,9 @@ public class TransactionPagePO extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 			
-			expenseListLabel = new JLabel("");
-			expenseListLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setViewportView(expenseListLabel);
+			progressUpdatesLabel = new JLabel("");
+			progressUpdatesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			scrollPane.setViewportView(progressUpdatesLabel);
 			
 			feelFreeLabel = new JLabel("Feel free to try adding some staff, and then viewing them.");
 			feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -136,7 +138,7 @@ public class TransactionPagePO extends JFrame {
 			
 			JPanel panel_1 = new JPanel();
 			contentPane.add(panel_1, BorderLayout.NORTH);
-			welcomeToStaffLabel = new JLabel("Welcome to Transactions. There's a lot of stuff.");
+			welcomeToStaffLabel = new JLabel("Welcome to Staff. There's a lot of stuff.");
 			panel_1.add(welcomeToStaffLabel);
 
 		btnSave.addActionListener(new ActionListener() {

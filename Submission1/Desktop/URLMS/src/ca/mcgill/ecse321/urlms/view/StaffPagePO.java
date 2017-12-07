@@ -33,6 +33,7 @@ public class StaffPagePO extends JFrame {
 	//Pop out pages
 	public AddStaffMemberPO asmpo = new AddStaffMemberPO();
 	public EditStaffMemberPO esmpo = new EditStaffMemberPO();
+	public ProgressUpdatePO pupo = new ProgressUpdatePO();
 	
 	//JPanel
 	private JPanel contentPane;
@@ -42,6 +43,7 @@ public class StaffPagePO extends JFrame {
 	
 	//error
 	private String error;
+	private JButton btnAddProgress;
 	
 
 	/**
@@ -106,6 +108,15 @@ public class StaffPagePO extends JFrame {
 				refreshData();
 			}
 		});
+		
+		btnAddProgress = new JButton("Add Progress");
+		btnAddProgress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				pupo.setVisible(true);
+			}
+		});
+		panel.add(btnAddProgress);
 		
 		btnSave = new JButton("Save");
 		panel.add(btnSave);

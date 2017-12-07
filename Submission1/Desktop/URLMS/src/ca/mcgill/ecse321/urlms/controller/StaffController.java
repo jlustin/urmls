@@ -125,6 +125,14 @@ public class StaffController extends Controller {
 		List<ProgressUpdate> progress = aLab.getStaffMember(index).getProgressUpdates();
 		return progress;
 	}
+	
+	public List<ProgressUpdate> viewProgressUpdateByID(int id) {
+
+		StaffMember currentStaffMember = getStaffMemberByID(id);
+
+		List<ProgressUpdate> progress = currentStaffMember.getProgressUpdates();
+		return progress;
+	}
 
 	/**
 	 * Add Progress Update
@@ -228,11 +236,10 @@ public class StaffController extends Controller {
 			double weeklySalary) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		StaffMember aStaffMember = aLab.getStaffMember(0);
+		StaffMember aStaffMember = null;
 
 		//if there are currently no staff members in the lab
-		if (aStaffMember == null)
-			return;
+
 
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
@@ -250,9 +257,7 @@ public class StaffController extends Controller {
 	public void removeStaffMemberByID(int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		StaffMember aStaffMember = aLab.getStaffMember(0);
-		if (aStaffMember == null)
-			return;
+
 
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
@@ -260,6 +265,33 @@ public class StaffController extends Controller {
 			}
 		}
 
+	}
+	
+	public void addProgressByID(String date, String description, int id) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		StaffMember aStaffMember = null;
+		
+		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
+			if (id == iteratedStaffMember.getId()) {
+				aStaffMember = iteratedStaffMember;
+			}
+		}
+		aStaffMember.addProgressUpdate(date, description);
+	}
+
+	
+	public StaffMember getStaffMemberByID(int id) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		StaffMember aStaffMember = null;
+		
+		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
+			if (id == iteratedStaffMember.getId()) {
+				aStaffMember = iteratedStaffMember;
+			}
+		}
+		return aStaffMember;
 	}
 
 }
