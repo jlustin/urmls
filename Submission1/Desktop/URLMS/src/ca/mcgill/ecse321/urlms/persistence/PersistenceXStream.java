@@ -9,6 +9,7 @@ import com.thoughtworks.xstream.XStream;
 
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+import ca.mcgill.ecse321.urlms.view.NewSaveFilePO;
 
 public abstract class PersistenceXStream {
 
@@ -63,7 +64,8 @@ public abstract class PersistenceXStream {
 																// file
 			return xstream.fromXML(fileReader);
 		} catch (IOException e) {
-			e.printStackTrace();
+			NewSaveFilePO nsfpo = new NewSaveFilePO();
+			nsfpo.setVisible(true);
 			return null;
 		}
 	}
