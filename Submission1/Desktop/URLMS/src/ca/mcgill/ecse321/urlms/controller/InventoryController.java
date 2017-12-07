@@ -110,7 +110,7 @@ public class InventoryController extends Controller {
 			SupplyType temp = (SupplyType) aLab.getInventoryItem(index);
 			return String.valueOf(temp.getQuantity());
 		} else
-			return "This item is of type Equipment, so there's no quantity specified.";
+			return "N/A";
 	}
 
 	/**

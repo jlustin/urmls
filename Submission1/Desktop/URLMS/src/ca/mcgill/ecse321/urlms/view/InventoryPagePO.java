@@ -84,14 +84,18 @@ public class InventoryPagePO extends JFrame {
 				int id;
 				inventoryItemListLabel.setText("<html>");
 				id = 0;
+				double cost;
 				
 			//	inventoryItemListLabel.setText(previousText + "");
 				for (InventoryItem aItem : inventoryList) {
 					String previousText = inventoryItemListLabel.getText();
 					name = aItem.getName();
 					String category = aItem.getCategory();
+					cost = aItem.getCost();
+					String quantity = controller.viewSupplyItemQuantity(id);
 					inventoryItemListLabel.setText(previousText + "Item Name: " + name + "&nbsp &nbsp &nbsp " +
-					"Item ID: " + id + "&nbsp &nbsp &nbsp " + "Item Category " + category + " <br/>");
+					"Item ID: " + id + "&nbsp &nbsp &nbsp " + "Item Category " + category+ "&nbsp &nbsp &nbsp "
+							+ "Cost: " + cost + "&nbsp &nbsp &nbsp " + "Quantity: " + quantity + " <br/>");
 					id ++;
 				}
 				String previousText = inventoryItemListLabel.getText();
