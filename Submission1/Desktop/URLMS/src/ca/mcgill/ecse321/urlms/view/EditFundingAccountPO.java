@@ -89,12 +89,10 @@ public class EditFundingAccountPO extends JFrame {
 					.addGap(62))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(123, Short.MAX_VALUE)
-					.addComponent(txtTargetAccountID, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(txtNewAccountType, Alignment.TRAILING)
+						.addComponent(txtTargetAccountID, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
 					.addGap(110))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(158, Short.MAX_VALUE)
-					.addComponent(txtNewAccountType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(152))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
