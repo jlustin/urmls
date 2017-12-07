@@ -63,10 +63,14 @@ public class StaffPagePO extends JFrame {
 	 * Create the frame.
 	 */
 	public StaffPagePO() {
+		initComponents();
+	}
+	
+	private void initComponents(){
 		setTitle("Staff");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 535, 300);
+		setBounds(100, 100, 640, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -117,6 +121,14 @@ public class StaffPagePO extends JFrame {
 		
 		JButton btnSave = new JButton("Save");
 		panel.add(btnSave);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				close();
+			}
+		});
+		panel.add(btnClose);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -176,7 +188,14 @@ public class StaffPagePO extends JFrame {
 		});
 	}
 	
+	
 	private void refreshData(){
 		
 	}
+	
+	public void close() { 
+		this.setVisible(false);
+	    this.dispose();
+	}
+	
 }

@@ -45,19 +45,91 @@
           <progressUpdates id="18"/>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="19">
+          <name></name>
+          <id>44</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="20"/>
+          <progressUpdates id="21"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="22">
+          <name></name>
+          <id>19</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="23"/>
+          <progressUpdates id="24"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="25">
+          <name></name>
+          <id>957</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="26"/>
+          <progressUpdates id="27"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="28">
+          <name></name>
+          <id>143</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="29"/>
+          <progressUpdates id="30"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="31">
+          <name></name>
+          <id>617</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="32"/>
+          <progressUpdates id="33"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="34">
+          <name></name>
+          <id>887</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="35"/>
+          <progressUpdates id="36"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="37">
+          <name></name>
+          <id>610</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="38"/>
+          <progressUpdates id="39"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="40">
+          <name></name>
+          <id>834</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="41"/>
+          <progressUpdates id="42"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
+        <ca.mcgill.ecse321.urlms.model.StaffMember id="43">
+          <name></name>
+          <id>204</id>
+          <weeklySalary>22.0</weeklySalary>
+          <researchRoles id="44"/>
+          <progressUpdates id="45"/>
+          <lab reference="3"/>
+        </ca.mcgill.ecse321.urlms.model.StaffMember>
       </staffMembers>
-      <inventoryItems id="19">
-        <ca.mcgill.ecse321.urlms.model.InventoryItem id="20">
+      <inventoryItems id="46">
+        <ca.mcgill.ecse321.urlms.model.InventoryItem id="47">
           <name>pololu</name>
           <cost>10.0</cost>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.InventoryItem>
-        <ca.mcgill.ecse321.urlms.model.InventoryItem id="21">
+        <ca.mcgill.ecse321.urlms.model.InventoryItem id="48">
           <name>lol</name>
           <cost>11.0</cost>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.InventoryItem>
-        <ca.mcgill.ecse321.urlms.model.Equipment id="22">
+        <ca.mcgill.ecse321.urlms.model.Equipment id="49">
           <name>Computer</name>
           <cost>123.0</cost>
           <category>Equipment</category>
@@ -65,53 +137,53 @@
           <isDamaged>false</isDamaged>
         </ca.mcgill.ecse321.urlms.model.Equipment>
       </inventoryItems>
-      <fundingAccounts id="23">
-        <ca.mcgill.ecse321.urlms.model.FundingAccount id="24">
+      <fundingAccounts id="50">
+        <ca.mcgill.ecse321.urlms.model.FundingAccount id="51">
           <type>Hello</type>
           <balance>59.0</balance>
-          <expenses id="25">
-            <ca.mcgill.ecse321.urlms.model.Expense id="26">
+          <expenses id="52">
+            <ca.mcgill.ecse321.urlms.model.Expense id="53">
               <amount>16.0</amount>
               <date>2/17/17</date>
               <type>broke EV3</type>
-              <fundingAccount reference="24"/>
+              <fundingAccount reference="51"/>
             </ca.mcgill.ecse321.urlms.model.Expense>
-            <ca.mcgill.ecse321.urlms.model.Expense id="27">
+            <ca.mcgill.ecse321.urlms.model.Expense id="54">
               <amount>16.0</amount>
               <date>2/17/17</date>
               <type>broke EV3</type>
-              <fundingAccount reference="24"/>
+              <fundingAccount reference="51"/>
             </ca.mcgill.ecse321.urlms.model.Expense>
-            <ca.mcgill.ecse321.urlms.model.Expense id="28">
+            <ca.mcgill.ecse321.urlms.model.Expense id="55">
               <amount>16.0</amount>
               <date>2/17/17</date>
               <type>broke EV3</type>
-              <fundingAccount reference="24"/>
+              <fundingAccount reference="51"/>
             </ca.mcgill.ecse321.urlms.model.Expense>
-            <ca.mcgill.ecse321.urlms.model.Expense id="29">
+            <ca.mcgill.ecse321.urlms.model.Expense id="56">
               <amount>16.0</amount>
               <date>2/17/17</date>
               <type>broke EV3</type>
-              <fundingAccount reference="24"/>
+              <fundingAccount reference="51"/>
             </ca.mcgill.ecse321.urlms.model.Expense>
           </expenses>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.FundingAccount>
-        <ca.mcgill.ecse321.urlms.model.FundingAccount id="30">
+        <ca.mcgill.ecse321.urlms.model.FundingAccount id="57">
           <type>sup</type>
           <balance>305.0</balance>
-          <expenses id="31">
-            <ca.mcgill.ecse321.urlms.model.Expense id="32">
+          <expenses id="58">
+            <ca.mcgill.ecse321.urlms.model.Expense id="59">
               <amount>16.0</amount>
               <date>2/17/17</date>
               <type>broke EV3</type>
-              <fundingAccount reference="30"/>
+              <fundingAccount reference="57"/>
             </ca.mcgill.ecse321.urlms.model.Expense>
           </expenses>
           <lab reference="3"/>
         </ca.mcgill.ecse321.urlms.model.FundingAccount>
       </fundingAccounts>
-      <financialReports id="33"/>
+      <financialReports id="60"/>
       <uRLMS reference="1"/>
     </ca.mcgill.ecse321.urlms.model.Lab>
   </labs>
