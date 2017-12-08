@@ -98,7 +98,8 @@ public class StaffPagePO extends JFrame {
 						String previousText = staffMemberListLabel.getText();
 						name = aMember.getName();
 						id = aMember.getId();
-						staffMemberListLabel.setText(previousText + name + " " + id + " <br/>");
+						staffMemberListLabel.setText(previousText + "Name: " + name + "&nbsp &nbsp &nbsp "
+						+ "ID: " +  id + " <br/>");
 					}
 					String previousText = staffMemberListLabel.getText();
 					staffMemberListLabel.setText(previousText + "</html>");
