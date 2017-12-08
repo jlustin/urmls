@@ -11,7 +11,10 @@
 	require_once $my_dir . '/../model/Expense.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-	session_start();
+ 	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 	?>	
 	<html>
 		<head>
@@ -94,11 +97,10 @@ class FundingController extends Controller {
 		
 		echo "<tr>
 				<td>" .$e->getType()."</td>
-				<td>$". $e->getAmount() ."</td>
+				<td>$". number_format($e->getAmount(), 2, "." , "," ) ."</td>
 				<td>" . $e->getDate() . "</td>
 			</tr>";}
 		echo "</tbody></table>";
-		//session_start();
 		$_SESSION['fundingAccount'] = $fundingAccount;
 		$_SESSION['urlms'] = $urlms;
 		?>
@@ -160,7 +162,6 @@ class FundingController extends Controller {
 		$urlmsLab = $urlms->getLab_index(0);
 		$fundingAccount = $this->findFundingAccount($type);
 		$fundingAccount->delete();
-		//$persistence = new Persistence();
 		$this->persistence->writeDataToStore($urlms);
 		?>
 		<!-- Add back button to page -->
@@ -175,7 +176,7 @@ class FundingController extends Controller {
 		// Get staff members from urlms
 		$accounts = $this->urlms->getLab_index(0)->getFundingAccounts();
 		foreach ($accounts as $a){
-			echo $a->getType() . " " . $a->getBalance() . "<br>";
+			echo $a->getType() . " " . number_format($a->getBalance(), 2, "." , "," ) . "<br>";
 		}?>
 		<html>
 			<div class="container">
@@ -197,7 +198,7 @@ class FundingController extends Controller {
 		foreach ($accounts as $a){
 			$netBalance = $netBalance + $a->getBalance();
 		}
-		echo "Net Balance of Lab: " . $netBalance . "<br>";
+		echo "Net Balance of Lab: $" . number_format($netBalance, 2, "." , "," ) . "<br>";
 		echo "<a href= \"../view/FundingView.php\">Back</a>" . "<br>";
 	}
 	
@@ -218,7 +219,7 @@ class FundingController extends Controller {
 				<br>
 				<label for="AccountType">Account Type :</label> <?php echo $fundingAccount->getType();?>
 				<br>
-				<label for="AccountBalance">Account Balance :</label> <?php echo "$ " . $fundingAccount->getBalance();?> 
+				<label for="AccountBalance">Account Balance :</label> <?php echo "$ " . number_format($fundingAccount->getBalance(), 2, "." , "," );?> 
 				<br>
 			
 				<form action="../controller/InfoUpdater.php" method="get">

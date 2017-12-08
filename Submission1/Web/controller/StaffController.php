@@ -9,8 +9,11 @@
 	require_once $my_dir . '/../model/ResearchAssociate.php';
 	require_once $my_dir . '/../model/ResearchAssistant.php';
 	require_once $my_dir . '/../model/ProgressUpdate.php';
-	session_start();
-	?>
+	require_once $my_dir . '/../model/FundingAccount.php';
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } ?>
 	<html>
 	<head>
 	<title>URLMS</title>

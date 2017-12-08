@@ -7,6 +7,7 @@
 	require_once $my_dir . '/../model/ResearchAssociate.php';
 	require_once $my_dir . '/../model/ResearchAssistant.php';
 	require_once $my_dir . '/../model/ProgressUpdate.php';
+	require_once $my_dir . '/../model/FundingAccount.php';
 ?>
 
 <html>
@@ -205,8 +206,7 @@
 							<tbody>
 								<?php 
 								
-								$urlms = (new Persistence())->loadDataFromStore();
-								
+								$urlms = (new Persistence(dirname(__FILE__) . "/../persistence/data.txt"))->loadDataFromStore();
 								
 								foreach ($urlms->getLab_index(0)->getStaffMembers() as $member){
 									$roles = "";

@@ -336,14 +336,14 @@ require_once $my_dir . '/../model/FundingAccount.php';
 								<tbody>
 								<?php 
 								
-								$urlms = (new Persistence())->loadDataFromStore();
+								$urlms = (new Persistence(dirname(__FILE__) . "/../persistence/data.txt"))->loadDataFromStore();
 								
 								
 								foreach ($urlms->getLab_index(0)->getFundingAccounts() as $account){
 									$latestExpense = "";
 									if($account->hasExpenses()){
 										$expense = $account->getExpense_index(sizeof($account->getExpenses())-1);
-										$latestExpense = $expense->getType() .", $". $expense->getAmount();
+										$latestExpense = $expense->getType() .", $". number_format($expense->getAmount(), 2, "." , "," );
 									}else{
 										$latestExpense = "None";
 									}
@@ -356,7 +356,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 										<input type=\"submit\" class=\"btn btn-outline-danger\" value=\" " . $account->getType() . "\" />
 										</form>					
 										</td>				
-										<td>$". $account->getBalance() ."</td>
+										<td>$". number_format($account->getBalance(), 2, "." , "," ) ."</td>
 										<td>" . $latestExpense . "</td>
 										<td>
 										<form action=\"FundingRequest.php\" method=\"get\">

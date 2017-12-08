@@ -1,3 +1,12 @@
+<?php
+$my_dir = dirname(__FILE__);
+require_once $my_dir . '/../persistence/persistence.php';
+require_once $my_dir . '/../controller/FundingController.php';
+if(!isset($_SESSION))
+{
+	session_start();
+}
+?>
 <html>
 	<head>
 		<title>URLMS</title>
@@ -10,12 +19,7 @@
 	</head>	
 </html>
 <?php
-
-$my_dir = dirname(__FILE__);
-require_once $my_dir . '/../persistence/persistence.php';
-require_once $my_dir . '/../controller/FundingController.php';
-
-$persistence = new Persistence();
+$persistence = $_SESSION['persistence'];
 $urlms = $persistence->loadDataFromStore();
 
 $invC = new FundingController($urlms, $persistence);
