@@ -19,7 +19,6 @@
 			$lab = new Lab("9/10", $this->urlms);
 			$this->urlms->addLab($lab);
 			
-			
 			$this->p = new Persistence(dirname(__FILE__)."/../persistence/test.txt");
 			$this->p->loadDataFromStore();
 			$this->p->writeDataToStore($this->urlms);
@@ -29,6 +28,11 @@
 		protected function tearDown()
 		{
 		}
+		
+		/**
+		 * 	TODO: Do get staff list test, if necessary	
+		 * 	Get Staff List Tests
+		 */
 	
 		/**
 		 *	DONE

@@ -140,7 +140,7 @@ require_once $my_dir . '/../model/Equipment.php';
 									</div>
 									<div class="form-check col-sm-2">
 									  <label class="form-check-label">
-									    <input class="form-check-input" type="radio" name="type" id="type" value="Supply">
+									    <input class="form-check-input" type="radio" name="type" id="type" value="SupplyType">
 									   	Supply
 									  </label>
 									</div>
