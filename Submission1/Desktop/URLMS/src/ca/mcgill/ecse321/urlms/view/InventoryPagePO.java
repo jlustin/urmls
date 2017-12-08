@@ -7,26 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ca.mcgill.ecse321.urlms.application.URLMSApplication;
-import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.InventoryController;
-import ca.mcgill.ecse321.urlms.controller.StaffController;
+import ca.mcgill.ecse321.urlms.model.Equipment;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
-import ca.mcgill.ecse321.urlms.model.StaffMember;
+import ca.mcgill.ecse321.urlms.model.SupplyType;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class InventoryPagePO extends JFrame {
@@ -35,33 +27,25 @@ public class InventoryPagePO extends JFrame {
 	JLabel inventoryItemListLabel;
 	JLabel welcomeToInventoryLabel;
 	JLabel feelFreeLabel;
-	
+
 	public static InventoryController controller = new InventoryController();
 	public AddInventoryItemPO aiipo = new AddInventoryItemPO();
 	public EditInventoryItemPO eiipo = new EditInventoryItemPO();
-	
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InventoryPagePO frame = new InventoryPagePO();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JButton btnAddInventoryItem;
+	private JButton btnRemoveItem;
+	private JButton btnSave;
+	private String error;
+	private JButton btnClose;
+	private JButton btnViewItemList;
 
 	/**
 	 * Create the frame.
 	 */
 	public InventoryPagePO() {
+		initComponents();
+	}
+
+	private void initComponents() {
 		setTitle("Inventory");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,86 +54,124 @@ public class InventoryPagePO extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
-		
-		JButton btnViewItemList = new JButton("View Item List");
+
+		btnViewItemList = new JButton("View Item List");
 		btnViewItemList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				inventoryItemListLabel.setText("");
-				List<InventoryItem> inventoryList = controller.viewInventoryList();
+				error = "";
+
+				List<InventoryItem> inventoryList;
 				String name;
-				int id;
-				inventoryItemListLabel.setText("<html>");
-				id = 0;
+				int index;
 				double cost;
-				
-			//	inventoryItemListLabel.setText(previousText + "");
-				for (InventoryItem aItem : inventoryList) {
+				String category;
+				String quantity;
+				String type;
+
+				try {
+					inventoryList = controller.viewInventoryList();
+					inventoryItemListLabel.setText("");
+					inventoryItemListLabel.setText("<html>");
+					index = 0;
+
+					for (InventoryItem aItem : inventoryList) {
+						String previousText = inventoryItemListLabel.getText();
+						name = aItem.getName();
+						category = aItem.getCategory();
+						cost = aItem.getCost();
+						quantity = controller.viewSupplyItemQuantity(index);
+						if (aItem instanceof SupplyType) {
+							type = "Supply";
+						} else if (aItem instanceof Equipment) {
+							type = "Equipement";
+						} else {
+							type = "idk man";
+						}
+						inventoryItemListLabel.setText(previousText + "Item Name: " + name + "&nbsp &nbsp &nbsp "
+								+ "Item ID: " + index + "&nbsp &nbsp &nbsp " + "Item Type: " + type + "&nbsp &nbsp &nbsp "
+								+ "Item Category " + category + "&nbsp &nbsp &nbsp " + "Cost: " + cost
+								+ "&nbsp &nbsp &nbsp " + "Quantity: " + quantity + " <br/>");
+						index++;
+					}
 					String previousText = inventoryItemListLabel.getText();
-					name = aItem.getName();
-					String category = aItem.getCategory();
-					cost = aItem.getCost();
-					String quantity = controller.viewSupplyItemQuantity(id);
-					inventoryItemListLabel.setText(previousText + "Item Name: " + name + "&nbsp &nbsp &nbsp " +
-					"Item ID: " + id + "&nbsp &nbsp &nbsp " + "Item Category " + category+ "&nbsp &nbsp &nbsp "
-							+ "Cost: " + cost + "&nbsp &nbsp &nbsp " + "Quantity: " + quantity + " <br/>");
-					id ++;
+					inventoryItemListLabel.setText(previousText + "</html>");
+				} catch (InvalidInputException e1) {
+					error += e1.getMessage();
+				} catch (RuntimeException e1) {
+					error += "Error. Please try again. ";
 				}
-				String previousText = inventoryItemListLabel.getText();
-				inventoryItemListLabel.setText(previousText + "</html>");
+				refreshData();
 			}
 		});
 		panel.add(btnViewItemList);
-		
-		JButton btnAddInventoryItem = new JButton("Add Item");
+
+		btnAddInventoryItem = new JButton("Add Item");
 		btnAddInventoryItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				aiipo.setVisible(true);
 			}
 		});
 		panel.add(btnAddInventoryItem);
-		
-		JButton btnRemoveItem = new JButton("Edit Item");
+
+		btnRemoveItem = new JButton("Edit Item");
 		btnRemoveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				eiipo.setVisible(true);
 			}
 		});
 		panel.add(btnRemoveItem);
-		
-		JButton btnSave = new JButton("Save");
+
+		btnSave = new JButton("Save");
 		panel.add(btnSave);
-		
+
+		btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				close();
+			}
+		});
+		panel.add(btnClose);
+
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-			
-			inventoryItemListLabel = new JLabel("");
-			inventoryItemListLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setViewportView(inventoryItemListLabel);
-			
-			feelFreeLabel = new JLabel("Feel free to do stuff with the inventory.");
-			feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setColumnHeaderView(feelFreeLabel);
-			
-			JPanel panel_1 = new JPanel();
-			contentPane.add(panel_1, BorderLayout.NORTH);
-			
-			welcomeToInventoryLabel = new JLabel("Welcome to Inventory. There's a lot of inventory.");
-			panel_1.add(welcomeToInventoryLabel);
+
+		inventoryItemListLabel = new JLabel("");
+		inventoryItemListLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setViewportView(inventoryItemListLabel);
+
+		feelFreeLabel = new JLabel("Feel free to do stuff with the inventory.");
+		feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setColumnHeaderView(feelFreeLabel);
+
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.NORTH);
+
+		welcomeToInventoryLabel = new JLabel("Welcome to Inventory. There's a lot of inventory.");
+		panel_1.add(welcomeToInventoryLabel);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.save();
+				SavePO spo = new SavePO();
+				spo.setVisible(true);
 			}
 		});
 	}
-	
-	private void refreshData(){
-		
+
+	private void refreshData() {
+		if (error.length() > 0) {
+			feelFreeLabel.setText(error);
+		} else {
+			feelFreeLabel.setText("Feel free to try adding some inventory items, and then viewing them.");
+		}
+	}
+
+	public void close() {
+		this.setVisible(false);
+		this.dispose();
 	}
 }

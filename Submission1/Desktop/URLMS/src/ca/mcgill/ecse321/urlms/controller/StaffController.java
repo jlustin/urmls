@@ -16,8 +16,7 @@ public class StaffController extends Controller {
 	/**
 	 * Add Progress Update
 	 * 
-	 * @param desired
-	 *            date by string and desired description by string
+	 * @param desired date by string and desired description by string
 	 */
 	public void addProgress(String date, String description, int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -103,8 +102,7 @@ public class StaffController extends Controller {
 	/**
 	 * This method will add a staff member in the lab
 	 * 
-	 * @param name
-	 *            of the staff member by String and staff Roles defined by
+	 * @param name of the staff member by String and staff Roles defined by
 	 *            booleans for checkedbox/radio buttons box1==staff assistant
 	 *            box2==staff associate
 	 * @throws InvalidInputException 
@@ -146,8 +144,7 @@ public class StaffController extends Controller {
 	/**
 	 * Edit staff name
 	 * 
-	 * @param desired
-	 *            name change by string & id of the staff member by int
+	 * @param desired name change by string & id of the staff member by int
 	 */
 	public void editStaffmemberName(String desiredName, int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -158,10 +155,8 @@ public class StaffController extends Controller {
 	/**
 	 * This method will edit the record of a specific staff member by ID
 	 * 
-	 * @param id
-	 *            of the staff member by int box1 and box2 are radio buttons
-	 *            selected by user box1 == Research Assistant box2 == Research
-	 *            Associate
+	 * @param id of the staff member by int box1 and box2 are radio buttons
+	 * selected by user box1 == Research Assistant box2 == Research Associate
 	 */
 	public void editStaffmemberRecord(int index, int id, String desiredName, boolean isAssistant, boolean isAssociate,
 			double weeklySalary) {
@@ -241,8 +236,7 @@ public class StaffController extends Controller {
 	/**
 	 * This method will remove a staff member in the lab by id
 	 * 
-	 * @param id
-	 *            of the staff member by int
+	 * @param id of the staff member by int
 	 */
 	public void removeStaffMember(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -277,8 +271,7 @@ public class StaffController extends Controller {
 	 * This method will get the progress update of a specific staff member by ID
 	 * number
 	 * 
-	 * @param id
-	 *            of the staff member by int
+	 * @param id of the staff member by int
 	 * @return the progress update of the specific member
 	 */
 	public List<ProgressUpdate> viewProgressUpdate(int index) {
@@ -345,8 +338,7 @@ public class StaffController extends Controller {
 	 * This method will get the name of a specific staff member in the list and
 	 * return its name as a string.
 	 * 
-	 * @param int
-	 *            index of the staff member in the list
+	 * @param int index of the staff member in the list
 	 * @return name of the staff member as a String
 	 */
 	public String viewStaffMember(int index) {
@@ -369,8 +361,7 @@ public class StaffController extends Controller {
 	/**
 	 * This method will get the records of a specific staff member by ID number
 	 * 
-	 * @param id
-	 *            of the staff member by int
+	 * @param id of the staff member by int
 	 */
 	public void viewStaffMemberRecord(int id) {
 		// will not be used

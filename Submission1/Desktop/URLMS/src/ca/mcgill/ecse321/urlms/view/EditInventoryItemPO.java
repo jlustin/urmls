@@ -7,161 +7,223 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.InventoryController;
+import ca.mcgill.ecse321.urlms.controller.StaffController;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
 
 public class EditInventoryItemPO extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtTargetId;
-	private JTextField txtNewName;
-	private JTextField txtNewCost;
-	private JTextField txtNewQuantity;
-	private JButton btnEditItemDetails;
+	private JTextField txtOldItemName;
+	private JTextField txtItemCost;
 	public static InventoryController controller = new InventoryController();
-	private JButton btnDeleteTargetedItem;
-	private JLabel lblTargetItemId;
-	private JLabel lblNewItemName;
-	private JLabel lblNewCost;
-	private JLabel lblNewQuantity;
+	private JButton btnDelete;
+	private JTextField txtQuantity;
+	private JLabel lblItemName;
+	private JLabel lblItemCost;
+	private JLabel lblQuantity;
+	private JTextField txtItemCategory;
+	private String error;
+	private JButton btnAdd;
+	private JLabel lblItemCategory;
+	private JButton btnClose;
+	private JLabel lblError;
+	private JLabel lblNewName;
+	private JTextField txtNewItemName;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditInventoryItemPO frame = new EditInventoryItemPO();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public EditInventoryItemPO() {
-		setTitle("Edit Inventory Item");
+		initComponents();
+	}
+	
+	private void initComponents(){
+		setResizable(false);
+		setAlwaysOnTop(true);
+		setTitle("Add Inventory Item");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 566, 320);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		txtTargetId = new JTextField();
-		txtTargetId.setColumns(10);
+		txtOldItemName = new JTextField();
+		txtOldItemName.setColumns(10);
 		
-		txtNewName = new JTextField();
-		txtNewName.setColumns(10);
+		txtItemCost = new JTextField();
+		txtItemCost.setColumns(10);
 		
-		txtNewCost = new JTextField();
-		txtNewCost.setColumns(10);
-		
-		txtNewQuantity = new JTextField();
-		txtNewQuantity.setColumns(10);
-		
-		btnEditItemDetails = new JButton("Edit Item Details");
-		btnEditItemDetails.addActionListener(new ActionListener() {
+		btnAdd = new JButton("Edit Inventory Item");
+		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				error = "";
 				
-				String newName = txtNewName.getText();
-				int id = Integer.valueOf(txtTargetId.getText());
-				double cost = Double.valueOf(txtNewCost.getText());
-				int quantity = Integer.valueOf(txtNewQuantity.getText());
+				try {
+					String oldName = txtOldItemName.getText();
+					String newName = txtNewItemName.getText();
+					
+					double cost = Double.valueOf(txtItemCost.getText());
+					int quantity = Integer.valueOf(txtQuantity.getText());
+					String category = txtItemCategory.getText();
+					
+					controller.editInventoryItemDetails(oldName, newName, category, cost, quantity);
+				} catch (InvalidInputException e1) {
+					error += e1.getMessage();
+				} catch (NumberFormatException e1) {
+					error += "Please enter a valid cost (double) and/or quantity (integer) amount. ";
+				} catch (RuntimeException e1) {
+					error += "stuff happened. ";
+				}
+				refreshData();
 				
-				controller.editInventoryItemDetails(id, newName, cost, quantity);
 			}
 		});
 		
-		btnDeleteTargetedItem = new JButton("Delete Targeted Item");
-		btnDeleteTargetedItem.addActionListener(new ActionListener() {
+		btnDelete = new JButton("Delete Targeted Inventory Item");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				error = "";
 				
-				int itemID = Integer.valueOf(txtTargetId.getText());
-				
-				controller.removeInventoryItem(itemID);
+				try {
+					String name = txtOldItemName.getText();
+					
+					controller.removeInventoryItembyName(name);
+				} catch (InvalidInputException e1) {
+					error += e1.getMessage();
+				} catch (RuntimeException e1) {
+					error += "stuff happened. ";
+				}
+				refreshData();
 			}
 		});
 		
-		lblTargetItemId = new JLabel("Target Item ID");
+		txtQuantity = new JTextField();
+		txtQuantity.setColumns(10);
 		
-		lblNewItemName = new JLabel("New Item Name Desired");
+		lblItemName = new JLabel("Item Name (case-sensive) | Old:");
 		
-		lblNewCost = new JLabel("New Cost");
+		lblItemCost = new JLabel("New Item Cost (CAD, use '.' for floating point):");
 		
-		lblNewQuantity = new JLabel("New Quantity");
+		lblQuantity = new JLabel("Updated Quantity (leave empty if adding equipment):");
+		
+		txtItemCategory = new JTextField();
+		txtItemCategory.setColumns(10);
+		
+		lblItemCategory = new JLabel("New Item Category (e.g. Computer, Chair):");
+		
+		btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				close();
+			}
+		});
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		lblNewName = new JLabel("New:");
+		
+		txtNewItemName = new JTextField();
+		txtNewItemName.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(89, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnEditItemDetails)
-						.addComponent(lblNewQuantity))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(46)
-							.addComponent(btnDeleteTargetedItem))
-						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(14)
+							.addComponent(btnAdd)
 							.addGap(18)
-							.addComponent(txtNewQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnDelete)
+							.addGap(17)
+							.addComponent(btnClose))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(47)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(61)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewCost)
+					.addGap(11)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblItemName)
+							.addGap(3)
+							.addComponent(txtOldItemName, 0, 86, Short.MAX_VALUE)
 							.addGap(18)
-							.addComponent(txtNewCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewItemName)
-							.addGap(18)
-							.addComponent(txtNewName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblTargetItemId)
-							.addGap(18)
-							.addComponent(txtTargetId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(80, Short.MAX_VALUE))
+							.addComponent(lblNewName, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtNewItemName, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblQuantity)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblItemCost)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtItemCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblItemCategory)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtItemCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(11))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(23)
+					.addContainerGap(23, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtTargetId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTargetItemId))
-					.addGap(12)
+						.addComponent(txtOldItemName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblItemName)
+						.addComponent(lblNewName)
+						.addComponent(txtNewItemName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtNewName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewItemName))
-					.addGap(18)
+						.addComponent(txtItemCategory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblItemCategory))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtNewCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewCost))
-					.addGap(18)
+						.addComponent(txtItemCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblItemCost))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewQuantity)
-						.addComponent(txtNewQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+						.addComponent(txtQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblQuantity))
+					.addGap(10)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditItemDetails)
-						.addComponent(btnDeleteTargetedItem))
-					.addGap(29))
+						.addComponent(btnAdd)
+						.addComponent(btnClose)
+						.addComponent(btnDelete))
+					.addGap(21))
 		);
+		
+		lblError = new JLabel("Feel free to edit some inventory items.");
+		scrollPane.setViewportView(lblError);
 		contentPane.setLayout(gl_contentPane);
 	}
-
+	
+	private void refreshData(){
+		if(error.length() > 0){
+			lblError.setText(error);
+		}
+		else{
+			lblError.setText("Item successfully added.");
+		}
+	}
+	
+	public void close() { 
+		this.setVisible(false);
+	    this.dispose();
+	}
 }
