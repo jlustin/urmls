@@ -163,7 +163,7 @@ public class InventoryController extends Controller {
 
 		List<InventoryItem> items = aLab.getInventoryItems();
 		for (InventoryItem anItem : items) {
-			if (anItem.getName() == oldName) {
+			if (anItem.getName().equals(oldName)) {
 				foundItem = anItem;
 				break;
 			}
@@ -240,7 +240,7 @@ public class InventoryController extends Controller {
 		
 		List<InventoryItem> items = aLab.getInventoryItems();
 		for (InventoryItem anItem : items) {
-			if (anItem.getName() == name) {
+			if (anItem.getName().equals(name)) {
 				foundItem = anItem;
 				break;
 			}
