@@ -2,6 +2,9 @@ package ca.mcgill.ecse321.urlms.controller;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,16 +12,22 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
+import ca.mcgill.ecse321.urlms.model.InventoryItem;
+import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
 public class InventoryControllerTest {
 
 	private static URLMS urlms;
-	
+	private static InventoryController controller;
+	private static Lab aLab;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		PersistenceXStream.initializeModelManager("urlms.xml");
+		PersistenceXStream.setFilename("urlmsTest.xml");
+		URLMSApplication.setFilename("urlmsTest.xml");
+		PersistenceXStream.initializeModelManager("urlmsTest.xml");
 	}
 
 	@AfterClass
@@ -27,11 +36,18 @@ public class InventoryControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		urlms = URLMSApplication.getURLMS();
+		urlms = URLMSApplication.load();
+		URLMSApplication.setURLMS(urlms);
+		controller = new InventoryController();
+		aLab = urlms.getLab(0);
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		urlms.delete();
+		File file = new File("urlmsTest.xml");
+		file.delete();
 	}
 	
 	//TODO Add in appropriate JUnit tests
@@ -92,58 +108,225 @@ public class InventoryControllerTest {
 			// }
 
 	@Test
-	public void testInventoryController() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testViewInventoryList() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "EV3";
+		String category = "scrap hardware";
+		double cost = 123;
+		int quantity = 3;
+		List<InventoryItem> testList = null;
+		try {
+			controller.addSupplyItem(name, category, cost, quantity);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			List<InventoryItem> items = controller.viewInventoryList();
+			testList = items;
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		assertEquals("EV3", aLab.getInventoryItem(0).getName());
+		assertEquals("scrap hardware", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, testList.size());
+
 	}
 
 	@Test
 	public void testAddInventoryItem() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "item inventory";
+		double cost = 123;
+		int quantity = 3;
+		List<InventoryItem> testList = null;
+		try {
+			controller.addSupplyItem(name, category, cost, quantity);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			List<InventoryItem> items = controller.viewInventoryList();
+			testList = items;
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("item inventory", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, testList.size());
 	}
 
 	@Test
 	public void testAddEquipmentItem() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "equip";
+		double cost = 123;
+		try {
+			controller.addEquipmentItem(name, category, cost);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+	
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("equip", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
 	}
 
 	@Test
 	public void testAddSupplyItem() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "SUPPLY";
+		int quantity = 19;
+		double cost = 123;
+		try {
+			controller.addSupplyItem(name, category, cost, quantity);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+	
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
 	}
 
 	@Test
 	public void testRemoveInventoryItem() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "equip";
+		double cost = 123;
+		try {
+			controller.addEquipmentItem(name, category, cost);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("equip", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		controller.removeInventoryItem(0);
+		assertEquals(0, aLab.getInventoryItems().size());
 	}
 
 	@Test
 	public void testViewInventoryItemName() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "equip";
+		double cost = 123;
+		try {
+			controller.addEquipmentItem(name, category, cost);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("equip", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		String testString = controller.viewInventoryItemName(0);
+		
+		assertEquals("test add", testString);
 	}
 
 	@Test
 	public void testViewInventoryItemCost() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "equip";
+		double cost = 123;
+		try {
+			controller.addEquipmentItem(name, category, cost);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("equip", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		String testCost = controller.viewInventoryItemCost(0);
+
+		assertEquals("123.0", testCost);
 	}
 
 	@Test
 	public void testViewSupplyItemQuantity() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testViewInventoryItemDetails() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "SUPPLY";
+		int quantity = 19;
+		double cost = 123;
+		try {
+			controller.addSupplyItem(name, category, cost, quantity);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+	
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		String testQuantity = controller.viewSupplyItemQuantity(0);
+		
+		assertEquals("19", testQuantity);
 	}
 
 	@Test
 	public void testEditInventoryItemDetails() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "SUPPLY";
+		int quantity = 19;
+		double cost = 123;
+		try {
+			controller.addSupplyItem(name, category, cost, quantity);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+	
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		try {
+			controller.editInventoryItemDetails("test add", "new test name", "test category", 111, 2);
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals("new test name", aLab.getInventoryItem(0).getName());
+		assertEquals("test category", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		
 	}
 
 	@Test
