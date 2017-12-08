@@ -97,5 +97,6 @@
     <string name="ADD_QUANTITY">Add Quantity</string>
     <string name="enterQuantity">Enter Quantity</string>
     <string name="staffMembersString">Staff Members</string>
+    <string name="membersString">Members</string>
 
 </resources>

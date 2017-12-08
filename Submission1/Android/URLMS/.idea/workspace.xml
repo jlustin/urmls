@@ -78,14 +78,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomePageUITest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomePageUITest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/HomePageUITest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+            <state relative-caret-position="270">
+              <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#974#988#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_staff_list_page.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_staff_list_page.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="671">
+              <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
+              <folding>
+                <element signature="e#2323#2346#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2087,7 +2111,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/StaffPage.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/AddFundingTest.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_staff_list_page.xml" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/MainActivityTest.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/AddStaffMemberTest.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/RandomTest.java" />
@@ -2096,6 +2119,7 @@
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/InventoryUITest.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/MainActivityTest2.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/HomePageUITest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_staff_list_page.xml" />
       </list>
     </option>
   </component>
@@ -3340,14 +3364,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/team8/urlms/FundingAccountPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
@@ -3368,17 +3384,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_staff_list_page.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -3423,8 +3428,8 @@
         <state relative-caret-position="360">
           <caret line="142" column="21" selection-start-line="142" selection-start-column="21" selection-end-line="142" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4895#6251#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4895#6251#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3523,11 +3528,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/team8/urlms/HomePageUITest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+        <state relative-caret-position="270">
+          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#974#988#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_staff_list_page.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
+          <folding>
+            <element signature="e#2323#2346#0" expanded="false" />
           </folding>
         </state>
       </provider>
