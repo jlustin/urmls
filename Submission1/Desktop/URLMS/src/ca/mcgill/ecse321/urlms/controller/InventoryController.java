@@ -19,28 +19,35 @@ public class InventoryController extends Controller {
 	// TODO USE CASES IMPLEMENTATION ----------------------------------
 
 	/**
-	 * This method will get the inventory item list
+	 * This method will add an equipment to the inventory list
 	 * 
-	 * @return a list of the inventory items
+	 * @param aName
+	 *            of the item by String
+	 * @param cost
+	 *            of the item by double
 	 * @throws InvalidInputException 
 	 */
-	public List<InventoryItem> viewInventoryList() throws InvalidInputException {
+	public void addEquipmentItem(String aName, double cost) throws InvalidInputException{
 		String error = "";
-
+		
+		if(aName == null || aName.isEmpty()){
+			error += "Please enter a name. ";
+		}
+		if(cost < 0){
+			error += "Please enter a valid cost. ";
+		}
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-
-		List<InventoryItem> inventorylist;
-		
-		try {
-			inventorylist = aLab.getInventoryItems();
-			if (inventorylist.isEmpty()) {
-				error = "There are no inventory items to display :(";
-			}
-		} catch (RuntimeException e) {
+		try{
+		Equipment temp = new Equipment(aName, cost, "Equipment", aLab, false);
+		aLab.addInventoryItem(temp);
+		}catch(RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
 		}
-		return inventorylist;
 	}
 
 	/**
@@ -73,38 +80,6 @@ public class InventoryController extends Controller {
 		
 		try{
 		aLab.addInventoryItem(name, cost, null);
-		}catch(RuntimeException e){
-			throw new InvalidInputException(e.getMessage());
-		}
-	}
-
-	/**
-	 * This method will add an equipment to the inventory list
-	 * 
-	 * @param aName
-	 *            of the item by String
-	 * @param cost
-	 *            of the item by double
-	 * @throws InvalidInputException 
-	 */
-	public void addEquipmentItem(String aName, double cost) throws InvalidInputException{
-		String error = "";
-		
-		if(aName == null || aName.isEmpty()){
-			error += "Please enter a name. ";
-		}
-		if(cost < 0){
-			error += "Please enter a valid cost. ";
-		}
-		
-		if(error.length() > 0){
-			throw new InvalidInputException(error.trim());
-		}
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		try{
-		Equipment temp = new Equipment(aName, cost, "Equipment", aLab, false);
-		aLab.addInventoryItem(temp);
 		}catch(RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
 		}
@@ -145,40 +120,6 @@ public class InventoryController extends Controller {
 		}catch(RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
 		}
-	}
-
-	/**
-	 * This method will remove an item from the inventory list
-	 * 
-	 * @param index
-	 *            of Inventory Item by int
-	 */
-	public void removeInventoryItem(int index) {//TODO implement with search by name (not index)
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		aLab.getInventoryItem(index).delete();
-	}
-
-	public String viewInventoryItemName(int index) {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		return aLab.getInventoryItem(index).getName();
-	}
-
-	public String viewInventoryItemCost(int index) {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		return String.valueOf(aLab.getInventoryItem(index).getCost());
-	}
-
-	public String viewSupplyItemQuantity(int index) {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		if (aLab.getInventoryItem(index) instanceof SupplyType) {
-			SupplyType temp = (SupplyType) aLab.getInventoryItem(index);
-			return String.valueOf(temp.getQuantity());
-		} else
-			return "N/A";
 	}
 
 	/**
@@ -223,6 +164,15 @@ public class InventoryController extends Controller {
 		}
 	}
 
+	public boolean inventoryItemIsEquipment(int index) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		if (aLab.getInventoryItem(index) instanceof Equipment) {
+			return true;
+		} else
+			return false;
+	}
+
 	public boolean inventoryItemIsSupply(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -232,13 +182,53 @@ public class InventoryController extends Controller {
 			return false;
 	}
 
-	public boolean inventoryItemIsEquipment(int index) {
+	/**
+	 * This method will remove an item from the inventory list
+	 * 
+	 * @param index
+	 *            of Inventory Item by int
+	 */
+	public void removeInventoryItem(int index) {//TODO implement with search by name (not index)
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		if (aLab.getInventoryItem(index) instanceof Equipment) {
-			return true;
-		} else
-			return false;
+		aLab.getInventoryItem(index).delete();
+	}
+
+	public String viewInventoryItemCost(int index) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		return String.valueOf(aLab.getInventoryItem(index).getCost());
+	}
+
+	public String viewInventoryItemName(int index) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		return aLab.getInventoryItem(index).getName();
+	}
+
+	/**
+	 * This method will get the inventory item list
+	 * 
+	 * @return a list of the inventory items
+	 * @throws InvalidInputException 
+	 */
+	public List<InventoryItem> viewInventoryList() throws InvalidInputException {
+		String error = "";
+
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+
+		List<InventoryItem> inventorylist;
+		
+		try {
+			inventorylist = aLab.getInventoryItems();
+			if (inventorylist.isEmpty()) {
+				error = "There are no inventory items to display :(";
+			}
+		} catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		return inventorylist;
 	}
 
 	/**
@@ -250,6 +240,16 @@ public class InventoryController extends Controller {
 
 		// TODO: remove this when working on implementation
 		return null;
+	}
+
+	public String viewSupplyItemQuantity(int index) {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		if (aLab.getInventoryItem(index) instanceof SupplyType) {
+			SupplyType temp = (SupplyType) aLab.getInventoryItem(index);
+			return String.valueOf(temp.getQuantity());
+		} else
+			return "N/A";
 	}
 
 }
