@@ -42,6 +42,25 @@ public class StaffController extends Controller {
 		return staffList;
 	}
 
+	// TODO move to JUnit Test
+	/**
+	 * This method is used for testing purposes. Three members with names
+	 * Victor, Feras and Jun2Yu will be added to the current staff member list.
+	 * These three members will have different IDs: 123, 111 and 222
+	 * respectively.
+	 */
+	public void addSampleMembers() {
+		URLMS urlms = URLMSApplication.getURLMS();
+		Lab aLab = urlms.getLab(0);
+		StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
+		aLab.addStaffMember(member);
+
+		StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
+		aLab.addStaffMember(member2);
+
+		StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
+		aLab.addStaffMember(member3);
+	}
 
 	/**
 	 * This method will get the name of a specific staff member in the list and
@@ -114,15 +133,16 @@ public class StaffController extends Controller {
 		try {
 			progress = currentStaffMember.getProgressUpdates();
 			if (progress.isEmpty()) {
-				error = "There are no progress updates to display :(";
+				error += "There are no progress updates to display :(";
+			}
+			if (error.length() > 0) {
+				throw new InvalidInputException(error.trim());
 			}
 		} catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
 
-		if (error.length() > 0) {
-			throw new InvalidInputException(error.trim());
-		}
+
 
 		return progress;
 	}
@@ -298,6 +318,8 @@ public class StaffController extends Controller {
 
 	}
 
+	
+	//TODO: this generates ConcurrentModificationException
 	public void removeStaffMemberByID(int id) throws InvalidInputException {
 		boolean wasRemoved = false;
 		int originalNumberStaff;
@@ -319,7 +341,15 @@ public class StaffController extends Controller {
 		}
 	}
 
-	public void addProgressByID(String date, String description, int id) {
+	public void addProgressByID(String date, String description, int id) throws InvalidInputException {
+		String error = "";
+		if (description.isEmpty()) {
+			error += "Might want to enter a description. ";
+		}
+		if (date.isEmpty()) {
+			error += "Might want to enter a date. ";
+		}
+
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		StaffMember aStaffMember = null;
@@ -329,10 +359,18 @@ public class StaffController extends Controller {
 				aStaffMember = iteratedStaffMember;
 			}
 		}
+		if (aStaffMember == null){
+			throw new InvalidInputException("Bad ID; staff member was not found! ");
+		}
+		
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		
 		aStaffMember.addProgressUpdate(date, description);
 	}
 
-	public StaffMember getStaffMemberByID(int id) {
+	public StaffMember getStaffMemberByID(int id) throws InvalidInputException {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		StaffMember aStaffMember = null;
@@ -341,6 +379,10 @@ public class StaffController extends Controller {
 			if (id == iteratedStaffMember.getId()) {
 				aStaffMember = iteratedStaffMember;
 			}
+		}
+		
+		if (aStaffMember == null){
+			throw new InvalidInputException("Bad ID; staff member was not found! ");
 		}
 		return aStaffMember;
 	}
