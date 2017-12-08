@@ -30,7 +30,7 @@ public class InventoryController extends Controller {
 		List<InventoryItem> inventorylist = aLab.getInventoryItems();
 		return inventorylist;
 	}
-
+//TODO What's the point of the addInventoryItem method? Ever used??
 	/**
 	 * This method will add an item to the inventory list
 	 * 
@@ -40,11 +40,30 @@ public class InventoryController extends Controller {
 	 *            of the item by double
 	 * @param category
 	 *            of item by String
+	 * @throws InvalidInputException 
 	 */
-	public void addInventoryItem(String name, double cost) {
+	public void addInventoryItem(String name, double cost) throws InvalidInputException {
+		String error = "";
+		
+		if(name == null || name.isEmpty()){
+			error += "Please enter a name. ";
+		}
+		if(cost < 0){
+			error += "Please enter a valid cost. ";
+		}
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		
+		try{
 		aLab.addInventoryItem(name, cost, null);
+		}catch(RuntimeException e){
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
 
 	/**
@@ -54,12 +73,29 @@ public class InventoryController extends Controller {
 	 *            of the item by String
 	 * @param cost
 	 *            of the item by double
+	 * @throws InvalidInputException 
 	 */
-	public void addEquipmentItem(String aName, double cost) {
+	public void addEquipmentItem(String aName, double cost) throws InvalidInputException{
+		String error = "";
+		
+		if(aName == null || aName.isEmpty()){
+			error += "Please enter a name. ";
+		}
+		if(cost < 0){
+			error += "Please enter a valid cost. ";
+		}
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		try{
 		Equipment temp = new Equipment(aName, cost, "Equipment", aLab, false);
 		aLab.addInventoryItem(temp);
+		}catch(RuntimeException e){
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
 
 	/**
@@ -71,12 +107,32 @@ public class InventoryController extends Controller {
 	 *            of the item by double
 	 * @param quantity
 	 *            of item by int
+	 * @throws InvalidInputException 
 	 */
-	public void addSupplyItem(String aName, double cost, int quantity) {
+	public void addSupplyItem(String aName, double cost, int quantity) throws InvalidInputException {
+		String error = "";
+		
+		if(aName == null || aName.isEmpty()){
+			error += "Please enter a name. ";
+		}
+		if(cost < 0){
+			error += "Please enter a valid cost. ";
+		}
+		if(quantity <= 0){
+			error += "Please enter a valid quantity. ";
+		}
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		try{
 		SupplyType temp = new SupplyType(aName, cost, "Supply", aLab, quantity);
 		aLab.addInventoryItem(temp);
+		}catch(RuntimeException e){
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
 
 	/**
@@ -85,7 +141,7 @@ public class InventoryController extends Controller {
 	 * @param index
 	 *            of Inventory Item by int
 	 */
-	public void removeInventoryItem(int index) {
+	public void removeInventoryItem(int index) {//TODO implement with search by name (not index)
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		aLab.getInventoryItem(index).delete();
@@ -114,36 +170,44 @@ public class InventoryController extends Controller {
 	}
 
 	/**
-	 * This method will view the details of a specific item
-	 * 
-	 * @param name
-	 *            of the item by String
-	 * @return the inventory item wanted
-	 */
-	public InventoryItem viewInventoryItemDetails(String name) {
-
-		// NOT USED
-		return null;
-	}
-
-	/**
 	 * This method will edit the details of a specific item inventory
 	 * 
 	 * @param name
 	 *            of the the inventory item by String
+	 * @throws InvalidInputException 
 	 */
-	public void editInventoryItemDetails(int index, String desiredName, double desiredCost, int desiredQuantity) {
+	public void editInventoryItemDetails(int index, String desiredName, double desiredCost, int desiredQuantity) throws InvalidInputException {
+		//TODO Not use index to retrieve item but use a search by name
+		String error = "";
+		
+		if(desiredName == null || desiredName.isEmpty()){
+			error += "Please enter a name. ";
+		}
+		if(desiredCost < 0){
+			error += "Please enter a valid cost. ";
+		}
+		if(desiredQuantity <= 0){
+			error += "Please enter a valid quantity. ";
+		}
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		if (aLab.getInventoryItem(index) instanceof SupplyType) {
-			SupplyType temp = (SupplyType) aLab.getInventoryItem(index);
-			temp.setName(desiredName);
-			temp.setCost(desiredCost);
-			temp.setQuantity(desiredQuantity);
-		} else {
-			Equipment temp = (Equipment) aLab.getInventoryItem(index);
-			temp.setName(desiredName);
-			temp.setCost(desiredCost);
+		try{
+			if (aLab.getInventoryItem(index) instanceof SupplyType) {
+				SupplyType temp = (SupplyType) aLab.getInventoryItem(index);
+				temp.setName(desiredName);
+				temp.setCost(desiredCost);
+				temp.setQuantity(desiredQuantity);
+			} else {
+				Equipment temp = (Equipment) aLab.getInventoryItem(index);
+				temp.setName(desiredName);
+				temp.setCost(desiredCost);
+			}
+		}catch(RuntimeException e){
+			throw new InvalidInputException(e.getMessage());
 		}
 	}
 
