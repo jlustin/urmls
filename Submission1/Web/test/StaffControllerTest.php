@@ -40,6 +40,7 @@
 		 */
 		public function testAddStaffMember()
 		{
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			// 1. Create test data
 			$this->controller->addStaff("bob", 100);
 			
@@ -63,6 +64,7 @@
 		
 		public function testAddStaffMemberNullName()
 		{
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			// 1. Create test data
 			try{
 				$this->controller->addStaff(null, 90);
@@ -90,6 +92,7 @@
 		
 		public function testAddStaffMemberNullSalary()
 		{
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			// 1. Create test data
 			try{
 				$this->controller->addStaff("jasmine", null);
@@ -117,6 +120,7 @@
 		
 		public function testAddStaffMemberInvalidName()
 		{
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			// 1. Create test data
 			try{
 				$this->controller->addStaff("EV3", 90);
@@ -142,6 +146,7 @@
 		
 		public function testAddStaffMemberInvalidId()
 		{
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			// 1. Create test data
 			try{
 				$this->controller->addStaff("jasmine", "victor");
@@ -175,6 +180,8 @@
 			$newStaffMember = new StaffMember("jasmine", rand(0,1000), 100, $this->urlms->getLab_index(0));
 			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
 			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+			
 			$this->controller->removeStaff("jasmine", $newStaffMember->getId());
 			
 			// 2. Write all of the data
@@ -198,6 +205,8 @@
 			// 1. Create test data
 			$newStaffMember = new StaffMember("jasmine", rand(0,1000), 100, $this->urlms->getLab_index(0));
 			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			
 			try{
 				$this->controller->removeStaff(null, $newStaffMember->getId());
@@ -227,6 +236,8 @@
 			$newStaffMember = new StaffMember("jasmine", rand(0,1000), 100, $this->urlms->getLab_index(0));
 			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
 			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+			
 			try{
 				$this->controller->removeStaff("jasmine", null);
 			}catch (Exception $e) {
@@ -252,8 +263,10 @@
 		public function testRemoveStaffInvalidName()
 		{
 			// 1. Create test data
-			$newStaffMember = new StaffMember("jasmine", rand(0,1000), 100, $this->urlms->getLab_index(0));
+			$newStaffMember = new StaffMember("!?!?!?!?", rand(0,1000), 100, $this->urlms->getLab_index(0));
 			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			
 			try{
 				$this->controller->removeStaff("!?!?!?!?", null);
@@ -283,8 +296,10 @@
 			$newStaffMember = new StaffMember("jasmine", rand(0,1000), 100, $this->urlms->getLab_index(0));
 			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
 			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+			
 			try{
-				$this->controller->removeStaff("jasmine", "abc");
+				$this->controller->removeStaff("jasmine", "victor");
 			}catch (Exception $e) {
 				$this->assertEquals("Please enter a valid id.", $e->getMessage());
 			}
