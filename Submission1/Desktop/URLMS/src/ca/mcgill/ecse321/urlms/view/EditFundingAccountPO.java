@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class EditFundingAccountPO extends JFrame {
 
@@ -23,6 +24,8 @@ public class EditFundingAccountPO extends JFrame {
 	private JTextField txtNewAccountType;
 	private JTextField txtTargetAccountID;
 	public static FundingController controller = new FundingController();
+	private JLabel lblTargetAccountName;
+	private JLabel lblNewAccountName;
 
 	/**
 	 * Launch the application.
@@ -52,11 +55,9 @@ public class EditFundingAccountPO extends JFrame {
 		setContentPane(contentPane);
 		
 		txtNewAccountType = new JTextField();
-		txtNewAccountType.setText("New Account Type");
 		txtNewAccountType.setColumns(10);
 		
 		txtTargetAccountID = new JTextField();
-		txtTargetAccountID.setText("Target Account Type Name");
 		txtTargetAccountID.setColumns(10);
 		
 		JButton btnEditType = new JButton("Edit Type");
@@ -78,17 +79,25 @@ public class EditFundingAccountPO extends JFrame {
 				controller.removeFundingAccount(index);
 			}
 		});
+		
+		lblTargetAccountName = new JLabel("Target Account Name");
+		
+		lblNewAccountName = new JLabel("New Account Name Desired");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addGap(91)
 					.addComponent(btnEditType)
-					.addPreferredGap(ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+					.addGap(50)
 					.addComponent(btnDeleteAccount)
-					.addGap(62))
+					.addContainerGap(133, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(123, Short.MAX_VALUE)
+					.addContainerGap(6, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblTargetAccountName)
+						.addComponent(lblNewAccountName))
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(txtNewAccountType, Alignment.TRAILING)
 						.addComponent(txtTargetAccountID, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
@@ -98,9 +107,13 @@ public class EditFundingAccountPO extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(30)
-					.addComponent(txtTargetAccountID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtTargetAccountID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTargetAccountName))
 					.addGap(26)
-					.addComponent(txtNewAccountType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtNewAccountType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewAccountName))
 					.addGap(49)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnEditType)
