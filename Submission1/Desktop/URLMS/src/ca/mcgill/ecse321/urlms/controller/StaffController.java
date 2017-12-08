@@ -209,17 +209,19 @@ public class StaffController extends Controller {
 		if (weeklySalary < 0) {
 			error += "Please enter a valid salary. Or try again with celery. ";
 		}
-		try {
-			newStaffMember = aLab.addStaffMember(name, randomNumber, weeklySalary);
-			addRoles(newStaffMember, isAssistant, isAssociate);
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			throw new InvalidInputException(e.getMessage());
-		}
 		
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
 		}
+		
+		try {
+			newStaffMember = aLab.addStaffMember(name, randomNumber, weeklySalary);
+			addRoles(newStaffMember, isAssistant, isAssociate);
+		} catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		
+
 	}
 
 	/**
@@ -269,23 +271,49 @@ public class StaffController extends Controller {
 	}
 
 	public void editStaffmemberRecordByID(int id, int newID, String desiredName, boolean isAssistant,
-			boolean isAssociate, double weeklySalary) {
+			boolean isAssociate, double weeklySalary) throws InvalidInputException {
+		String error = "";
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		
 		StaffMember aStaffMember = null;
 
-		// if there are currently no staff members in the lab
+		
 
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
 				aStaffMember = iteratedStaffMember;
 			}
 		}
-
-		aStaffMember.setName(desiredName);
-		aStaffMember.setId(newID);
-		aStaffMember.setWeeklySalary(weeklySalary);
-		addRoles(aStaffMember, isAssistant, isAssociate);
+		//error checking
+		// if there are currently no staff members in the lab
+		if(aStaffMember == null){
+			error += "There are no staff members in the lab. ";
+		}
+		if (desiredName.isEmpty()) {
+			error += "Please enter a name. ";
+		}
+		if (weeklySalary < 0) {
+			error += "Please enter a valid salary. Or try again with celery. ";
+		}
+		if (id < 0 || newID < 0) {
+			error += "No negative IDs please. ";
+		}
+		
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		
+		
+		try {
+			aStaffMember.setName(desiredName);
+			aStaffMember.setId(newID);
+			aStaffMember.setWeeklySalary(weeklySalary);
+			addRoles(aStaffMember, isAssistant, isAssociate);
+		} catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
 
 	}
 

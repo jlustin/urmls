@@ -39,21 +39,7 @@ public class AddStaffMemberPO extends JFrame {
 	private JLabel lblName;
 	private JButton btnClose;
 	private JButton addButton;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddStaffMemberPO frame = new AddStaffMemberPO();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
