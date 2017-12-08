@@ -110,7 +110,7 @@ public class StaffPagePO extends JFrame {
 			}
 		});
 		
-		btnAddProgress = new JButton("Add Progress");
+		btnAddProgress = new JButton("Staff Progress");
 		btnAddProgress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

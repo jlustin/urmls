@@ -92,7 +92,7 @@ public class ProgressUpdatePO extends JFrame {
 		panel.add(btnAddTransaction);
 		
 		txtAccountName = new JTextField();
-		txtAccountName.setText("Staff Name to view");
+		txtAccountName.setText("Staff ID to view");
 		panel.add(txtAccountName);
 		txtAccountName.setColumns(10);
 		
