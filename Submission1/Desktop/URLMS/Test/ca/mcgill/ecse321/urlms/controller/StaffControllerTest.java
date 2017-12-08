@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.urlms.controller;
-//TODO Rewrite this or delete, idk something
-import static org.junit.Assert.*;
 
-import java.io.File;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,47 +13,30 @@ import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
-public class ControllerTest {
+public class StaffControllerTest {
 	
 	private static URLMS urlms;
 
-	/**
-	 * Set up once before: Load the file
-	 * @throws Exception
-	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PersistenceXStream.initializeModelManager("urlms.xml");
 	}
 
-	/**
-	 * @throws Exception
-	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		
 	}
 
-	/**
-	 * Set up the urlms using the Application class
-	 * @throws Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
 		urlms = URLMSApplication.getURLMS();
-		
 	}
 
-	/**
-	 * Deletes the urlms
-	 * @throws Exception
-	 */
 	@After
 	public void tearDown() throws Exception {
 		//urlms.delete();
 	}
 
-	@Test//TODO Move to StaffControllerTest
+	@Test
 	public void testViewStaffList() {
 		//fail("Not yet implemented");
 		Lab aLab = urlms.getLab(0);
@@ -80,6 +61,91 @@ public class ControllerTest {
 		//check file contents (same checks as above, but with loaded file)
 		assertEquals(3, aLab.getStaffMembers().size());
 		assertEquals(name, aLab.getStaffMember(1).getName());
+	}
+
+	@Test
+	public void testAddSampleMembers() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testViewStaffMember() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testEditStaffmemberRecord() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testEditStaffmemberName() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testViewProgressUpdate() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testViewProgressUpdateByID() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddProgress() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testViewStaffMemberRecord() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testViewStaffMemberName() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testViewStaffMemberID() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddStaffMember() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testRemoveStaffMember() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddRoles() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testEditStaffmemberRecordByID() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testRemoveStaffMemberByID() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testAddProgressByID() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetStaffMemberByID() {
+		fail("Not yet implemented");
 	}
 
 }
