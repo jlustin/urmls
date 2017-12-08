@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class AddInventoryItemPO extends JFrame {
 
@@ -25,6 +26,9 @@ public class AddInventoryItemPO extends JFrame {
 	public static InventoryController controller = new InventoryController();
 	private JButton btnAddAsEquipment;
 	private JTextField txtQuantity;
+	private JLabel lblItemName;
+	private JLabel lblItemCost;
+	private JLabel lblQuantity;
 
 	/**
 	 * Launch the application.
@@ -54,11 +58,9 @@ public class AddInventoryItemPO extends JFrame {
 		setContentPane(contentPane);
 		
 		txtItemName = new JTextField();
-		txtItemName.setText("Item Name");
 		txtItemName.setColumns(10);
 		
 		txtItemCost = new JTextField();
-		txtItemCost.setText("Item Cost");
 		txtItemCost.setColumns(10);
 		
 		JButton AddButton = new JButton("Add as Supply Item");
@@ -84,8 +86,13 @@ public class AddInventoryItemPO extends JFrame {
 		});
 		
 		txtQuantity = new JTextField();
-		txtQuantity.setText("Quantity");
 		txtQuantity.setColumns(10);
+		
+		lblItemName = new JLabel("Item Name");
+		
+		lblItemCost = new JLabel("Item Cost");
+		
+		lblQuantity = new JLabel("Quantity");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -96,7 +103,12 @@ public class AddInventoryItemPO extends JFrame {
 					.addComponent(btnAddAsEquipment)
 					.addContainerGap(12, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(157, Short.MAX_VALUE)
+					.addContainerGap(78, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblItemName)
+						.addComponent(lblItemCost)
+						.addComponent(lblQuantity))
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(txtQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtItemCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -107,11 +119,17 @@ public class AddInventoryItemPO extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(43)
-					.addComponent(txtItemName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtItemName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblItemName))
 					.addGap(18)
-					.addComponent(txtItemCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtItemCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblItemCost))
 					.addGap(18)
-					.addComponent(txtQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtQuantity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblQuantity))
 					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(AddButton)
