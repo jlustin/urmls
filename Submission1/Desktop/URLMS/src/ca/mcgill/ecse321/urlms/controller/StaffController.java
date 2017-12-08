@@ -289,16 +289,16 @@ public class StaffController extends Controller {
 		//error checking
 		// if there are currently no staff members in the lab
 		if(aStaffMember == null){
-			error += "There are no staff members in the lab. ";
+			error += "There is no staff matching the entered target ID. ";
 		}
 		if (desiredName.isEmpty()) {
 			error += "Please enter a name. ";
 		}
 		if (weeklySalary < 0) {
-			error += "Please enter a valid salary. Or try again with celery. ";
+			error += "Please enter a valid salary. ";
 		}
 		if (id < 0 || newID < 0) {
-			error += "No negative IDs please. ";
+			error += "Please enter a valid ID. ";
 		}
 		
 		if (error.length() > 0) {
