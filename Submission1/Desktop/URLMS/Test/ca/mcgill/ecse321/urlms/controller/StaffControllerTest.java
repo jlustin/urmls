@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.urlms.controller;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,10 +19,14 @@ import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 public class StaffControllerTest {
 	
 	private static URLMS urlms;
+	private static StaffController controller;
+	private static Lab aLab;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		PersistenceXStream.initializeModelManager("urlms.xml");
+		PersistenceXStream.setFilename("urlmsTest.xml");
+		URLMSApplication.setFilename("urlmsTest.xml");
+		PersistenceXStream.initializeModelManager("urlmsTest.xml");
 	}
 
 	@AfterClass
@@ -29,12 +35,18 @@ public class StaffControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		urlms = URLMSApplication.getURLMS();
+		urlms = URLMSApplication.load();
+		URLMSApplication.setURLMS(urlms);
+		controller = new StaffController();
+		aLab = urlms.getLab(0);
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		//urlms.delete();
+		urlms.delete();
+		File file = new File("urlmsTest.xml");
+		file.delete();
 	}
 	
 	// staff tests=================================
@@ -70,8 +82,6 @@ public class StaffControllerTest {
 
 	@Test
 	public void testViewStaffList() {
-		//fail("Not yet implemented");
-		Lab aLab = urlms.getLab(0);
 		
 		//check if the staff manager is empty
 		assertEquals(0, aLab.getStaffMembers().size());
@@ -88,7 +98,6 @@ public class StaffControllerTest {
 		//save the file
 		urlmsController.save();
 		
-		//TODO delete urlms here cuz the rest of the test is useless otherwise
 		
 		urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 		
@@ -97,92 +106,314 @@ public class StaffControllerTest {
 		assertEquals(name, aLab.getStaffMember(1).getName());
 	}
 
-	@Test
-	public void testAddSampleMembers() {
-		fail("Not yet implemented");
-	}
+
+
 
 	@Test
 	public void testViewStaffMember() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		String testString = controller.viewStaffMember(0);
+		
+		assertEquals("Feras", testString);
 	}
 
 	@Test
 	public void testEditStaffmemberRecord() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		controller.editStaffmemberRecord(0, 123, "Victor", false, true, 100);
+		assertEquals("Victor", aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssociate", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		assertEquals(123, aLab.getStaffMember(0).getId());
 	}
 
 	@Test
 	public void testEditStaffmemberName() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		controller.editStaffmemberName("Test", 0);
+		assertEquals("Test", aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
 	}
 
 	@Test
 	public void testViewProgressUpdate() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		controller.addProgress("11/12/17", "Can you view this?", 0);
+		assertEquals("11/12/17", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
+		assertEquals("Can you view this?", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
 	}
 
 	@Test
 	public void testViewProgressUpdateByID() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		try {
+			controller.addProgressByID("11/12/17", "Can you view this?", aLab.getStaffMember(0).getId());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals("11/12/17", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
+		assertEquals("Can you view this?", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
 	}
 
 	@Test
 	public void testAddProgress() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		controller.addProgress("1/2/3", "Testing", 0);
+		
+		assertEquals("1/2/3", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
+		assertEquals("Testing", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
+		assertEquals(1, aLab.getStaffMember(0).getProgressUpdates().size());
 	}
 
-	@Test
-	public void testViewStaffMemberRecord() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testViewStaffMemberName() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		
 	}
 
 	@Test
 	public void testViewStaffMemberID() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		String expectedID = String.valueOf(aLab.getStaffMember(0).getId());
+		String testID = controller.viewStaffMemberID(0);
+		
+		assertEquals(expectedID, testID);
 	}
 
+	//successful test for addStaffMember
 	@Test
 	public void testAddStaffMember() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
 	}
 
 	@Test
 	public void testRemoveStaffMember() {
-		fail("Not yet implemented");
-	}
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		controller.removeStaffMember(0);
 
-	@Test
-	public void testAddRoles() {
-		fail("Not yet implemented");
+		assertEquals(0, aLab.getStaffMembers().size());
+
 	}
 
 	@Test
 	public void testEditStaffmemberRecordByID() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		controller.editStaffmemberRecord(0, 123, "Victor", false, true, 100);
+		assertEquals("Victor", aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssociate", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		assertEquals(123, aLab.getStaffMember(0).getId());
+
 	}
 
 	@Test
 	public void testRemoveStaffMemberByID() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		int id = 0;
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+
+		controller.removeStaffMember(id);
+
+		assertEquals(0, aLab.getStaffMembers().size());
 	}
 
 	@Test
 	public void testAddProgressByID() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
+		try {
+			controller.addProgressByID("1/2/3", "Add test by ID", aLab.getStaffMember(0).getId());
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+		}
+		assertEquals("1/2/3", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
+		assertEquals("Add test by ID", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
 	}
 
 	@Test
 	public void testGetStaffMemberByID() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "Feras";
+		try {
+			controller.addStaffMember(name, true, false, 111);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals(name, aLab.getStaffMember(0).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(1, aLab.getStaffMembers().size());
+		
 	}
 
-	// TODO move to JUnit Test
+	
 		/**
 		 * This method is used for testing purposes. Three members with names
 		 * Victor, Feras and Jun2Yu will be added to the current staff member list.

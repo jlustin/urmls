@@ -67,4 +67,8 @@ public class URLMSApplication {
 	public static void setFilename(String newFilename) {
 		filename = newFilename;
 	}
+	
+	public static void setURLMS(URLMS u) {
+		urlms = u;
+	}
 }
