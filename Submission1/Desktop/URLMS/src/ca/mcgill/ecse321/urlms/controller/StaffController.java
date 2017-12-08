@@ -126,11 +126,27 @@ public class StaffController extends Controller {
 		return progress;
 	}
 	
-	public List<ProgressUpdate> viewProgressUpdateByID(int id) {
-
+	public List<ProgressUpdate> viewProgressUpdateByID(int id) throws InvalidInputException {
+		
 		StaffMember currentStaffMember = getStaffMemberByID(id);
+		String error = "";
+		List<ProgressUpdate> progress;
+		
+		try {
+			progress = currentStaffMember.getProgressUpdates();
+			if(progress.isEmpty()){
+				error = "There are no progress updates to display :(";
+			}
+		} catch (RuntimeException e) {
+			throw new InvalidInputException (e.getMessage());
+		}
 
-		List<ProgressUpdate> progress = currentStaffMember.getProgressUpdates();
+		if (error.length() > 0){
+			throw new InvalidInputException (error.trim());
+		}
+		
+		
+		
 		return progress;
 	}
 

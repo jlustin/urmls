@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.FundingController;
+import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.Expense;
 import ca.mcgill.ecse321.urlms.model.Lab;
@@ -41,6 +42,7 @@ public class ProgressUpdatePO extends JFrame {
 	JLabel feelFreeLabel;
 	private JPanel contentPane;
 	JLabel welcomeToStaffLabel;
+	String error;
 
 	public AddProgressUpdatePopOut apupo = new AddProgressUpdatePopOut();
 	JPanel panel = new JPanel();
@@ -100,6 +102,8 @@ public class ProgressUpdatePO extends JFrame {
 		panel.add(btnViewStaffList);
 		btnViewStaffList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				error = "";
+				try {
 				progressUpdatesLabel.setText("");
 				int targetStaffID = Integer.valueOf(txtAccountName.getText());
 				List<ProgressUpdate> updates = controller.viewProgressUpdateByID(targetStaffID);
@@ -120,6 +124,11 @@ public class ProgressUpdatePO extends JFrame {
 				}
 				String previousText = progressUpdatesLabel.getText();
 				progressUpdatesLabel.setText(previousText + "</html>");
+				}catch (InvalidInputException e1) {
+					error = e1.getMessage();
+				}
+				
+				refreshData();
 			}
 		});
 		
@@ -150,6 +159,11 @@ public class ProgressUpdatePO extends JFrame {
 	}
 	
 	private void refreshData(){
-		
+		if(error.length() > 0){
+			feelFreeLabel.setText(error);
+		}
+		else{
+			feelFreeLabel.setText("Feel free to try adding some staff, and then viewing them.");
+		}
 	}
 }
