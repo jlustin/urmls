@@ -1,11 +1,11 @@
 package ca.mcgill.ecse321.urlms.controller;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
-
 import ca.mcgill.ecse321.urlms.model.ResearchAssistant;
 import ca.mcgill.ecse321.urlms.model.ResearchAssociate;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
@@ -18,27 +18,26 @@ public class StaffController extends Controller {
 	 * to view the members
 	 * 
 	 * @return the staffList from urlms
-	 * @throws InvalidInputException 
+	 * @throws InvalidInputException
 	 */
 	public List<StaffMember> viewStaffList() throws InvalidInputException {
 		String error = "";
-		
+
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		List<StaffMember> staffList;
-			
 
 		try {
 			staffList = aLab.getStaffMembers();
-			if(staffList.isEmpty()){
+			if (staffList.isEmpty()) {
 				error = "There are no staff members to display :(";
 			}
 		} catch (RuntimeException e) {
-			throw new InvalidInputException (e.getMessage());
+			throw new InvalidInputException(e.getMessage());
 		}
 
-		if (error.length() > 0){
-			throw new InvalidInputException (error.trim());
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
 		}
 		return staffList;
 	}
@@ -86,7 +85,7 @@ public class StaffController extends Controller {
 	 *            selected by user box1 == Research Assistant box2 == Research
 	 *            Associate
 	 */
-	public void editStaffmemberRecord(int index, int id, String desiredName, boolean box1, boolean box2,
+	public void editStaffmemberRecord(int index, int id, String desiredName, boolean isAssistant, boolean isAssociate,
 			double weeklySalary) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -94,8 +93,7 @@ public class StaffController extends Controller {
 		aStaffMember.setName(desiredName);
 		aStaffMember.setId(id);
 		aStaffMember.setWeeklySalary(weeklySalary);
-		addRoles(aStaffMember, box1, box2);
-
+		addRoles(aStaffMember, isAssistant, isAssociate);
 	}
 
 	/**
@@ -125,28 +123,26 @@ public class StaffController extends Controller {
 		List<ProgressUpdate> progress = aLab.getStaffMember(index).getProgressUpdates();
 		return progress;
 	}
-	
+
 	public List<ProgressUpdate> viewProgressUpdateByID(int id) throws InvalidInputException {
-		
+
 		StaffMember currentStaffMember = getStaffMemberByID(id);
 		String error = "";
 		List<ProgressUpdate> progress;
-		
+
 		try {
 			progress = currentStaffMember.getProgressUpdates();
-			if(progress.isEmpty()){
+			if (progress.isEmpty()) {
 				error = "There are no progress updates to display :(";
 			}
 		} catch (RuntimeException e) {
-			throw new InvalidInputException (e.getMessage());
+			throw new InvalidInputException(e.getMessage());
 		}
 
-		if (error.length() > 0){
-			throw new InvalidInputException (error.trim());
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
 		}
-		
-		
-		
+
 		return progress;
 	}
 
@@ -192,15 +188,38 @@ public class StaffController extends Controller {
 	 *            of the staff member by String and staff Roles defined by
 	 *            booleans for checkedbox/radio buttons box1==staff assistant
 	 *            box2==staff associate
+	 * @throws InvalidInputException 
 	 */
-	public void addStaffMember(String name, boolean box1, boolean box2, double weeklySalary) {
+	public void addStaffMember(String name, boolean isAssistant, boolean isAssociate, double weeklySalary) throws InvalidInputException {
+		String error = "";
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		
+		int randomNumber;
+		StaffMember newStaffMember;
+		
 		// "auto-unique"
-		int rng = (int) (Math.random() * 1000 + 1);
-		aLab.addStaffMember(name, rng, weeklySalary);
-		addRoles(aLab.getStaffMember(aLab.getStaffMembers().size() - 1), box1, box2);
+		randomNumber = (int) (Math.random() * 1000 + 1);
 
+		//error checking
+		if (name.isEmpty()) {
+			error += "Please enter a name. ";
+		}
+		if (weeklySalary < 0) {
+			error += "Please enter a valid salary. Or try again with celery. ";
+		}
+		try {
+			newStaffMember = aLab.addStaffMember(name, randomNumber, weeklySalary);
+			addRoles(newStaffMember, isAssistant, isAssociate);
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			throw new InvalidInputException(e.getMessage());
+		}
+		
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
 	}
 
 	/**
@@ -228,7 +247,8 @@ public class StaffController extends Controller {
 	}
 
 	// helper method for adding roles specificied by checkbox / radio button
-	public void addRoles(StaffMember aStaffMember, boolean box1, boolean box2) {
+	//TODO: simplify this code...
+	public void addRoles(StaffMember aStaffMember, boolean isAssistant, boolean isAssociate) {
 		if (aStaffMember.hasResearchRoles()) {
 			aStaffMember.getResearchRole(0).delete();
 		}
@@ -236,26 +256,25 @@ public class StaffController extends Controller {
 			aStaffMember.getResearchRole(0).delete();
 		}
 		// add desired roles
-		if (box1 && box2) {
+		if (isAssistant && isAssociate) {
 			aStaffMember.addResearchRole(new ResearchAssistant("Why you read this", aStaffMember));
 			aStaffMember.addResearchRole(new ResearchAssociate("Why you read this", aStaffMember));
-		} else if (box1 && !box2) {
+		} else if (isAssistant && !isAssociate) {
 			aStaffMember.addResearchRole(new ResearchAssistant("Why you read this", aStaffMember));
-		} else if (box2 && !box1) {
+		} else if (isAssociate && !isAssistant) {
 			aStaffMember.addResearchRole(new ResearchAssociate("Why you read this", aStaffMember));
 		} else {
 			// do nothing
 		}
 	}
 
-	public void editStaffmemberRecordByID(int id, int newID, String desiredName, boolean box1, boolean box2,
-			double weeklySalary) {
+	public void editStaffmemberRecordByID(int id, int newID, String desiredName, boolean isAssistant,
+			boolean isAssociate, double weeklySalary) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		StaffMember aStaffMember = null;
 
-		//if there are currently no staff members in the lab
-
+		// if there are currently no staff members in the lab
 
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
@@ -266,14 +285,13 @@ public class StaffController extends Controller {
 		aStaffMember.setName(desiredName);
 		aStaffMember.setId(newID);
 		aStaffMember.setWeeklySalary(weeklySalary);
-		addRoles(aStaffMember, box1, box2);
+		addRoles(aStaffMember, isAssistant, isAssociate);
 
 	}
 
 	public void removeStaffMemberByID(int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-
 
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
@@ -282,12 +300,12 @@ public class StaffController extends Controller {
 		}
 
 	}
-	
+
 	public void addProgressByID(String date, String description, int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		StaffMember aStaffMember = null;
-		
+
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
 				aStaffMember = iteratedStaffMember;
@@ -296,12 +314,11 @@ public class StaffController extends Controller {
 		aStaffMember.addProgressUpdate(date, description);
 	}
 
-	
 	public StaffMember getStaffMemberByID(int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		StaffMember aStaffMember = null;
-		
+
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
 				aStaffMember = iteratedStaffMember;

@@ -1,32 +1,22 @@
 package ca.mcgill.ecse321.urlms.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
-import ca.mcgill.ecse321.urlms.model.StaffMember;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import java.awt.Window.Type;
 
 public class MainPage extends JFrame {
 
@@ -36,11 +26,22 @@ public class MainPage extends JFrame {
 	
 	public static Controller controller = new Controller();
 	public static StaffController staffController = new StaffController();
+	private JButton btnStaff;
+	private JButton btnFunding;
+	private JButton btnSave;
+	private JLabel lblFeelFreeTo;
 
 	/**
 	 * Create the frame.
 	 */
 	public MainPage() {
+//		pack();
+//		setLocationRelativeTo(null);
+		centerWindow(this);
+		initComponents();
+	}
+	
+	private void initComponents(){
 		setTitle("URLMS Main Page");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +54,7 @@ public class MainPage extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton btnStaff = new JButton("Staff");
+		btnStaff = new JButton("Staff");
 		btnStaff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				StaffPagePO sppo = new StaffPagePO();
@@ -71,7 +72,7 @@ public class MainPage extends JFrame {
 		});
 		panel.add(btnInventory);
 		
-		JButton btnFunding = new JButton("Funding");
+		btnFunding = new JButton("Funding");
 		btnFunding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FundingPagePO fppo = new FundingPagePO();
@@ -80,7 +81,7 @@ public class MainPage extends JFrame {
 		});
 		panel.add(btnFunding);
 		
-		JButton btnSave = new JButton("Save");
+		btnSave = new JButton("Save");
 		panel.add(btnSave);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -91,7 +92,7 @@ public class MainPage extends JFrame {
 			staffMemberListLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			scrollPane.setViewportView(staffMemberListLabel);
 			
-			JLabel lblFeelFreeTo = new JLabel("Feel free to check out the various amazing functionalites.");
+			lblFeelFreeTo = new JLabel("Feel free to check out the various amazing functionalites.");
 			lblFeelFreeTo.setHorizontalAlignment(SwingConstants.CENTER);
 			scrollPane.setColumnHeaderView(lblFeelFreeTo);
 			
@@ -111,5 +112,12 @@ public class MainPage extends JFrame {
 	
 	private void refreshData(){
 		
+	}
+	
+	public static void centerWindow(Window frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 }
