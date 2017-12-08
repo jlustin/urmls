@@ -224,15 +224,11 @@ class StaffController extends Controller {
 	}
 		
 	function findMember($name,$id){
-		if($name == null || strlen($name) == 0){
-			throw new Exception ("Please enter a name.");
-		}elseif(!$this->isValidStr($name)){
+		if($name == null || strlen($name) == 0 || !$this->isValidStr($name)){
 			throw new Exception ("Please enter a valid name.");
-		}elseif ($id == null){
-			throw new Exception ("Please enter an id.");
-		}elseif(!is_numeric($id)){
+		}elseif ($id == null || (!is_numeric($id))){
 			throw new Exception ("Please enter a valid id.");
-		} else{
+		}else{
 			//Find the member
 			$members = $this->urlms->getLab_index(0)->getStaffMembers();
 			$staffMember=null;
