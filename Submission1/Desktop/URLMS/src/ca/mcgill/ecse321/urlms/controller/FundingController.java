@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.urlms.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
@@ -9,8 +8,6 @@ import ca.mcgill.ecse321.urlms.model.FinancialReport;
 import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
-
-import ca.mcgill.ecse321.urlms.model.FinancialReport;
 
 public class FundingController extends Controller {
 
@@ -24,16 +21,46 @@ public class FundingController extends Controller {
 	 * This method will generate a financial report of the lab
 	 * 
 	 * @return a report containing all financial information
+	 * @throws InvalidInputException 
 	 */
-	public void addFundingAccount(String fundingType, double fundingBalance) {
+	public void addFundingAccount(String fundingType, double fundingBalance) throws InvalidInputException {
+		String error = "";
+		
+		if(fundingType == null || fundingType.isEmpty()){
+			error += "Please enter a name for the account. ";
+		}
+		
+		//Assuming that you can start with negative balance
+		//So no exception handling for that case
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
+		try{
 		aLab.addFundingAccount(fundingType, fundingBalance);
+		}catch(RuntimeException e){
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
-	public List<FundingAccount> viewFundingAccounts() {
+	public List<FundingAccount> viewFundingAccounts() throws InvalidInputException {
+		String error = "";
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
-		return aLab.getFundingAccounts();
+		List<FundingAccount> accountsList;
+		try{
+			accountsList = aLab.getFundingAccounts();
+			if(accountsList.isEmpty()){
+				error = "There is no funding accounts to display.";
+			}
+		}catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		
+		return accountsList;
 	}
 
 	/**
@@ -43,8 +70,25 @@ public class FundingController extends Controller {
 	 *            of the cost of the transaction by double
 	 * @param type
 	 *            of transaction by String
+	 * @throws InvalidInputException 
 	 */
-	public void addTransaction(String date, double amount, String type, String fundingAccount) {
+	public void addTransaction(String date, double amount, String type, String fundingAccount) throws InvalidInputException {
+		String error = "";
+		
+		if(date == null || date.isEmpty()){
+			error += "Please enter a date. ";
+		}
+		if(type == null || type.isEmpty()){
+			error += "Please enter a transaction type. ";
+		}
+		if(fundingAccount == null || fundingAccount.isEmpty()){
+			error += "Please enter a funding account name";
+		}
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
 		FundingAccount currentFundingAccount;
 		try {
 			currentFundingAccount = getFundingAccount(fundingAccount);
@@ -53,10 +97,10 @@ public class FundingController extends Controller {
 			double currentBalance = currentFundingAccount.getBalance();
 			currentFundingAccount.setBalance(currentBalance-amount);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new InvalidInputException(e.getMessage());
 		}
 	}
+	//TODO exceptions
 	public void addTransaction(String date, double amount, String type, int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -65,7 +109,18 @@ public class FundingController extends Controller {
 	}
 	
 
-	public FundingAccount getFundingAccount(String fundingType) throws Exception {
+	public FundingAccount getFundingAccount(String fundingType) throws InvalidInputException {
+		String error = "";
+		
+		if(fundingType == null || fundingType.isEmpty()){
+			error += "Please enter a name for the account. ";
+		}
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		
@@ -75,7 +130,7 @@ public class FundingController extends Controller {
 				return funding;
 			}
 		}
-			throw new Exception("Please enter a valid funding account");
+		throw new InvalidInputException("Please enter an existing funding account");
 	}
 	/** This method will initiate funding accounts
 	 * 	if funding accounts already exists, method will return 1
@@ -85,9 +140,15 @@ public class FundingController extends Controller {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		if(!aLab.hasFundingAccounts()) {
-			addFundingAccount("Supply Funds", 0.00);
-			addFundingAccount("Equipment Funds", 0.00);
-			addFundingAccount("Staff Funds", 0.00);
+			try {
+				addFundingAccount("Supply Funds", 0.00);
+				addFundingAccount("Equipment Funds", 0.00);
+				addFundingAccount("Staff Funds", 0.00);
+			} catch (InvalidInputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			return -1;
 		}
 		return 1;
@@ -128,22 +189,32 @@ public class FundingController extends Controller {
 	
 	/** This method will edit a financial account (?)
 	 * @param type of account by String
+	 * @throws InvalidInputException 
 	 */
-	public void editFinancialAccount(String targetType, String newType) {
+	public void editFinancialAccount(String targetType, String newType) throws InvalidInputException {
+		String error = "";
+		
+		if(targetType == null || targetType.isEmpty()){
+			error += "Please enter the old name for the account. ";
+		}
+		if(newType == null || newType.isEmpty()){
+			error += "Please enter the new name for the account. ";
+		}
+		
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		FundingAccount currentFundingAccount = null;
 		try {
 			currentFundingAccount = getFundingAccount(targetType);
-			
+			currentFundingAccount.setType(newType);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		currentFundingAccount.setType(newType);
-		
-
 	}
 	public String viewFundingAccountType(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -157,6 +228,12 @@ public class FundingController extends Controller {
 		return String.valueOf(aLab.getFundingAccount(index).getBalance());
 	}
 	public List<Expense> viewFundingAccountExpenses(String fundingType){
+		String error = "";
+		
+		if(fundingType == null || fundingType.isEmpty()){
+			error += "Please enter the name for the account. ";
+		}
+		
 		FundingAccount currentFundingAccount;
 		try {
 			currentFundingAccount = getFundingAccount(fundingType);
@@ -186,19 +263,19 @@ public class FundingController extends Controller {
 	}
 	
 	public void removeFundingAccount(String type) {
+		String error = "";
+		
+		if(type == null || type.isEmpty()){
+			error += "Please enter the name for the account. ";
+		}
 		
 		FundingAccount currentFundingAccount = null;
 		try {
 			currentFundingAccount = getFundingAccount(type);
-			
+			currentFundingAccount.delete();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		currentFundingAccount.delete();
+		}	
 	}
-	
-
-
 }

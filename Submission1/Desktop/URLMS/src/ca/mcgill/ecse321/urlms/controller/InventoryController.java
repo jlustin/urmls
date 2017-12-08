@@ -22,15 +22,27 @@ public class InventoryController extends Controller {
 	 * This method will get the inventory item list
 	 * 
 	 * @return a list of the inventory items
+	 * @throws InvalidInputException 
 	 */
-	public List<InventoryItem> viewInventoryList() {
+	public List<InventoryItem> viewInventoryList() throws InvalidInputException {
+		String error = "";
+
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 
-		List<InventoryItem> inventorylist = aLab.getInventoryItems();
+		List<InventoryItem> inventorylist;
+		
+		try {
+			inventorylist = aLab.getInventoryItems();
+			if (inventorylist.isEmpty()) {
+				error = "There are no inventory items to display :(";
+			}
+		} catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
 		return inventorylist;
 	}
-//TODO What's the point of the addInventoryItem method? Ever used??
+
 	/**
 	 * This method will add an item to the inventory list
 	 * 
