@@ -298,16 +298,25 @@ public class StaffController extends Controller {
 
 	}
 
-	public void removeStaffMemberByID(int id) {
+	public void removeStaffMemberByID(int id) throws InvalidInputException {
+		boolean wasRemoved = false;
+		int originalNumberStaff;
+		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 
+		originalNumberStaff = aLab.numberOfStaffMembers();
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
 				iteratedStaffMember.delete();
+				if(originalNumberStaff - aLab.numberOfStaffMembers() > 0){
+					wasRemoved = true;
+				}
 			}
 		}
-
+		if(!wasRemoved){
+			throw new InvalidInputException("Staff Member was not deleted :( ");
+		}
 	}
 
 	public void addProgressByID(String date, String description, int id) {

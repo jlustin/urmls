@@ -133,8 +133,9 @@ public class EditStaffMemberPO extends JFrame {
 				try {
 					id = Integer.valueOf(txtID.getText());
 					controller.removeStaffMemberByID(id);
-				} catch (RuntimeException e1) {
+				} catch (NumberFormatException | InvalidInputException e1) {
 					error += "Invalid ID entered. ";
+					error += e1.getMessage();
 				}
 				refreshData();
 			}
