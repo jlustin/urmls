@@ -7,7 +7,9 @@
 		/*
 		 * Constructor
 		 */
-		function __construct($filename = '/../persistence/data.txt') {
+		function __construct($filename = -1) {
+			if($filename == -1)
+				$this->filename = dirname(__FILE__) . '/../persistence/data.txt';
 			$this->filename = $filename;
 		}
 		

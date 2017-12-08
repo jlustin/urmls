@@ -1,12 +1,12 @@
 <?php
 $my_dir = dirname ( __FILE__ );
-$my_dir = dirname ( __FILE__ );
 require_once $my_dir . '/../persistence/persistence.php';
 require_once $my_dir . '/../model/URLMS.php';
 require_once $my_dir . '/../model/Lab.php';
 require_once $my_dir . '/../model/InventoryItem.php';
 require_once $my_dir . '/../model/SupplyType.php';
 require_once $my_dir . '/../model/Equipment.php';
+require_once $my_dir . '/../model/FundingAccount.php';
 
 ?>
 
@@ -248,7 +248,7 @@ require_once $my_dir . '/../model/Equipment.php';
 							<tbody>
 			<?php
 			
-			$urlms = (new Persistence ())->loadDataFromStore ();
+			$urlms = (new Persistence (dirname(__FILE__) . "/../persistence/data.txt"))->loadDataFromStore ();
 			
 			foreach ( $urlms->getLab_index ( 0 )->getInventoryItems () as $item ) {
 				echo "<tr>
@@ -261,7 +261,7 @@ require_once $my_dir . '/../model/Equipment.php';
 					</td>
 					<td>" . $item->getCategory () . "</td>
 					<td>" . get_class ( $item ) . "</td>
-					<td>$" . $item->getCost () . "</td>
+					<td>$" . number_format($item->getCost(), 2, "." , "," ) . "</td>
 					<td>
 					<form action=\"InventoryRequest.php\" method=\"get\">
 					<input type=\"hidden\" name=\"action\" value=\"11/10\" />

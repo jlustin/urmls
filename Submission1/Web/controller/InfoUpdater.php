@@ -32,8 +32,7 @@
 	require('InventoryController.php');
 	require('FundingController.php');
 	
-	$persistence = new Persistence();
-	//$urlms = $persistence->loadDataFromStore();
+	$persistence = $_SESSION['persistence'];
 	
 	$iu = new InfoUpdater($persistence);
 	
@@ -92,7 +91,7 @@
 		/*
 		 * Constructor
 		 */
-		public function __construct($urlms, $persistence){
+		public function __construct($persistence){
 			$this->urlms = $persistence->loadDataFromStore();
 			$this->persistence = $persistence;
 		}

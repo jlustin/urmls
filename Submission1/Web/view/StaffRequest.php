@@ -1,3 +1,11 @@
+<?php
+$my_dir = dirname(__FILE__);
+require_once $my_dir . '/../persistence/persistence.php';
+require_once $my_dir . '/../controller/StaffController.php';
+if(!isset($_SESSION))
+{
+	session_start();
+}?>
 <html>
 	<head>
 		<title>URLMS</title>
@@ -9,13 +17,8 @@
 		<link rel="stylesheet" type="text/css" href="style/style.css">
 	</head>	
 </html>
-<?php
-
-$my_dir = dirname(__FILE__);
-require_once $my_dir . '/../persistence/persistence.php';
-require_once $my_dir . '/../controller/StaffController.php';
-
-$persistence = new Persistence();
+<?php 
+$persistence = $_SESSION['persistence'];
 $urlms = $persistence->loadDataFromStore();
 
 $invC = new StaffController($urlms, $persistence);

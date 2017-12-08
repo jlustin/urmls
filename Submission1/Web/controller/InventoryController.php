@@ -8,8 +8,11 @@
 	require_once $my_dir . '/../model/SupplyType.php';
 	require_once $my_dir . '/../model/Equipment.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
-	session_start();
-class InventoryController extends Controller {
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    class InventoryController extends Controller {
 	
 	protected $urlms;
 	/*

@@ -13,8 +13,8 @@
 	require_once $my_dir . '/model/FinancialReport.php';
 	require_once $my_dir . '/model/Expense.php';
 	require_once $my_dir . '/model/FundingAccount.php';
+	session_start();
 ?>
-
 <html>
 	<head>
 		<title>URLMS</title>
@@ -63,9 +63,10 @@
       					3 of 3
     				</div>
   				</div> -->
-  		<?php $urlms = (new Persistence("persistence/data.txt"))->loadDataFromStore();?>
-  		
-  		
+  		<?php 
+   		$persistence = new Persistence( dirname(__FILE__) . "/persistence/data.txt");
+   		$_SESSION['persistence'] = $persistence;
+  		$urlms = $persistence->loadDataFromStore();?>
   		
   		<!-- Carousel -->
 		<br>
@@ -160,7 +161,7 @@
 				  					}
 				  				}
 				  			}
-				  			echo $totalValue . " $";
+				  			echo "$" . number_format($totalValue, 2, "." , "," );
 				  			// warning for equipment damage
 					  		if ($countEQ == 1){
 				  				?>
@@ -252,7 +253,7 @@
 				  			foreach ($accounts as $a){
 				  				$netBalance = $netBalance + $a->getBalance();
 				  			}
-				  			echo "$" . $netBalance . "<br>";
+				  			echo "$" . number_format($netBalance, 2, "." , "," ) . "<br>";
 				  		?>
 				  		<!-- Checking total number of accounts -->
 				  		Total Number of Accounts: <?php echo $urlms->getLab_index(0)->numberOfFundingAccounts();?>
