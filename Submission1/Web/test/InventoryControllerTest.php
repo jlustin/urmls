@@ -5,7 +5,6 @@
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir . '/../model/FundingAccount.php';
 	
-	
 	class InventoryControllerTest extends PHPUnit_Framework_TestCase
 	{
 		protected $urlms;
@@ -492,6 +491,58 @@
 			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getInventoryItems()));
 		}
 		
+		public function testRemoveEquipment()
+		{
+			// 1. Create test data
+			$newInventoryItem = new Equipment("fpga", 500, "board", $this->urlms->getLab_index(0), false);
+			$this->urlms->getLab_index(0)->addInventoryItem($newInventoryItem);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$this->controller->removeInventory("fpga");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getInventoryItems()));
+		}
+		
+		public function testRemoveSupplyType()
+		{
+			// 1. Create test data
+			$newInventoryItem = new SupplyType("mouse", 70, "tool", $this->urlms->getLab_index(0), 70);
+			$this->urlms->getLab_index(0)->addInventoryItem($newInventoryItem);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$this->controller->removeInventory("mouse");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getInventoryItems()));
+		}
+		
 		public function testRemoveInventoryNullName()
 		{
 			// 1. Create test data
@@ -547,18 +598,226 @@
 			$this->urlms = $pers->loadDataFromStore();
 			
 			// 5. Check that we got it back
+			/*
+			 * The item should be removed since there are no restrictions on the item name
+			 */
 			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getInventoryItems()));
 		}
 		
 		/**
-		 *	TODO: Finish View Inventory Tests
+		 *	DONE
 		 * 	View Inventory Tests
 		 */
+		public function testViewEquipment()
+		{
+			// 1. Create test data
+			$newEquipment = new Equipment("fpga", 500, "board", $this->urlms->getLab_index(0), false);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$this->controller->viewInventoryItem("fpga");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getInventoryItems()));
+		}
+		
+		public function testViewSupplyType()
+		{
+			// 1. Create test data
+			$newEquipment = new SupplyType("mouse", 70, "tool", $this->urlms->getLab_index(0), 70);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$this->controller->viewInventoryItem("mouse");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getInventoryItems()));
+		}
 		
 		/**
-		 *	TODO: Finish Find Inventory Tests
+		 *	DONE
 		 * 	Find Inventory Tests
 		 */
+		public function testFindInventoryItem()
+		{
+			// 1. Create test data
+			$newInventoryItem1 = new InventoryItem("fpga", 500, "board", $this->urlms->getLab_index(0));
+			$this->urlms->getLab_index(0)->addInventoryItem($newInventoryItem1);
+			$newInventoryItem2 = new InventoryItem("mouse", 70, "tool", $this->urlms->getLab_index(0));
+			$this->urlms->getLab_index(0)->addInventoryItem($newInventoryItem2);
+			
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$foundItem = $this->controller->findInventoryItem("fpga");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			$this->assertEquals("fpga", $foundItem->getName());
+			$this->assertEquals(500, $foundItem->getCost());
+			$this->assertEquals("board", $foundItem->getCategory());
+		}
+		
+		public function testFindEquipment()
+		{
+			// 1. Create test data
+			$newEquipment = new Equipment("fpga", 500, "board", $this->urlms->getLab_index(0), false);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			$newEquipment = new SupplyType("mouse", 70, "tool", $this->urlms->getLab_index(0), 70);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$foundItem = $this->controller->findInventoryItem("fpga");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			$this->assertEquals("fpga", $foundItem->getName());
+			$this->assertEquals(500, $foundItem->getCost());
+			$this->assertEquals("board", $foundItem->getCategory());
+			$this->assertEquals(false, $foundItem->getIsDamaged());
+		}
+		
+		public function testFindSupply()
+		{
+			// 1. Create test data
+			$newEquipment = new Equipment("fpga", 500, "board", $this->urlms->getLab_index(0), false);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			$newEquipment = new SupplyType("mouse", 70, "tool", $this->urlms->getLab_index(0), 70);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			$foundItem = $this->controller->findInventoryItem("mouse");
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			$this->assertEquals("mouse", $foundItem->getName());
+			$this->assertEquals(70, $foundItem->getCost());
+			$this->assertEquals("tool", $foundItem->getCategory());
+			$this->assertEquals(70, $foundItem->getQuantity());
+		}
+		
+		public function testFindInventoryItemNullName()
+		{
+			// 1. Create test data
+			$newEquipment = new Equipment("fpga", 500, "board", $this->urlms->getLab_index(0), false);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			$newEquipment = new SupplyType("mouse", 70, "tool", $this->urlms->getLab_index(0), 70);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			try {
+				$foundItem = $this->controller->findInventoryItem(null);
+			} catch (Exception $e) {
+				$this->assertEquals("Please enter a valid name.", $e->getMessage());
+			}
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+		}
+		
+		/*
+		 * All inventory names are valid therefore, only non-existent names are tested
+		 */
+		public function testFindInventoryItemNonExistentName()
+		{
+			// 1. Create test data
+			$newEquipment = new Equipment("fpga", 500, "board", $this->urlms->getLab_index(0), false);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			$newEquipment = new SupplyType("mouse", 70, "tool", $this->urlms->getLab_index(0), 70);
+			$this->urlms->getLab_index(0)->addInventoryItem($newEquipment);
+			
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+			
+			try {
+				$foundItem = $this->controller->findInventoryItem("keyboard");
+			} catch (Exception $e) {
+				$this->assertEquals("Inventory item not found.", $e->getMessage());
+			}
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(2, count($this->urlms->getLab_index(0)->getInventoryItems()));
+		}
 		
 	}
 ?>

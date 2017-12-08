@@ -1,12 +1,11 @@
 <?php
 	$my_dir = dirname(__FILE__);
 
-	require_once $my_dir . '/../controller/StaffController.php';
+	require_once $my_dir . '/../controller/FundingController.php';
 	require_once $my_dir . '/../model/URLMS.php';
 	require_once $my_dir.'/../model/FundingAccount.php';
 	
-	
-	class StaffControllerTest extends PHPUnit_Framework_TestCase
+	class FundingControllerTest extends PHPUnit_Framework_TestCase
 	{
 		protected $urlms;
 		protected $controller;
@@ -23,7 +22,7 @@
 			$this->p = new Persistence(dirname(__FILE__)."/../persistence/test.txt");
 			$this->p->loadDataFromStore();
 			$this->p->writeDataToStore($this->urlms);
-			$this->controller = new StaffController($this->urlms, $this->p);
+			$this->controller = new FundingController($this->urlms, $this->p);
 		}
 	
 		protected function tearDown()
