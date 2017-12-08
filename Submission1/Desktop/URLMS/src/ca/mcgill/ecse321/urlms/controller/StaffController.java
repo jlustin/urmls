@@ -209,17 +209,19 @@ public class StaffController extends Controller {
 		if (weeklySalary < 0) {
 			error += "Please enter a valid salary. Or try again with celery. ";
 		}
-		try {
-			newStaffMember = aLab.addStaffMember(name, randomNumber, weeklySalary);
-			addRoles(newStaffMember, isAssistant, isAssociate);
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			throw new InvalidInputException(e.getMessage());
-		}
 		
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
 		}
+		
+		try {
+			newStaffMember = aLab.addStaffMember(name, randomNumber, weeklySalary);
+			addRoles(newStaffMember, isAssistant, isAssociate);
+		} catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		
+
 	}
 
 	/**
