@@ -45,6 +45,7 @@ public class AddProgressUpdatePopOut extends JFrame {
 	 * Create the frame.
 	 */
 	public AddProgressUpdatePopOut() {
+		setTitle("Add Progress Update");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

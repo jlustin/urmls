@@ -72,7 +72,7 @@ public class ProgressUpdatePO extends JFrame {
 	 * Create the frame.
 	 */
 	public ProgressUpdatePO() {
-		setTitle("Transactions");
+		setTitle("Progress Updates");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 360);
