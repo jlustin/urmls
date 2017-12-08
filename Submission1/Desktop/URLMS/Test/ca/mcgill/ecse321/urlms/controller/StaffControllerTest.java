@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.Lab;
+import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
@@ -35,6 +36,37 @@ public class StaffControllerTest {
 	public void tearDown() throws Exception {
 		//urlms.delete();
 	}
+	
+	// staff tests=================================
+
+			// StaffController sc = new StaffController();
+			// sc.addStaffMember("Victor",true,true);
+			// sc.addStaffMember("Eric",false,true);
+			//
+			// System.out.println(sc.viewStaffMemberName(0));
+			// System.out.println(sc.viewStaffMemberID(0));
+			// System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
+			// System.out.println(sc.viewStaffMemberName(1));
+			// System.out.println(sc.viewStaffMemberID(1));
+			// System.out.println(urlms.getLab(0).getStaffMember(1).getResearchRole(0).toString());
+			// sc.removeStaffMember(0);
+			// System.out.println(sc.viewStaffMemberName(0));
+			// System.out.println(sc.viewStaffMemberID(0));
+			// System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
+			// sc.addProgress("november 27", "du ma", 0);
+			// sc.addProgress("dec 8", "du ma presentation", 0);
+			// List<ProgressUpdate> progress = sc.viewProgressUpdate(0);
+			// for(int i=0; i<progress.size();i++) {
+			// System.out.println(progress.get(i).getDate());
+			// System.out.println(progress.get(i).getDescription());
+			// }
+			// sc.addStaffMember("Feras", true, false);
+			// System.out.println(urlms.getLab(0).getStaffMember(1).getId());
+			// System.out.println(urlms.getLab(0).getStaffMember(1).getName());
+			// sc.addStaffMember("JustinToMessUp", true, false);
+			// System.out.println(urlms.getLab(0).getStaffMember(2).getId());
+			// System.out.println(urlms.getLab(0).getStaffMember(2).getName());
+			//
 
 	@Test
 	public void testViewStaffList() {
@@ -47,7 +79,7 @@ public class StaffControllerTest {
 		String name = "Feras"; //test name
 		
 		StaffController urlmsController = new StaffController(); //create instance of controller
-		urlmsController.addSampleMembers(); //add some sample members
+		addSampleMembers(aLab); //add some sample members
 		
 		//check model in memory
 		assertEquals(3, aLab.getStaffMembers().size()); //checks if the staff manager now contains 3 members
@@ -55,6 +87,8 @@ public class StaffControllerTest {
 		
 		//save the file
 		urlmsController.save();
+		
+		//TODO delete urlms here cuz the rest of the test is useless otherwise
 		
 		urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
 		
@@ -148,4 +182,22 @@ public class StaffControllerTest {
 		fail("Not yet implemented");
 	}
 
+	// TODO move to JUnit Test
+		/**
+		 * This method is used for testing purposes. Three members with names
+		 * Victor, Feras and Jun2Yu will be added to the current staff member list.
+		 * These three members will have different IDs: 123, 111 and 222
+		 * respectively.
+		 */
+		public void addSampleMembers(Lab aLab) {
+			StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
+			aLab.addStaffMember(member);
+
+			StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
+			aLab.addStaffMember(member2);
+
+			StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
+			aLab.addStaffMember(member3);
+		}
+	
 }

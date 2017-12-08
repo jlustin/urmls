@@ -42,25 +42,6 @@ public class StaffController extends Controller {
 		return staffList;
 	}
 
-	// TODO move to JUnit Test
-	/**
-	 * This method is used for testing purposes. Three members with names
-	 * Victor, Feras and Jun2Yu will be added to the current staff member list.
-	 * These three members will have different IDs: 123, 111 and 222
-	 * respectively.
-	 */
-	public void addSampleMembers() {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
-		aLab.addStaffMember(member);
-
-		StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
-		aLab.addStaffMember(member2);
-
-		StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
-		aLab.addStaffMember(member3);
-	}
 
 	/**
 	 * This method will get the name of a specific staff member in the list and
