@@ -60,6 +60,10 @@ public class FundingController extends Controller {
 			throw new InvalidInputException(e.getMessage());
 		}
 		
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		
 		return accountsList;
 	}
 

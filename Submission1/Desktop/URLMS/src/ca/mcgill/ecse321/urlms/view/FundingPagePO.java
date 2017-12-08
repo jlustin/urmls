@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.FundingController;
+import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
@@ -36,6 +37,7 @@ public class FundingPagePO extends JFrame {
 	JLabel accountListLabel;
 	JLabel welcomeToInventoryLabel;
 	JLabel feelFreeLabel;
+	String error;
 
 	
 	AddFundingAccountPO afapo = new AddFundingAccountPO();
@@ -87,7 +89,9 @@ public class FundingPagePO extends JFrame {
 		JButton btnViewAccounts = new JButton("View Accounts");
 		btnViewAccounts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				error = "";
 				
+				try {
 				accountListLabel.setText("");
 				List<FundingAccount> accountList = controller.viewFundingAccounts();
 				String name;
@@ -107,6 +111,11 @@ public class FundingPagePO extends JFrame {
 				accountListLabel.setText(previousText + "Net balance: " + controller.viewNetBalance());
 				previousText = accountListLabel.getText();
 				accountListLabel.setText(previousText + "</html>");
+				} catch (InvalidInputException e1) {
+					error = e1.getMessage();
+				}
+				
+				refreshData();
 			}
 		});
 		panel.add(btnViewAccounts);
@@ -150,6 +159,16 @@ public class FundingPagePO extends JFrame {
 	}
 	
 	private void refreshData(){
-		
+		if(error.length() > 0){
+			feelFreeLabel.setText(error);
+		}
+		else{
+			feelFreeLabel.setText("Feel free to try adding some staff, and then viewing them.");
+		}
+	}
+	
+	public void close() { 
+		this.setVisible(false);
+	    this.dispose();
 	}
 }
