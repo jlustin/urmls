@@ -89,7 +89,7 @@ public class InventoryController extends Controller {
 	 */
 	public void addSupplyItem(String aName, String category, double cost, int quantity) throws InvalidInputException {
 		String error = "";
-
+		
 		if (aName == null || aName.isEmpty()) {
 			error += "Please enter a name. ";
 		}

@@ -77,7 +77,29 @@ public class InventoryControllerTest {
 		assertEquals("EV3", aLab.getInventoryItem(0).getName());
 		assertEquals("scrap hardware", aLab.getInventoryItem(0).getCategory());
 		assertEquals(1, testList.size());
+		
+		controller.removeInventoryItem(0);
+		
+		try {
+			List<InventoryItem> items = controller.viewInventoryList();
+			testList = items;
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("There are no inventory items to display :( ", err);
+		
+		try {
+			controller.addSupplyItem("", "", -1, -1);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("Please enter a name. Please enter a category. Please enter a valid cost. Please enter a valid quantity.", err);
 
+		
 	}
 
 	@Test
@@ -134,6 +156,7 @@ public class InventoryControllerTest {
 		}catch(InvalidInputException e){
 			assertEquals("Please enter a name. Please enter a category. Please enter a valid cost.", e.getMessage());
 		}
+		
 	}
 
 	@Test
@@ -181,6 +204,34 @@ public class InventoryControllerTest {
 		assertEquals(1, aLab.getInventoryItems().size());
 		
 		controller.removeInventoryItem(0);
+		assertEquals(0, aLab.getInventoryItems().size());
+	}
+	
+	@Test
+	public void testRemoveInventoryItemByName() {
+		String err = "";
+		String name = "test remove";
+		String category = "equip";
+		double cost = 123;
+		try {
+			controller.addEquipmentItem(name, category, cost);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test remove", aLab.getInventoryItem(0).getName());
+		assertEquals("equip", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		try {
+			controller.removeInventoryItembyName("test remove");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
 		assertEquals(0, aLab.getInventoryItems().size());
 	}
 
