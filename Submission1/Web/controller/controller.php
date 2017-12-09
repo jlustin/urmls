@@ -13,7 +13,8 @@ class Controller {
 	//Check if string is alphabetical letters and spaces
 	function isValidStr($str){
 		for ($i = 0; $i < strlen($str); $i++){
-			if(! ((65 <= ord($str[$i]) && ord($str[$i]) <= 90) || (97 <= ord($str[$i]) && ord($str[$i]) <= 122) || ord($str[$i]) == 32)){				return false;
+			if(! ((65 <= ord($str[$i]) && ord($str[$i]) <= 90) || (97 <= ord($str[$i]) && ord($str[$i]) <= 122) || ord($str[$i]) == 32)){				
+				return false;
 			}
 		}return true;
 	}
