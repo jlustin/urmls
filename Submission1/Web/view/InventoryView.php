@@ -7,10 +7,7 @@ require_once $my_dir . '/../model/InventoryItem.php';
 require_once $my_dir . '/../model/SupplyType.php';
 require_once $my_dir . '/../model/Equipment.php';
 require_once $my_dir . '/../model/FundingAccount.php';
-
 ?>
-
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -126,32 +123,31 @@ require_once $my_dir . '/../model/FundingAccount.php';
 											(eg. 100).</small> <br>
 									</div>
 								</div>
-								
+
 								<div class="row">
 									<div class="form-check col-sm-3">
-									  <label for="newInventoryType">Type</label>
-									  <small id="nameHelp" class="form-text text-muted">Select the type of the intentory item.</small>
+										<label for="newInventoryType">Type</label> <small
+											id="nameHelp" class="form-text text-muted">Select the type of
+											the intentory item.</small>
 									</div>
 									<div class="form-check col-sm-2">
-									  <label class="form-check-label">
-									    <input class="form-check-input" type="radio" name="type" id="type" value="Equipment">
-									   	Equipement
-									  </label>
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio" name="type" id="type"
+											value="Equipment"> Equipement
+										</label>
 									</div>
 									<div class="form-check col-sm-2">
-									  <label class="form-check-label">
-									    <input class="form-check-input" type="radio" name="type" id="type" value="SupplyType">
-									   	Supply
-									  </label>
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio" name="type" id="type"
+											value="SupplyType"> Supply
+										</label>
 									</div>
-									<div class="form-check col-sm-5">
-									</div>
+									<div class="form-check col-sm-5"></div>
 								</div>
 								<br>
 								<div class="form-row">
-									<br>
-									<input type="submit" class="btn btn-danger" value="Add Inventory!" /> 
-									<br>
+									<br> <input type="submit" class="btn btn-danger"
+										value="Add Inventory!" /> <br>
 								</div>
 							</div>
 						</form>
@@ -171,21 +167,23 @@ require_once $my_dir . '/../model/FundingAccount.php';
 					aria-labelledby="headingTwo" data-parent="#accordion">
 					<div class="card-body">
 						<form action="InventoryRequest.php" method="get">
-						<div class="form-group">
-							<br>
-							<h3>Remove Inventory Item</h3>
-							<input type="hidden" name="action" value="11/10" />
+							<div class="form-group">
+								<br>
+								<h3>Remove Inventory Item</h3>
+								<input type="hidden" name="action" value="11/10" />
 								<div class="row">
 									<div class="col-sm-6">
 										<label for="newInventoryName">Name</label> <input type="text"
 											class="form-control" name="oldInventoryName"
 											id="oldInventoryName" aria-describedby="nameHelp"
 											placeholder="Enter item name"> <small id="nameHelp"
-											class="form-text text-muted">Enter name of item to be removed.</small> <br>
+											class="form-text text-muted">Enter name of item to be
+											removed.</small> <br>
 									</div>
 								</div>
-							<input class="btn btn-danger" type="submit" value="Remove inventory!" />
-						</div>
+								<input class="btn btn-danger" type="submit"
+									value="Remove inventory!" />
+							</div>
 							<br>
 						</form>
 					</div>
@@ -207,19 +205,18 @@ require_once $my_dir . '/../model/FundingAccount.php';
 						<form action="InventoryRequest.php" method="get">
 							<br>
 							<h3>View and Edit Inventory Item</h3>
-							<input type="hidden" name="action" value="12/10" /> 
-								<div class="row">
-									<div class="col-sm-6">
-										<label for="newInventoryName">Name</label> <input type="text"
-											class="form-control" name="inventoryName"
-											id="inventoryName" aria-describedby="nameHelp"
-											placeholder="Enter item name"> <small id="nameHelp"
-											class="form-text text-muted">Enter name of item to be viewed.</small> <br>
-									</div>
+							<input type="hidden" name="action" value="12/10" />
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="newInventoryName">Name</label> <input type="text"
+										class="form-control" name="inventoryName" id="inventoryName"
+										aria-describedby="nameHelp" placeholder="Enter item name"> <small
+										id="nameHelp" class="form-text text-muted">Enter name of item
+										to be viewed.</small> <br>
 								</div>
-							<input
-								class="btn btn-danger" type="submit" value="View inventory!" />
-							<br>
+							</div>
+							<input class="btn btn-danger" type="submit"
+								value="View inventory!" /> <br>
 						</form>
 
 					</div>
@@ -246,9 +243,9 @@ require_once $my_dir . '/../model/FundingAccount.php';
 							</tr>
 							</thread>
 							<tbody>
-			<?php
+			<?php //Creating each row of table for each inventory item
 			
-			$urlms = (new Persistence (dirname(__FILE__) . "/../persistence/data.txt"))->loadDataFromStore ();
+			$urlms = (new Persistence ( dirname ( __FILE__ ) . "/../persistence/data.txt" ))->loadDataFromStore ();
 			
 			foreach ( $urlms->getLab_index ( 0 )->getInventoryItems () as $item ) {
 				echo "<tr>
@@ -261,7 +258,7 @@ require_once $my_dir . '/../model/FundingAccount.php';
 					</td>
 					<td>" . $item->getCategory () . "</td>
 					<td>" . get_class ( $item ) . "</td>
-					<td>$" . number_format($item->getCost(), 2, "." , "," ) . "</td>
+					<td>$" . number_format ( $item->getCost (), 2, ".", "," ) . "</td>
 					<td>
 					<form action=\"InventoryRequest.php\" method=\"get\">
 					<input type=\"hidden\" name=\"action\" value=\"11/10\" />
@@ -300,9 +297,6 @@ require_once $my_dir . '/../model/FundingAccount.php';
 			</div>
 		</div>
 		<br> <br>
-
-
-
 	</div>
 	</div>
 

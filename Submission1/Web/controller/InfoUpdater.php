@@ -47,7 +47,7 @@
 					$iu->updateInventory($_GET['editedinventoryname'],$_GET['editedinventorycost'], $_GET['editedinventorycat'], false, $_GET['editedsupplyquantity']);
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"InventoryView.php\">Back</a>" . "<br>";
+				echo "<a href= \"/../view/InventoryView.php\">Back</a>" . "<br>";
 			}
 			break;
 		case "editStaffMember":
@@ -65,21 +65,21 @@
 				}
 			} catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"StaffView.php\">Back</a>" . "<br>";
+				echo "<a href= \"/../view/StaffView.php\">Back</a>" . "<br>";
 			}
 			break;
 		case "editAccount":
 			try {$iu->updateAccount($_GET['editedaccountname']);
 			}catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"FundingView.php\">Back</a>" . "<br>";
+				echo "<a href= \"/../view/FundingView.php\">Back</a>" . "<br>";
 			}
 			break;
 		case "editExpense":
 			try {$iu->updateExpense($_GET['expensename'], $_GET['newexpensename'],$_GET['newexpenseamount'], $_GET['newexpensedate']);
 			}catch (Exception $e){
 				echo $e->getMessage() . "<br>";
-				echo "<a href= \"FundingView.php\">Back</a>" . "<br>";
+				echo "<a href= \"/../view/FundingView.php\">Back</a>" . "<br>";
 			}
 			break;
 	}
