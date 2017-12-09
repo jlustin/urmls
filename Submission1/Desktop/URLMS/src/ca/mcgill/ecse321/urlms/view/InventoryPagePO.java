@@ -92,7 +92,7 @@ public class InventoryPagePO extends JFrame {
 						}
 						inventoryItemListLabel.setText(previousText + "Item Name: " + name + "&nbsp &nbsp &nbsp "
 								+ "Item ID: " + index + "&nbsp &nbsp &nbsp " + "Item Type: " + type + "&nbsp &nbsp &nbsp "
-								+ "Item Category " + category + "&nbsp &nbsp &nbsp " + "Cost: " + cost
+								+ "Item Category: " + category + "&nbsp &nbsp &nbsp " + "Cost: " + cost
 								+ "&nbsp &nbsp &nbsp " + "Quantity: " + quantity + " <br/>");
 						index++;
 					}

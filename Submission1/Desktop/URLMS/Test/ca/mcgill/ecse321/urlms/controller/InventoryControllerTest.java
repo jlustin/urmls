@@ -331,12 +331,47 @@ public class InventoryControllerTest {
 
 	@Test
 	public void testInventoryItemIsSupply() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "SUPPLY";
+		boolean testBoolean;
+		int quantity = 19;
+		double cost = 123;
+		try {
+			controller.addSupplyItem(name, category, cost, quantity);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+	
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		testBoolean = controller.inventoryItemIsSupply(0);
+		assertEquals(true, testBoolean);
 	}
 
 	@Test
 	public void testInventoryItemIsEquipment() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		String category = "EQUIP";
+		boolean testBoolean;
+		double cost = 123;
+		try {
+			controller.addEquipmentItem(name, category, cost);
+		} catch (InvalidInputException e) {
+			err = e.getMessage();
+		}
+	
+		assertEquals("", err);
+		assertEquals("test add", aLab.getInventoryItem(0).getName());
+		assertEquals("EQUIP", aLab.getInventoryItem(0).getCategory());
+		assertEquals(1, aLab.getInventoryItems().size());
+		
+		testBoolean = controller.inventoryItemIsEquipment(0);
+		assertEquals(true, testBoolean);
 	}
 
 }
