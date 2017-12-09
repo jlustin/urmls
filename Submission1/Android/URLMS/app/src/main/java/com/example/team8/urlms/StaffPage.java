@@ -74,11 +74,14 @@ public class StaffPage extends AppCompatActivity {
         setViewStaffListButton();
         setAddMemberButton();
     }
+
+    //button methods
+
     private void setAddMemberButton() {
         addMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!insertName.getText().toString().equals("") && !insertWeeklySalary.getText().toString().equals("")) {
+                if(!insertName.getText().toString().equals("") && !insertWeeklySalary.getText().toString().equals("")&!insertWeeklySalary.getText().toString().equals(".")) {
                     sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(), researchAssociateBox.isChecked(),
                             Double.parseDouble(insertWeeklySalary.getText().toString()));
                     toastMessage("Member successfully added.");
@@ -89,7 +92,6 @@ public class StaffPage extends AppCompatActivity {
         });
     }
 
-    //button methods
     public void setBackButton(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +127,7 @@ public class StaffPage extends AppCompatActivity {
     }
 
 
-
+    //initiate new activity 
     public void startActivity(Class<?> cls){
         sc.save();
         Intent intent = new Intent(this,cls );

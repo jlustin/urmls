@@ -82,6 +82,7 @@ public class InventoryItemPage extends AppCompatActivity {
         editCost.setText(ic.viewInventoryItemCost(position));
 
 
+        //display inventory UI
         if(ic.inventoryItemIsEquipment(position)){
             currentQuantity.setVisibility(View.INVISIBLE);
             actualQuantity.setVisibility(View.INVISIBLE);
@@ -89,8 +90,8 @@ public class InventoryItemPage extends AppCompatActivity {
             totalCostDisplay.setVisibility(View.INVISIBLE);
             addQuantityButton.setVisibility(View.INVISIBLE);
         }
+        //display supply UI
         else {
-            //TODO: change quantity edit text to text view and add addQuantityButton and incorporate fundingcontroller
             actualQuantity.setText(ic.viewSupplyItemQuantity(position));
             currentQuantity.setText("Quantity");
             double costPerUnit = Double.parseDouble(ic.viewInventoryItemCost(position));
@@ -123,12 +124,15 @@ public class InventoryItemPage extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if(!mAmount.getText().toString().isEmpty()){
+                            //compute new quantity
                             int amount = Integer.parseInt(mAmount.getText().toString());
                             int currentQuantity = Integer.parseInt(ic.viewSupplyItemQuantity(position));
                             int newQuantity = amount+currentQuantity;
+
+                            //edit
                             ic.editInventoryItemDetails(position, ic.viewInventoryItemName(position)
                             ,Double.parseDouble(ic.viewInventoryItemCost(position)), newQuantity);
-
+                            //record transaction to Supply Funds account
                             String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
                             fc.addTransaction(date, amount*Double.parseDouble(ic.viewInventoryItemCost(position)),
                                     "Purchased " + amount + " " + "additional " + ic.viewInventoryItemName(position)+".", "Supply Funds");
@@ -137,6 +141,7 @@ public class InventoryItemPage extends AppCompatActivity {
                             dialog.dismiss();
                             recreate();
                         }
+                        //invalid inputs
                         else{
                             toastMessage("Please fill any empty fields.");
                         }
@@ -149,12 +154,16 @@ public class InventoryItemPage extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!editCost.getText().toString().equals(".")){
                 ic.editInventoryItemDetails(position, editName.getText().toString(),
                         Double.parseDouble(editCost.getText().toString())
                         , Integer.parseInt(ic.viewSupplyItemQuantity(position)));
                 ic.save();
                 recreate();
-                toastMessage("Sucessfully updated.");
+                toastMessage("Sucessfully updated.");}
+                else{
+                    toastMessage("Please fix the cost quantity");
+                }
             }
         });
     }

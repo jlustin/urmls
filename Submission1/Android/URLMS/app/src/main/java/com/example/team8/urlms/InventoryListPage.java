@@ -71,6 +71,7 @@ public class InventoryListPage extends AppCompatActivity {
                 ic.save();
                 Intent intent = new Intent(getApplicationContext(),InventoryItemPage.class );
                 intent.putExtra("itemPosition", position);
+                finish();
                 startActivity(intent);
             }
         });

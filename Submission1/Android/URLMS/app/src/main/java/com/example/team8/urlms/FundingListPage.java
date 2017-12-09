@@ -20,13 +20,20 @@ import ca.mcgill.ecse321.urlms.controller.InventoryController;
 import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
 import ca.mcgill.ecse321.urlms.model.URLMS;
+import java.text.DecimalFormat;
+
+import static android.R.attr.format;
 
 public class FundingListPage extends AppCompatActivity {
+
     private URLMS urlms;
     private String fileName;
     Controller controller = new Controller();
     InventoryController ic = new InventoryController();
     FundingController fc = new FundingController();
+
+    //decimal format to 2 digits after decimal
+    DecimalFormat format = new DecimalFormat("#.00");
 
     Button backButton;
     Button refreshButton;
@@ -48,11 +55,13 @@ public class FundingListPage extends AppCompatActivity {
         List<FundingAccount> fa = fc.viewFundingAccounts();
         final String[] fundingAccounts= new String[fa.size()];
 
+        //intrepret bundle to array list for ListView
         for(int i =0; i<fa.size(); i++){
             fundingAccounts[i]= "Type: " + fc.viewFundingAccountType(i)+"\n" +
-                    "Balance: " +fc.viewFundingAccountBalance(i)+"\n";
+                    "Balance: " +String.valueOf(format.format(Double.parseDouble(fc.viewFundingAccountBalance(i))))+"\n";
         }
 
+        //ListView creator to display list of accounts
         viewItemAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fundingAccounts);
         ListView buckyListView = (ListView) findViewById(R.id.buckyListView);
         buckyListView.setAdapter(viewItemAdapter);
@@ -66,7 +75,9 @@ public class FundingListPage extends AppCompatActivity {
                 ic.save();
                 Intent intent = new Intent(getApplicationContext(),FundingAccountPage.class );
                 intent.putExtra("itemPosition", position);
+                finish();
                 startActivity(intent);
+
             }
         });
 

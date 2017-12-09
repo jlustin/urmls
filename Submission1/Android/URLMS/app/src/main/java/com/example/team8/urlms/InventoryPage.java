@@ -76,14 +76,14 @@ public class InventoryPage extends AppCompatActivity {
 
 
 
-
+        //add spinner for inventory items
         spinner = (Spinner) findViewById(R.id.spinnerItemType);
 
         setSpinner();
         setBackButton();
         setViewInventoryItemListButton();
         setAddItemButton();
-
+        //TOTAL EQUIPMENT OBSERVER
         List<InventoryItem> ii = ic.viewInventoryList();
         int totalSupplyItem = 0;
         int totalEquipmentItem = 0;
@@ -103,14 +103,16 @@ public class InventoryPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean added = false;
-                if(!insertName.getText().toString().equals("")&& !insertCost.getText().toString().equals("")) {
+                if(!insertName.getText().toString().equals("")&& !insertCost.getText().toString().equals("")&&!insertCost.getText().toString().equals(".")) {
                     String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+                    //add equipment
                     if (itemType.equals(type_equipment)) {
                         double cost = Double.parseDouble(insertCost.getText().toString());
                         ic.addEquipmentItem(insertName.getText().toString(), cost);
                         added = true;
                         fc.addTransaction(date, cost,"Purchased " + insertName.getText().toString(), "Equipment Funds");
                     }
+                    //add supply
                     if (itemType.equals(type_supply) && !insertQuantity.getText().toString().equals("")
                             ) {
                         ic.addSupplyItem(insertName.getText().toString(), Double.parseDouble(insertCost.getText().toString()),
@@ -123,6 +125,7 @@ public class InventoryPage extends AppCompatActivity {
                         toastMessage("Item: " + insertName.getText().toString() + " successfully added."+"\n Transaction recorded.");
                     }
                 }
+                //invalid input
                 else{
                     toastMessage("Please fill the appropriate categories.");
                 }
@@ -178,7 +181,7 @@ public class InventoryPage extends AppCompatActivity {
         Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
         myToast.show();
     }
-
+    //spinner builder
     public void setSpinner(){
         adapter = ArrayAdapter.createFromResource(this, R.array.item_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -188,11 +191,13 @@ public class InventoryPage extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
+                    //equipment UI
                     itemType = type_equipment;
                     insertQuantity.setVisibility(View.INVISIBLE);
                     toDisplayQuantity.setVisibility(View.INVISIBLE);
                 }
                 if(position==1){
+                    //inventory UI
                     itemType = type_supply;
                     insertQuantity.setVisibility(View.VISIBLE);
                     toDisplayQuantity.setVisibility(View.VISIBLE);

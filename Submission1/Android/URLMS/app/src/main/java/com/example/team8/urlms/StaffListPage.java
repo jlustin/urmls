@@ -71,6 +71,7 @@ public class StaffListPage extends AppCompatActivity {
                 sc.save();
                 Intent intent = new Intent(getApplicationContext(),StaffMemberPage.class );
                 intent.putExtra("memberPosition", position);
+                finish();
                 startActivity(intent);
 
             }
