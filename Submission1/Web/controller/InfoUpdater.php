@@ -33,8 +33,8 @@
 	require('FundingController.php');
 	
 	$persistence = $_SESSION['persistence'];
-	
-	$iu = new InfoUpdater($persistence);
+	if(isset($_SESSION['persistence']))
+		$iu = new InfoUpdater($persistence);
 	
 	// Check which button was clicked by user
 	// Run appropriate controller method with respect to user request
@@ -92,8 +92,9 @@
 		 * Constructor
 		 */
 		public function __construct($persistence){
-			$this->urlms = $persistence->loadDataFromStore();
 			$this->persistence = $persistence;
+			$this->urlms = $persistence->loadDataFromStore();
+			
 		}
 		
 		function updateInventory($name, $cost, $category, $isDamaged, $quantity){

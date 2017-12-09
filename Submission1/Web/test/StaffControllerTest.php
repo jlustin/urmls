@@ -143,7 +143,7 @@
 			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 		}
 		
-		public function testAddStaffMemberInvalidId()
+		public function testAddStaffMemberInvalidSalary()
 		{
 			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMembers()));
 			// 1. Create test data
@@ -301,6 +301,66 @@
 				$this->controller->removeStaff("jasmine", "victor");
 			}catch (Exception $e) {
 				$this->assertEquals("Please enter a valid id.", $e->getMessage());
+			}
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		}
+		
+		public function testRemoveStaffNonExistentName()
+		{
+			// 1. Create test data
+			$newStaffMember = new StaffMember("victor", rand(0,1000), 100, $this->urlms->getLab_index(0));
+			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+			
+			try{
+				$this->controller->removeStaff("jasmine", $newStaffMember->getId());
+			}catch (Exception $e) {
+				$this->assertEquals("Staff Member not found.", $e->getMessage());
+			}
+			
+			// 2. Write all of the data
+			$pers = $this->p;
+			$pers->writeDataToStore($this->urlms);
+			
+			// 3. Clear the data from memory
+			$this->urlms->delete();
+			
+			$this->assertEquals(0, $this->urlms->numberOfLabs());
+			
+			// 4. Load it back in
+			$this->urlms = $pers->loadDataFromStore();
+			
+			// 5. Check that we got it back
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		}
+		
+		public function testRemoveStaffNonExistentId()
+		{
+			// 1. Create test data
+			$newStaffMember = new StaffMember("jasmine", rand(0,1000), 100, $this->urlms->getLab_index(0));
+			$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+			
+			$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+			
+			try{
+				$this->controller->removeStaff("jasmine", 123);
+			}catch (Exception $e) {
+				$this->assertEquals("Staff Member not found.", $e->getMessage());
 			}
 			
 			// 2. Write all of the data

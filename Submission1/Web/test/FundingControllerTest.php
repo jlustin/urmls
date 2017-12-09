@@ -184,7 +184,7 @@
 			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getFundingAccounts()));
 		}
 		
-		public function testAddAccountReservedName2()
+		public function testAddAccountReservedType2()
 		{
 			// 1. Create test data
 			try {
@@ -209,7 +209,7 @@
 			$this->assertEquals(0, count($this->urlms->getLab_index(0)->getFundingAccounts()));
 		}
 		
-		public function testAddAccountReservedName3()
+		public function testAddAccountReservedType3()
 		{
 			// 1. Create test data
 			try {
