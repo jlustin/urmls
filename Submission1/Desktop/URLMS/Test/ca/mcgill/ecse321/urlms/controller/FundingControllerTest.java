@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
+import ca.mcgill.ecse321.urlms.model.Expense;
 import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
 import ca.mcgill.ecse321.urlms.model.Lab;
@@ -124,6 +125,7 @@ public class FundingControllerTest {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAddTransaction() {
 		String err = "";
@@ -181,35 +183,31 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
 			err = e.getMessage();
 		}
 		
 		try {
-			controller.addExpense("1/2/3", 111, "test type", "test transaction");
+			controller.addExpense("test transaction", 111, "1/2/3", "test type");
 		} catch (InvalidInputException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
+		
 		try {
 			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
-		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (InvalidInputException e2) {
+			e2.printStackTrace();
+		}	
 		
 		try {
 			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -217,9 +215,8 @@ public class FundingControllerTest {
 		
 		
 		try {
-			controller.addTransaction("", 111, "", "");
+			controller.addExpense("", 111, "", "");
 		} catch (InvalidInputException e1) {
-			// TODO Auto-generated catch block
 			err = e1.getMessage();
 		}
 		
