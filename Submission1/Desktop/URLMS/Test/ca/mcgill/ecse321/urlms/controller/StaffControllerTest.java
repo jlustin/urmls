@@ -81,7 +81,7 @@ public class StaffControllerTest {
 			assertEquals(3, controller.viewStaffList().size());//checks if the staff manager now contains 3 members
 			assertEquals(name, controller.viewStaffList().get(1).getName()); //checks if the 2nd member in the list is "Feras"
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} 
 		
@@ -97,7 +97,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -118,7 +118,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -141,7 +141,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -194,20 +194,20 @@ public class StaffControllerTest {
 		try {
 			controller.addProgressByID("11/12/17", "Can you view this?", aLab.getStaffMember(0).getId());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
 		try {
 			assertEquals("11/12/17", controller.viewProgressUpdateByID(aLab.getStaffMember(0).getId()).get(0).getDate());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		try {
 			assertEquals("Can you view this?", controller.viewProgressUpdateByID(aLab.getStaffMember(0).getId()).get(0).getDescription());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		try{
@@ -225,7 +225,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -249,7 +249,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -268,7 +268,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -291,7 +291,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -315,7 +315,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -337,7 +337,7 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -349,7 +349,7 @@ public class StaffControllerTest {
 		try {
 			controller.editStaffmemberRecordByID(aLab.getStaffMember(0).getId(), 123, "Victor", false, true, 123);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		assertEquals("Victor", aLab.getStaffMember(0).getName());
@@ -373,19 +373,19 @@ public class StaffControllerTest {
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
 		assertEquals("", err);
-		assertEquals(name, aLab.getStaffMember(0).getName());
-		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(name, aLab.getStaffMember(id).getName());
+		assertEquals("ResearchAssistant", aLab.getStaffMember(id).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 
 		try {
 			controller.removeStaffMemberByID(aLab.getStaffMember(0).getId());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -442,7 +442,7 @@ public class StaffControllerTest {
 		try {
 			testMember = controller.getStaffMemberByID(aLab.getStaffMember(0).getId());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

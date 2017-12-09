@@ -372,6 +372,12 @@ public class InventoryControllerTest {
 		
 		testBoolean = controller.inventoryItemIsSupply(0);
 		assertEquals(true, testBoolean);
+		
+		testBoolean = controller.inventoryItemIsEquipment(0);
+		assertEquals(false, testBoolean);
+		
+		
+		
 	}
 
 	@Test
@@ -394,6 +400,9 @@ public class InventoryControllerTest {
 		
 		testBoolean = controller.inventoryItemIsEquipment(0);
 		assertEquals(true, testBoolean);
+		
+		testBoolean = controller.inventoryItemIsSupply(0);
+		assertEquals(false, testBoolean);
 	}
 
 }
