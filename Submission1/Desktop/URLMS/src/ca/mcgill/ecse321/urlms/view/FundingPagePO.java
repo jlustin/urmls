@@ -96,7 +96,7 @@ public class FundingPagePO extends JFrame {
 						name = aAccount.getType();
 						balance = aAccount.getBalance();
 						accountListLabel.setText(
-								previousText + "Account type: " + name + "&nbsp &nbsp &nbsp " + "Account Balance: "
+								previousText + "Account type: " + name + "&nbsp &nbsp &nbsp " + "Account Balance: $"
 										+ String.format("%.2f", balance) + "&nbsp &nbsp &nbsp " + " <br/>");
 					}
 
@@ -104,7 +104,7 @@ public class FundingPagePO extends JFrame {
 					accountListLabel.setText(previousText + " <br/>");
 
 					previousText = accountListLabel.getText();
-					accountListLabel.setText(previousText + "Net balance of all accounts: "
+					accountListLabel.setText(previousText + "Net balance of all accounts: $"
 							+ String.format("%.2f", controller.viewNetBalance()));
 					previousText = accountListLabel.getText();
 					accountListLabel.setText(previousText + "</html>");

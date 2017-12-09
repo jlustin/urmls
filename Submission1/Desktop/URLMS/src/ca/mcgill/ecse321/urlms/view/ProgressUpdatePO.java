@@ -106,7 +106,7 @@ public class ProgressUpdatePO extends JFrame {
 					progressUpdatesLabel.setText("<html>");
 					progressUpdatesLabel.setText(progressUpdatesLabel.getText() + "Staff Member: " + staffMember
 							+ "&nbsp &nbsp &nbsp " + "ID: " + controller.getStaffMemberByID(targetStaffID).getId()
-							+ "&nbsp &nbsp &nbsp " + "Salary: "
+							+ "&nbsp &nbsp &nbsp " + "Salary: $"
 							+ String.format("%.2f", controller.getStaffMemberByID(targetStaffID).getWeeklySalary())
 							+ " <br/>" + " <br/>" + " <br/>");
 					for (ProgressUpdate aUpdate : updates) {

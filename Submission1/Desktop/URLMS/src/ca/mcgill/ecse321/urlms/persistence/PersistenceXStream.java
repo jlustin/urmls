@@ -20,7 +20,6 @@ public abstract class PersistenceXStream {
 		// Initialization for persistence
 		URLMS urlms;
 		setFilename(fileName);
-		// setAlias("URLMS", URLMS.class);
 
         // load model if exists, create otherwise
         File file = new File(fileName);
@@ -52,7 +51,6 @@ public abstract class PersistenceXStream {
 			writer.close();
 			return true;
 		} catch (IOException e) {
-//			e.printStackTrace();
 			return false;
 		}
 	}
@@ -60,8 +58,8 @@ public abstract class PersistenceXStream {
 	public static Object loadFromXMLwithXStream() {
 		xstream.setMode(XStream.ID_REFERENCES);
 		try {
-			FileReader fileReader = new FileReader(filename); // load our xml
-																// file
+			FileReader fileReader = new FileReader(filename); // load our xml file
+																 
 			return xstream.fromXML(fileReader);
 		} catch (IOException e) {
 			NewSaveFilePO nsfpo = new NewSaveFilePO();

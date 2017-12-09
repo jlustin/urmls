@@ -109,7 +109,7 @@ public class StaffPagePO extends JFrame {
 						
 						
 						staffMemberListLabel.setText(previousText + "Name: " + name + "&nbsp &nbsp &nbsp "
-						+ "ID: " +  id + "&nbsp &nbsp &nbsp " + "Salary: " +
+						+ "ID: " +  id + "&nbsp &nbsp &nbsp " + "Salary: $" +
 								String.format("%.2f", aMember.getWeeklySalary()) + 
 								 "&nbsp &nbsp &nbsp " + "Role(s): " +
 								 roleString + " <br/>");

@@ -86,7 +86,7 @@ public class TransactionPagePO extends JFrame {
 						amount = aExpense.getAmount();
 						expenseListLabel
 								.setText(previousText + "Expense Type: " + name + "&nbsp &nbsp &nbsp " + "Date: " + date
-										+ "&nbsp &nbsp &nbsp " + "Amount: " + String.format("%.2f", amount) + " <br/>");
+										+ "&nbsp &nbsp &nbsp " + "Amount: " + "$" + String.format("%.2f", amount) + " <br/>");
 
 					}
 					previousText = expenseListLabel.getText();
