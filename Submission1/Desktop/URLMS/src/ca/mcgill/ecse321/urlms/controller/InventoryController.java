@@ -299,17 +299,6 @@ public class InventoryController extends Controller {
 		return inventorylist;
 	}
 
-	/**
-	 * This method will give a summary of the overall URLMS Inventory
-	 * 
-	 * @return a hash map containing all information
-	 */
-	public HashMap<String, String> viewStatus() {
-
-		// TODO: remove this when working on implementation
-		return null;
-	}
-
 	public String viewSupplyItemQuantity(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
