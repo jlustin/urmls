@@ -13,7 +13,6 @@
 	
 		protected function setUp()
 		{
-			
 			$this->urlms = new URLMS();
 			$lab = new Lab("9/10", $this->urlms);
 			$this->urlms->addLab($lab);
