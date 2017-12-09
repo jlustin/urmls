@@ -52,7 +52,7 @@ public class EditInventoryItemPO extends JFrame {
 	private void initComponents(){
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setTitle("Add Inventory Item");
+		setTitle("Edit Inventory Item");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 566, 320);
 		contentPane = new JPanel();
@@ -73,10 +73,16 @@ public class EditInventoryItemPO extends JFrame {
 				try {
 					String oldName = txtOldItemName.getText();
 					String newName = txtNewItemName.getText();
-					
 					double cost = Double.valueOf(txtItemCost.getText());
-					int quantity = Integer.valueOf(txtQuantity.getText());
 					String category = txtItemCategory.getText();
+					int quantity;
+					String quantityText = txtQuantity.getText();
+					if (quantityText.isEmpty()) {
+						quantity = Integer.MIN_VALUE;
+					}
+					else{
+						quantity = Integer.valueOf(quantityText);
+					}
 					
 					controller.editInventoryItemDetails(oldName, newName, category, cost, quantity);
 				} catch (InvalidInputException e1) {
@@ -116,7 +122,7 @@ public class EditInventoryItemPO extends JFrame {
 		
 		lblItemCost = new JLabel("New Item Cost (CAD, use '.' for floating point):");
 		
-		lblQuantity = new JLabel("Updated Quantity (leave empty if adding equipment):");
+		lblQuantity = new JLabel("Updated Quantity (leave empty if editing equipment):");
 		
 		txtItemCategory = new JTextField();
 		txtItemCategory.setColumns(10);
@@ -218,7 +224,7 @@ public class EditInventoryItemPO extends JFrame {
 			lblError.setText(error);
 		}
 		else{
-			lblError.setText("Item successfully added.");
+			lblError.setText("Requested inventory changes successfully made.");
 		}
 	}
 	

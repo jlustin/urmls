@@ -146,7 +146,7 @@ public class InventoryController extends Controller {
 		
 		
 		if (oldName == null || oldName.isEmpty()) {
-			error += "Please enter an old name. ";
+			error += "Please enter the existing item name. ";
 		}
 		if (desiredName == null || desiredName.isEmpty()) {
 			error += "Please enter a new name. ";
@@ -157,9 +157,7 @@ public class InventoryController extends Controller {
 		if (desiredCost < 0) {
 			error += "Please enter a valid cost. ";
 		}
-		if (desiredQuantity <= 0) {
-			error += "Please enter a valid quantity. ";
-		}
+
 
 		List<InventoryItem> items = aLab.getInventoryItems();
 		for (InventoryItem anItem : items) {
@@ -167,6 +165,23 @@ public class InventoryController extends Controller {
 				foundItem = anItem;
 				break;
 			}
+		}
+		
+		if (desiredQuantity == Integer.MIN_VALUE){ //user left the field blank
+			if(foundItem != null){ //if not null. If null will get taken care after
+				if(foundItem instanceof SupplyType){ //not supposed to have blank quantity
+					error += "Do not leave the quantity field blank. ";
+				}
+				else if(foundItem instanceof Equipment){
+					//stuff is good since no quantity for equipment 
+				}
+				else{ //not supposed to happen
+					error += "stuff happened. ";
+				}
+			}
+		}
+		else if (desiredQuantity <= 0) {
+			error += "Please enter a valid quantity. ";
 		}
 
 		if (foundItem == null) {
@@ -253,6 +268,8 @@ public class InventoryController extends Controller {
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
 		}
+		
+		foundItem.delete();
 	}
 
 	public String viewInventoryItemCost(int index) {

@@ -1,0 +1,48 @@
+<ca.mcgill.ecse321.urlms.model.URLMS id="1">
+  <labs id="2">
+    <ca.mcgill.ecse321.urlms.model.Lab id="3">
+      <name>Lab</name>
+      <staffMembers id="4"/>
+      <inventoryItems id="5">
+        <ca.mcgill.ecse321.urlms.model.SupplyType id="6">
+          <name>Allloo</name>
+          <cost>1.0</cost>
+          <category>GrosITEM</category>
+          <lab reference="3"/>
+          <quantity>1</quantity>
+        </ca.mcgill.ecse321.urlms.model.SupplyType>
+        <ca.mcgill.ecse321.urlms.model.Equipment id="7">
+          <name>Allloo</name>
+          <cost>1.0</cost>
+          <category>GrosITEM</category>
+          <lab reference="3"/>
+          <isDamaged>false</isDamaged>
+        </ca.mcgill.ecse321.urlms.model.Equipment>
+        <ca.mcgill.ecse321.urlms.model.SupplyType id="8">
+          <name>Allloo</name>
+          <cost>1.0</cost>
+          <category>Ayyyyyyyy</category>
+          <lab reference="3"/>
+          <quantity>1</quantity>
+        </ca.mcgill.ecse321.urlms.model.SupplyType>
+        <ca.mcgill.ecse321.urlms.model.Equipment id="9">
+          <name>Ferassss</name>
+          <cost>123.123</cost>
+          <category>Grosgars</category>
+          <lab reference="3"/>
+          <isDamaged>false</isDamaged>
+        </ca.mcgill.ecse321.urlms.model.Equipment>
+        <ca.mcgill.ecse321.urlms.model.SupplyType id="10">
+          <name>Feras</name>
+          <cost>123.123</cost>
+          <category>Grosgars</category>
+          <lab reference="3"/>
+          <quantity>12333333</quantity>
+        </ca.mcgill.ecse321.urlms.model.SupplyType>
+      </inventoryItems>
+      <fundingAccounts id="11"/>
+      <financialReports id="12"/>
+      <uRLMS reference="1"/>
+    </ca.mcgill.ecse321.urlms.model.Lab>
+  </labs>
+</ca.mcgill.ecse321.urlms.model.URLMS>
