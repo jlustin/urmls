@@ -19,7 +19,6 @@
 	<html>
 		<head>
 			<title>URLMS</title>
-			<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -96,7 +95,16 @@
 			$this->urlms = $persistence->loadDataFromStore();
 			
 		}
-		
+		/**
+		 * This method will find and edit an inventory item.
+		 * 
+		 * @param unknown $name
+		 * @param unknown $cost
+		 * @param unknown $category
+		 * @param unknown $isDamaged
+		 * @param unknown $quantity
+		 * @throws Exception
+		 */
 		function updateInventory($name, $cost, $category, $isDamaged, $quantity){
 			if($name == null || strlen($name) == 0){
 				throw new Exception ("Please enter a valid name.");
@@ -108,9 +116,11 @@
 				throw new Exception ("Please enter a valid cost.");
 			}
 			else {
+				//Retrieve URLMS and item to be edited
 				$urlms = $_SESSION['urlms'];
 				$inventoryItem = $_SESSION['inventoryitem'];
 				
+				//Modify item appropriately
 				$inventoryItem->setName($name);
 				$inventoryItem->setCost($cost);
 				$inventoryItem->setCategory($category);
@@ -135,8 +145,6 @@
 						}
 					}
 				}
-			
-				//$persistence = new Persistence();
 				$this->persistence->writeDataToStore($urlms);
 				
 				?>
@@ -161,7 +169,14 @@
 				<?php 
 			}
 		}
-		
+		/**
+		 * This method will find and update a staff member.
+		 * 
+		 * @param unknown $name
+		 * @param unknown $id
+		 * @param unknown $salary
+		 * @throws Exception
+		 */
 		function updateStaffMember($name, $id, $salary){
 			if($name == null || strlen($name) == 0 || !$this->isValidStr($name)){
 				throw new Exception ("Please enter a valid name.");
@@ -170,16 +185,16 @@
 			} elseif ($salary == null || !is_numeric($salary)){
 				throw new Exception ("Please enter a valid number for the salary.");
 			}else {
+				//Retrieve URLMS and staff member to be updated.
 				$urlms = $_SESSION['urlms'];
 				$staffMember = $_SESSION['staffmember'];
 				
+				//Update staff member
 				$staffMember->setName($name);
 				$staffMember->setId($id);
 				$staffMember->setWeeklySalary($salary);
 				
-				//$persistence = new Persistence();
-				$this->persistence->writeDataToStore($urlms);
-				
+				$this->persistence->writeDataToStore($urlms);				
 				?>
 				<html>
 					<meta http-equiv="refresh" content="0; URL='../view/StaffView.php'" />
@@ -202,15 +217,21 @@
 				<?php 				
 			}
 		}
-		
+		/**
+		 * This method will update the roles of a given staff member
+		 * @param unknown $roles
+		 */
 		function updateRoles($roles){
+			//Retrieve URLMS and staff member to update
 			$urlms = $_SESSION['urlms'];
 			$staffMember = $_SESSION['staffmember'];
 			
+			//First delete the roles of the staff member
 			foreach ($staffMember->getResearchRoles() as $r){
 				$r->delete();
 			}
 			
+			//Then add the desired roles
 			foreach ($roles as $r){
 				switch ($r){
 					case "ResearchAssociate":
@@ -222,40 +243,51 @@
 				}
 			}	
 			
-			//$persistence = new Persistence();
 			$this->persistence->writeDataToStore($urlms);
 		}
 		
+		/**
+		 * This method will add a progress update to a staff member.
+		 * @param unknown $desc
+		 * @param unknown $date
+		 * @throws Exception
+		 */
 		function addProgressUpdate($desc, $date){
 			if($desc == null || strlen($desc) == 0 ){
 				throw new Exception ("Please enter a progress update description.");
 			}elseif ($date == null || strlen($date) == 0){
 				throw new Exception ("Please enter a date.");
 			}else {
+				//Retrieve URLMS and desired staff member
 				$urlms = $_SESSION['urlms'];
 				$staffMember = $_SESSION['staffmember'];
 				
+				//Add progress update to staff member
 				$staffMember->addProgressUpdate(new ProgressUpdate($date, $desc,$staffMember));
 				
-				//$persistence = new Persistence();
 				$this->persistence->writeDataToStore($urlms);
 			}
 		}
 		
+		/**
+		 * This method will update the type (name) of the desired account
+		 * @param unknown $newType
+		 * @throws Exception
+		 */
 		function updateAccount($newType){
 			if($newType == null || strlen($newType) == 0 || !$this->isValidStr($newType)){
 				throw new Exception ("Please enter a valid funding account type.");	
 			}elseif($newType == "Staff Funding" || $newType == "Equipment Funding" || $newType == "Supply Funding"){
 				throw new Exception ("Can't edit account with this name!");
 			}else{
+				//Retrieve URLMS and desired account
 				$fundingAccount = $_SESSION['fundingaccount'];
 				$urlms = $_SESSION['urlms'];
 				
+				//Update account type (name)
 				$fundingAccount->setType($newType);
 				
-				//$persistence = new Persistence();
 				$this->persistence->writeDataToStore($urlms);
-				
 				?>
 				<html>
 					<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
@@ -279,6 +311,14 @@
 			}
 		}
 		
+		/**
+		 * This method will modify a given expense.
+		 * @param unknown $expenseType
+		 * @param unknown $newExpenseType
+		 * @param unknown $newAmount
+		 * @param unknown $newDate
+		 * @throws Exception
+		 */
 		function updateExpense($expenseType, $newExpenseType, $newAmount, $newDate){
 			if($expenseType == null || strlen($expenseType) == 0 || !$this->isValidStr($expenseType)){
 				throw new Exception ("Please enter a valid expense type.");
@@ -291,14 +331,15 @@
 			else if ($newDate == null || strlen($newDate) == 0){
 				throw new Exception ("Please enter a date.");
 			} else {
+				//Retrieve URLMS and funding account containing expense
 				$fundingAccount = $_SESSION['fundingAccount'];
 				$urlms = $_SESSION['urlms'];
 				$expense = null;
 				
 				$fundingAccountBalance = $fundingAccount->getBalance();
-				
 				$expenses = $fundingAccount->getExpenses();
 				
+				//Find desired expense
 				foreach ($expenses as $e){
 					if($expenseType == $e->getType()){
 						$expense = $e;
@@ -311,6 +352,7 @@
 				
 				$oldExpenseAmount = $expense->getAmount();
 				
+				//Modify expense to desired attributes
 				$expense->setType($newExpenseType);
 				$expense->setAmount($newAmount);
 	 			$expense->setDate($newDate);
@@ -318,9 +360,7 @@
 				$expenseAmountDiff = $expense->getAmount() - $oldExpenseAmount;			
 				$fundingAccount->setBalance($fundingAccountBalance + $expenseAmountDiff);
 				
-				//$persistence = new Persistence();
 				$this->persistence->writeDataToStore($urlms);
-				
 				?>
 				<html>
 					<meta http-equiv="refresh" content="0; URL='../view/FundingView.php'" />
@@ -344,7 +384,11 @@
 			}
 		}
 		
-		//Check if string is alphabetical letters and spaces
+		/**
+		 * This method checks if a given string is only composed of letters and spaces.
+		 * @param unknown $str
+		 * @return boolean
+		 */
 		function isValidStr($str){
 			for ($i = 0; $i < strlen($str); $i++){
 				if(! ((65 <= ord($str[$i]) && ord($str[$i]) <= 90) || (97 <= ord($str[$i]) && ord($str[$i]) <= 122) || ord($str[$i]) == 32)){				
