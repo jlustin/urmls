@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
+import ca.mcgill.ecse321.urlms.model.ResearchRole;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 
 public class StaffPagePO extends JFrame {
@@ -93,13 +94,27 @@ public class StaffPagePO extends JFrame {
 					List<StaffMember> staffList = controller.viewStaffList();
 					String name;
 					int id;
+					List<ResearchRole> roles;
+					String roleString = "";
+
 					staffMemberListLabel.setText("<html>");
 					for (StaffMember aMember : staffList) {
 						String previousText = staffMemberListLabel.getText();
 						name = aMember.getName();
 						id = aMember.getId();
+						roles = aMember.getResearchRoles();
+						for(ResearchRole role: roles) {
+							roleString = roleString + role.getClass().getSimpleName() + " ";
+						}
+						
+						
 						staffMemberListLabel.setText(previousText + "Name: " + name + "&nbsp &nbsp &nbsp "
-						+ "ID: " +  id + " <br/>");
+						+ "ID: " +  id + "&nbsp &nbsp &nbsp " + "Salary: " +
+								String.format("%.2f", aMember.getWeeklySalary()) + 
+								 "&nbsp &nbsp &nbsp " + "Role(s): " +
+								 roleString + " <br/>");
+						
+						roleString = "";
 					}
 					String previousText = staffMemberListLabel.getText();
 					staffMemberListLabel.setText(previousText + "</html>");
