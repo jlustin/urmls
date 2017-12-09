@@ -61,7 +61,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addSupplyItem(name, category, cost, quantity);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -69,7 +69,7 @@ public class InventoryControllerTest {
 			List<InventoryItem> items = controller.viewInventoryList();
 			testList = items;
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -84,7 +84,7 @@ public class InventoryControllerTest {
 			List<InventoryItem> items = controller.viewInventoryList();
 			testList = items;
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -93,7 +93,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addSupplyItem("", "", -1, -1);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -113,7 +113,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addSupplyItem(name, category, cost, quantity);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -121,7 +121,7 @@ public class InventoryControllerTest {
 			List<InventoryItem> items = controller.viewInventoryList();
 			testList = items;
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -142,7 +142,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addEquipmentItem(name, category, cost);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 	
@@ -169,7 +169,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addSupplyItem(name, category, cost, quantity);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 	
@@ -194,7 +194,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addEquipmentItem(name, category, cost);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -216,7 +216,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addEquipmentItem(name, category, cost);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -228,7 +228,7 @@ public class InventoryControllerTest {
 		try {
 			controller.removeInventoryItembyName("test remove");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -244,7 +244,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addEquipmentItem(name, category, cost);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -267,7 +267,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addEquipmentItem(name, category, cost);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -291,7 +291,7 @@ public class InventoryControllerTest {
 		try {
 			controller.addSupplyItem(name, category, cost, quantity);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 	

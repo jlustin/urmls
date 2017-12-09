@@ -12,9 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
-import ca.mcgill.ecse321.urlms.model.Expense;
 import ca.mcgill.ecse321.urlms.model.FundingAccount;
-import ca.mcgill.ecse321.urlms.model.InventoryItem;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
@@ -61,7 +59,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -69,7 +67,7 @@ public class FundingControllerTest {
 			List<FundingAccount> accounts = controller.viewFundingAccounts();
 			testList = accounts;
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -95,7 +93,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -103,7 +101,7 @@ public class FundingControllerTest {
 			List<FundingAccount> accounts = controller.viewFundingAccounts();
 			testList = accounts;
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -117,7 +115,7 @@ public class FundingControllerTest {
 			List<FundingAccount> accounts = controller.viewFundingAccounts();
 			testList = accounts;
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -131,11 +129,10 @@ public class FundingControllerTest {
 		String err = "";
 		String name = "test transaction";
 		double balance = 123;
-		List<FundingAccount> testList = null;
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -144,21 +141,21 @@ public class FundingControllerTest {
 		try {
 			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
 		try {
 			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
 		try {
 			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -167,7 +164,7 @@ public class FundingControllerTest {
 		try {
 			controller.getFundingAccount("abcdefghijkmlnoqprstugvwyz");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -179,7 +176,6 @@ public class FundingControllerTest {
 		String err = "";
 		String name = "test transaction";
 		double balance = 123;
-		List<FundingAccount> testList = null;
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
@@ -234,14 +230,14 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
 		try {
 			testAccount = controller.getFundingAccount("test get account");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -251,7 +247,7 @@ public class FundingControllerTest {
 		try {
 			testAccount = controller.getFundingAccount("");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -284,13 +280,13 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		try {
 			controller.addFundingAccount(name2, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -311,7 +307,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -331,7 +327,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -358,7 +354,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -370,7 +366,7 @@ public class FundingControllerTest {
 		try {
 			controller.editFundingAccount("test edit", "new test edit");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -381,7 +377,7 @@ public class FundingControllerTest {
 		try {
 			controller.editFundingAccount("", "");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -398,7 +394,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -415,7 +411,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -432,7 +428,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		///////
@@ -441,13 +437,13 @@ public class FundingControllerTest {
 		try {
 			assertEquals("test type", controller.viewFundingAccountExpenses("test view expenses").get(0).getType());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		try {
 			assertEquals("1/2/3", controller.viewFundingAccountExpenses("test view expenses").get(0).getDate());
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		assertEquals("", err);
@@ -455,7 +451,7 @@ public class FundingControllerTest {
 		try {
 			controller.viewFundingAccountExpenses("");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -471,7 +467,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		///////
@@ -491,7 +487,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		///////
@@ -513,7 +509,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -534,7 +530,7 @@ public class FundingControllerTest {
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
@@ -543,7 +539,7 @@ public class FundingControllerTest {
 		try {
 			controller.removeFundingAccount("test remove");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -553,7 +549,7 @@ public class FundingControllerTest {
 		try {
 			controller.removeFundingAccount("");
 		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
+			
 			err = e.getMessage();
 		}
 		
