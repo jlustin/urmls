@@ -600,21 +600,594 @@ class InfoUpdaterTest extends PHPUnit_Framework_TestCase
 	 * 	TODO: Finish Update Staff Member Tests
 	 * 	Update Staff Member Tests
 	 */
+	public function testUpdateStaffMember()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		$this->controller->updateStaffMember("victor", 1001, 1001);
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals("victor", $newStaffMember->getName());
+		$this->assertEquals(1001, $newStaffMember->getId());
+		$this->assertEquals(1001, $newStaffMember->getWeeklySalary());
+	}
+	
+	public function testUpdateStaffMemberNullName()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		try {
+			$this->controller->updateStaffMember(null, 1001, 1001);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid name.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+	}
+	
+	public function testUpdateStaffMemberInvalidName()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		try {
+			$this->controller->updateStaffMember("#victor", 1001, 1001);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid name.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+	}
+	
+	public function testUpdateStaffMemberNullId()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		try {
+			$this->controller->updateStaffMember("victor", null, 1001);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid number for the ID.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+	}
+	
+	public function testUpdateStaffMemberInvalidId()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		try {
+			$this->controller->updateStaffMember("victor", "one hundred", 1001);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid number for the ID.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+	}
+	
+	public function testUpdateStaffMemberNullSalary()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		try {
+			$this->controller->updateStaffMember("victor", 1001, null);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid number for the salary.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+	}
+	
+	public function testUpdateStaffMemberInvalidSalary()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		try {
+			$this->controller->updateStaffMember("victor", 1001, "infinity");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid number for the salary.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+	}
 	
 	/**
 	 * 	TODO: Finish Update Staff Role Tests
-	 * 	Update Invnetory Tests
+	 * 	Update Staff Role Tests
 	 */
+	public function testUpdateRoles()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		$this->urlms->getLab_index(0)->getStaffMember_index(0)->addResearchRole(new ResearchAssociate("", $newStaffMember));
+		$this->urlms->getLab_index(0)->getStaffMember_index(0)->addResearchRole(new ResearchAssistant("", $newStaffMember));
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(2, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		$this->controller->updateRoles(["ResearchAssociate"]);
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
+	}
 	
 	/**
 	 * 	TODO: Finish Update Progress Update Test
 	 * 	Update Invnetory Tests
 	 */
+	public function testAddProgressUpdate()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		$newProgressUpdate = new ProgressUpdate("10/10/10", "Hello", $newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getProgressUpdates()));
+		
+		$this->controller->addProgressUpdate("Hello2", "11/10/10");
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(2, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getProgressUpdates()));
+	}
+	
+	public function testAddProgressUpdateNullDescription()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		$newProgressUpdate = new ProgressUpdate("10/10/10", "Hello", $newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getProgressUpdates()));
+		
+		try {
+			$this->controller->addProgressUpdate(null, "11/10/10");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a progress update description.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getProgressUpdates()));
+	}
+	
+	public function testAddProgressUpdateDate()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		$newProgressUpdate = new ProgressUpdate("10/10/10", "Hello", $newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getProgressUpdates()));
+		
+		try {
+			$this->controller->addProgressUpdate("Hello2", null);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a date.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getProgressUpdates()));
+	}
 	
 	/**
 	 * 	TODO: Finish Update Account Test
-	 * 	Update Invnetory Tests
+	 * 	Update Account Tests
 	 */
+	public function testUpdateAccount()
+	{
+		// 1. Create test data
+		$newFundingAccount = new FundingAccount("DPM Budget", 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingaccount'] = $newFundingAccount;
+		
+		/*
+		 * 4 because a lab already has 3 funding accounts (supply, equipement, staff)
+		 */
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		
+		$this->controller->updateAccount("DPM Fund");
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		$this->assertEquals("DPM Fund", $newFundingAccount->getType());
+	}
+	
+	public function testUpdateAccountNullType()
+	{
+		// 1. Create test data
+		$newFundingAccount = new FundingAccount("DPM Budget", 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingaccount'] = $newFundingAccount;
+		
+		/*
+		 * 4 because a lab already has 3 funding accounts (supply, equipement, staff)
+		 */
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		
+		try {
+			$this->controller->updateAccount(null);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid funding account type.", $e->getMessage());
+		}
+				
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+	}
+	
+	public function testUpdateAccountInvalidType()
+	{
+		// 1. Create test data
+		$newFundingAccount = new FundingAccount("DPM Budget", 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingaccount'] = $newFundingAccount;
+		
+		/*
+		 * 4 because a lab already has 3 funding accounts (supply, equipement, staff)
+		 */
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		
+		try {
+			$this->controller->updateAccount("#dpm");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid funding account type.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+	}
+	
+	public function testUpdateAccountReservedType1()
+	{
+		// 1. Create test data
+		$newFundingAccount = new FundingAccount("DPM Budget", 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingaccount'] = $newFundingAccount;
+		
+		/*
+		 * 4 because a lab already has 3 funding accounts (supply, equipement, staff)
+		 */
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		
+		try {
+			$this->controller->updateAccount("Staff Funding");
+		} catch (Exception $e) {
+			$this->assertEquals("Can't edit account with this name!", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+	}
+	
+	public function testUpdateAccountReservedType2()
+	{
+		// 1. Create test data
+		$newFundingAccount = new FundingAccount("DPM Budget", 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingaccount'] = $newFundingAccount;
+		
+		/*
+		 * 4 because a lab already has 3 funding accounts (supply, equipement, staff)
+		 */
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		
+		try {
+			$this->controller->updateAccount("Equipment Funding");
+		} catch (Exception $e) {
+			$this->assertEquals("Can't edit account with this name!", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+	}
+	
+	public function testUpdateAccountReservedType3()
+	{
+		// 1. Create test data
+		$newFundingAccount = new FundingAccount("DPM Budget", 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addFundingAccount($newFundingAccount);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingaccount'] = $newFundingAccount;
+		
+		/*
+		 * 4 because a lab already has 3 funding accounts (supply, equipement, staff)
+		 */
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+		
+		try {
+			$this->controller->updateAccount("Supply Funding");
+		} catch (Exception $e) {
+			$this->assertEquals("Can't edit account with this name!", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(4, count($this->urlms->getLab_index(0)->getFundingAccounts()));
+	}
 	
 	/**
 	 * 	TODO: Finish Update Expense Test
@@ -625,5 +1198,53 @@ class InfoUpdaterTest extends PHPUnit_Framework_TestCase
 	 * 	TODO: Finish Is Valid String Test
 	 * 	Update Is Valid String Tests
 	 */
+	public function testIsValidString()
+	{
+		// 1. Create test data
+		$boolean = false;
+		
+		$string = "URLMS";
+		
+		$boolean = $this->controller->isValidStr($string);
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(true, $boolean);
+	}
 	
+	public function testIsNotValidString()
+	{
+		// 1. Create test data
+		$boolean = true;
+		
+		$string = "#URLMS";
+		
+		$boolean = $this->controller->isValidStr($string);
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(false, $boolean);
+	}
 }?>
