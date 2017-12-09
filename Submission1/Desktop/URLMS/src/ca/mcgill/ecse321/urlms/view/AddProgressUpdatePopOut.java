@@ -162,7 +162,7 @@ public class AddProgressUpdatePopOut extends JFrame {
 			lblError.setText(error);
 		}
 		else{
-			lblError.setText("Please progress. If you want.");
+			lblError.setText("Progress update successfully added.");
 		}
 	}
 	

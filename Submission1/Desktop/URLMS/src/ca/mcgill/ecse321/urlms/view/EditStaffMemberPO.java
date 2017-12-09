@@ -1,17 +1,11 @@
 package ca.mcgill.ecse321.urlms.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
-import ca.mcgill.ecse321.urlms.model.URLMS;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -20,7 +14,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 
@@ -45,6 +38,10 @@ public class EditStaffMemberPO extends JFrame {
 	 * Create the frame.
 	 */
 	public EditStaffMemberPO() {
+		initComponents();
+	}
+	
+	private void initComponents(){
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Edit Staff Member");
@@ -203,7 +200,7 @@ public class EditStaffMemberPO extends JFrame {
 			lblError.setText(error);
 		}
 		else{
-			lblError.setText("Please edit a staff member. If you want.");
+			lblError.setText("Staff successfully edited/deleted.");
 		}
 	}
 	

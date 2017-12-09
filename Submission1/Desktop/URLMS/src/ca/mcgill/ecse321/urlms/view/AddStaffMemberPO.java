@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.urlms.view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -73,8 +71,8 @@ public class AddStaffMemberPO extends JFrame {
 				boolean box2 = ResearchAssociateBox.isSelected();
 				
 				String stringSalary = txtSalary.getText();
-				if(stringSalary.toLowerCase().trim() == "celery"){
-					error += "nice try with the celery.";
+				if(stringSalary.toLowerCase().trim().equals("celery")){
+					error += "Nice try with the celery. ";
 				}
 				double doubleSalary;
 				try {
@@ -174,7 +172,7 @@ public class AddStaffMemberPO extends JFrame {
 			lblError.setText(error);
 		}
 		else{
-			lblError.setText("Please add a staff member. If you want.");
+			lblError.setText("Staff member successfully added.");
 		}
 	}
 	
