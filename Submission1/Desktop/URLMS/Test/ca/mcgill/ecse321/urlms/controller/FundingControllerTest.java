@@ -75,6 +75,12 @@ public class FundingControllerTest {
 		assertEquals("", err);
 		assertEquals("test add", aLab.getFundingAccount(0).getType());
 		assertEquals(1, testList.size());
+		
+		try{
+			controller.addFundingAccount("", 123);
+		}catch(InvalidInputException e){
+			assertEquals("Please enter a name for the account.", e.getMessage());
+		}
 	}
 
 	@Test
@@ -97,10 +103,23 @@ public class FundingControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertEquals("", err);
 		assertEquals("test view", aLab.getFundingAccount(0).getType());
 		assertEquals(1, testList.size());
+		
+		controller.removeFundingAccount(0);
+		
+		try {
+			List<FundingAccount> accounts = controller.viewFundingAccounts();
+			testList = accounts;
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("There are no funding accounts to display.", err);
+		
 	}
 
 	@Test
@@ -142,6 +161,60 @@ public class FundingControllerTest {
 		assertEquals("", err);
 		
 	}
+	
+	@Test
+	public void testAddTransactionByName() {
+		String err = "";
+		String name = "test transaction";
+		double balance = 123;
+		List<FundingAccount> testList = null;
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			controller.addTransaction("1/2/3", 111, "test type", "test transaction");
+		} catch (InvalidInputException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		
+		
+		try {
+			controller.addTransaction("", 111, "", "");
+		} catch (InvalidInputException e1) {
+			// TODO Auto-generated catch block
+			err = e1.getMessage();
+		}
+		
+		assertEquals("Please enter a date. Please enter a transaction type. Please enter a funding account name", err);
+	}
 
 	@Test
 	public void testGetFundingAccount() {
@@ -168,13 +241,31 @@ public class FundingControllerTest {
 		assertEquals("test get account", testAccount.getType());
 		assertEquals("", err);
 		
+		try {
+			testAccount = controller.getFundingAccount("");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("Please enter a name for the account.", err);
+		
 	}
 
-//	@Test
-//	public void testInitiateFundingAccounts() {
-//		
-//		
-//	}
+	@Test
+	public void testInitiateFundingAccounts() {
+		
+		controller.initiateFundingAccounts();
+		
+		String testName = aLab.getFundingAccount(0).getType();
+		String testName1 = aLab.getFundingAccount(1).getType();
+		String testName2 = aLab.getFundingAccount(2).getType();
+		
+		assertEquals("Supply Funds", testName);
+		assertEquals("Equipment Funds", testName1);
+		assertEquals("Staff Funds", testName2);
+		
+	}
 
 	@Test
 	public void testViewNetBalance() {
@@ -227,7 +318,7 @@ public class FundingControllerTest {
 	public void testAddFunding() {
 		
 		String err = "";
-		String name = "test view balance";
+		String name = "test add Funding";
 		double balance = 123;
 		
 		try {
@@ -270,7 +361,7 @@ public class FundingControllerTest {
 		assertEquals("test edit", aLab.getFundingAccount(0).getType());
 		
 		try {
-			controller.editFinancialAccount("test edit", "new test edit");
+			controller.editFundingAccount("test edit", "new test edit");
 		} catch (InvalidInputException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -279,6 +370,16 @@ public class FundingControllerTest {
 		assertEquals("123.0", testBalance);
 		assertEquals("new test edit", aLab.getFundingAccount(0).getType());
 		assertEquals("", err);
+		
+		try {
+			controller.editFundingAccount("", "");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("Please enter the old name for the account. Please enter the new name for the account.", err);
+		
 	}
 
 	@Test
@@ -330,9 +431,28 @@ public class FundingControllerTest {
 		///////
 		controller.addTransaction("1/2/3", 111, "test type", 0);
 		
-		assertEquals("test type", controller.viewFundingAccountExpenses("test view expenses").get(0).getType());
-		assertEquals("1/2/3", controller.viewFundingAccountExpenses("test view expenses").get(0).getDate());
+		try {
+			assertEquals("test type", controller.viewFundingAccountExpenses("test view expenses").get(0).getType());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("1/2/3", controller.viewFundingAccountExpenses("test view expenses").get(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals("", err);
+		
+		try {
+			controller.viewFundingAccountExpenses("");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("Please enter the name for the account. ", err);
 	}
 
 	@Test
@@ -413,10 +533,24 @@ public class FundingControllerTest {
 		
 		assertEquals("test remove", aLab.getFundingAccount(0).getType());
 		
-		controller.removeFundingAccount("test remove");
+		try {
+			controller.removeFundingAccount("test remove");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		assertEquals(0, aLab.getFundingAccounts().size());
 		assertEquals("", err);
+		
+		try {
+			controller.removeFundingAccount("");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("Please enter the name for the account. ", err);
 	}
 
 }
