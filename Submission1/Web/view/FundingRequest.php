@@ -45,7 +45,7 @@ switch($_GET['action']){
 	case "3/10":
 		try{
 			if(!isset($_GET['type'])){
-				echo "Please chose a type of transaction<br>";
+				echo "Please choose a type of transaction<br>";
 				echo"<a href= \"FundingView.php\">Back</a><br>";
 			}else $invC->addTransaction($_GET['account'], $_GET['expensetype'], $_GET['amount'], $_GET['type'], $_GET['date']);
 		} catch (Exception $e){
