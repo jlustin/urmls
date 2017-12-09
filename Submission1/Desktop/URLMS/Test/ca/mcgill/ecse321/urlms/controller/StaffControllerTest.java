@@ -342,7 +342,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		
-		controller.editStaffmemberRecord(0, 123, "Victor", false, true, 100);
+		try {
+			controller.editStaffmemberRecordByID(aLab.getStaffMember(0).getId(), 123, "Victor", false, true, 123);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals("Victor", aLab.getStaffMember(0).getName());
 		assertEquals("ResearchAssociate", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
