@@ -13,9 +13,10 @@ import ca.mcgill.ecse321.urlms.model.URLMS;
 public class StaffController extends Controller {
 
 	/**
-	 * Add Progress Update
-	 * 
-	 * @param desired date by string and desired description by string
+	 * This method will add a progress update to a specific staff member in the lab by index.
+	 * @param date of the progress update
+	 * @param description of the progress update
+	 * @param index of the staff member in the list
 	 */
 	public void addProgress(String date, String description, int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -24,6 +25,13 @@ public class StaffController extends Controller {
 		aStaffMember.addProgressUpdate(date, description);
 	}
 
+	/**
+	 * This method will add a progress update to a specific staff member in the lab by ID.
+	 * @param date of the progress update
+	 * @param description of the progress update
+	 * @param id of the staff member
+	 * @throws InvalidInputException
+	 */
 	public void addProgressByID(String date, String description, int id) throws InvalidInputException {
 		String error = "";
 		if (description.isEmpty()) {
@@ -53,7 +61,12 @@ public class StaffController extends Controller {
 		aStaffMember.addProgressUpdate(date, description);
 	}
 
-	// helper method for adding roles specificied by checkbox / radio button
+	/**
+	 * This method is a helper method to add roles to a staff member using booleans.
+	 * @param aStaffMember
+	 * @param isAssistant boolean
+	 * @param isAssociate boolean
+	 */
 	public void addRoles(StaffMember aStaffMember, boolean isAssistant, boolean isAssociate) {
 		if (aStaffMember.hasResearchRoles()) {
 			aStaffMember.getResearchRole(0).delete();
@@ -75,12 +88,12 @@ public class StaffController extends Controller {
 	}
 
 	/**
-	 * This method will add a staff member in the lab
-	 * 
-	 * @param name of the staff member by String and staff Roles defined by
-	 *            booleans for checkedbox/radio buttons box1==staff assistant
-	 *            box2==staff associate
-	 * @throws InvalidInputException 
+	 * This method will add a staff member to the lab.
+	 * @param name of the staff member
+	 * @param isAssistant role of member true or false
+	 * @param isAssociate role of member true or false
+	 * @param weeklySalary of the staff member
+	 * @throws InvalidInputException
 	 */
 	public void addStaffMember(String name, boolean isAssistant, boolean isAssociate, double weeklySalary) throws InvalidInputException {
 		String error = "";
@@ -117,9 +130,9 @@ public class StaffController extends Controller {
 	}
 
 	/**
-	 * Edit staff name
-	 * 
-	 * @param desired name change by string & id of the staff member by int
+	 * This method will edit the name of a specific staff member in the lab.
+	 * @param desiredName of the edit
+	 * @param id index of the staff member in the list
 	 */
 	public void editStaffmemberName(String desiredName, int id) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -128,10 +141,13 @@ public class StaffController extends Controller {
 	}
 
 	/**
-	 * This method will edit the record of a specific staff member by ID
-	 * 
-	 * @param id of the staff member by int box1 and box2 are radio buttons
-	 * selected by user box1 == Research Assistant box2 == Research Associate
+	 * This method will edit the records of a specific staff member in the lab
+	 * @param index of the staff member in the list
+	 * @param id new id desired of the staff member
+	 * @param desiredName of the staff member
+	 * @param isAssistant role true or false
+	 * @param isAssociate role true or false
+	 * @param weeklySalary desired of the staff member
 	 */
 	public void editStaffmemberRecord(int index, int id, String desiredName, boolean isAssistant, boolean isAssociate,
 			double weeklySalary) {
@@ -144,6 +160,16 @@ public class StaffController extends Controller {
 		addRoles(aStaffMember, isAssistant, isAssociate);
 	}
 
+	/**
+	 * This method will edit the records of a specific staff member in the lab by ID.
+	 * @param id of the target staff member
+	 * @param newID desired for the staff member
+	 * @param desiredName for the staff member
+	 * @param isAssistant role true or false
+	 * @param isAssociate role true or false
+	 * @param weeklySalary desired of the staff member
+	 * @throws InvalidInputException
+	 */
 	public void editStaffmemberRecordByID(int id, int newID, String desiredName, boolean isAssistant,
 			boolean isAssociate, double weeklySalary) throws InvalidInputException {
 		String error = "";
@@ -191,6 +217,12 @@ public class StaffController extends Controller {
 
 	}
 
+	/**
+	 * This method will get a staff member by ID.
+	 * @param id of the targeted staff member
+	 * @return the staff member wanted
+	 * @throws InvalidInputException
+	 */
 	public StaffMember getStaffMemberByID(int id) throws InvalidInputException {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -209,9 +241,9 @@ public class StaffController extends Controller {
 	}
 
 	/**
-	 * This method will remove a staff member in the lab by id
+	 * This method will remove a staff member in the lab.
 	 * 
-	 * @param id of the staff member by int
+	 * @param id index of the staff member in the list
 	 */
 	public void removeStaffMember(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
@@ -220,6 +252,11 @@ public class StaffController extends Controller {
 
 	}
 
+	/**
+	 * This method will remove a staff member in the lab by ID.
+	 * @param id of the staff member
+	 * @throws InvalidInputException
+	 */
 	public void removeStaffMemberByID(int id) throws InvalidInputException {
 		boolean wasRemoved = false;
 		
@@ -242,6 +279,12 @@ public class StaffController extends Controller {
 		}
 	}
 
+	/**
+	 * This method is used to view the progress updates of a staff member by ID.
+	 * @param id of the targeted staff member
+	 * @return a list of progress updates related to the staff member
+	 * @throws InvalidInputException
+	 */
 	public List<ProgressUpdate> viewProgressUpdateByID(int id) throws InvalidInputException {
 
 		StaffMember currentStaffMember = getStaffMemberByID(id);
@@ -305,6 +348,11 @@ public class StaffController extends Controller {
 		return URLMSApplication.getURLMS().getLab(0).getStaffMembers().get(index).getName();
 	}
 
+	/**
+	 * This method will get the ID of a specific staff member in the list and return as a string
+	 * @param index of the staff member in the list
+	 * @return the ID of the staff member as a String
+	 */
 	public String viewStaffMemberID(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
