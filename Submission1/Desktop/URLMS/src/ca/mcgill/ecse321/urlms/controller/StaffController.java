@@ -76,9 +76,6 @@ public class StaffController extends Controller {
 		}
 	}
 
-	// TODO: USE CASES IMPLEMENTATION
-	// -----------------------------------------------
-
 	/**
 	 * This method will add a staff member in the lab
 	 * 
@@ -247,21 +244,6 @@ public class StaffController extends Controller {
 		}
 	}
 
-	/**
-	 * This method will get the progress update of a specific staff member by ID
-	 * number
-	 * 
-	 * @param id of the staff member by int
-	 * @return the progress update of the specific member
-	 */
-	public List<ProgressUpdate> viewProgressUpdate(int index) {
-
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		List<ProgressUpdate> progress = aLab.getStaffMember(index).getProgressUpdates();
-		return progress;
-	}
-
 	public List<ProgressUpdate> viewProgressUpdateByID(int id) throws InvalidInputException {
 
 		StaffMember currentStaffMember = getStaffMemberByID(id);
@@ -329,12 +311,5 @@ public class StaffController extends Controller {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		return String.valueOf(aLab.getStaffMember(index).getId());
-	}
-
-	
-	public String viewStaffMemberName(int index) {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		return aLab.getStaffMember(index).getName();
 	}
 }

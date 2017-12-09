@@ -52,43 +52,18 @@ public class StaffControllerTest {
 		File file = new File("urlmsTest.xml");
 		file.delete();
 	}
-	
-	// staff tests=================================
-
-			// StaffController sc = new StaffController();
-			// sc.addStaffMember("Victor",true,true);
-			// sc.addStaffMember("Eric",false,true);
-			//
-			// System.out.println(sc.viewStaffMemberName(0));
-			// System.out.println(sc.viewStaffMemberID(0));
-			// System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
-			// System.out.println(sc.viewStaffMemberName(1));
-			// System.out.println(sc.viewStaffMemberID(1));
-			// System.out.println(urlms.getLab(0).getStaffMember(1).getResearchRole(0).toString());
-			// sc.removeStaffMember(0);
-			// System.out.println(sc.viewStaffMemberName(0));
-			// System.out.println(sc.viewStaffMemberID(0));
-			// System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
-			// sc.addProgress("november 27", "du ma", 0);
-			// sc.addProgress("dec 8", "du ma presentation", 0);
-			// List<ProgressUpdate> progress = sc.viewProgressUpdate(0);
-			// for(int i=0; i<progress.size();i++) {
-			// System.out.println(progress.get(i).getDate());
-			// System.out.println(progress.get(i).getDescription());
-			// }
-			// sc.addStaffMember("Feras", true, false);
-			// System.out.println(urlms.getLab(0).getStaffMember(1).getId());
-			// System.out.println(urlms.getLab(0).getStaffMember(1).getName());
-			// sc.addStaffMember("JustinToMessUp", true, false);
-			// System.out.println(urlms.getLab(0).getStaffMember(2).getId());
-			// System.out.println(urlms.getLab(0).getStaffMember(2).getName());
-			//
 
 	@Test
 	public void testViewStaffList() {
 		
 		//check if the staff manager is empty
 		assertEquals(0, aLab.getStaffMembers().size());
+		
+		try{
+			controller.viewStaffList();
+		}catch(InvalidInputException e){
+			assertEquals("There are no staff members to display :(", e.getMessage());
+		}
 		
 		String name = "Feras"; //test name
 		
@@ -308,6 +283,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		
+		try{
+			controller.addStaffMember("", true, true, -1);
+		}catch(InvalidInputException e){
+			assertEquals("Please enter a name. Please enter a valid salary. Or try again with celery.", e.getMessage());
+		}
+		
 	}
 
 	@Test
@@ -358,6 +339,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssociate", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		assertEquals(123, aLab.getStaffMember(0).getId());
+		
+		try{
+			controller.editStaffmemberRecordByID(123456, -1, "", true, true, -1);
+		}catch(InvalidInputException e){
+			assertEquals("There is no staff matching the entered target ID. Please enter a name. Please enter a valid salary. Please enter a valid ID.",e.getMessage());
+		}
 
 	}
 
@@ -405,6 +392,18 @@ public class StaffControllerTest {
 		}
 		assertEquals("1/2/3", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
 		assertEquals("Add test by ID", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
+		
+		try{
+			controller.addProgressByID("", "", aLab.getStaffMember(0).getId());
+		}catch(InvalidInputException e){
+			assertEquals("Might want to enter a description. Might want to enter a date.",e.getMessage());
+		}
+		
+		try{
+			controller.addProgressByID("date", "desc", 12345678);
+		}catch(InvalidInputException e){
+			assertEquals("Bad ID; staff member was not found! ", e.getMessage());
+		}
 	}
 
 	@Test

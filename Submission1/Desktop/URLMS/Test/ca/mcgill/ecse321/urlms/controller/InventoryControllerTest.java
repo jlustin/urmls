@@ -49,63 +49,6 @@ public class InventoryControllerTest {
 		File file = new File("urlmsTest.xml");
 		file.delete();
 	}
-	
-	//TODO Add in appropriate JUnit tests
-	// //inventory tests=============================
-			//
-			//
-			// InventoryController ic = new InventoryController();
-			// ic.addEquipmentItem("Computer", 180.50);
-			// System.out.println(urlms.getLab(0).getInventoryItem(0).getName());
-			// ic.addSupplyItem("Crayon", 2, 100);
-			// System.out.println(urlms.getLab(0).getInventoryItem(1).getName());
-			// System.out.println(ic.viewSupplyItemQuantity(0));
-			// System.out.println(ic.viewSupplyItemQuantity(1));
-			// System.out.println(ic.viewInventoryItemName(0));
-			// System.out.println(ic.viewInventoryItemName(1));
-			// System.out.println("current size is "
-			// +ic.viewInventoryList().size());
-			// ic.removeInventoryItem(0);
-			// System.out.println("current size is " +ic.viewInventoryList().size()
-			// +" after deleting");
-			// ic.addSupplyItem("Crayola", 2.00, 80);
-			// ic.addEquipmentItem("Oscilloscope", 54.8);
-			// System.out.println("current size is "
-			// +ic.viewInventoryList().size());
-			// System.out.println(ic.viewInventoryItemName(1));
-			// System.out.println(ic.viewSupplyItemQuantity(1));
-			// System.out.println(ic.viewInventoryItemCost(1));
-			// System.out.println(ic.viewInventoryItemName(2));
-			// System.out.println(ic.viewSupplyItemQuantity(2));
-			// System.out.println(ic.viewInventoryItemCost(2));
-			// ic.editInventoryItemDetails(1, "Eraser", 2.1, 100);
-			// ic.editInventoryItemDetails(2, "GTX 1080", 2.5, 80);
-			// System.out.println(ic.viewInventoryItemName(1));
-			// System.out.println(ic.viewSupplyItemQuantity(1));
-			// System.out.println(ic.viewInventoryItemCost(1));
-			// System.out.println(ic.viewInventoryItemName(2));
-			// System.out.println(ic.viewSupplyItemQuantity(2));
-			// System.out.println(ic.viewInventoryItemCost(2));
-			//
-			// System.out.println("Checking if it's supply"+"\n");
-			// int InventorySize = ic.viewInventoryList().size();
-			// for(int i=0; i<InventorySize; i++) {
-			// if(ic.inventoryItemIsSupply(i)) {
-			// System.out.println(ic.viewInventoryItemName(i) + " is supply");
-			// }
-			// else System.out.println(ic.viewInventoryItemName(i) + " is NOT
-			// supply");
-			// }
-			// System.out.println("\n"+ "Checking if it's equipment"+"\n");
-			//
-			//
-			// for(int i=0; i<InventorySize; i++) {
-			// if(ic.inventoryItemIsEquipment(i)) {
-			// System.out.println(ic.viewInventoryItemName(i) + " is equipment");
-			// }
-			// else System.out.println(ic.viewInventoryItemName(i) + " is NOT
-			// equipment");
-			// }
 
 	@Test
 	public void testViewInventoryList() {
@@ -164,6 +107,8 @@ public class InventoryControllerTest {
 		assertEquals("test add", aLab.getInventoryItem(0).getName());
 		assertEquals("item inventory", aLab.getInventoryItem(0).getCategory());
 		assertEquals(1, testList.size());
+		
+		
 	}
 
 	@Test
@@ -178,12 +123,17 @@ public class InventoryControllerTest {
 			// TODO Auto-generated catch block
 			err = e.getMessage();
 		}
-		
 	
 		assertEquals("", err);
 		assertEquals("test add", aLab.getInventoryItem(0).getName());
 		assertEquals("equip", aLab.getInventoryItem(0).getCategory());
 		assertEquals(1, aLab.getInventoryItems().size());
+		
+		try{
+			controller.addEquipmentItem("", "", -1);
+		}catch(InvalidInputException e){
+			assertEquals("Please enter a name. Please enter a category. Please enter a valid cost.", e.getMessage());
+		}
 	}
 
 	@Test
@@ -204,6 +154,12 @@ public class InventoryControllerTest {
 		assertEquals("test add", aLab.getInventoryItem(0).getName());
 		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
 		assertEquals(1, aLab.getInventoryItems().size());
+		
+		try{
+			controller.addSupplyItem("", "", -1, -1);;
+		}catch(InvalidInputException e){
+			assertEquals("Please enter a name. Please enter a category. Please enter a valid cost. Please enter a valid quantity.", e.getMessage());
+		}
 	}
 
 	@Test
@@ -307,6 +263,7 @@ public class InventoryControllerTest {
 		double cost = 123;
 		try {
 			controller.addSupplyItem(name, category, cost, quantity);
+			controller.addEquipmentItem("equip", category, cost);
 		} catch (InvalidInputException e) {
 			err = e.getMessage();
 		}
@@ -314,7 +271,7 @@ public class InventoryControllerTest {
 		assertEquals("", err);
 		assertEquals("test add", aLab.getInventoryItem(0).getName());
 		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
-		assertEquals(1, aLab.getInventoryItems().size());
+		assertEquals(2, aLab.getInventoryItems().size());
 		
 		try {
 			controller.editInventoryItemDetails("test add", "new test name", "test category", 111, 2);
@@ -324,9 +281,23 @@ public class InventoryControllerTest {
 		
 		assertEquals("new test name", aLab.getInventoryItem(0).getName());
 		assertEquals("test category", aLab.getInventoryItem(0).getCategory());
-		assertEquals(1, aLab.getInventoryItems().size());
+		assertEquals(2, aLab.getInventoryItems().size());
 		
-		
+		try{
+			controller.editInventoryItemDetails("", "", "", -1, -1);
+		}catch(InvalidInputException e){
+			assertEquals("Please enter the existing item name. Please enter a new name. Please enter a category. Please enter a valid cost. Please enter a valid quantity. Requested inventory item not found :(", e.getMessage());
+		}
+		try{
+			controller.editInventoryItemDetails("new test name", "desiredName", "desiredCategory", 10, Integer.MIN_VALUE);
+		}catch(InvalidInputException e){
+			assertEquals("Do not leave the quantity field blank.", e.getMessage());
+		}
+		try{
+			controller.editInventoryItemDetails("equip", "desiredName", "desiredCategory", 10, Integer.MIN_VALUE);
+		}catch(InvalidInputException e){
+			assertEquals("", e.getMessage());
+		}
 	}
 
 	@Test
