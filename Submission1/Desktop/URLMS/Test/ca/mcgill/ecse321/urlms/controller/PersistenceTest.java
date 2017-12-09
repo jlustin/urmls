@@ -10,12 +10,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ca.mcgill.ecse321.urlms.application.URLMSApplication;
+import ca.mcgill.ecse321.urlms.model.Lab;
+import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
 public class PersistenceTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		URLMSApplication.setFilename("urlmsTest.xml");
 		File file = new File("urlmsTest.xml");
 		file.delete();
 		PersistenceXStream.setFilename("urlmsTest.xml");
@@ -36,23 +40,18 @@ public class PersistenceTest {
 	}
 
 	@Test
-	public void testInitializeModelManager() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSaveToXMLwithXStream() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testLoadFromXMLwithXStream() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetFilename() {
-		fail("Not yet implemented");
+	public void testPersistence() {
+		PersistenceXStream.initializeModelManager("urlmsTest.xml");
+		URLMS urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
+		PersistenceXStream.saveToXMLwithXStream(urlms);
+		
+		
+		String testName = urlms.getClass().getSimpleName();
+		
+		assertEquals("URLMS", testName);
+		assertEquals("Lab", urlms.getLab(0).getName());
+		assertEquals(1, urlms.getLabs().size());
+		
 	}
 
 }
