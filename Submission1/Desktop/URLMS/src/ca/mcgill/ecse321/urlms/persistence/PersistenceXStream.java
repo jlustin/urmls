@@ -52,7 +52,7 @@ public abstract class PersistenceXStream {
 			writer.close();
 			return true;
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			return false;
 		}
 	}
