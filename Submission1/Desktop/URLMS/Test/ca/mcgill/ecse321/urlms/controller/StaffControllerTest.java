@@ -378,7 +378,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 
-		controller.removeStaffMember(id);
+		try {
+			controller.removeStaffMemberByID(aLab.getStaffMember(0).getId());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		assertEquals(0, aLab.getStaffMembers().size());
 	}
@@ -411,15 +416,23 @@ public class StaffControllerTest {
 	public void testGetStaffMemberByID() {
 		String err = "";
 		String name = "Feras";
+		StaffMember testMember = null;
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
 			err = e.getMessage();
 		}
 		
+		try {
+			testMember = controller.getStaffMemberByID(aLab.getStaffMember(0).getId());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		assertEquals("", err);
-		assertEquals(name, aLab.getStaffMember(0).getName());
-		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(name, testMember.getName());
+		assertEquals("ResearchAssistant", testMember.getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		
 	}

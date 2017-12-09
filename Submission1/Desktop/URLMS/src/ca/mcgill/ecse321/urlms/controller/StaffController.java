@@ -228,19 +228,20 @@ public class StaffController extends Controller {
 	//TODO: this generates ConcurrentModificationException
 	public void removeStaffMemberByID(int id) throws InvalidInputException {
 		boolean wasRemoved = false;
-		int originalNumberStaff;
 		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 
-		originalNumberStaff = aLab.numberOfStaffMembers();
+		StaffMember m = null;
+
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
-				iteratedStaffMember.delete();
-				if(originalNumberStaff - aLab.numberOfStaffMembers() > 0){
-					wasRemoved = true;
-				}
+				m = iteratedStaffMember;
 			}
+		}
+		if(m != null) {
+			m.delete();
+			wasRemoved = true;
 		}
 		if(!wasRemoved){
 			throw new InvalidInputException("Staff Member was not deleted :( ");
