@@ -186,7 +186,7 @@ public class FundingControllerTest {
 		}
 		
 		try {
-			controller.addTransaction("1/2/3", 111, "test type", "test transaction");
+			controller.addExpense("1/2/3", 111, "test type", "test transaction");
 		} catch (InvalidInputException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

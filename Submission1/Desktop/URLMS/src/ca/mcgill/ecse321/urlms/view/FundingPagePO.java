@@ -127,7 +127,7 @@ public class FundingPagePO extends JFrame {
 		});
 		panel.add(btnRemoveItem);
 
-		btnTransactions = new JButton("Transaction");
+		btnTransactions = new JButton("Transactions");
 		btnTransactions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tppo.setVisible(true);

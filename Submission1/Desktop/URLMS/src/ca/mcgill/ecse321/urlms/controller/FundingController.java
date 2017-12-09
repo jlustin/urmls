@@ -53,7 +53,14 @@ public class FundingController extends Controller {
 		}
 	}
 
-	// TODO exceptions
+	
+	/**
+	 * @param date
+	 * @param amount
+	 * @param type
+	 * @param index
+	 * @deprecated uses index
+	 */
 	public void addTransaction(String date, double amount, String type, int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -61,16 +68,16 @@ public class FundingController extends Controller {
 		aLab.getFundingAccount(index).addExpense(aExpense);
 	}
 
+
 	/**
 	 * This method will add a transaction to the lab
-	 * 
-	 * @param amount
-	 *            of the cost of the transaction by double
-	 * @param type
-	 *            of transaction by String
+	 * @param date
+	 * @param amount of the cost of the transaction by double
+	 * @param type of transaction by String
+	 * @param fundingAccount
 	 * @throws InvalidInputException
 	 */
-	public void addTransaction(String date, double amount, String type, String fundingAccount)
+	public void addExpense(String fundingAccount, double amount, String date, String type)
 			throws InvalidInputException {
 		String error = "";
 
