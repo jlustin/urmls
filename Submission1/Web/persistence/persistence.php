@@ -1,5 +1,5 @@
 <?php
-	
+
 	class Persistence{
 		
 		private $filename;
@@ -7,7 +7,9 @@
 		/*
 		 * Constructor
 		 */
-		function __construct($filename = '../Persistence/data.txt') {
+		function __construct($filename = -1) {
+			if($filename == -1)
+				$this->filename = dirname(__FILE__) . '/../persistence/data.txt';
 			$this->filename = $filename;
 		}
 		
@@ -24,6 +26,10 @@
 				$urlms = new URLMS();
 				$lab = new Lab("9/10", $urlms);
 				$urlms->addLab($lab);
+				
+				$lab->addFundingAccount(new FundingAccount("Staff Funding", 0, $lab));
+				$lab->addFundingAccount(new FundingAccount("Equipment Funding", 0, $lab));
+				$lab->addFundingAccount(new FundingAccount("Supply Funding", 0, $lab));
 			}
 			// return urlms
 			return $urlms;

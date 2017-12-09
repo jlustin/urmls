@@ -2,10 +2,6 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
-// class Staff
-// {
-// 1 -- * StaffMember;
-// }
 class StaffMember
 {
 
@@ -16,6 +12,7 @@ class StaffMember
   //StaffMember Attributes
   private $name;
   private $id;
+  private $weeklySalary;
 
   //StaffMember Associations
   private $researchRoles;
@@ -26,10 +23,11 @@ class StaffMember
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aId, $aLab)
+  public function __construct($aName, $aId, $aWeeklySalary, $aLab)
   {
     $this->name = $aName;
     $this->id = $aId;
+    $this->weeklySalary = $aWeeklySalary;
     $this->researchRoles = array();
     $this->progressUpdates = array();
     $didAddLab = $this->setLab($aLab);
@@ -59,6 +57,14 @@ class StaffMember
     return $wasSet;
   }
 
+  public function setWeeklySalary($aWeeklySalary)
+  {
+    $wasSet = false;
+    $this->weeklySalary = $aWeeklySalary;
+    $wasSet = true;
+    return $wasSet;
+  }
+
   public function getName()
   {
     return $this->name;
@@ -67,6 +73,11 @@ class StaffMember
   public function getId()
   {
     return $this->id;
+  }
+
+  public function getWeeklySalary()
+  {
+    return $this->weeklySalary;
   }
 
   public function getResearchRole_index($index)
