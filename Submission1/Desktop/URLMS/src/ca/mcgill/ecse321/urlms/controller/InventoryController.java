@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.urlms.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
@@ -12,13 +11,6 @@ import ca.mcgill.ecse321.urlms.model.SupplyType;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 
 public class InventoryController extends Controller {
-
-	public InventoryController() {
-		// TODO Auto-generated constructor stub
-	}
-
-	// TODO USE CASES IMPLEMENTATION ----------------------------------
-
 	/**
 	 * This method will add an equipment to the inventory list
 	 * 
@@ -55,7 +47,7 @@ public class InventoryController extends Controller {
 	}
 
 	/**
-	 * TODO: wtf is this This method will add an item to the inventory list
+	 * This method will add an item to the inventory list
 	 * 
 	 * @param name
 	 *            of the item by String
@@ -125,7 +117,6 @@ public class InventoryController extends Controller {
 	 */
 	public void editInventoryItemDetails(String oldName, String desiredName, String desiredCategory, double desiredCost,
 			int desiredQuantity) throws InvalidInputException {
-		// TODO Not use index to retrieve item but use a search by name
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		String error = "";
@@ -220,8 +211,7 @@ public class InventoryController extends Controller {
 	 * 
 	 * @param index of Inventory Item by int
 	 */
-	public void removeInventoryItem(int index) {// TODO implement with search by
-												// name (not index)
+	public void removeInventoryItem(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		aLab.getInventoryItem(index).delete();
@@ -233,8 +223,7 @@ public class InventoryController extends Controller {
 	 * @param index of Inventory Item by int
 	 * @throws InvalidInputException 
 	 */
-	public void removeInventoryItembyName(String name) throws InvalidInputException {// TODO implement with search by
-												// name (not index)
+	public void removeInventoryItembyName(String name) throws InvalidInputException {
 		String error = "";
 		InventoryItem foundItem = null;
 		URLMS urlms = URLMSApplication.getURLMS();

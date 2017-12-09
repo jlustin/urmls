@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.urlms.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
@@ -55,7 +54,6 @@ public class StaffController extends Controller {
 	}
 
 	// helper method for adding roles specificied by checkbox / radio button
-	//TODO: simplify this code...
 	public void addRoles(StaffMember aStaffMember, boolean isAssistant, boolean isAssociate) {
 		if (aStaffMember.hasResearchRoles()) {
 			aStaffMember.getResearchRole(0).delete();
@@ -222,7 +220,6 @@ public class StaffController extends Controller {
 
 	}
 
-	//TODO: this generates ConcurrentModificationException
 	public void removeStaffMemberByID(int id) throws InvalidInputException {
 		boolean wasRemoved = false;
 		

@@ -11,12 +11,6 @@ import ca.mcgill.ecse321.urlms.model.URLMS;
 
 public class FundingController extends Controller {
 
-	public FundingController() {
-		// TODO Auto-generated constructor stub
-	}
-
-	// TODO: USE CASES IMPLEMENTATION --------------------------
-
 	public void addFunding(int index, double amount) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -181,7 +175,6 @@ public class FundingController extends Controller {
 				addFundingAccount("Equipment Funds", 0.00);
 				addFundingAccount("Staff Funds", 0.00);
 			} catch (InvalidInputException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -210,7 +203,6 @@ public class FundingController extends Controller {
 			currentFundingAccount = getFundingAccount(type);
 			currentFundingAccount.delete();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
