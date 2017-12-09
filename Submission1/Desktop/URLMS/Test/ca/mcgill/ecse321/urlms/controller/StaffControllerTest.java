@@ -210,6 +210,12 @@ public class StaffControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try{
+			controller.addStaffMember("name", true, true, 10);
+			controller.viewProgressUpdateByID(aLab.getStaffMember(1).getId());
+		}catch(InvalidInputException e){
+			assertEquals("There are no progress updates to display :(", e.getMessage());
+		}
 	}
 
 	@Test
