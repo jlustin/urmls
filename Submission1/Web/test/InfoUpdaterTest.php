@@ -620,6 +620,301 @@ class InfoUpdaterTest extends PHPUnit_Framework_TestCase
 	 * 	TODO: Finish Update Expense Test
 	 * 	Update Invnetory Tests
 	 */
+	public function updateExpenseTest(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		$this->controller->updateExpense("Name type", "NewType", 999, "10/10/2010");
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		$this->assertEquals("NewType", $newExpense->getType());
+		$this->assertEquals(999, $newExpense->getAmount());
+		$this->assertEquals("10/10/2010", $newExpense->getDate());
+	}
+	
+	public function updateExpenseTestNullOldType(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense(null, "Name type", 999, "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid expense type.", $e->getMessage()); 
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestInvalidOldType(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("Type#$%", "Name type", 999, "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid expense type.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestNullNewType(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("Name type", null, 999, "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid new expense type.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestInvalidNewType(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("Name type", "Type$%?&*", 999, "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid new expense type.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestNullAmount(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("Name type", "New name ype", null, "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid amount.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestInvalidAmount(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("Name type", "New type", "abc12", "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid amount.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestNullDate(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("Name type", "New type", 999, null);
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid expense type.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
+	
+	public function updateExpenseTestNullExpense(){
+		// 1. Create test data
+		$newExpense = new Expense(123, "12/03/2017", "Name type", "Staff Funding");
+		$newAccount = new FundingAccount("Test account", 0, $this->urlms->getLab_index(0));
+		$newAccount->addExpense($newExpense);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['fundingAccount'] = $newAccount;
+		
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+		
+		try {
+			$this->controller->updateExpense("abc", "New type", 999, "10/10/2010");
+		} catch (Exception $e) {
+			$this->assertEquals("Please enter a valid expense type.", $e->getMessage());
+		}
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($newAccount->getExpenses()));
+	}
 	
 	/**
 	 * 	TODO: Finish Is Valid String Test
