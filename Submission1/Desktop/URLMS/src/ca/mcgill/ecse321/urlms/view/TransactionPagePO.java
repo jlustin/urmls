@@ -1,49 +1,33 @@
 package ca.mcgill.ecse321.urlms.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ca.mcgill.ecse321.urlms.application.URLMSApplication;
-import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
-import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.Expense;
-import ca.mcgill.ecse321.urlms.model.StaffMember;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.AbstractButton;
-import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
 
 public class TransactionPagePO extends JFrame {
 	JLabel expenseListLabel;
 	JLabel feelFreeLabel;
 	private JPanel contentPane;
 	JLabel welcomeToStaffLabel;
-	public AddTransactionPO atpo = new AddTransactionPO();
+	public AddExpensePO atpo = new AddExpensePO();
 	JPanel panel = new JPanel();
 	public static FundingController controller = new FundingController();
 	private JTextField txtAccountName;
-	JButton btnAddTransaction = new JButton("Add Transaction");
+	JButton btnAddExpense = new JButton("Add Expense");
 	JButton btnViewExpenses = new JButton("View Expenses");
 	private String error;
 	private JButton btnClose;
@@ -68,13 +52,13 @@ public class TransactionPagePO extends JFrame {
 
 		contentPane.add(panel, BorderLayout.SOUTH);
 
-		btnAddTransaction.addActionListener(new ActionListener() {
+		btnAddExpense.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				atpo.setVisible(true);
 			}
 		});
-		panel.add(btnAddTransaction);
+		panel.add(btnAddExpense);
 
 		txtAccountName = new JTextField();
 		txtAccountName.setText("Account Name");
@@ -100,8 +84,9 @@ public class TransactionPagePO extends JFrame {
 						name = aExpense.getType();
 						date = aExpense.getDate();
 						amount = aExpense.getAmount();
-						expenseListLabel.setText(previousText + "Account Type: " + name + "&nbsp &nbsp &nbsp "
-								+ "Date: " + date + "&nbsp &nbsp &nbsp " + "Amount: " + amount + " <br/>");
+						expenseListLabel
+								.setText(previousText + "Expense Type: " + name + "&nbsp &nbsp &nbsp " + "Date: " + date
+										+ "&nbsp &nbsp &nbsp " + "Amount: " + String.format("%.2f", amount) + " <br/>");
 
 					}
 					previousText = expenseListLabel.getText();
@@ -138,7 +123,7 @@ public class TransactionPagePO extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
-		welcomeToStaffLabel = new JLabel("Welcome to Transactions. There's a lot of transactions.");
+		welcomeToStaffLabel = new JLabel("Welcome to Transactions. There's a lot of expenses.");
 		panel_1.add(welcomeToStaffLabel);
 	}
 

@@ -81,6 +81,8 @@ public class FundingControllerTest {
 		}catch(InvalidInputException e){
 			assertEquals("Please enter a name for the account.", e.getMessage());
 		}
+		
+		
 	}
 
 	@Test
@@ -160,6 +162,14 @@ public class FundingControllerTest {
 		
 		assertEquals("", err);
 		
+		try {
+			controller.getFundingAccount("abcdefghijkmlnoqprstugvwyz");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("Requested account does not exist :( ", err);
 	}
 	
 	@Test
@@ -176,7 +186,7 @@ public class FundingControllerTest {
 		}
 		
 		try {
-			controller.addTransaction("1/2/3", 111, "test type", "test transaction");
+			controller.addExpense("1/2/3", 111, "test type", "test transaction");
 		} catch (InvalidInputException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
