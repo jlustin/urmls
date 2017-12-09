@@ -144,11 +144,13 @@ public class FundingControllerTest {
 	}
 
 	@Test
-	public void testAddTransactionStringDoubleStringInt() {
+	public void testGetFundingAccount() {
+		
 		String err = "";
-		String name = "test transaction";
+		String name = "test get account";
 		double balance = 123;
-		List<FundingAccount> testList = null;
+		FundingAccount testAccount = null;
+		
 		try {
 			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
@@ -156,95 +158,265 @@ public class FundingControllerTest {
 			err = e.getMessage();
 		}
 		
-		controller.addTransaction("1/2/3", 111, "test type", 0);
-		
 		try {
-			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
+			testAccount = controller.getFundingAccount("test get account");
 		} catch (InvalidInputException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		try {
-			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
-		} catch (InvalidInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		assertEquals("test get account", testAccount.getType());
+		assertEquals("", err);
+		
+	}
+
+//	@Test
+//	public void testInitiateFundingAccounts() {
+//		
+//		
+//	}
+
+	@Test
+	public void testViewNetBalance() {
+		String err = "";
+		String name = "test view balance";
+		String name2 = "test view balance2";
+		double balance = 123;
 		
 		try {
-			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
+			controller.addFundingAccount(name, balance);
 		} catch (InvalidInputException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			err = e.getMessage();
+		}
+		try {
+			controller.addFundingAccount(name2, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
 		}
 		
+		double testBalance = controller.viewNetBalance();
+		String stringBalance = String.valueOf(testBalance);
+		
+		assertEquals("246.0", stringBalance);
 		assertEquals("", err);
 	}
 
 	@Test
-	public void testGetFundingAccount() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testInitiateFundingAccounts() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testViewNetBalance() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testViewBalanceForSpecificAccount() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test view balance";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		String testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("123.0", testBalance);
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testAddFunding() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test view balance";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		String testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("123.0", testBalance);
+		
+		controller.addFunding(0, 123);
+		
+		testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("246.0", testBalance);
+		assertEquals("", err);
+		
 	}
 
 	@Test
 	public void testEditFinancialAccount() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test edit";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		String testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("123.0", testBalance);
+		assertEquals("test edit", aLab.getFundingAccount(0).getType());
+		
+		try {
+			controller.editFinancialAccount("test edit", "new test edit");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("123.0", testBalance);
+		assertEquals("new test edit", aLab.getFundingAccount(0).getType());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountType() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view type";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("test view type", controller.viewFundingAccountType(0));
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountBalance() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view balance";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("123.0", controller.viewFundingAccountBalance(0));
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountExpensesString() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view expenses";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		///////
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		assertEquals("test type", controller.viewFundingAccountExpenses("test view expenses").get(0).getType());
+		assertEquals("1/2/3", controller.viewFundingAccountExpenses("test view expenses").get(0).getDate());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountExpensesInt() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view expenses";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		///////
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		assertEquals("test type", controller.viewFundingAccountExpenses(0).get(0).getType());
+		assertEquals("1/2/3", controller.viewFundingAccountExpenses(0).get(0).getDate());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testGetExpense() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test get expense";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		///////
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		
+		
+		assertEquals("test type", controller.getExpense(0).getType());
+		assertEquals("1/2/3", controller.getExpense(0).getDate());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testRemoveFundingAccountInt() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test remove";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("test remove", aLab.getFundingAccount(0).getType());
+		
+		controller.removeFundingAccount(0);
+		
+		assertEquals(0, aLab.getFundingAccounts().size());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testRemoveFundingAccountString() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test remove";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("test remove", aLab.getFundingAccount(0).getType());
+		
+		controller.removeFundingAccount("test remove");
+		
+		assertEquals(0, aLab.getFundingAccounts().size());
+		assertEquals("", err);
 	}
 
 }
