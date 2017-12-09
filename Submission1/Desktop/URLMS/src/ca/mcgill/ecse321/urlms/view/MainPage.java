@@ -46,7 +46,7 @@ public class MainPage extends JFrame {
 		setTitle("URLMS Main Page");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 615, 360);
+		setBounds(100, 100, 620, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -103,7 +103,7 @@ public class MainPage extends JFrame {
 		txtpnBeforeUsingThis = new JTextPane();
 		txtpnBeforeUsingThis.setEditable(false);
 		txtpnBeforeUsingThis.setText(
-				"\n\nBefore using this application, please note that this is a multi screen interactive program, meaning that pop out windows will appear as you navigate around. In order to experience the full potential of the features, please feel free to move around the pop out windows to search for information needed when effectuating actions. For example, editing staff member records requires the knowledge of the ID of the targeted staff member. To know which staff member the ID is associated with, refer to the Staff Page's View Staff List feature. Also, before exiting the program, please use the Save button if you wish you save your actions. If the windows do not refresh instantly, please be patient or click on the View button again to refresh it manually. Thank you for using the URLMS application! We hope to hear from you if you have any other questions. Please e-mail Team08 at feras.altaha@mail.mcgill.ca if you have any other concerns.");
+				"\n\nBefore using this application, please note that this is a multi screen interactive program, meaning that pop out windows will appear as you navigate around. In order to experience the full potential of the features, please feel free to move around the pop out windows to search for information needed when effectuating actions. For example, editing staff member records requires the knowledge of the ID of the targeted staff member. To know which staff member the ID is associated with, refer to the Staff Page's View Staff List feature. \n\nAlso, before exiting the program, please use the Save button if you wish you save your actions. \n\nIf the data in the windows do not refresh instantly, please be patient or click on the View button again to refresh it manually. \n\nThank you for using the URLMS application! We hope to hear from you if you have any other questions. Please e-mail Team08 at feras.altaha@mail.mcgill.ca if you have any other concerns.");
 		scrollPane.setViewportView(txtpnBeforeUsingThis);
 
 		JPanel panel_1 = new JPanel();
