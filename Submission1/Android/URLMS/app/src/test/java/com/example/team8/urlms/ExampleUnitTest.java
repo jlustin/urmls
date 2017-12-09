@@ -3,7 +3,6 @@ package com.example.team8.urlms;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.mcgill.ecse321.urlms.persistence.DatabaseHelper;
 
 import static org.junit.Assert.*;
 

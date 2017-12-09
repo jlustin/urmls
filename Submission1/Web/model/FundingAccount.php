@@ -15,21 +15,21 @@ class FundingAccount
 
   //FundingAccount Associations
   private $expenses;
-  private $fundingManager;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aType, $aBalance, $aFundingManager)
+  public function __construct($aType, $aBalance, $aLab)
   {
     $this->type = $aType;
     $this->balance = $aBalance;
     $this->expenses = array();
-    $didAddFundingManager = $this->setFundingManager($aFundingManager);
-    if (!$didAddFundingManager)
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create fundingAccount due to fundingManager");
+      throw new Exception("Unable to create fundingAccount due to lab");
     }
   }
 
@@ -104,9 +104,9 @@ class FundingAccount
     return $index;
   }
 
-  public function getFundingManager()
+  public function getLab()
   {
-    return $this->fundingManager;
+    return $this->lab;
   }
 
   public static function minimumNumberOfExpenses()
@@ -114,9 +114,9 @@ class FundingAccount
     return 0;
   }
 
-  public function addExpenseVia($aAmount, $aType)
+  public function addExpenseVia($aAmount, $aDate, $aType)
   {
-    return new Expense($aAmount, $aType, $this);
+    return new Expense($aAmount, $aDate, $aType, $this);
   }
 
   public function addExpense($aExpense)
@@ -182,21 +182,21 @@ class FundingAccount
     return $wasAdded;
   }
 
-  public function setFundingManager($aFundingManager)
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aFundingManager == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingFundingManager = $this->fundingManager;
-    $this->fundingManager = $aFundingManager;
-    if ($existingFundingManager != null && $existingFundingManager != $aFundingManager)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingFundingManager->removeFundingAccount($this);
+      $existingLab->removeFundingAccount($this);
     }
-    $this->fundingManager->addFundingAccount($this);
+    $this->lab->addFundingAccount($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -212,9 +212,9 @@ class FundingAccount
     {
       $aExpense->delete();
     }
-    $placeholderFundingManager = $this->fundingManager;
-    $this->fundingManager = null;
-    $placeholderFundingManager->removeFundingAccount($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeFundingAccount($this);
   }
 
 }

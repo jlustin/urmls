@@ -15,21 +15,21 @@ class InventoryItem
   private $category;
 
   //InventoryItem Associations
-  private $inventoryManager;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aCost, $aCategory, $aInventoryManager)
+  public function __construct($aName, $aCost, $aCategory, $aLab)
   {
     $this->name = $aName;
     $this->cost = $aCost;
     $this->category = $aCategory;
-    $didAddInventoryManager = $this->setInventoryManager($aInventoryManager);
-    if (!$didAddInventoryManager)
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create inventoryItem due to inventoryManager");
+      throw new Exception("Unable to create inventoryItem due to lab");
     }
   }
 
@@ -76,26 +76,26 @@ class InventoryItem
     return $this->category;
   }
 
-  public function getInventoryManager()
+  public function getLab()
   {
-    return $this->inventoryManager;
+    return $this->lab;
   }
 
-  public function setInventoryManager($aInventoryManager)
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aInventoryManager == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingInventoryManager = $this->inventoryManager;
-    $this->inventoryManager = $aInventoryManager;
-    if ($existingInventoryManager != null && $existingInventoryManager != $aInventoryManager)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingInventoryManager->removeInventoryItem($this);
+      $existingLab->removeInventoryItem($this);
     }
-    $this->inventoryManager->addInventoryItem($this);
+    $this->lab->addInventoryItem($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -107,9 +107,9 @@ class InventoryItem
 
   public function delete()
   {
-    $placeholderInventoryManager = $this->inventoryManager;
-    $this->inventoryManager = null;
-    $placeholderInventoryManager->removeInventoryItem($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeInventoryItem($this);
   }
 
 }

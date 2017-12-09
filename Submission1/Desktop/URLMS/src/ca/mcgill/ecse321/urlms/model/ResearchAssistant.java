@@ -1,9 +1,9 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.0-b05b57321 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse321.urlms.model;
 
-// line 82 "../../../../../URLMS.ump"
+// line 100 "../../../../../URLMS.ump"
 public class ResearchAssistant extends ResearchRole
 {
 
@@ -15,9 +15,9 @@ public class ResearchAssistant extends ResearchRole
   // CONSTRUCTOR
   //------------------------
 
-  public ResearchAssistant(StaffMember aStaffMember)
+  public ResearchAssistant(String aTaskDescription, StaffMember aStaffMember)
   {
-    super(aStaffMember);
+    super(aTaskDescription, aStaffMember);
   }
 
   //------------------------

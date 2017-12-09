@@ -9,18 +9,35 @@ class Equipment extends InventoryItem
   // MEMBER VARIABLES
   //------------------------
 
+  //Equipment Attributes
+  private $isDamaged;
+
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aCost, $aCategory, $aInventoryManager)
+  public function __construct($aName, $aCost, $aCategory, $aLab, $aIsDamaged)
   {
-    parent::__construct($aName, $aCost, $aCategory, $aInventoryManager);
+    parent::__construct($aName, $aCost, $aCategory, $aLab);
+    $this->isDamaged = $aIsDamaged;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
+
+  public function setIsDamaged($aIsDamaged)
+  {
+    $wasSet = false;
+    $this->isDamaged = $aIsDamaged;
+    $wasSet = true;
+    return $wasSet;
+  }
+
+  public function getIsDamaged()
+  {
+    return $this->isDamaged;
+  }
 
   public function equals($compareTo)
   {

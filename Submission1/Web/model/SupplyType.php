@@ -16,9 +16,9 @@ class SupplyType extends InventoryItem
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aCost, $aCategory, $aInventoryManager, $aQuantity)
+  public function __construct($aName, $aCost, $aCategory, $aLab, $aQuantity)
   {
-    parent::__construct($aName, $aCost, $aCategory, $aInventoryManager);
+    parent::__construct($aName, $aCost, $aCategory, $aLab);
     $this->quantity = $aQuantity;
   }
 

@@ -12,26 +12,28 @@ class StaffMember
   //StaffMember Attributes
   private $name;
   private $id;
+  private $weeklySalary;
 
   //StaffMember Associations
   private $researchRoles;
   private $progressUpdates;
-  private $staffManager;
+  private $lab;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public function __construct($aName, $aId, $aStaffManager)
+  public function __construct($aName, $aId, $aWeeklySalary, $aLab)
   {
     $this->name = $aName;
     $this->id = $aId;
+    $this->weeklySalary = $aWeeklySalary;
     $this->researchRoles = array();
     $this->progressUpdates = array();
-    $didAddStaffManager = $this->setStaffManager($aStaffManager);
-    if (!$didAddStaffManager)
+    $didAddLab = $this->setLab($aLab);
+    if (!$didAddLab)
     {
-      throw new Exception("Unable to create staffMember due to staffManager");
+      throw new Exception("Unable to create staffMember due to lab");
     }
   }
 
@@ -55,6 +57,14 @@ class StaffMember
     return $wasSet;
   }
 
+  public function setWeeklySalary($aWeeklySalary)
+  {
+    $wasSet = false;
+    $this->weeklySalary = $aWeeklySalary;
+    $wasSet = true;
+    return $wasSet;
+  }
+
   public function getName()
   {
     return $this->name;
@@ -63,6 +73,11 @@ class StaffMember
   public function getId()
   {
     return $this->id;
+  }
+
+  public function getWeeklySalary()
+  {
+    return $this->weeklySalary;
   }
 
   public function getResearchRole_index($index)
@@ -147,9 +162,9 @@ class StaffMember
     return $index;
   }
 
-  public function getStaffManager()
+  public function getLab()
   {
-    return $this->staffManager;
+    return $this->lab;
   }
 
   public static function minimumNumberOfResearchRoles()
@@ -157,9 +172,9 @@ class StaffMember
     return 0;
   }
 
-  public function addResearchRoleVia()
+  public function addResearchRoleVia($aTaskDescription)
   {
-    return new ResearchRole($this);
+    return new ResearchRole($aTaskDescription, $this);
   }
 
   public function addResearchRole($aResearchRole)
@@ -230,9 +245,9 @@ class StaffMember
     return 0;
   }
 
-  public function addProgressUpdateVia($aDate)
+  public function addProgressUpdateVia($aDate, $aDescription)
   {
-    return new ProgressUpdate($aDate, $this);
+    return new ProgressUpdate($aDate, $aDescription, $this);
   }
 
   public function addProgressUpdate($aProgressUpdate)
@@ -298,21 +313,21 @@ class StaffMember
     return $wasAdded;
   }
 
-  public function setStaffManager($aStaffManager)
+  public function setLab($aLab)
   {
     $wasSet = false;
-    if ($aStaffManager == null)
+    if ($aLab == null)
     {
       return $wasSet;
     }
     
-    $existingStaffManager = $this->staffManager;
-    $this->staffManager = $aStaffManager;
-    if ($existingStaffManager != null && $existingStaffManager != $aStaffManager)
+    $existingLab = $this->lab;
+    $this->lab = $aLab;
+    if ($existingLab != null && $existingLab != $aLab)
     {
-      $existingStaffManager->removeStaffMember($this);
+      $existingLab->removeStaffMember($this);
     }
-    $this->staffManager->addStaffMember($this);
+    $this->lab->addStaffMember($this);
     $wasSet = true;
     return $wasSet;
   }
@@ -336,9 +351,9 @@ class StaffMember
       $this->progressUpdates = array_values($this->progressUpdates);
     }
     
-    $placeholderStaffManager = $this->staffManager;
-    $this->staffManager = null;
-    $placeholderStaffManager->removeStaffMember($this);
+    $placeholderLab = $this->lab;
+    $this->lab = null;
+    $placeholderLab->removeStaffMember($this);
   }
 
 }
