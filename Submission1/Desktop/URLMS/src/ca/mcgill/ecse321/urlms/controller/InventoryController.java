@@ -188,6 +188,11 @@ public class InventoryController extends Controller {
 		}
 	}
 
+	/**
+	 * This method is a helper method to check if an item is an equipment
+	 * @param index of the item in the list
+	 * @return true if the item is an equipment, false otherwise
+	 */
 	public boolean inventoryItemIsEquipment(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -197,6 +202,11 @@ public class InventoryController extends Controller {
 			return false;
 	}
 
+	/**
+	 * This method is helper method to check if an item is a supply
+	 * @param index of the item in the list
+	 * @return true if the item is a supply, false otherwise
+	 */
 	public boolean inventoryItemIsSupply(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -248,12 +258,22 @@ public class InventoryController extends Controller {
 		foundItem.delete();
 	}
 
+	/**
+	 * This method will get the cost of an inventory item.
+	 * @param index of the item in the list
+	 * @return the cost of the item as a String
+	 */
 	public String viewInventoryItemCost(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 		return String.valueOf(aLab.getInventoryItem(index).getCost());
 	}
 
+	/**
+	 * This method will get the name of an inventory item.
+	 * @param index of the item in the list
+	 * @return the name of the item as a String
+	 */
 	public String viewInventoryItemName(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
@@ -288,6 +308,11 @@ public class InventoryController extends Controller {
 		return inventorylist;
 	}
 
+	/**
+	 * This method will get the quantity of a supply item in the lab.
+	 * @param index of the item in the list
+	 * @return the quantity of the supply item as a String
+	 */
 	public String viewSupplyItemQuantity(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);

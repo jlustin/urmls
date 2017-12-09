@@ -28,7 +28,7 @@ public class TransactionPagePO extends JFrame {
 	public static FundingController controller = new FundingController();
 	private JTextField txtAccountName;
 	JButton btnAddExpense = new JButton("Add Expense");
-	JButton btnViewExpenses = new JButton("View Expenses");
+	JButton btnViewExpenses = new JButton("Generate Report");
 	private String error;
 	private JButton btnClose;
 
