@@ -834,7 +834,40 @@ class InfoUpdaterTest extends PHPUnit_Framework_TestCase
 	 * 	TODO: Finish Update Staff Role Tests
 	 * 	Update Staff Role Tests
 	 */
-	public function testUpdateRoles()
+	public function testUpdate0Roles()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		$this->urlms->getLab_index(0)->getStaffMember_index(0)->addResearchRole(new ResearchAssociate("", $newStaffMember));
+		$this->urlms->getLab_index(0)->getStaffMember_index(0)->addResearchRole(new ResearchAssistant("", $newStaffMember));
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(2, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		$this->controller->updateRoles([]);
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
+	}
+	
+	public function testUpdate1Roles()
 	{
 		// 1. Create test data
 		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
@@ -865,6 +898,37 @@ class InfoUpdaterTest extends PHPUnit_Framework_TestCase
 		// 5. Check that we got it back
 		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
 		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
+	}
+	
+	public function testUpdate2Roles()
+	{
+		// 1. Create test data
+		$newStaffMember = new StaffMember("jasmine", 1000, 1000, $this->urlms->getLab_index(0));
+		$this->urlms->getLab_index(0)->addStaffMember($newStaffMember);
+		
+		$_SESSION['urlms'] = $this->urlms ;
+		$_SESSION['staffmember'] = $newStaffMember;
+		
+		$this->assertEquals(0, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		
+		$this->controller->updateRoles(["ResearchAssociate", "ResearchAssistant"]);
+		
+		// 2. Write all of the data
+		$pers = $this->p;
+		$pers->writeDataToStore($this->urlms);
+		
+		// 3. Clear the data from memory
+		$this->urlms->delete();
+		
+		$this->assertEquals(0, $this->urlms->numberOfLabs());
+		
+		// 4. Load it back in
+		$this->urlms = $pers->loadDataFromStore();
+		
+		// 5. Check that we got it back
+		$this->assertEquals(1, count($this->urlms->getLab_index(0)->getStaffMembers()));
+		$this->assertEquals(2, count($this->urlms->getLab_index(0)->getStaffMember_index(0)->getResearchRoles()));
 	}
 	
 	/**
