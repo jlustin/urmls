@@ -222,8 +222,19 @@ public class StaffControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("11/12/17", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
-		assertEquals("Can you view this?", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
+
+		try {
+			assertEquals("11/12/17", controller.viewProgressUpdateByID(aLab.getStaffMember(0).getId()).get(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Can you view this?", controller.viewProgressUpdateByID(aLab.getStaffMember(0).getId()).get(0).getDescription());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
