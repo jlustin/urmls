@@ -55,11 +55,6 @@ require_once $my_dir . '/../model/FundingAccount.php';
 				<li class="nav-item"><a class="nav-link" href="FundingView.php">Funding</a>
 				</li>
 			</ul>
-			<ul class="nav-bar">
-				<li class="nav-item"
-					style="text-decoration: none; list-style: none;"><a
-					class="nav-link" href=#>Help</a></li>
-			</ul>
 		</div>
 	</nav>
 	<br>
