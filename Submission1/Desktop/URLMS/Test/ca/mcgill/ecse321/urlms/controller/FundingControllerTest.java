@@ -142,6 +142,51 @@ public class FundingControllerTest {
 		assertEquals("", err);
 		
 	}
+	
+	@Test
+	public void testAddTransactionByName() {
+		String err = "";
+		String name = "test transaction";
+		double balance = 123;
+		List<FundingAccount> testList = null;
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			controller.addTransaction("1/2/3", 111, "test type", "test transaction");
+		} catch (InvalidInputException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		
+	}
 
 	@Test
 	public void testGetFundingAccount() {
