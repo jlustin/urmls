@@ -233,6 +233,12 @@ public class InventoryControllerTest {
 		}
 		
 		assertEquals(0, aLab.getInventoryItems().size());
+		
+		try{
+			controller.removeInventoryItembyName("qwerty");
+		}catch(InvalidInputException e){
+			assertEquals("Requested inventory item not found :(",e.getMessage());
+		}
 	}
 
 	@Test
@@ -290,6 +296,7 @@ public class InventoryControllerTest {
 		double cost = 123;
 		try {
 			controller.addSupplyItem(name, category, cost, quantity);
+			controller.addEquipmentItem("equip", category, cost);
 		} catch (InvalidInputException e) {
 			
 			err = e.getMessage();
@@ -298,11 +305,13 @@ public class InventoryControllerTest {
 		assertEquals("", err);
 		assertEquals("test add", aLab.getInventoryItem(0).getName());
 		assertEquals("SUPPLY", aLab.getInventoryItem(0).getCategory());
-		assertEquals(1, aLab.getInventoryItems().size());
+		assertEquals(2, aLab.getInventoryItems().size());
 		
 		String testQuantity = controller.viewSupplyItemQuantity(0);
 		
 		assertEquals("19", testQuantity);
+		
+		assertEquals("N/A", controller.viewSupplyItemQuantity(1));
 	}
 
 	@Test
