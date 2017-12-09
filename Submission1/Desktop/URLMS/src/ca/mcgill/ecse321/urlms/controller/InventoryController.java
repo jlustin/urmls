@@ -66,19 +66,6 @@ public class InventoryController extends Controller {
 	 * @throws InvalidInputException
 	 */
 	public void addInventoryItem(String name, double cost) throws InvalidInputException {
-		String error = "";
-
-		if (name == null || name.isEmpty()) {
-			error += "Please enter a name. ";
-		}
-		if (cost < 0) {
-			error += "Please enter a valid cost. ";
-		}
-
-		if (error.length() > 0) {
-			throw new InvalidInputException(error.trim());
-		}
-
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 

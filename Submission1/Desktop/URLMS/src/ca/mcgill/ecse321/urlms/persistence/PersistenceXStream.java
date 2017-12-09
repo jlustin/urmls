@@ -70,10 +70,6 @@ public abstract class PersistenceXStream {
 		}
 	}
 
-	public static void setAlias(String xmlTagName, Class<?> className) {
-		xstream.alias(xmlTagName, className);
-	}
-
 	public static void setFilename(String fn) {
 		filename = fn;
 	}

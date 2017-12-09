@@ -208,19 +208,6 @@ public class FundingController extends Controller {
 		}
 	}
 
-	/**
-	 * This method will get the balance of a specific account in the lab by type
-	 * 
-	 * @param type
-	 *            of the account by String
-	 * @return
-	 */
-	public double[] viewBalanceForSpecificAccount(String type) {
-
-		// TODO: remove this when working on implementation
-		return null;
-	}
-
 	public String viewFundingAccountBalance(int index) {
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
