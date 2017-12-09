@@ -76,29 +76,6 @@ public class StaffController extends Controller {
 		}
 	}
 
-	// TODO: USE CASES IMPLEMENTATION
-	// -----------------------------------------------
-
-	// TODO move to JUnit Test
-	/**
-	 * This method is used for testing purposes. Three members with names
-	 * Victor, Feras and Jun2Yu will be added to the current staff member list.
-	 * These three members will have different IDs: 123, 111 and 222
-	 * respectively.
-	 */
-	public void addSampleMembers() {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
-		aLab.addStaffMember(member);
-
-		StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
-		aLab.addStaffMember(member2);
-
-		StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
-		aLab.addStaffMember(member3);
-	}
-
 	/**
 	 * This method will add a staff member in the lab
 	 * 
@@ -248,38 +225,24 @@ public class StaffController extends Controller {
 	//TODO: this generates ConcurrentModificationException
 	public void removeStaffMemberByID(int id) throws InvalidInputException {
 		boolean wasRemoved = false;
-		int originalNumberStaff;
 		
 		URLMS urlms = URLMSApplication.getURLMS();
 		Lab aLab = urlms.getLab(0);
 
-		originalNumberStaff = aLab.numberOfStaffMembers();
+		StaffMember m = null;
+
 		for (StaffMember iteratedStaffMember : aLab.getStaffMembers()) {
 			if (id == iteratedStaffMember.getId()) {
-				iteratedStaffMember.delete();
-				if(originalNumberStaff - aLab.numberOfStaffMembers() > 0){
-					wasRemoved = true;
-				}
+				m = iteratedStaffMember;
 			}
+		}
+		if(m != null) {
+			m.delete();
+			wasRemoved = true;
 		}
 		if(!wasRemoved){
 			throw new InvalidInputException("Staff Member was not deleted :( ");
 		}
-	}
-
-	/**
-	 * This method will get the progress update of a specific staff member by ID
-	 * number
-	 * 
-	 * @param id of the staff member by int
-	 * @return the progress update of the specific member
-	 */
-	public List<ProgressUpdate> viewProgressUpdate(int index) {
-
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		List<ProgressUpdate> progress = aLab.getStaffMember(index).getProgressUpdates();
-		return progress;
 	}
 
 	public List<ProgressUpdate> viewProgressUpdateByID(int id) throws InvalidInputException {
@@ -350,32 +313,4 @@ public class StaffController extends Controller {
 		Lab aLab = urlms.getLab(0);
 		return String.valueOf(aLab.getStaffMember(index).getId());
 	}
-
-	
-	public String viewStaffMemberName(int index) {
-		URLMS urlms = URLMSApplication.getURLMS();
-		Lab aLab = urlms.getLab(0);
-		return aLab.getStaffMember(index).getName();
-	}
-
-	/**
-	 * This method will get the records of a specific staff member by ID number
-	 * 
-	 * @param id of the staff member by int
-	 */
-	public void viewStaffMemberRecord(int id) {
-		// will not be used
-	}
-
-	/**
-	 * This method will give a summary of the overall URLMS staff
-	 * 
-	 * @return a hash map containing all information
-	 */
-	public HashMap<String, String> viewStatus() {
-
-		// TODO: remove this when working on implementation
-		return null;
-	}
-
 }

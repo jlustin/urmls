@@ -2,6 +2,9 @@ package ca.mcgill.ecse321.urlms.controller;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,16 +12,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
+import ca.mcgill.ecse321.urlms.model.FundingAccount;
+import ca.mcgill.ecse321.urlms.model.InventoryItem;
+import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.PersistenceXStream;
 
 public class FundingControllerTest {
 
 	private static URLMS urlms;
-	
+	private static FundingController controller;
+	private static Lab aLab;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		PersistenceXStream.initializeModelManager("urlms.xml");
+		PersistenceXStream.setFilename("urlmsTest.xml");
+		URLMSApplication.setFilename("urlmsTest.xml");
+		PersistenceXStream.initializeModelManager("urlmsTest.xml");
 	}
 
 	@AfterClass
@@ -27,101 +37,431 @@ public class FundingControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		urlms = URLMSApplication.getURLMS();
+		urlms = URLMSApplication.load();
+		URLMSApplication.setURLMS(urlms);
+		controller = new FundingController();
+		aLab = urlms.getLab(0);
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testFundingController() {
-		fail("Not yet implemented");
+		urlms.delete();
+		File file = new File("urlmsTest.xml");
+		file.delete();
 	}
 
 	@Test
 	public void testAddFundingAccount() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test add";
+		double balance = 123;
+		List<FundingAccount> testList = null;
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			List<FundingAccount> accounts = controller.viewFundingAccounts();
+			testList = accounts;
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test add", aLab.getFundingAccount(0).getType());
+		assertEquals(1, testList.size());
 	}
 
 	@Test
 	public void testViewFundingAccounts() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view";
+		double balance = 123;
+		List<FundingAccount> testList = null;
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			List<FundingAccount> accounts = controller.viewFundingAccounts();
+			testList = accounts;
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		assertEquals("test view", aLab.getFundingAccount(0).getType());
+		assertEquals(1, testList.size());
 	}
 
 	@Test
-	public void testAddTransactionStringDoubleStringString() {
-		fail("Not yet implemented");
+	public void testAddTransaction() {
+		String err = "";
+		String name = "test transaction";
+		double balance = 123;
+		List<FundingAccount> testList = null;
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		try {
+			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		
 	}
-
+	
 	@Test
-	public void testAddTransactionStringDoubleStringInt() {
-		fail("Not yet implemented");
+	public void testAddTransactionByName() {
+		String err = "";
+		String name = "test transaction";
+		double balance = 123;
+		List<FundingAccount> testList = null;
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			controller.addTransaction("1/2/3", 111, "test type", "test transaction");
+		} catch (InvalidInputException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			assertEquals("1/2/3", controller.getFundingAccount("test transaction").getExpense(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("test type", controller.getFundingAccount("test transaction").getExpense(0).getType());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals(1, controller.getFundingAccount("test transaction").getExpenses().size());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("", err);
+		
 	}
 
 	@Test
 	public void testGetFundingAccount() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test get account";
+		double balance = 123;
+		FundingAccount testAccount = null;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		try {
+			testAccount = controller.getFundingAccount("test get account");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("test get account", testAccount.getType());
+		assertEquals("", err);
+		
 	}
 
-	@Test
-	public void testInitiateFundingAccounts() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	public void testInitiateFundingAccounts() {
+//		
+//		
+//	}
 
 	@Test
 	public void testViewNetBalance() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view balance";
+		String name2 = "test view balance2";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		try {
+			controller.addFundingAccount(name2, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		double testBalance = controller.viewNetBalance();
+		String stringBalance = String.valueOf(testBalance);
+		
+		assertEquals("246.0", stringBalance);
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewBalanceForSpecificAccount() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test view balance";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		String testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("123.0", testBalance);
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testAddFunding() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test view balance";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		String testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("123.0", testBalance);
+		
+		controller.addFunding(0, 123);
+		
+		testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("246.0", testBalance);
+		assertEquals("", err);
+		
 	}
 
 	@Test
 	public void testEditFinancialAccount() {
-		fail("Not yet implemented");
+		
+		String err = "";
+		String name = "test edit";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		String testBalance = controller.viewFundingAccountBalance(0);
+		
+		assertEquals("123.0", testBalance);
+		assertEquals("test edit", aLab.getFundingAccount(0).getType());
+		
+		try {
+			controller.editFinancialAccount("test edit", "new test edit");
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("123.0", testBalance);
+		assertEquals("new test edit", aLab.getFundingAccount(0).getType());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountType() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view type";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("test view type", controller.viewFundingAccountType(0));
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountBalance() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view balance";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("123.0", controller.viewFundingAccountBalance(0));
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountExpensesString() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view expenses";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		///////
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		assertEquals("test type", controller.viewFundingAccountExpenses("test view expenses").get(0).getType());
+		assertEquals("1/2/3", controller.viewFundingAccountExpenses("test view expenses").get(0).getDate());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testViewFundingAccountExpensesInt() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test view expenses";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		///////
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		assertEquals("test type", controller.viewFundingAccountExpenses(0).get(0).getType());
+		assertEquals("1/2/3", controller.viewFundingAccountExpenses(0).get(0).getDate());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testGetExpense() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test get expense";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		///////
+		controller.addTransaction("1/2/3", 111, "test type", 0);
+		
+		
+		
+		assertEquals("test type", controller.getExpense(0).getType());
+		assertEquals("1/2/3", controller.getExpense(0).getDate());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testRemoveFundingAccountInt() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test remove";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("test remove", aLab.getFundingAccount(0).getType());
+		
+		controller.removeFundingAccount(0);
+		
+		assertEquals(0, aLab.getFundingAccounts().size());
+		assertEquals("", err);
 	}
 
 	@Test
 	public void testRemoveFundingAccountString() {
-		fail("Not yet implemented");
+		String err = "";
+		String name = "test remove";
+		double balance = 123;
+		
+		try {
+			controller.addFundingAccount(name, balance);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			err = e.getMessage();
+		}
+		
+		assertEquals("test remove", aLab.getFundingAccount(0).getType());
+		
+		controller.removeFundingAccount("test remove");
+		
+		assertEquals(0, aLab.getFundingAccounts().size());
+		assertEquals("", err);
 	}
 
 }

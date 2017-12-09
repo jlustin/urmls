@@ -24,6 +24,8 @@ public class StaffControllerTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		File file = new File("urlmsTest.xml");
+		file.delete();
 		PersistenceXStream.setFilename("urlmsTest.xml");
 		URLMSApplication.setFilename("urlmsTest.xml");
 		PersistenceXStream.initializeModelManager("urlmsTest.xml");
@@ -31,6 +33,8 @@ public class StaffControllerTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		File file = new File("urlmsTest.xml");
+		file.delete();
 	}
 
 	@Before
@@ -48,37 +52,6 @@ public class StaffControllerTest {
 		File file = new File("urlmsTest.xml");
 		file.delete();
 	}
-	
-	// staff tests=================================
-
-			// StaffController sc = new StaffController();
-			// sc.addStaffMember("Victor",true,true);
-			// sc.addStaffMember("Eric",false,true);
-			//
-			// System.out.println(sc.viewStaffMemberName(0));
-			// System.out.println(sc.viewStaffMemberID(0));
-			// System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
-			// System.out.println(sc.viewStaffMemberName(1));
-			// System.out.println(sc.viewStaffMemberID(1));
-			// System.out.println(urlms.getLab(0).getStaffMember(1).getResearchRole(0).toString());
-			// sc.removeStaffMember(0);
-			// System.out.println(sc.viewStaffMemberName(0));
-			// System.out.println(sc.viewStaffMemberID(0));
-			// System.out.println(urlms.getLab(0).getStaffMember(0).getResearchRole(0).toString());
-			// sc.addProgress("november 27", "du ma", 0);
-			// sc.addProgress("dec 8", "du ma presentation", 0);
-			// List<ProgressUpdate> progress = sc.viewProgressUpdate(0);
-			// for(int i=0; i<progress.size();i++) {
-			// System.out.println(progress.get(i).getDate());
-			// System.out.println(progress.get(i).getDescription());
-			// }
-			// sc.addStaffMember("Feras", true, false);
-			// System.out.println(urlms.getLab(0).getStaffMember(1).getId());
-			// System.out.println(urlms.getLab(0).getStaffMember(1).getName());
-			// sc.addStaffMember("JustinToMessUp", true, false);
-			// System.out.println(urlms.getLab(0).getStaffMember(2).getId());
-			// System.out.println(urlms.getLab(0).getStaffMember(2).getName());
-			//
 
 	@Test
 	public void testViewStaffList() {
@@ -86,24 +59,32 @@ public class StaffControllerTest {
 		//check if the staff manager is empty
 		assertEquals(0, aLab.getStaffMembers().size());
 		
+		try{
+			controller.viewStaffList();
+		}catch(InvalidInputException e){
+			assertEquals("There are no staff members to display :(", e.getMessage());
+		}
+		
 		String name = "Feras"; //test name
 		
-		StaffController urlmsController = new StaffController(); //create instance of controller
-		addSampleMembers(aLab); //add some sample members
+		StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
+		aLab.addStaffMember(member);
+
+		StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
+		aLab.addStaffMember(member2);
+
+		StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
+		aLab.addStaffMember(member3);
 		
 		//check model in memory
-		assertEquals(3, aLab.getStaffMembers().size()); //checks if the staff manager now contains 3 members
-		assertEquals(name, aLab.getStaffMember(1).getName()); //checks if the 2nd member in the list is "Feras"
+		try {
+			assertEquals(3, controller.viewStaffList().size());//checks if the staff manager now contains 3 members
+			assertEquals(name, controller.viewStaffList().get(1).getName()); //checks if the 2nd member in the list is "Feras"
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
-		//save the file
-		urlmsController.save();
-		
-		
-		urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
-		
-		//check file contents (same checks as above, but with loaded file)
-		assertEquals(3, aLab.getStaffMembers().size());
-		assertEquals(name, aLab.getStaffMember(1).getName());
 	}
 
 
@@ -216,8 +197,19 @@ public class StaffControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("11/12/17", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
-		assertEquals("Can you view this?", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
+
+		try {
+			assertEquals("11/12/17", controller.viewProgressUpdateByID(aLab.getStaffMember(0).getId()).get(0).getDate());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Can you view this?", controller.viewProgressUpdateByID(aLab.getStaffMember(0).getId()).get(0).getDescription());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
@@ -302,6 +294,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		
+		try{
+			controller.addStaffMember("", true, true, -1);
+		}catch(InvalidInputException e){
+			assertEquals("Please enter a name. Please enter a valid salary. Or try again with celery.", e.getMessage());
+		}
+		
 	}
 
 	@Test
@@ -352,6 +350,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssociate", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		assertEquals(123, aLab.getStaffMember(0).getId());
+		
+		try{
+			controller.editStaffmemberRecordByID(123456, -1, "", true, true, -1);
+		}catch(InvalidInputException e){
+			assertEquals("There is no staff matching the entered target ID. Please enter a name. Please enter a valid salary. Please enter a valid ID.",e.getMessage());
+		}
 
 	}
 
@@ -372,7 +376,12 @@ public class StaffControllerTest {
 		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 
-		controller.removeStaffMember(id);
+		try {
+			controller.removeStaffMemberByID(aLab.getStaffMember(0).getId());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		assertEquals(0, aLab.getStaffMembers().size());
 	}
@@ -399,41 +408,42 @@ public class StaffControllerTest {
 		}
 		assertEquals("1/2/3", aLab.getStaffMember(0).getProgressUpdate(0).getDate());
 		assertEquals("Add test by ID", aLab.getStaffMember(0).getProgressUpdate(0).getDescription());
+		
+		try{
+			controller.addProgressByID("", "", aLab.getStaffMember(0).getId());
+		}catch(InvalidInputException e){
+			assertEquals("Might want to enter a description. Might want to enter a date.",e.getMessage());
+		}
+		
+		try{
+			controller.addProgressByID("date", "desc", 12345678);
+		}catch(InvalidInputException e){
+			assertEquals("Bad ID; staff member was not found! ", e.getMessage());
+		}
 	}
 
 	@Test
 	public void testGetStaffMemberByID() {
 		String err = "";
 		String name = "Feras";
+		StaffMember testMember = null;
 		try {
 			controller.addStaffMember(name, true, false, 111);
 		} catch (InvalidInputException e) {
 			err = e.getMessage();
 		}
 		
+		try {
+			testMember = controller.getStaffMemberByID(aLab.getStaffMember(0).getId());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		assertEquals("", err);
-		assertEquals(name, aLab.getStaffMember(0).getName());
-		assertEquals("ResearchAssistant", aLab.getStaffMember(0).getResearchRole(0).getClass().getSimpleName());
+		assertEquals(name, testMember.getName());
+		assertEquals("ResearchAssistant", testMember.getResearchRole(0).getClass().getSimpleName());
 		assertEquals(1, aLab.getStaffMembers().size());
 		
 	}
-
-	
-		/**
-		 * This method is used for testing purposes. Three members with names
-		 * Victor, Feras and Jun2Yu will be added to the current staff member list.
-		 * These three members will have different IDs: 123, 111 and 222
-		 * respectively.
-		 */
-		public void addSampleMembers(Lab aLab) {
-			StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
-			aLab.addStaffMember(member);
-
-			StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
-			aLab.addStaffMember(member2);
-
-			StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
-			aLab.addStaffMember(member3);
-		}
-	
 }
