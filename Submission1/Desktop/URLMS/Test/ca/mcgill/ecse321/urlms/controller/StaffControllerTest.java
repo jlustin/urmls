@@ -24,6 +24,8 @@ public class StaffControllerTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		File file = new File("urlmsTest.xml");
+		file.delete();
 		PersistenceXStream.setFilename("urlmsTest.xml");
 		URLMSApplication.setFilename("urlmsTest.xml");
 		PersistenceXStream.initializeModelManager("urlmsTest.xml");
@@ -31,6 +33,8 @@ public class StaffControllerTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		File file = new File("urlmsTest.xml");
+		file.delete();
 	}
 
 	@Before
@@ -88,22 +92,24 @@ public class StaffControllerTest {
 		
 		String name = "Feras"; //test name
 		
-		StaffController urlmsController = new StaffController(); //create instance of controller
-		addSampleMembers(aLab); //add some sample members
+		StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
+		aLab.addStaffMember(member);
+
+		StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
+		aLab.addStaffMember(member2);
+
+		StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
+		aLab.addStaffMember(member3);
 		
 		//check model in memory
-		assertEquals(3, aLab.getStaffMembers().size()); //checks if the staff manager now contains 3 members
-		assertEquals(name, aLab.getStaffMember(1).getName()); //checks if the 2nd member in the list is "Feras"
+		try {
+			assertEquals(3, controller.viewStaffList().size());//checks if the staff manager now contains 3 members
+			assertEquals(name, controller.viewStaffList().get(1).getName()); //checks if the 2nd member in the list is "Feras"
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
-		//save the file
-		urlmsController.save();
-		
-		
-		urlms = (URLMS) PersistenceXStream.loadFromXMLwithXStream();
-		
-		//check file contents (same checks as above, but with loaded file)
-		assertEquals(3, aLab.getStaffMembers().size());
-		assertEquals(name, aLab.getStaffMember(1).getName());
 	}
 
 
@@ -412,23 +418,4 @@ public class StaffControllerTest {
 		assertEquals(1, aLab.getStaffMembers().size());
 		
 	}
-
-	
-		/**
-		 * This method is used for testing purposes. Three members with names
-		 * Victor, Feras and Jun2Yu will be added to the current staff member list.
-		 * These three members will have different IDs: 123, 111 and 222
-		 * respectively.
-		 */
-		public void addSampleMembers(Lab aLab) {
-			StaffMember member = new StaffMember("Victor", 123, 123.2, aLab);
-			aLab.addStaffMember(member);
-
-			StaffMember member2 = new StaffMember("Feras", 111, 3232, aLab);
-			aLab.addStaffMember(member2);
-
-			StaffMember member3 = new StaffMember("Jun2Yu", 222, 323, aLab);
-			aLab.addStaffMember(member3);
-		}
-	
 }
