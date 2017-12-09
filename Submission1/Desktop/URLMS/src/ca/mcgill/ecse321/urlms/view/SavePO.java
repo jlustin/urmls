@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NewSaveFilePO extends JDialog {
+public class SavePO extends JDialog {
 
 	//TODO: add your buttons or components (Design Tab at the bottom) that you want and test
 	
@@ -22,8 +22,8 @@ public class NewSaveFilePO extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewSaveFilePO() {
-		setTitle("Awn Yeah!");
+	public SavePO() {
+		setTitle("You Got This");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -32,21 +32,21 @@ public class NewSaveFilePO extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
-		JLabel lblSaveSuccessful = new JLabel("New save file created");
+		JLabel lblSaveSuccessful = new JLabel("You have successfully saved the URLMS.");
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(137)
-					.addComponent(lblSaveSuccessful, GroupLayout.PREFERRED_SIZE, 133, Short.MAX_VALUE)
-					.addGap(148))
+					.addGap(80)
+					.addComponent(lblSaveSuccessful, GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+					.addGap(69))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(39)
-					.addComponent(lblSaveSuccessful, GroupLayout.PREFERRED_SIZE, 4, Short.MAX_VALUE)
-					.addGap(152))
+				.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+					.addGap(100)
+					.addComponent(lblSaveSuccessful, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(91))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{

@@ -9,7 +9,11 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.FundingController;
+import ca.mcgill.ecse321.urlms.controller.InvalidInputException;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
+import ca.mcgill.ecse321.urlms.model.FundingAccount;
+import ca.mcgill.ecse321.urlms.model.InventoryItem;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 
 import javax.swing.GroupLayout;
@@ -30,79 +34,154 @@ import javax.swing.SwingConstants;
 public class FundingPagePO extends JFrame {
 
 	private JPanel contentPane;
-	JLabel staffMemberListLabel;
+	JLabel accountListLabel;
 	JLabel welcomeToInventoryLabel;
 	JLabel feelFreeLabel;
-	
-	public static StaffController controller = new StaffController();
-	
+	String error;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FundingPagePO frame = new FundingPagePO();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	AddFundingAccountPO afapo = new AddFundingAccountPO();
+	EditFundingAccountPO efapo = new EditFundingAccountPO();
+	TransactionPagePO tppo = new TransactionPagePO();
+
+	public static FundingController controller = new FundingController();
+	private JButton addFundingAccbtn;
+	private JButton btnViewAccounts;
+	private JButton btnRemoveItem;
+	private JButton btnTransactions;
+	private JButton btnClose;
+	private JButton btnSave;
 
 	/**
 	 * Create the frame.
 	 */
 	public FundingPagePO() {
-		setTitle("Inventory");
+		initComponents();
+	}
+
+	private void initComponents() {
+		setTitle("Funding");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 535, 300);
+		setBounds(100, 100, 640, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
-		
-		JButton btnAddInventoryItem = new JButton("Add Item");
-		panel.add(btnAddInventoryItem);
-		
-		JButton btnRemoveItem = new JButton("Remove Item");
+
+		addFundingAccbtn = new JButton("Add Account");
+		addFundingAccbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				afapo.setVisible(true);
+			}
+		});
+
+		btnViewAccounts = new JButton("View Accounts");
+		btnViewAccounts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				error = "";
+				String previousText;
+
+				try {
+					accountListLabel.setText("");
+					List<FundingAccount> accountList = controller.viewFundingAccounts();
+					String name;
+					double balance;
+					accountListLabel.setText("<html>");
+
+					for (FundingAccount aAccount : accountList) {
+						previousText = accountListLabel.getText();
+						name = aAccount.getType();
+						balance = aAccount.getBalance();
+						accountListLabel.setText(
+								previousText + "Account type: " + name + "&nbsp &nbsp &nbsp " + "Account Balance: $"
+										+ String.format("%.2f", balance) + "&nbsp &nbsp &nbsp " + " <br/>");
+					}
+
+					previousText = accountListLabel.getText();
+					accountListLabel.setText(previousText + " <br/>");
+
+					previousText = accountListLabel.getText();
+					accountListLabel.setText(previousText + "Net balance of all accounts: $"
+							+ String.format("%.2f", controller.viewNetBalance()));
+					previousText = accountListLabel.getText();
+					accountListLabel.setText(previousText + "</html>");
+				} catch (InvalidInputException e1) {
+					error += e1.getMessage();
+				}
+
+				refreshData();
+			}
+		});
+		panel.add(btnViewAccounts);
+		panel.add(addFundingAccbtn);
+
+		btnRemoveItem = new JButton("Edit Account");
+		btnRemoveItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				efapo.setVisible(true);
+			}
+		});
 		panel.add(btnRemoveItem);
+
+		btnTransactions = new JButton("Transactions");
+		btnTransactions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tppo.setVisible(true);
+
+			}
+		});
+		panel.add(btnTransactions);
+
+		btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				close();
+			}
+		});
 		
-		JButton btnSave = new JButton("Save");
-		panel.add(btnSave);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-			
-			staffMemberListLabel = new JLabel("");
-			staffMemberListLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setViewportView(staffMemberListLabel);
-			
-			feelFreeLabel = new JLabel("Feel free to do stuff with the inventory.");
-			feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scrollPane.setColumnHeaderView(feelFreeLabel);
-			
-			JPanel panel_1 = new JPanel();
-			contentPane.add(panel_1, BorderLayout.NORTH);
-			
-			welcomeToInventoryLabel = new JLabel("Welcome to Inventory. There's a lot of inventory.");
-			panel_1.add(welcomeToInventoryLabel);
+		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.save();
+				SavePO spo = new SavePO();
+				spo.setVisible(true);
 			}
 		});
+		panel.add(btnSave);
+		panel.add(btnClose);
+
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+
+		accountListLabel = new JLabel("");
+		accountListLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setViewportView(accountListLabel);
+
+		feelFreeLabel = new JLabel("Feel free to do stuff with the funding.");
+		feelFreeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setColumnHeaderView(feelFreeLabel);
+
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.NORTH);
+
+		welcomeToInventoryLabel = new JLabel("Welcome to Funding. There's a lot of funds.");
+		panel_1.add(welcomeToInventoryLabel);
 	}
-	
-	private void refreshData(){
-		
+
+	private void refreshData() {
+		if (error.length() > 0) {
+			feelFreeLabel.setText(error);
+		} else {
+			feelFreeLabel.setText("Here you go, the list of funding accounts and some details about them. ");
+		}
+	}
+
+	public void close() {
+		this.setVisible(false);
+		this.dispose();
 	}
 }
