@@ -276,7 +276,7 @@ public class StaffControllerTest {
 		assertEquals(expectedID, testID);
 	}
 
-	//successful test for addStaffMember
+
 	@Test
 	public void testAddStaffMember() {
 		
