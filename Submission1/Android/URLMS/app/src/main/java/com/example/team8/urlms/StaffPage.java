@@ -74,19 +74,24 @@ public class StaffPage extends AppCompatActivity {
         setViewStaffListButton();
         setAddMemberButton();
     }
-//TODO: add weekly salary to member
+
+    //button methods
+
     private void setAddMemberButton() {
         addMemberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(),researchAssociateBox.isChecked(),
-                        Double.parseDouble(insertWeeklySalary.getText().toString()));
-                toastMessage("Member successfully added.");
+                if(!insertName.getText().toString().equals("") && !insertWeeklySalary.getText().toString().equals("")&!insertWeeklySalary.getText().toString().equals(".")) {
+                    sc.addStaffMember(insertName.getText().toString(), researchAssistantBox.isChecked(), researchAssociateBox.isChecked(),
+                            Double.parseDouble(insertWeeklySalary.getText().toString()));
+                    toastMessage("Member successfully added.");
+                    recreate();
+                }else{toastMessage("Please fill in any missing field.");
+                }
             }
         });
     }
 
-    //button methods
     public void setBackButton(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +127,7 @@ public class StaffPage extends AppCompatActivity {
     }
 
 
-
+    //initiate new activity 
     public void startActivity(Class<?> cls){
         sc.save();
         Intent intent = new Intent(this,cls );

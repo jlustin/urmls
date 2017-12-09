@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
@@ -32,8 +36,6 @@ public class StaffMemberPage extends AppCompatActivity {
     private String fileName;
     String date = "";
 
-    private String m_Date;
-    private String m_ProgressUpdateText;
 
     Controller c = new Controller();
     StaffController sc = new StaffController();
@@ -54,6 +56,8 @@ public class StaffMemberPage extends AppCompatActivity {
 
     CheckBox researchAssistantBox;
     CheckBox researchAssociateBox;
+
+    DecimalFormat format = new DecimalFormat("#.00");
 
     int position;
 
@@ -88,8 +92,7 @@ public class StaffMemberPage extends AppCompatActivity {
         editId = (EditText) findViewById(R.id.editId);
         editId.setText(sc.viewStaffMemberID(position));
         editWeeklySalary =(EditText) findViewById(R.id.editWeeklySalary);
-        editWeeklySalary.setText(sc.viewStaffMemberWeeklySalary(position));
-        //todo impement weekly salary
+        editWeeklySalary.setText(String.valueOf(format.format(Double.parseDouble(sc.viewStaffMemberWeeklySalary(position)))));
 
 
         progressUpdate = (TextView) findViewById(R.id.progressText);
@@ -120,7 +123,7 @@ public class StaffMemberPage extends AppCompatActivity {
         setDeleteButton();
 
     }
-
+    //add progress dialog
     private void setAddProgressButton(){
         addProgressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +136,12 @@ public class StaffMemberPage extends AppCompatActivity {
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
-                mDatePicker.init(2017, 11, 03, new DatePicker.OnDateChangedListener() {
+               date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH)+1;
+                mDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         date = (monthOfYear+1)+ "-"+dayOfMonth+ "-"+year;
@@ -144,7 +152,7 @@ public class StaffMemberPage extends AppCompatActivity {
                     public void onClick(View v) {
                         if(!mProgress.getText().toString().isEmpty()){
                             sc.addProgress(date, mProgress.getText().toString(),position);
-                            toastMessage("Progress Updated");
+                            toastMessage("Progress Updated.");
                             dialog.dismiss();
                         }
                         else{
@@ -156,6 +164,7 @@ public class StaffMemberPage extends AppCompatActivity {
         });
         sc.save();
       }
+    //display progress scrollable text
     private void setViewProgressButton() {
         viewProgressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,14 +174,14 @@ public class StaffMemberPage extends AppCompatActivity {
                 String progressToDisplay = "";
                 for(int i=0; i<progress.size();i++){
                     progressToDisplay+= progress.get(i).getDate()+"\n";
-                    progressToDisplay+= progress.get(i).getDescription()+"\n";
+                    progressToDisplay+= progress.get(i).getDescription()+"\n\n";
                     progressUpdate.setText(progressToDisplay);
                 }
             }
         });
         sc.save();
     }
-
+    //button methods
     public void setBackButton(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,15 +195,15 @@ public class StaffMemberPage extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editName.getText().toString().isEmpty()){
-                    toastMessage("you didn't enter a string");
+                if(editName.getText().toString().isEmpty()&&!editWeeklySalary.getText().toString().equals(".")){
+                    toastMessage("You didn't enter a string or you didn't fit the weekly salary. ");
                 }
                 else sc.editStaffmemberRecord(position,Integer.parseInt(editId.getText().toString()),
                         editName.getText().toString(),
                         researchAssistantBox.isChecked(),
                         researchAssociateBox.isChecked(),
                 Double.parseDouble(editWeeklySalary.getText().toString()));
-                toastMessage("Member successfully updated, refresh page to see");
+                toastMessage("Member successfully updated, refresh page to see.");
                 sc.save();
             }
         });
@@ -214,6 +223,7 @@ public class StaffMemberPage extends AppCompatActivity {
         myToast.show();
     }
 
+    //admin consent
     public void deleteAllAuthorization(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage("Admin Access Required.")

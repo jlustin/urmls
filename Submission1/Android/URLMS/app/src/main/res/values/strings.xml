@@ -52,7 +52,7 @@
     <string name="deleteButton">Delete</string>
     <string name="updateButton">Update</string>
     <string name="deleteAll">Erase Database</string>
-    <string name="costString">Cost</string>
+    <string name="costString">Cost $</string>
     <string name="nameString">Name</string>
     <string name="insertRoleDescriptrion">Role Description</string>
     <string name="RoleDescription">Description</string>
@@ -61,7 +61,7 @@
     <string name="addNewTransaction">Add New Transaction</string>
     <string name="viewTransactions">View Transactions</string>
     <string name="accountString">Account</string>
-    <string name="balanceString">Balance</string>
+    <string name="balanceString">Balance $</string>
     <string name="addFundingString">Add Funding</string>
     <string name="currentBalanceString">Current Balance</string>
     <string name="accountName">Account Name</string>
@@ -80,13 +80,24 @@
     <string name="quantityString">Quantity</string>
     <string name="totalCostStatus">Total Cost Status</string>
     <string name="insertWeeklySalary">Enter weekly salary</string>
-    <string name="weeklySalaryString">Weekly Salary</string>
+    <string name="weeklySalaryString">Weekly Salary $</string>
     <string name="insertNewWeeklySalaryString">Insert New Weekly Salary</string>
     <string name="addFundingAccountString">Add Funding Account</string>
     <string name="insertTypeString">Insert Account Type</string>
     <string name="insertInitialAmount">Insert Initial Amount</string>
     <string name="typeString">Type</string>
-    <string name="amountString">Amount</string>
+    <string name="amountString">Amount $</string>
     <string name="accountsString">Accounts</string>
+    <string name="addDateAndExpenseString">Add Date and Expense</string>
+    <string name="enterAmountString">Enter Amount</string>
+    <string name="insertExpenseDescriptionString">Expense Description</string>
+    <string name="removeString">Remove</string>
+    <string name="payDayString">Pay Day!</string>
+    <string name="inventoryString">Inventory</string>
+    <string name="ADD_QUANTITY">Add Quantity</string>
+    <string name="enterQuantity">Enter Quantity</string>
+    <string name="staffMembersString">Staff Members</string>
+    <string name="membersString">Members</string>
+    <string name="NotificationString">Notification</string>
 
 </resources>

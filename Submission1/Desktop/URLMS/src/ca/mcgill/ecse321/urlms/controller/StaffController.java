@@ -5,9 +5,11 @@ import java.util.*;
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.model.Lab;
 import ca.mcgill.ecse321.urlms.model.ProgressUpdate;
+
 import ca.mcgill.ecse321.urlms.model.ResearchAssistant;
 import ca.mcgill.ecse321.urlms.model.ResearchAssociate;
 import ca.mcgill.ecse321.urlms.model.ResearchRole;
+
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
  

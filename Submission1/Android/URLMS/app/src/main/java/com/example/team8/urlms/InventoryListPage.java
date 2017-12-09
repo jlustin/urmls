@@ -56,6 +56,7 @@ public class InventoryListPage extends AppCompatActivity {
             }
         }
 
+
        viewItemAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, inventoryItems);
         ListView buckyListView = (ListView) findViewById(R.id.buckyListView);
         buckyListView.setAdapter(viewItemAdapter);
@@ -64,11 +65,13 @@ public class InventoryListPage extends AppCompatActivity {
         buckyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast myToast= Toast.makeText(getApplicationContext(),"You have clicked on " +inventoryItems[position],Toast.LENGTH_SHORT);
+                Toast myToast= Toast.makeText(getApplicationContext(),"You have clicked on "
+                        +ic.viewInventoryItemName(position)+".",Toast.LENGTH_SHORT);
                 myToast.show();
                 ic.save();
                 Intent intent = new Intent(getApplicationContext(),InventoryItemPage.class );
                 intent.putExtra("itemPosition", position);
+                finish();
                 startActivity(intent);
             }
         });

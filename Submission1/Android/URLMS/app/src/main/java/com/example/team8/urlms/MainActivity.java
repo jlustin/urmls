@@ -7,17 +7,20 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.application.URLMSApplication;
 import ca.mcgill.ecse321.urlms.controller.Controller;
 import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
+import ca.mcgill.ecse321.urlms.model.FundingAccount;
 import ca.mcgill.ecse321.urlms.model.StaffMember;
 import ca.mcgill.ecse321.urlms.model.URLMS;
 import ca.mcgill.ecse321.urlms.persistence.*;
@@ -26,6 +29,7 @@ import android.content.res.XmlResourceParser;
 import android.widget.Toast;
 
 import static android.R.id.message;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static com.example.team8.urlms.R.string.addMember;
 import static com.example.team8.urlms.R.string.deleteAll;
@@ -44,15 +48,19 @@ public class MainActivity extends AppCompatActivity {
     Button staff;
     Button funding;
     Button inventory;
+    Button refreshButton;
     TextView toDisplay;
     TextView appTitle;
-    EditText editName;
-    EditText editID;
+    TextView notificationDisplay;
+
 
     Controller c = new Controller();
     StaffController sc = new StaffController();
     FundingController fc = new FundingController();
 
+    //decimal format to 2 digits after decimal
+    DecimalFormat format = new DecimalFormat("#.00");
+    String notification="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +76,22 @@ public class MainActivity extends AppCompatActivity {
         staff = (Button) findViewById(R.id.staffButton);
         funding = (Button) findViewById(R.id.fundingButton);
         inventory = (Button) findViewById(R.id.inventoryButton);
+        refreshButton = (Button) findViewById(R.id.refreshButton);
 
-        //textviews
+        //text views
         toDisplay = (TextView) findViewById(R.id.toDisplay);
         appTitle = (TextView) findViewById(R.id.appTitle);
         toDisplay.setMovementMethod(new ScrollingMovementMethod());
+        notificationDisplay = (TextView) findViewById(R.id.notificationDisplay);
+        notificationDisplay.setVisibility(View.INVISIBLE);
+        notificationDisplay.setMovementMethod(new ScrollingMovementMethod());
 
         /*
          *initiate all buttons
          */
-        openFunding();openInventory();openStaff();
+        openFunding();openInventory();openStaff();setRefreshButton();
 
+        //initiate initial account if first login
         int accountsInitiated = fc.initiateFundingAccounts();
         if(accountsInitiated == 1){
             toastMessage("Welcome back to URLMS");
@@ -86,15 +99,44 @@ public class MainActivity extends AppCompatActivity {
         else{
             toastMessage("Welcome to URLMS, initial funding accounts created.");
         }
+        //get alert for critical account balances
+        notifyCriticalAccount();
+        if(!notification.equals("")){
+            notificationDisplay.setText(notification);
+            notificationDisplay.setVisibility(View.VISIBLE);
+        }
 
 
     }
 
-    //toast
     public void toastMessage(String message){
         Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
         myToast.show();
     }
+    /*
+    This methods loops through all funding accounts to check for
+    any critical state (negative/critical balance level).
+     */
+    public void notifyCriticalAccount() {
+        List<FundingAccount> accounts = fc.viewFundingAccounts();
+        for (FundingAccount account : accounts) {
+            if(account.getBalance()<0){
+                notification = notification + account.getType() + ":    " + "$"+ format.format(account.getBalance()) + "\n";
+            }
+
+        }
+        if(!notification.equals("")){
+            notification = "!!!ALERT!!!"+"\n"+"NEGATIVE BALANCE:"+"\n"+"\n"+"\n" + notification;
+           Toast myToast =  Toast.makeText(getApplicationContext(), notification, Toast.LENGTH_LONG);
+            myToast.setGravity(Gravity.CENTER,0,0);
+            myToast.show();
+        }
+        else{
+            notification = "";
+        }
+    }
+
+
 
     //button methods
     public void openStaff(){
@@ -117,6 +159,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(InventoryPage.class);
 
+            }
+        });
+    }
+        public void setRefreshButton(){
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
             }
         });
     }

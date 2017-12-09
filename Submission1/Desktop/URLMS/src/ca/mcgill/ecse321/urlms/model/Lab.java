@@ -3,7 +3,6 @@
 
 package ca.mcgill.ecse321.urlms.model;
 import java.util.*;
-
 // line 10 "../../../../../URLMS.ump"
 import java.sql.Date;
 

@@ -12,9 +12,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ca.mcgill.ecse321.urlms.controller.Controller;
+import ca.mcgill.ecse321.urlms.controller.FundingController;
 import ca.mcgill.ecse321.urlms.controller.InventoryController;
 import ca.mcgill.ecse321.urlms.controller.StaffController;
 import ca.mcgill.ecse321.urlms.model.InventoryItem;
@@ -30,6 +33,7 @@ public class InventoryPage extends AppCompatActivity {
     private String fileName;
     Controller controller = new Controller();
     InventoryController ic = new InventoryController();
+    FundingController fc = new FundingController();
 
 
     Button backButton;
@@ -72,14 +76,14 @@ public class InventoryPage extends AppCompatActivity {
 
 
 
-
+        //add spinner for inventory items
         spinner = (Spinner) findViewById(R.id.spinnerItemType);
 
         setSpinner();
         setBackButton();
         setViewInventoryItemListButton();
         setAddItemButton();
-
+        //TOTAL EQUIPMENT OBSERVER
         List<InventoryItem> ii = ic.viewInventoryList();
         int totalSupplyItem = 0;
         int totalEquipmentItem = 0;
@@ -94,27 +98,34 @@ public class InventoryPage extends AppCompatActivity {
         toDisplayStatus.setText("Number of Equipment Item(s): " +totalEquipmentItem + "\n" +
                 "Number of Supply Item(s): " +totalSupplyItem);
     }
-
     private void setAddItemButton() {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean added = false;
-                if(!insertName.getText().toString().equals("")&& !insertCost.getText().toString().equals("")) {
+                if(!insertName.getText().toString().equals("")&& !insertCost.getText().toString().equals("")&&!insertCost.getText().toString().equals(".")) {
+                    String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+                    //add equipment
                     if (itemType.equals(type_equipment)) {
-                        ic.addEquipmentItem(insertName.getText().toString(), Double.parseDouble(insertCost.getText().toString()));
+                        double cost = Double.parseDouble(insertCost.getText().toString());
+                        ic.addEquipmentItem(insertName.getText().toString(), cost);
                         added = true;
+                        fc.addTransaction(date, cost,"Purchased " + insertName.getText().toString(), "Equipment Funds");
                     }
+                    //add supply
                     if (itemType.equals(type_supply) && !insertQuantity.getText().toString().equals("")
                             ) {
                         ic.addSupplyItem(insertName.getText().toString(), Double.parseDouble(insertCost.getText().toString()),
                                 Integer.parseInt(insertQuantity.getText().toString()));
+                        double totalCost = Double.parseDouble(insertCost.getText().toString()) * Integer.parseInt(insertQuantity.getText().toString());
+                        fc.addTransaction(date, totalCost,"Purchased " + insertName.getText().toString(), "Supply Funds");
                         added = true;
                     }
                     if (added) {
-                        toastMessage("Item: " + insertName.getText().toString() + " successfully added.");
+                        toastMessage("Item: " + insertName.getText().toString() + " successfully added."+"\n Transaction recorded.");
                     }
                 }
+                //invalid input
                 else{
                     toastMessage("Please fill the appropriate categories.");
                 }
@@ -123,6 +134,8 @@ public class InventoryPage extends AppCompatActivity {
             }
         });
     }
+
+
     private void setViewInventoryItemListButton(){
         viewInventoryItemListButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +181,7 @@ public class InventoryPage extends AppCompatActivity {
         Toast myToast= Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT);
         myToast.show();
     }
-
+    //spinner builder
     public void setSpinner(){
         adapter = ArrayAdapter.createFromResource(this, R.array.item_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -178,11 +191,13 @@ public class InventoryPage extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
+                    //equipment UI
                     itemType = type_equipment;
                     insertQuantity.setVisibility(View.INVISIBLE);
                     toDisplayQuantity.setVisibility(View.INVISIBLE);
                 }
                 if(position==1){
+                    //inventory UI
                     itemType = type_supply;
                     insertQuantity.setVisibility(View.VISIBLE);
                     toDisplayQuantity.setVisibility(View.VISIBLE);

@@ -7,24 +7,32 @@
               android:weightSum="1">
 
     <TextView
-        android:id="@+id/progressUpdateTitle"
+        android:id="@+id/addExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:layout_gravity="center"
-        android:text="@string/addDateAndProgress"
+        android:layout_marginTop="5dp"
+        android:text="@string/addDateAndExpenseString"
         android:textSize="20sp"
-        android:layout_marginTop="5dp"/>
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/editTextProgress"
+        android:id="@+id/editExpenseDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/insertExpenseDescriptionString"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/editTextAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="@string/ProgressString"
-        android:inputType="textPersonName"
+        android:hint="@string/enterAmountString"
+        android:inputType="numberDecimal"
         />
 
     <Button

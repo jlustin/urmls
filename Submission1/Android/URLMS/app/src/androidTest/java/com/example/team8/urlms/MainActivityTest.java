@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.R.attr.button;
 import static org.junit.Assert.*;
 /**
  * Created by ericvuong on 2017-10-17.
@@ -26,11 +27,9 @@ public class MainActivityTest {
 
     @Test
     public void testViewStaffList(){
-        //tests refresh button====================
-//        Looper.prepare();
-//        mActivity.refresh();
-//        mActivity.refreshButton.callOnClick();
-//        assertEquals(mActivity.toDisplay.getText().toString(), "");
+//        tests refresh button====================
+        Looper.prepare();
+        assertEquals(mActivity.toDisplay.getText().toString(), "");
 
 
 

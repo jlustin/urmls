@@ -7,39 +7,32 @@
               android:weightSum="1">
 
     <TextView
-        android:id="@+id/progressUpdateTitle"
+        android:id="@+id/addQuantityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:layout_gravity="center"
-        android:text="@string/addDateAndProgress"
+        android:layout_marginTop="5dp"
+        android:text="@string/ADD_QUANTITY"
         android:textSize="20sp"
-        android:layout_marginTop="5dp"/>
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/editTextProgress"
+        android:id="@+id/editTextAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="@string/ProgressString"
-        android:inputType="textPersonName"
-        />
+        android:hint="@string/enterQuantity"
+        android:inputType="numberSigned"/>
 
     <Button
         android:id="@+id/buttonConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorAccent"
         android:text="@string/confirmString"
         android:textColor="@android:color/white"
         android:textColorLink="@android:color/holo_blue_bright"/>
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.85"/>
 
 </LinearLayout>
